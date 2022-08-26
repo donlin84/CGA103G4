@@ -16,7 +16,6 @@ window.addEventListener("load", function () {
                 let ul_el = document.getElementsByClassName("picture_list")[i];
                 ul_el.insertAdjacentHTML("beforeend", li_str);
             })
-
-        
-    });
+    	}
+	})
 });
