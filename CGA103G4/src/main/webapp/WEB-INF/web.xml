@@ -18,4 +18,96 @@
     <servlet-name>EmpServlet</servlet-name>
     <url-pattern>/back-end/emp/emp.do</url-pattern>
   </servlet-mapping>
+  
+<!--   =======================張正弘的web.xml========================== -->
+  <servlet>
+		<servlet-name>MemberServlet</servlet-name>
+		<servlet-class>com.member.controller.MemberServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberServlet</servlet-name>
+		<url-pattern>/back-end/member/member.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ChefServlet</servlet-name>
+		<servlet-class>com.chef.controller.ChefServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChefServlet</servlet-name>
+		<url-pattern>/back-end/chef/chef.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ChefSkillsTypeServlet</servlet-name>
+		<servlet-class>com.chefskillstype.controller.ChefSkillsTypeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChefSkillsTypeServlet</servlet-name>
+		<url-pattern>/back-end/chefSkillsType/chefSkillsType.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CreditCardInformationServlet</servlet-name>
+		<servlet-class>com.creditcardinformation.controller.CreditCardInformationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreditCardInformationServlet</servlet-name>
+		<url-pattern>/back-end/creditCardInformation/creditCardInformation.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ChefSkillsServlet</servlet-name>
+		<servlet-class>com.chefskills.controller.ChefSkillsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChefSkillsServlet</servlet-name>
+		<url-pattern>/back-end/chefSkills/chefSkills.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ChefSubscriptionServlet</servlet-name>
+		<servlet-class>com.chefsubscription.controller.ChefSubscriptionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChefSubscriptionServlet</servlet-name>
+		<url-pattern>/back-end/chefSubscription/chefSubscription.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>showLicensePicture</servlet-name>
+		<servlet-class>basic.util.showLicensePicture</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showLicensePicture</servlet-name>
+		<url-pattern>/showLicensePicture</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>showIdCardPicture</servlet-name>
+		<servlet-class>basic.util.showIdCardPicture</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showIdCardPicture</servlet-name>
+		<url-pattern>/showIdCardPicture</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>showIdCardBackPicture</servlet-name>
+		<servlet-class>basic.util.showIdCardBackPicture</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showIdCardBackPicture</servlet-name>
+		<url-pattern>/showIdCardBackPicture</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>showChefPhotoPicture</servlet-name>
+		<servlet-class>basic.util.showChefPhotoPicture</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showChefPhotoPicture</servlet-name>
+		<url-pattern>/showChefPhotoPicture</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

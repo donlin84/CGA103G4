@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+#drop_zone1 {
+	border: 1px dashed #ccc;
+	height: 50px;
+	width: 120px;
+	position: relative;
+}
+#drop_zone2 {
+	border: 1px dashed #ccc;
+	height: 50px;
+	width: 120px;
+	position: relative;
+}
+#drop_zone3 {
+	border: 1px dashed #ccc;
+	height: 50px;
+	width: 120px;
+	position: relative;
+}
+#drop_zone4 {
+	border: 1px dashed #ccc;
+	height: 50px;
+	width: 120px;
+	position: relative;
+}
+
+#drop_zone1 span.text {
+/* 	position: absolute; */
+	display: inline-block;
+	left: 50%;
+	top: 50%;
+	transform: translate(5%, 0%);
+	z-index: -1;
+	color: lightgray;
+}
+#drop_zone2 span.text {
+/* 	position: absolute; */
+	display: inline-block;
+	left: 50%;
+	top: 50%;
+	transform: translate(5%, 0%);
+	z-index: -1;
+	color: lightgray;
+}
+#drop_zone3 span.text {
+/* 	position: absolute; */
+	display: inline-block;
+	left: 50%;
+	top: 50%;
+	transform: translate(5%, 0%);
+	z-index: -1;
+	color: lightgray;
+}
+#drop_zone4 span.text {
+/* 	position: absolute; */
+	display: inline-block;
+	left: 50%;
+	top: 50%;
+	transform: translate(5%, 0%);
+	z-index: -1;
+	color: lightgray;
+}
+
+#drop_zone1.-on {
+	border: 1px dashed lightblue;
+	box-shadow: 3px 3px 5px lightblue inset, -3px -3px 5px lightblue inset;
+}
+#drop_zone2.-on {
+	border: 1px dashed lightblue;
+	box-shadow: 3px 3px 5px lightblue inset, -3px -3px 5px lightblue inset;
+}
+#drop_zone3.-on {
+	border: 1px dashed lightblue;
+	box-shadow: 3px 3px 5px lightblue inset, -3px -3px 5px lightblue inset;
+}
+#drop_zone4.-on {
+	border: 1px dashed lightblue;
+	box-shadow: 3px 3px 5px lightblue inset, -3px -3px 5px lightblue inset;
+}
