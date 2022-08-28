@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ page import="com.emp.model.*"%>
-
+<%@ page import="java.util.*"%>
+<%@ page import="com.emp.model.*"%>
 
 <%
   EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
@@ -71,7 +72,7 @@
 		<td><%=empVO.getEmpid()%></td>
 		<td><%=empVO.getEmpName()%></td>
 		<td><%=empVO.getEmpPhone()%></td>
-<td><img  src= "data:image/jpg;base64,${empPicture}" width="100" heigh="100"> </td>
+<td><img src="<%= request.getContextPath() %>/EmpShowPic?empid=${empVO.empid}" width="100" heigh="100"></td>
 		<td><%=empVO.getEmpAccount()%></td>
 		<td><%=empVO.getEmpPassword()%></td>
 		<td><%=empVO.getEmpLevel()%></td>

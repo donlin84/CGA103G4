@@ -27,13 +27,14 @@ public class EmpService {
 	}
 
 	public EmpVO updateEmp(Integer empid, String empName, String empPhone, byte[] empPicture, String empPassword,
-			Integer empStatus, Date empHiredate) {
+			Integer empLevel,Integer empStatus, Date empHiredate) {
 		EmpVO empVO = new EmpVO();
 		empVO.setEmpid(empid);
 		empVO.setEmpName(empName);
 		empVO.setEmpPhone(empPhone);
 		empVO.setEmpPicture(empPicture);
 		empVO.setEmpPassword(empPassword);
+		empVO.setEmpLevel(empLevel);
 		empVO.setEmpStatus(empStatus);
 		empVO.setEmpHiredate(empHiredate);
 		dao.update(empVO);

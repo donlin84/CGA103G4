@@ -71,7 +71,8 @@ public class EmpServlet extends HttpServlet {
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
-
+			
+			
 			Integer empid = null;
 			try {
 				empid = Integer.valueOf(str);
@@ -100,23 +101,7 @@ public class EmpServlet extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("empVO", empVO); // 資料庫取出的empVO物件,存入req
-			String empPicture ="";
-			try {
-				System.out.println(empVO.getEmpPicture());
-			empPicture = Base64.getEncoder().encodeToString(empVO.getEmpPicture());
 			
-			}catch(NullPointerException ne){
-				empPicture ="";
-				ServletContext servletContext = req.getServletContext();
-				String filepath = servletContext.getRealPath("/back-end/emp/images/noImage.jpg");
-				File file=new File(filepath);
-				FileInputStream fis = new FileInputStream(file);
-				byte[] b = new byte[fis.available()];
-				fis.read(b);
-				fis.close();
-				empPicture = Base64.getEncoder().encodeToString(b);	
-			}
-			req.setAttribute("empPicture", empPicture);
 			String url = "/back-end/emp/listOneEmp.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 			successView.forward(req, res); // forward to view
@@ -206,6 +191,119 @@ public class EmpServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
 		}
+
+		/* 管理員查詢修改 */
+		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*************************** 1.接收請求參數 ****************************************/
+			Integer empid = Integer.valueOf(req.getParameter("empid"));
+
+			/*************************** 2.開始查詢資料 ****************************************/
+			EmpService empSvc = new EmpService();
+			EmpVO empVO = empSvc.getOneEmp(empid);
+
+			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+			req.setAttribute("empVO", empVO); // 資料庫取出的empVO物件,存入req
+			String url = "/back-end/emp/update_emp_input.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+			successView.forward(req, res);
+		}
+
+		/* 管理員修改 */
+		if ("update".equals(action)) {
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+			Integer empid = Integer.valueOf(req.getParameter("empid").trim());
+
+			// 驗證姓名
+			String empName = req.getParameter("empName");
+			String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+			if (empName == null || empName.trim().length() == 0) {
+				errorMsgs.add("員工姓名: 請勿空白");
+			} else if (!empName.trim().matches(enameReg)) { // 以下練習正則(規)表示式(regular-expression)
+				errorMsgs.add("員工姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+			}
+
+			// 驗證電話
+			String empPhone = req.getParameter("empPhone").trim();
+			String phoneReg = "[0-9]{8,10}$";
+			if (empPhone == null || empPhone.trim().length() == 0) {
+				errorMsgs.add("電話請勿空白");
+			} else if (!empPhone.trim().matches(phoneReg)) {
+				errorMsgs.add("電話只能是數字!且長度必須介於8-10之間");
+			}
+			
+			// 驗證密碼
+			String empPassword = req.getParameter("empPassword");
+			String passwordReg = "^[(a-zA-Z0-9]{5,20}$";
+			if (empPassword == null || empPassword.trim().length() == 0) {
+				errorMsgs.add("密碼請勿空白");
+			} else if (!empPassword.trim().matches(passwordReg)) {
+				errorMsgs.add("密碼必須為英文字母、數字組成，且長度必須在");
+			}
+
+			// 驗證照片
+			Part part = req.getPart("empPicture");
+			InputStream in = part.getInputStream();
+			byte[] empPicture = new byte[in.available()];
+			in.read(empPicture);
+			in.close();
+			
+
+			// 管理員權限等級
+			Integer empLevel = Integer.valueOf(req.getParameter("empLevel"));
+			
+			//管理員狀態
+			Integer empStatus = Integer.valueOf(req.getParameter("empStatus"));
+			
+			// 驗證入職日期
+			java.sql.Date empHiredate = null;
+			try {
+				empHiredate = java.sql.Date.valueOf(req.getParameter("empHiredate").trim());
+			} catch (IllegalArgumentException e) {
+				empHiredate = new java.sql.Date(System.currentTimeMillis());
+				errorMsgs.add("請輸入日期!");
+			}
+
+
+			EmpVO empVO = new EmpVO();
+			empVO.setEmpid(empid);
+			empVO.setEmpName(empName);
+			empVO.setEmpPhone(empPhone);
+			empVO.setEmpPicture(empPicture);
+			empVO.setEmpLevel(empLevel);
+			empVO.setEmpStatus(empStatus);
+			empVO.setEmpHiredate(empHiredate);
+			
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				req.setAttribute("empVO", empVO); // 含有輸入格式錯誤的empVO物件,也存入req
+				RequestDispatcher failureView = req.getRequestDispatcher("/emp/update_emp_input.jsp");
+				failureView.forward(req, res);
+				return; // 程式中斷
+			}
+
+			/*************************** 2.開始修改資料 *****************************************/
+			EmpService empSvc = new EmpService();
+			empVO = empSvc.updateEmp(empid, empName, empPhone, empPicture, empPassword, empLevel, empStatus,empHiredate);
+
+			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+			req.setAttribute("empVO", empVO); // 資料庫update成功後,正確的的empVO物件,存入req
+			String url = "/back-end/emp/listOneEmp.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+			successView.forward(req, res);
+		}
+
 	}
 
 }

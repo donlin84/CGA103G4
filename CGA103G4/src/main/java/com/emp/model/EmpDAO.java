@@ -17,7 +17,7 @@ public class EmpDAO implements EmpDaoImpl {
 	private static final String INSERT_STMT = "INSERT INTO EMPLOYEE(empName, empPhone, empPicture, empAccount, empPassword, empLevel, empHiredate) VALUES (?, ?, ?, ?, ?, ?, ?);";
 	private static final String GET_ALL_STMT = "SELECT * FROM EMPLOYEE order by empid;";
 	private static final String GET_ONE_STMT = "SELECT * FROM EMPLOYEE where empid = ?;";
-	private static final String UPDATE = "UPDATE EMPLOYEE set empName=?, empPhone=?, empPicture=?, empPassword=?, empStatus=? where empid = ?;";
+	private static final String UPDATE = "UPDATE EMPLOYEE set empName=?, empPhone=?, empPicture=?, empPassword=?, empLevel=?, empStatus=?, empHiredate=? where empid = ?;";
 	private static final String GET_LATEST = "SELECT empid FROM EMPLOYEE ORDER BY empid DESC LIMIT 0,1";
 
 	// 連線池
@@ -92,9 +92,11 @@ public class EmpDAO implements EmpDaoImpl {
 			pstmt.setString(2, empVO.getEmpPhone());
 			pstmt.setBytes(3, empVO.getEmpPicture());
 			pstmt.setString(4, empVO.getEmpPassword());
-			pstmt.setInt(5, empVO.getEmpStatus());
-			pstmt.setInt(6, empVO.getEmpid());
-
+			pstmt.setInt(5, empVO.getEmpLevel());
+			pstmt.setInt(6, empVO.getEmpStatus());
+			pstmt.setDate(7, empVO.getEmpHiredate());
+			pstmt.setInt(8, empVO.getEmpid());
+			
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
