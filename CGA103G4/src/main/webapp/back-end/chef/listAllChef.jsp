@@ -9,47 +9,21 @@
     pageContext.setAttribute("list",list);
 %>
 
-
 <html>
 <head>
 <title>所有私廚資料 - listAllChef.jsp</title>
 
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-
-  table {
-	width: 1200px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-</style>
+<link href="css/bigPicture.css" rel="stylesheet" type="text/css">
+<link href="css/listAllChefOther.css" rel="stylesheet" type="text/css">
 
 </head>
 <body bgcolor='white'>
+
+<div style='position:fixed;width:100%;height:100%;background-color:rgb(0,0,0,0.65)' id='modal'>
+<div class='modal' id='modalw'>
+<img id='bgImg' />
+</div>
+</div>
 
 <table id="table-1">
 	<tr><td>
@@ -97,10 +71,10 @@
 			<td>${chefVO.reserve}</td>
 			<td>${chefVO.com}</td>
 			<td>${chefVO.gomg}</td>
-			<td><img src="<%=request.getContextPath()%>/showLicensePicture?chefid=${chefVO.chefid}"  width=80px height=80px></td>
-			<td><img src="<%=request.getContextPath()%>/showIdCardPicture?chefid=${chefVO.chefid}"  width=80px height=80px></td>
-			<td><img src="<%=request.getContextPath()%>/showIdCardBackPicture?chefid=${chefVO.chefid}"  width=80px height=80px></td>
-			<td><img src="<%=request.getContextPath()%>/showChefPhotoPicture?chefid=${chefVO.chefid}"  width=80px height=80px></td>
+			<td><img onclick='showBgImg(this)' class='thum-img' src="<%=request.getContextPath()%>/showLicensePicture?chefid=${chefVO.chefid}" ></td>
+			<td><img onclick='showBgImg(this)' class='thum-img' src="<%=request.getContextPath()%>/showIdCardPicture?chefid=${chefVO.chefid}"  ></td>
+			<td><img onclick='showBgImg(this)' class='thum-img' src="<%=request.getContextPath()%>/showIdCardBackPicture?chefid=${chefVO.chefid}"  ></td>
+			<td><img onclick='showBgImg(this)' class='thum-img' src="<%=request.getContextPath()%>/showChefPhotoPicture?chefid=${chefVO.chefid}"  ></td>
 
 
 			
@@ -116,6 +90,16 @@
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>
-
+<script>
+var modal = document.getElementById('modal');
+var bgImg = document.getElementById('bgImg');
+function showBgImg(e) {
+modal.style.display = 'block';
+bgImg.src = e.src;
+}
+bgImg.onclick = function() {
+modal.style.display = 'none';
+}
+</script>
 </body>
 </html>

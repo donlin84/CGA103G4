@@ -1,32 +1,29 @@
 package com.chef.model;
 
-import static com.util.common.PASSWORD;
-import static com.util.common.URL;
-import static com.util.common.USER;
+import static com.util.common.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.*;
+import java.util.*;
 
 public class ChefJDBCDAO implements ChefDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
 
-	private static final String INSERT_STMT = "INSERT INTO Chef(chefAccount, chefPassword, chefStatus, chefName, chefNickname, chefPrice, "
-			+ "schDate, reserve, com, gomg, license, idCard, idCardBack, chefPhoto, chefIntroduction ) "
-			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO Chef(chefName, chefNickname, "
+			+ "chefAccount, chefPassword, chefPrice, license, idCard, idCardBack, chefPhoto, chefIntroduction ) "
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT chefid, chefAccount, chefPassword, chefStatus, chefName, chefNickname, chefPrice, "
 			+ "schDate, reserve, com, gomg, license, idCard, idCardBack, chefPhoto, chefIntroduction "
 			+ "FROM Chef order by chefid";
 	private static final String GET_ONE_STMT = "SELECT chefid, chefAccount, chefPassword, chefStatus, chefName, chefNickname, chefPrice, "
 			+ "schDate, reserve, com, gomg, license, idCard, idCardBack, chefPhoto, chefIntroduction "
 			+ "FROM Chef where chefid = ?";
-	private static final String UPDATE = "UPDATE Chef set chefAccount=?, chefPassword=?,  chefStatus=?, chefName=?, chefNickname=?, chefPrice=?, "
-			+ "schDate=?, reserve=?, com=?, gomg=?, license=?, idCard=?, idCardBack=?, chefPhoto=?, chefIntroduction=? "
-			+ "where chefid = ?";
+	private static final String UPDATE = "UPDATE Chef set chefName=?, chefNickname=?, chefAccount=?, chefPassword=?,  chefStatus=?, "
+			+ "chefPrice=?,  chefIntroduction=? " + "where chefid = ?";
+//	private static final String UPDATE = "UPDATE Chef set chefAccount=?, chefPassword=?,  chefStatus=?, chefName=?, chefNickname=?, chefPrice=?, "
+//			+ "schDate=?, reserve=?, com=?, gomg=?, license=?, idCard=?, idCardBack=?, chefPhoto=?, chefIntroduction=? "
+//			+ "where chefid = ?";
 
 	@Override
 	public void insert(ChefVO chefVO) {
@@ -36,21 +33,16 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(INSERT_STMT);
-			pstmt.setString(1, chefVO.getChefAccount());
-			pstmt.setString(2, chefVO.getChefPassword());
-			pstmt.setInt(3, chefVO.getChefStatus());
-			pstmt.setString(4, chefVO.getChefName());
-			pstmt.setString(5, chefVO.getChefNickname());
-			pstmt.setInt(6, chefVO.getChefPrice());
-			pstmt.setString(7, chefVO.getSchDate());
-			pstmt.setInt(8, chefVO.getReserve());
-			pstmt.setInt(9, chefVO.getCom());
-			pstmt.setInt(10, chefVO.getGomg());
-			pstmt.setBytes(11, chefVO.getLicense());
-			pstmt.setBytes(12, chefVO.getIdCard());
-			pstmt.setBytes(13, chefVO.getIdCardBack());
-			pstmt.setBytes(14, chefVO.getChefPhoto());
-			pstmt.setString(15, chefVO.getChefIntroduction());
+			pstmt.setString(1, chefVO.getChefName());
+			pstmt.setString(2, chefVO.getChefNickname());
+			pstmt.setString(3, chefVO.getChefAccount());
+			pstmt.setString(4, chefVO.getChefPassword());
+			pstmt.setInt(5, chefVO.getChefPrice());
+			pstmt.setBytes(6, chefVO.getLicense());
+			pstmt.setBytes(7, chefVO.getIdCard());
+			pstmt.setBytes(8, chefVO.getIdCardBack());
+			pstmt.setBytes(9, chefVO.getChefPhoto());
+			pstmt.setString(10, chefVO.getChefIntroduction());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -86,22 +78,18 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(UPDATE);
-			pstmt.setString(1, chefVO.getChefAccount());
-			pstmt.setString(2, chefVO.getChefPassword());
-			pstmt.setInt(3, chefVO.getChefStatus());
-			pstmt.setString(4, chefVO.getChefName());
-			pstmt.setString(5, chefVO.getChefNickname());
+			pstmt.setString(1, chefVO.getChefName());
+			pstmt.setString(2, chefVO.getChefNickname());
+			pstmt.setString(3, chefVO.getChefAccount());
+			pstmt.setString(4, chefVO.getChefPassword());
+			pstmt.setInt(5, chefVO.getChefStatus());
 			pstmt.setInt(6, chefVO.getChefPrice());
-			pstmt.setString(7, chefVO.getSchDate());
-			pstmt.setInt(8, chefVO.getReserve());
-			pstmt.setInt(9, chefVO.getCom());
-			pstmt.setInt(10, chefVO.getGomg());
-			pstmt.setBytes(11, chefVO.getLicense());
-			pstmt.setBytes(12, chefVO.getIdCard());
-			pstmt.setBytes(13, chefVO.getIdCardBack());
-			pstmt.setBytes(14, chefVO.getChefPhoto());
-			pstmt.setString(15, chefVO.getChefIntroduction());
-			pstmt.setInt(16, chefVO.getChefid());
+//			pstmt.setBytes(11, chefVO.getLicense());
+//			pstmt.setBytes(12, chefVO.getIdCard());
+//			pstmt.setBytes(13, chefVO.getIdCardBack());
+//			pstmt.setBytes(14, chefVO.getChefPhoto());
+			pstmt.setString(7, chefVO.getChefIntroduction());
+			pstmt.setInt(8, chefVO.getChefid());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -144,11 +132,11 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 			while (rs.next()) {
 				chefVO = new ChefVO();
 				chefVO.setChefid(rs.getInt("chefid"));
+				chefVO.setChefName(rs.getString("chefName"));
+				chefVO.setChefNickname(rs.getString("chefNickname"));
 				chefVO.setChefAccount(rs.getString("chefAccount"));
 				chefVO.setChefPassword(rs.getString("chefPassword"));
 				chefVO.setChefStatus(rs.getInt("chefStatus"));
-				chefVO.setChefName(rs.getString("chefName"));
-				chefVO.setChefNickname(rs.getString("chefNickname"));
 				chefVO.setChefPrice(rs.getInt("chefPrice"));
 				chefVO.setSchDate(rs.getString("schDate"));
 				chefVO.setReserve(rs.getInt("reserve"));
@@ -209,11 +197,11 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 			while (rs.next()) {
 				chefVO = new ChefVO();
 				chefVO.setChefid(rs.getInt("chefid"));
+				chefVO.setChefName(rs.getString("chefName"));
+				chefVO.setChefNickname(rs.getString("chefNickname"));
 				chefVO.setChefAccount(rs.getString("chefAccount"));
 				chefVO.setChefPassword(rs.getString("chefPassword"));
 				chefVO.setChefStatus(rs.getInt("chefStatus"));
-				chefVO.setChefName(rs.getString("chefName"));
-				chefVO.setChefNickname(rs.getString("chefNickname"));
 				chefVO.setChefPrice(rs.getInt("chefPrice"));
 				chefVO.setSchDate(rs.getString("schDate"));
 				chefVO.setReserve(rs.getInt("reserve"));
@@ -260,56 +248,66 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 		return list;
 	}
 
-	public static void main(String[] args) {
+	public static byte[] getPictureByteArray(String path) throws IOException {
+		FileInputStream fis = new FileInputStream(path);
+		byte[] buffer = new byte[fis.available()];
+		fis.read(buffer);
+		fis.close();
+		return buffer;
+	}
+
+	public static void main(String[] args) throws IOException {
 		ChefJDBCDAO dao = new ChefJDBCDAO();
 
 		// 新增
-//		ChefVO chefVO1 = new ChefVO();
-//		chefVO1.setChefAccount("Account6");
-//		chefVO1.setChefPassword("Pass333");
-//		chefVO1.setChefStatus(1);
-//		chefVO1.setChefName("吳永志2");
-//		chefVO1.setChefNickname("大吳2");
-//		chefVO1.setChefPrice(99999);
-//		chefVO1.setSchDate("1111111");
-//		chefVO1.setReserve(100);
-//		chefVO1.setCom(100);
-//		chefVO1.setGomg(1000);
-//		chefVO1.setLicense(null);
-//		chefVO1.setIdCard(null);
-//		chefVO1.setIdCardBack(null);
-//		chefVO1.setChefPhoto(null);
-//		chefVO1.setChefIntroduction("我很厲害2");
-//		dao.insert(chefVO1);
+		ChefVO chefVO1 = new ChefVO();
+		chefVO1.setChefName("吳永志2");
+		chefVO1.setChefNickname("大吳2");
+		chefVO1.setChefAccount("Account6");
+		chefVO1.setChefPassword("Pass333");
+		chefVO1.setChefPrice(99999);
+		byte[] pic1 = getPictureByteArray(	"images/Tibame.png");
+//		byte[] pic1 = getPictureByteArray(
+//				"C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\CGA103G4HUNG\\src\\main\\java\\com\\chef\\model\\images\\Tibame.png");
+		chefVO1.setLicense(pic1);
+
+		byte[] pic2 = getPictureByteArray("images/none3.jpg");
+		chefVO1.setIdCard(pic2);
+		byte[] pic3 = getPictureByteArray(	"images/none.jpg");
+		chefVO1.setIdCardBack(pic3);
+		byte[] pic4 = getPictureByteArray(	"images/none2.jpg");
+		chefVO1.setChefPhoto(pic4);
+		chefVO1.setChefIntroduction("我很厲害2");
+		dao.insert(chefVO1);
 
 		// 修改
-		ChefVO chefVO2 = new ChefVO();
-		chefVO2.setChefid(3);
-		chefVO2.setChefAccount("Account3");
-		chefVO2.setChefPassword("Pass333");
-		chefVO2.setChefStatus(1);
-		chefVO2.setChefName("吳永志1");
-		chefVO2.setChefNickname("大吳1");
-		chefVO2.setChefPrice(99999);
-		chefVO2.setSchDate("1111111");
-		chefVO2.setReserve(100);
-		chefVO2.setCom(100);
-		chefVO2.setGomg(1000);
-		chefVO2.setLicense(null);
-		chefVO2.setIdCard(null);
-		chefVO2.setIdCardBack(null);
-		chefVO2.setChefPhoto(null);
-		chefVO2.setChefIntroduction("我很厲害1");
-		dao.update(chefVO2);
+//		ChefVO chefVO2 = new ChefVO();
+//		chefVO2.setChefid(304);
+//		chefVO2.setChefName("吳永志1");
+//		chefVO2.setChefNickname("大吳1");
+//		chefVO2.setChefAccount("Account4");
+//		chefVO2.setChefPassword("Pass333");
+//		chefVO2.setChefStatus(1);
+//		chefVO2.setChefPrice(99999);
+//		chefVO2.setSchDate("1111111");
+//		chefVO2.setReserve(100);
+//		chefVO2.setCom(100);
+//		chefVO2.setGomg(1000);
+//		chefVO2.setLicense(null);
+//		chefVO2.setIdCard(null);
+//		chefVO2.setIdCardBack(null);
+//		chefVO2.setChefPhoto(null);
+//		chefVO2.setChefIntroduction("我很厲害1");
+//		dao.update(chefVO2);
 
 		// 查詢
-		ChefVO chefVO3 = dao.findByPrimaryKey(3);
+		ChefVO chefVO3 = dao.findByPrimaryKey(301);
 		System.out.print(chefVO3.getChefid() + ",");
+		System.out.print(chefVO3.getChefName() + ",");
+		System.out.print(chefVO3.getChefNickname() + ",");
 		System.out.print(chefVO3.getChefAccount() + ",");
 		System.out.print(chefVO3.getChefPassword() + ",");
 		System.out.print(chefVO3.getChefStatus() + ",");
-		System.out.print(chefVO3.getChefName() + ",");
-		System.out.print(chefVO3.getChefNickname() + ",");
 		System.out.print(chefVO3.getChefPrice() + ",");
 		System.out.print(chefVO3.getSchDate() + ",");
 		System.out.print(chefVO3.getReserve() + ",");
@@ -326,11 +324,11 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 		List<ChefVO> list = dao.getAll();
 		for (ChefVO aChef : list) {
 			System.out.print(aChef.getChefid() + ",");
+			System.out.print(aChef.getChefName() + ",");
+			System.out.print(aChef.getChefNickname() + ",");
 			System.out.print(aChef.getChefAccount() + ",");
 			System.out.print(aChef.getChefPassword() + ",");
 			System.out.print(aChef.getChefStatus() + ",");
-			System.out.print(aChef.getChefName() + ",");
-			System.out.print(aChef.getChefNickname() + ",");
 			System.out.print(aChef.getChefPrice() + ",");
 			System.out.print(aChef.getSchDate() + ",");
 			System.out.print(aChef.getReserve() + ",");

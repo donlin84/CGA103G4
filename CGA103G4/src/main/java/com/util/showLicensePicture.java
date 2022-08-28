@@ -14,16 +14,16 @@ import javax.sql.DataSource;
 
 public class showLicensePicture extends HttpServlet {
 
-//	Connection con;
+	private static final long serialVersionUID = 1L;
+	Connection con;
+	String driver = "com.mysql.cj.jdbc.Driver";
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
-		
+//				System.out.println("aaaaaa");
 		res.setContentType("image/gif");
 		ServletOutputStream out = res.getOutputStream();
 
 		try {
-			String driver = "com.mysql.cj.jdbc.Driver";
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			Statement stmt = conn.createStatement();
@@ -47,6 +47,7 @@ public class showLicensePicture extends HttpServlet {
 				in.read(b);
 				out.write(b);
 				in.close();
+//				System.out.println("bbbbbb");
 			}
 			rs.close();
 			stmt.close();
@@ -56,29 +57,33 @@ public class showLicensePicture extends HttpServlet {
 			in.read(b);
 			out.write(b);
 			in.close();
+//			System.out.println("CCCCCCCC");
 		}
 	}
 
-//	public void init() throws ServletException {
-//		try {
-//			Context ctx = new javax.naming.InitialContext();
-//			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/David");
-//			con = ds.getConnection();
-//	
-//		}  catch (NamingException e) {
-//			e.printStackTrace();
-//		}catch (SQLException e) {
-//			e.printStackTrace();
-//		} 
-//	}
-//
-//	public void destroy() {
-//		try {
-//			if (con != null)
-//				con.close();
-//		} catch (SQLException e) {
-//			System.out.println(e);
-//		}
-//	}
+	public void init() throws ServletException {
+		try {
+//			System.out.println("aaaaaa");
+
+			Context ctx = new javax.naming.InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/David");
+			con = ds.getConnection();
+	
+		}  	catch (NamingException e) {
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		} 
+	}
+
+	public void destroy() {
+		try {
+			if (con != null)
+				con.close();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+	}
 
 }

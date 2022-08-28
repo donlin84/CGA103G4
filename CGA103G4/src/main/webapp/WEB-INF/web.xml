@@ -76,7 +76,7 @@
 	
 	<servlet>
 		<servlet-name>showLicensePicture</servlet-name>
-		<servlet-class>basic.util.showLicensePicture</servlet-class>
+		<servlet-class>com.util.showLicensePicture</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>showLicensePicture</servlet-name>
@@ -85,7 +85,7 @@
 	
 	<servlet>
 		<servlet-name>showIdCardPicture</servlet-name>
-		<servlet-class>basic.util.showIdCardPicture</servlet-class>
+		<servlet-class>com.util.showIdCardPicture</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>showIdCardPicture</servlet-name>
@@ -94,7 +94,7 @@
 	
 	<servlet>
 		<servlet-name>showIdCardBackPicture</servlet-name>
-		<servlet-class>basic.util.showIdCardBackPicture</servlet-class>
+		<servlet-class>com.util.showIdCardBackPicture</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>showIdCardBackPicture</servlet-name>
@@ -103,7 +103,7 @@
 	
 	<servlet>
 		<servlet-name>showChefPhotoPicture</servlet-name>
-		<servlet-class>basic.util.showChefPhotoPicture</servlet-class>
+		<servlet-class>com.util.showChefPhotoPicture</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>showChefPhotoPicture</servlet-name>

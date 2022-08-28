@@ -17,7 +17,13 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO"); //ChefServlet.java (Con
 <link href="css/chefUpdateOther.css" rel="stylesheet" type="text/css">
 
 
-
+<style>
+.formGroup .input{
+  border: 0px;
+  border-bottom: 1px solid #b2b2b2;
+  width: calc(100% - 110px);
+}
+</style>
 </head>
 <body bgcolor='white'>
 
@@ -52,24 +58,24 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO"); //ChefServlet.java (Con
 				<td><%=chefVO.getChefid()%></td>
 			</tr>
 			<tr>
-				<td>私廚姓名:</td>
-				<td><input type="TEXT" name="chefName" size="45"
+				<td>帳號:</td>
+				<td><input type="TEXT" name="chefAccount" size="45"
+					value="<%=chefVO.getChefAccount()%>" readonly/></td>
+			</tr>
+			<tr>
+				<td><label for="chefPassword">密碼:</label></td>
+				<td><input type="password" name="chefPassword" size="45" id="chefPassword"
+					value="<%=chefVO.getChefPassword()%>" /></td>
+			</tr>
+			<tr>
+				<td><label for="chefName">私廚姓名:</label></td>
+				<td><input type="TEXT" name="chefName" size="45" id="chefName"
 					value="<%=chefVO.getChefName()%>" /></td>
 			</tr>
 			<tr>
-				<td>私廚暱稱:</td>
-				<td><input type="TEXT" name="chefNickname" size="45"
+				<td><label for="chefNickname">私廚暱稱:</label></td>
+				<td><input type="TEXT" name="chefNickname" size="45" id="chefNickname"
 					value="<%=chefVO.getChefNickname()%>" /></td>
-			</tr>
-			<tr>
-				<td>帳號:</td>
-				<td><input type="TEXT" name="chefAccount" size="45"
-					value="<%=chefVO.getChefAccount()%>" /></td>
-			</tr>
-			<tr>
-				<td>密碼:</td>
-				<td><input type="TEXT" name="chefPassword" size="45"
-					value="<%=chefVO.getChefPassword()%>" /></td>
 			</tr>
 
 			<tr>
@@ -89,41 +95,49 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO"); //ChefServlet.java (Con
 			</tr>
 
 			<tr>
-				<td>價格:</td>
-				<td><input type="TEXT" name="chefPrice" size="45"
+				<td><label for="chefPrice">價格:</label></td>
+				<td><input type="TEXT" name="chefPrice" size="45" id="chefPrice"
 					value="<%=chefVO.getChefPrice()%>" /></td>
 			</tr>
 			<tr>
 				<td>廚師執照:</td>
 				<td><input type="file" id="p_file1"></td>
 				<td id="drop_zone1"><span class="text">圖片拖曳至此處</span></td>
-				<td id="preview1"><span class="text">預覽圖</span></td>
+				<td id="preview1"><img src="<%=request.getContextPath()%>/showLicensePicture?chefid=${chefVO.chefid}" width=100%>
+				<span class="text"></span></td>
 
 			</tr>
 			<tr>
 				<td>身分證(正):</td>
 				<td><input type="file" id="p_file2"></td>
 				<td id="drop_zone2"><span class="text">圖片拖曳至此處</span></td>
-				<td id="preview2"><span class="text">預覽圖</span></td>
+				<td id="preview2"><img src="<%=request.getContextPath()%>/showIdCardPicture?chefid=${chefVO.chefid}" width=100%>
+				<span class="text"></span></td>
 			</tr>
 			<tr>
 				<td>身分證(反):</td>
 				<td><input type="file" id="p_file3"></td>
 				<td id="drop_zone3"><span class="text">圖片拖曳至此處</span></td>
-				<td id="preview3"><span class="text">預覽圖</span></td>
+				<td id="preview3"><img src="<%=request.getContextPath()%>/showIdCardBackPicture?chefid=${chefVO.chefid}" width=100%>
+				<span class="text"></span></td>
 			</tr>
 			<tr>
 				<td>個人照:</td>
 				<td><input type="file" id="p_file4"></td>
 				<td id="drop_zone4"><span class="text">圖片拖曳至此處</span></td>
-				<td id="preview4"><span class="text">預覽圖</span></td>
+				<td id="preview4"><img src="<%=request.getContextPath()%>/showChefPhotoPicture?chefid=${chefVO.chefid}" width=100%>
+				<span class="text"></span></td>
 			</tr>
 
 			<tr>
-				<td>簡介:</td>
-				<td><input type="TEXT" name="chefIntroduction" size="45"
+				<td><label for="chefIntroduction">簡介:</label></td>
+				<td><input type="TEXT" name="chefIntroduction" size="45" id="chefIntroduction"
 					value="<%=chefVO.getChefIntroduction()%>" /></td>
 			</tr>
+<!-- 			<tr> -->
+<!-- 				<td><label for="chefIntroduction">簡介:</label></td> -->
+<%-- 				<td><textarea rows="10" cols="44" id="chefIntroduction"><%=chefVO.getChefIntroduction()%></textarea></td> --%>
+<!-- 			</tr> -->
 
 
 		</table>
