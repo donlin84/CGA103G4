@@ -66,7 +66,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ProductServlet</servlet-name>
-    <url-pattern>/backend/product.do</url-pattern>
+    <url-pattern>/back-end/product/product.do</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -75,7 +75,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ProductpicServlet</servlet-name>
-    <url-pattern>/backend/Productpic.do</url-pattern>
+    <url-pattern>/back-end/product/Productpic.do</url-pattern>
   </servlet-mapping>  
   <servlet>
 		<servlet-name>PromotionsServlet</servlet-name>

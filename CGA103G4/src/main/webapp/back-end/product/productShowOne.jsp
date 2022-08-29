@@ -163,7 +163,7 @@ ProductVO productVO = (ProductVO) request.getAttribute("productVO"); //EmpServle
 							<tr>
 								<td>商品圖:</td>
 								<td><img
-									src="<%=request.getContextPath()%>/backend/Productpic.do?pdid=<%=productVO.getPdid()%>"
+									src="Productpic.do?pdid=<%=productVO.getPdid()%>"
 									width="200"></td>
 							</tr>
 						</tbody>

@@ -11,7 +11,7 @@ import java.util.List;
 public class FavoriteProductJDBCDAO implements FavoriteProductDAO_interface {
 	
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/seefooddata?serverTimezone=Asia/Taipei";
+	String url = "jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei";
 	String userid = "root";
 	String passwd = "tn00349903";
 	
