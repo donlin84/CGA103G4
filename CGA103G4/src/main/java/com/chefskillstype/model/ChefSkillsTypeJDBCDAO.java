@@ -1,8 +1,8 @@
 package com.chefskillstype.model;
 
-import static com.util.common.PASSWORD;
-import static com.util.common.URL;
-import static com.util.common.USER;
+import static com.util.Common_12.PASSWORD;
+import static com.util.Common_12.URL;
+import static com.util.Common_12.USER;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

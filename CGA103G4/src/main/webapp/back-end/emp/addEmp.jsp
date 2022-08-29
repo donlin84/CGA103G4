@@ -124,7 +124,7 @@ img {
 			<tr>
 				<td>管理員照片:</td>
 				<td><input type="file" id="the_file" accept="image/*" multiple
-					name="empPicture" value="${empVO.empPicture} }" /></td>
+					name="empPicture" value="${empVO.empPicture} " /></td>
 			</tr>
 			<tr>
 				<td>管理員帳號:</td>
