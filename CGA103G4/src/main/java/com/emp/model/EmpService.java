@@ -2,6 +2,9 @@ package com.emp.model;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
+
+import com.announcement.model.AnnouncementVO;
 
 public class EmpService {
 
@@ -53,5 +56,9 @@ public class EmpService {
 
 	public EmpVO findLatestId() {
 		return dao.findLatestId();
+	}
+	
+	public Set<AnnouncementVO> getAnnouncementByEmpid(Integer annid) {
+		return dao.getAnnouncementByEmpid(annid);
 	}
 }

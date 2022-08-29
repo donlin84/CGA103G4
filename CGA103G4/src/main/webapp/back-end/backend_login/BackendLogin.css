@@ -1,0 +1,134 @@
+.errordiv{
+    top: 200px;
+    left: 400px;
+    position: absolute;
+    width: 140px;
+    height: 80px;
+    color:red;
+    border-radius: 20px;
+    border: 1px black solid;
+    display: flex;
+    align-items: center;
+}
+.errorp{
+     text-align: center;
+     font-size: 15px;
+     margin: auto;
+}
+.panel-group{
+    position: relative;
+    width: 450px;
+    top: 40px;
+    left: calc(50% - 225px);
+}
+.panel-control {
+    position:absolute;
+    opacity:0;
+}
+.tab-group #lab1 {
+    display:inline-block;
+    padding: 10px 86px;
+    border:1px solid #ccc;
+    border-bottom:none;
+    background-color: rgb(171, 154, 154);
+    left: 2px;
+    bottom: -3px;
+    position:relative;
+    border-radius: 20px 20px 0px 0px;
+    transition: all 0.5s 0s;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;   
+    font-weight: bold;
+}
+.tab-group #lab2 {
+    display:inline-block;
+    padding: 10px 95px;
+    border:1px solid #ccc;
+    border-bottom:none;
+    background-color: rgb(171, 154, 154);
+    left: 2px;
+    bottom: -3px;
+    position:relative;
+    border-radius: 20px 20px 0px 0px;
+    transition: all 0.5s 0s;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.login_1{
+    width: 450px;
+    border-radius: 0px 0px 20px 20px;
+    border: rgb(255, 255, 255) 2px solid;
+    background-color: rgb(244, 100, 100);
+    height: 400px;
+    display: none;
+    box-shadow: black 30px 30px 40px;
+    text-align: center;
+}
+.login_2{
+    width: 450px;
+    border-radius: 0px 0px 20px 20px;
+    border: rgb(255, 255, 255) 2px solid;
+    background-color: rgb(243, 178, 38);
+    height: 400px;
+    display: none;
+    box-shadow: black 30px 30px 40px;
+    text-align: center;
+}
+.small_title{
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+img{
+    width: 30px;
+    height: 30px;
+}
+input[type="text"],input[type="password"]{
+    text-align: center;
+    border-radius: 15px;
+    border: rgb(10, 10, 10) solid;
+    display: block;
+    padding: 10px 50px;
+    margin: 10px auto;
+    outline: none;
+}
+.textfont{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+h3{
+    font-size: 25px;
+    margin: 0px;
+}
+button[type="submit"]{
+    margin-top: -10px;
+    padding: 10px 30px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+#eyes1{
+    width: 25px;
+    left: 105px;
+    top: -45px;
+    position: relative;
+}
+#eyes2{
+    width: 25px;
+    left: 105px;
+    top: -45px;
+    position: relative;
+}
+
+#radio1:checked ~ .tab-group [for="radio1"] {background-color: rgb(244, 100, 100);}
+#radio2:checked ~ .tab-group [for="radio2"] {background-color: rgb(243, 178, 38);}
+
+
+#radio1:checked ~ .content-group .login_1,
+#radio2:checked ~ .content-group .login_2 {display:block}

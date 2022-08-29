@@ -6,11 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import com.announcement.model.AnnouncementVO;
 
 public class EmpDAO implements EmpDAO_interface {
 
@@ -292,5 +295,11 @@ public class EmpDAO implements EmpDAO_interface {
 			}
 		}
 		return empVO;
+	}
+	
+	@Override
+	public Set<AnnouncementVO> getAnnouncementByEmpid(Integer empid) {
+		Set<AnnouncementVO> set = findByPrimaryKey(empid).getAnnoucements();
+		return set;
 	}
 }

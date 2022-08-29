@@ -1,6 +1,10 @@
 package com.emp.model;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.announcement.model.AnnouncementVO;
 
 public class EmpVO implements java.io.Serializable {
 	private Integer empid;
@@ -12,6 +16,7 @@ public class EmpVO implements java.io.Serializable {
 	private Integer empLevel;
 	private Integer empStatus;
 	private Date empHiredate;
+	private Set<AnnouncementVO> annoucements = new HashSet<AnnouncementVO>();
 
 	public Integer getEmpid() {
 		return empid;
@@ -85,4 +90,11 @@ public class EmpVO implements java.io.Serializable {
 		this.empHiredate = empHiredate;
 	}
 
+	public Set<AnnouncementVO> getAnnoucements() {
+		return annoucements;
+	}
+
+	public void setAnnoucements(Set<AnnouncementVO> annoucements) {
+		this.annoucements = annoucements;
+	}
 }

@@ -18,4 +18,150 @@
     <servlet-name>EmpServlet</servlet-name>
     <url-pattern>/back-end/emp/emp.do</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>OrdersServlet</servlet-name>
+    <servlet-class>com.orders.controller.OrdersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrdersServlet</servlet-name>
+    <url-pattern>/orders/orders.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RecipePictureServlet</servlet-name>
+    <servlet-class>com.recipepicture.controller.RecipePictureServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecipePictureServlet</servlet-name>
+    <url-pattern>/recipepicture/recipePicture.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>TeacherServlet</servlet-name>
+    <servlet-class>com.teacher.controller.TeacherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TeacherServlet</servlet-name>
+    <url-pattern>/back-end/teacher/teacher.do</url-pattern>
+  </servlet-mapping>  
+
+  <servlet>
+    <servlet-name>RegisttrationFormServlet</servlet-name>
+    <servlet-class>com.registtrationform.controller.RegisttrationFormServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisttrationFormServlet</servlet-name>
+    <url-pattern>/back-end/registtrationform/RegisttrationForm.do</url-pattern>
+  </servlet-mapping>
+  
+  <resource-ref>
+    <description>DB Connection</description>
+    <res-ref-name>jdbc/TestDB2</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+  
+  <servlet>
+    <servlet-name>ProductServlet</servlet-name>
+    <servlet-class>com.product.controller.ProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductServlet</servlet-name>
+    <url-pattern>/backend/product.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ProductpicServlet</servlet-name>
+    <servlet-class>com.productPicture.controller.ProductpicServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductpicServlet</servlet-name>
+    <url-pattern>/backend/Productpic.do</url-pattern>
+  </servlet-mapping>  
+  <servlet>
+		<servlet-name>PromotionsServlet</servlet-name>
+		<servlet-class>com.promotions.controller.PromotionsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PromotionsServlet</servlet-name>
+		<url-pattern>/back-end/promotions/PromotionsServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CouponTypeServlet</servlet-name>
+		<servlet-class>com.coupontype.controller.CouponTypeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CouponTypeServlet</servlet-name>
+		<url-pattern>/back-end/coupontype/CouponTypeServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>"ImagesServlet"</servlet-name>
+		<servlet-class>com.images.ImagesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>"ImagesServlet"</servlet-name>
+		<url-pattern>/ImagesServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>"LoginHandler"</servlet-name>
+		<servlet-class>com.login.LoginHandler</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>"LoginHandler"</servlet-name>
+		<url-pattern>/login/LoginHandler</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MemberServlet</servlet-name>
+		<servlet-class>com.member.controller.MemberServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberServlet</servlet-name>
+		<url-pattern>/back-end/member/MemberServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- 以下為Filter的註冊 -->
+	<filter>
+		<filter-name>setCharacterEncoding</filter-name>
+		<filter-class>filters.SetCharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>setCharacterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>filters.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		
+		<url-pattern>/back-end/index-back.jsp</url-pattern>
+		<url-pattern>/back-end/discount-management/discount-management.jsp</url-pattern>
+		
+		<url-pattern>/back-end/promotions/addPromotions.jsp</url-pattern>
+		<url-pattern>/back-end/promotions/listAllPromotions.jsp</url-pattern>
+		<url-pattern>/back-end/promotions/listOnePromotion.jsp</url-pattern>
+		<url-pattern>/back-end/promotions/select_page.jsp</url-pattern>
+		<url-pattern>/back-end/promotions/updatePromotion.jsp</url-pattern>
+
+		<url-pattern>/back-end/coupontype/addCouponType.jsp</url-pattern>
+		<url-pattern>/back-end/coupontype/listAllCouponType.jsp</url-pattern>
+		<url-pattern>/back-end/coupontype/listOneCouponType.jsp</url-pattern>
+		<url-pattern>/back-end/coupontype/select_page.jsp</url-pattern>
+		<url-pattern>/back-end/coupontype/updateCouponType.jsp</url-pattern>
+
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
 </web-app>

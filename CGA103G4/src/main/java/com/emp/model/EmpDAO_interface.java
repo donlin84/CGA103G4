@@ -1,6 +1,9 @@
 package com.emp.model;
 
 import java.util.List;
+import java.util.Set;
+
+import com.announcement.model.AnnouncementVO;
 
 public interface EmpDAO_interface {
 	public void insert(EmpVO empVO);
@@ -13,4 +16,5 @@ public interface EmpDAO_interface {
 
 	public EmpVO findLatestId();
 
+	public Set<AnnouncementVO> getAnnouncementByEmpid(Integer annid);
 }
