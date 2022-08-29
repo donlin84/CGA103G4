@@ -1,6 +1,6 @@
 package com.util;
 
-import static com.util.common.*;
+import static com.util.common_hung.*;
 
 import java.io.*;
 import java.sql.*;

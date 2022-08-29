@@ -195,56 +195,75 @@ public class ChefServlet extends HttpServlet {
 
 			String chefIntroduction = req.getParameter("chefIntroduction");
 
-//			req.setCharacterEncoding("Big5"); // 處理中文檔名
-//			res.setContentType("text/html; charset=Big5");
-//			PrintWriter out = res.getWriter();
-////			System.out.println("ContentType="+req.getContentType()); // 測試用
-//
-//			String realPath = getServletContext().getRealPath(saveDirectory);
-////			System.out.println("realPath="+realPath); // 測試用
-//			File fsaveDirectory = new File(realPath);
-//			if (!fsaveDirectory.exists())
-//				 fsaveDirectory.mkdirs(); // 於 ContextPath 之下,自動建立目地目錄
-//
-//			Collection<Part> parts = req.getParts(); // Servlet3.0新增了Part介面，讓我們方便的進行檔案上傳處理	//上傳三要素之三
-//
-//			for (Part part : parts) {
-//
-//				String filename = part.getSubmittedFileName();
-//				if (filename!=null && filename.length()!=0 && part.getContentType()!=null) {
-//
-//					String name = part.getName();
-//					String ContentType = part.getContentType();	//xx除了IE瀏覽器 其他無效
-//					long size = part.getSize();
-//					File f = new File(fsaveDirectory, filename);
-//					System.out.println("test1");
-//					System.out.println("name: " + name);
-//					System.out.println("filename: " + filename);
-//					System.out.println("ContentType: " + ContentType);	//xx
-//					System.out.println("size: " + size);
-//					System.out.println("File: " + f);
-//					// 利用File物件,寫入目地目錄,上傳成功
-//					part.write(f.toString());
-//
-//				}
-//			}
-//			System.out.println("test2");
-			byte[] license2 = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
-					+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
-					+ "Tibame.png");
-//					req.getPart("license").getSubmittedFileName());
-			byte[] idCard2 = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
-					+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
-					+ "Tibame.png");
-//					req.getPart("idCard").getSubmittedFileName());
-			byte[] idCardBack2 = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
-					+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
-					+ "Tibame.png");
-//					req.getPart("idCardBack").getSubmittedFileName());
-			byte[] chefPhoto2 = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
-					+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
-					+ "Tibame.png");
-//					req.getPart("chefPhoto").getSubmittedFileName());
+			req.setCharacterEncoding("UTF-8"); // 處理中文檔名
+			res.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = res.getWriter();
+//			System.out.println("ContentType="+req.getContentType()); // 測試用
+
+			String realPath = getServletContext().getRealPath(saveDirectory);
+//			System.out.println("realPath="+realPath); // 測試用
+			File fsaveDirectory = new File(realPath);
+			if (!fsaveDirectory.exists())
+				fsaveDirectory.mkdirs(); // 於 ContextPath 之下,自動建立目地目錄
+
+			Collection<Part> parts = req.getParts(); // Servlet3.0新增了Part介面，讓我們方便的進行檔案上傳處理 //上傳三要素之三
+
+			for (Part part : parts) {
+				String filename = part.getSubmittedFileName();
+				if (filename != null && filename.length() != 0 && part.getContentType() != null) {
+					File f = new File(fsaveDirectory, filename);
+					// 利用File物件,寫入目地目錄,上傳成功
+					part.write(f.toString());
+
+				}
+			}
+
+			ChefService chefSvc = new ChefService();
+
+			Part part = req.getPart("license");
+			InputStream in = part.getInputStream();
+			byte[] license = new byte[in.available()];
+			ChefVO chefVOld = chefSvc.getOneChef(chefid);
+			in.read(license);
+			in.close();
+			if (license.length == 0) {
+				license = chefVOld.getLicense();
+			}
+//			System.out.println("req.getPart(\"license\") = "+req.getPart("license"));
+//			System.out.println("in = "+in);
+//			System.out.println("license.length = "+license.length);
+//			System.out.println("chefVOOld = "+chefVOld);
+
+			Part part1 = req.getPart("idCard");
+			InputStream in1 = part1.getInputStream();
+			byte[] idCard = new byte[in1.available()];
+			ChefVO chefVO1ld = chefSvc.getOneChef(chefid);
+			in1.read(idCard);
+			in1.close();
+			if (idCard.length == 0) {
+				idCard = chefVO1ld.getIdCard();
+			}
+
+			Part part2 = req.getPart("idCardBack");
+			InputStream in2 = part2.getInputStream();
+			byte[] idCardBack = new byte[in2.available()];
+			ChefVO chefVO2ld = chefSvc.getOneChef(chefid);
+			in2.read(idCardBack);
+			in2.close();
+			if (idCardBack.length == 0) {
+				idCardBack = chefVO2ld.getIdCardBack();
+			}
+
+			Part part3 = req.getPart("chefPhoto");
+			InputStream in3 = part3.getInputStream();
+			byte[] chefPhoto = new byte[in3.available()];
+			ChefVO chefVO3ld = chefSvc.getOneChef(chefid);
+			in3.read(chefPhoto);
+			in3.close();
+			if (chefPhoto.length == 0) {
+				chefPhoto = chefVO3ld.getChefPhoto();
+			}
+
 
 			ChefVO chefVO = new ChefVO();
 			chefVO.setChefid(chefid);
@@ -254,10 +273,10 @@ public class ChefServlet extends HttpServlet {
 			chefVO.setChefPassword(chefPassword);
 			chefVO.setChefStatus(chefStatus);
 			chefVO.setChefPrice(chefPrice);
-			chefVO.setLicense(license2);
-			chefVO.setIdCard(idCard2);
-			chefVO.setIdCardBack(idCardBack2);
-			chefVO.setChefPhoto(chefPhoto2);
+			chefVO.setLicense(license);
+			chefVO.setIdCard(idCard);
+			chefVO.setIdCardBack(idCardBack);
+			chefVO.setChefPhoto(chefPhoto);
 			chefVO.setChefIntroduction(chefIntroduction);
 
 			// Send the use back to the form, if there were errors
@@ -269,56 +288,12 @@ public class ChefServlet extends HttpServlet {
 			}
 
 			/*************************** 2.開始修改資料 *****************************************/
-			ChefService chefSvc = new ChefService();
+//			ChefService chefSvc = new ChefService();
 			chefVO = chefSvc.updateChef(chefid, chefName, chefNickname, chefAccount, chefPassword, chefStatus,
-					chefPrice, license2, idCard2, idCardBack2, chefPhoto2, chefIntroduction);
+					chefPrice, license, idCard, idCardBack, chefPhoto, chefIntroduction);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("chefVO", chefVO); // 資料庫update成功後,正確的的empVO物件,存入req
-
-			String license = null;
-			try {
-				license = Base64.getEncoder().encodeToString(chefVO.getLicense());
-			} catch (NullPointerException e) {
-				ServletContext servletContext = req.getServletContext();
-				String fileRealPath = servletContext.getRealPath("/back-end/chef/images/no.png");
-				byte[] fileRealPathtoByte = getPictureByteArray(fileRealPath);
-				license = Base64.getEncoder().encodeToString(fileRealPathtoByte);
-			}
-			req.setAttribute("license", license);
-
-			String idCard = null;
-			try {
-				idCard = Base64.getEncoder().encodeToString(chefVO.getIdCard());
-			} catch (NullPointerException e) {
-				ServletContext servletContext = req.getServletContext();
-				String fileRealPath = servletContext.getRealPath("/back-end/chef/images/no.png");
-				byte[] fileRealPathtoByte = getPictureByteArray(fileRealPath);
-				idCard = Base64.getEncoder().encodeToString(fileRealPathtoByte);
-			}
-			req.setAttribute("idCard", idCard);
-
-			String idCardBack = null;
-			try {
-				idCardBack = Base64.getEncoder().encodeToString(chefVO.getIdCardBack());
-			} catch (NullPointerException e) {
-				ServletContext servletContext = req.getServletContext();
-				String fileRealPath = servletContext.getRealPath("/back-end/chef/images/no.png");
-				byte[] fileRealPathtoByte = getPictureByteArray(fileRealPath);
-				idCardBack = Base64.getEncoder().encodeToString(fileRealPathtoByte);
-			}
-			req.setAttribute("idCardBack", idCardBack);
-
-			String chefPhoto = null;
-			try {
-				chefPhoto = Base64.getEncoder().encodeToString(chefVO.getChefPhoto());
-			} catch (NullPointerException e) {
-				ServletContext servletContext = req.getServletContext();
-				String fileRealPath = servletContext.getRealPath("/back-end/chef/images/no.png");
-				byte[] fileRealPathtoByte = getPictureByteArray(fileRealPath);
-				chefPhoto = Base64.getEncoder().encodeToString(fileRealPathtoByte);
-			}
-			req.setAttribute("chefPhoto", chefPhoto);
 
 			String url = "/back-end/chef/listOneChef.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneMember.jsp
@@ -372,8 +347,8 @@ public class ChefServlet extends HttpServlet {
 				errorMsgs.add("簡介請勿空白");
 			}
 
-			req.setCharacterEncoding("Big5"); // 處理中文檔名
-			res.setContentType("text/html; charset=Big5");
+			req.setCharacterEncoding("UTF-8"); // 處理中文檔名
+			res.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = res.getWriter();
 //			System.out.println("ContentType="+req.getContentType()); // 測試用
 
@@ -386,47 +361,50 @@ public class ChefServlet extends HttpServlet {
 			Collection<Part> parts = req.getParts(); // Servlet3.0新增了Part介面，讓我們方便的進行檔案上傳處理 //上傳三要素之三
 
 			for (Part part : parts) {
-
 				String filename = part.getSubmittedFileName();
+//				System.out.println("filename="+filename);
 				if (filename != null && filename.length() != 0 && part.getContentType() != null) {
-
-//					String name = part.getName();
-//					String ContentType = part.getContentType();	//xx除了IE瀏覽器 其他無效
-//					long size = part.getSize();
 					File f = new File(fsaveDirectory, filename);
-
-//					System.out.println("name: " + name);
-//					System.out.println("filename: " + filename);
-//					System.out.println("ContentType: " + ContentType);	//xx
-//					System.out.println("size: " + size);
-//					System.out.println("File: " + f);
 					// 利用File物件,寫入目地目錄,上傳成功
 					part.write(f.toString());
-
 				}
 			}
 
 			byte[] license = null;
-			System.out.println(req.getParts().isEmpty());
-			if (req.getPart("license").getSubmittedFileName() == null) {
-				errorMsgs.add("XX請勿空白");
+			if (req.getPart("license").getSubmittedFileName().isEmpty()) {
+				errorMsgs.add("請上傳廚師執照");
+			} else {
 				license = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
 						+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
 						+ req.getPart("license").getSubmittedFileName());
-						} else {
-							license = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
-									+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\back-end\\chef\\images\\no.png");
 			}
 
-			byte[] idCard = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
-					+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
-					+ req.getPart("idCard").getSubmittedFileName());
-			byte[] idCardBack = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
-					+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
-					+ req.getPart("idCardBack").getSubmittedFileName());
-			byte[] chefPhoto = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
-					+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
-					+ req.getPart("chefPhoto").getSubmittedFileName());
+			byte[] idCard = null;
+			if (req.getPart("idCard").getSubmittedFileName().isEmpty()) {
+				errorMsgs.add("請上傳身分證(正)");
+			} else {
+				idCard = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
+						+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
+						+ req.getPart("idCard").getSubmittedFileName());
+			}
+
+			byte[] idCardBack = null;
+			if (req.getPart("idCardBack").getSubmittedFileName().isEmpty()) {
+				errorMsgs.add("請上傳身分證(反)");
+			} else {
+				idCardBack = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
+						+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
+						+ req.getPart("idCardBack").getSubmittedFileName());
+			}
+
+			byte[] chefPhoto = null;
+			if (req.getPart("chefPhoto").getSubmittedFileName().isEmpty()) {
+				errorMsgs.add("請上傳個人照");
+			} else {
+				chefPhoto = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
+						+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
+						+ req.getPart("chefPhoto").getSubmittedFileName());
+			}
 
 			ChefVO chefVO = new ChefVO();
 			chefVO.setChefAccount(chefAccount);

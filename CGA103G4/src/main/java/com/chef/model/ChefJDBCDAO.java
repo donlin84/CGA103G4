@@ -1,6 +1,6 @@
 package com.chef.model;
 
-import static com.util.common.*;
+import static com.util.common_hung.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,10 +20,9 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 			+ "schDate, reserve, com, gomg, license, idCard, idCardBack, chefPhoto, chefIntroduction "
 			+ "FROM Chef where chefid = ?";
 	private static final String UPDATE = "UPDATE Chef set chefName=?, chefNickname=?, chefAccount=?, chefPassword=?,  chefStatus=?, "
-			+ "chefPrice=?,  chefIntroduction=? " + "where chefid = ?";
-//	private static final String UPDATE = "UPDATE Chef set chefAccount=?, chefPassword=?,  chefStatus=?, chefName=?, chefNickname=?, chefPrice=?, "
-//			+ "schDate=?, reserve=?, com=?, gomg=?, license=?, idCard=?, idCardBack=?, chefPhoto=?, chefIntroduction=? "
-//			+ "where chefid = ?";
+			+ "chefPrice=?, license=?, idCard=?, idCardBack=?, chefPhoto=?,  chefIntroduction=? " 
+			+ "where chefid = ?";
+
 
 	@Override
 	public void insert(ChefVO chefVO) {
@@ -84,12 +83,12 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 			pstmt.setString(4, chefVO.getChefPassword());
 			pstmt.setInt(5, chefVO.getChefStatus());
 			pstmt.setInt(6, chefVO.getChefPrice());
-//			pstmt.setBytes(11, chefVO.getLicense());
-//			pstmt.setBytes(12, chefVO.getIdCard());
-//			pstmt.setBytes(13, chefVO.getIdCardBack());
-//			pstmt.setBytes(14, chefVO.getChefPhoto());
-			pstmt.setString(7, chefVO.getChefIntroduction());
-			pstmt.setInt(8, chefVO.getChefid());
+			pstmt.setBytes(7, chefVO.getLicense());
+			pstmt.setBytes(8, chefVO.getIdCard());
+			pstmt.setBytes(9, chefVO.getIdCardBack());
+			pstmt.setBytes(10, chefVO.getChefPhoto());
+			pstmt.setString(11, chefVO.getChefIntroduction());
+			pstmt.setInt(12, chefVO.getChefid());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -260,25 +259,25 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 		ChefJDBCDAO dao = new ChefJDBCDAO();
 
 		// 新增
-		ChefVO chefVO1 = new ChefVO();
-		chefVO1.setChefName("吳永志2");
-		chefVO1.setChefNickname("大吳2");
-		chefVO1.setChefAccount("Account6");
-		chefVO1.setChefPassword("Pass333");
-		chefVO1.setChefPrice(99999);
-		byte[] pic1 = getPictureByteArray(	"images/Tibame.png");
-//		byte[] pic1 = getPictureByteArray(
-//				"C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\CGA103G4HUNG\\src\\main\\java\\com\\chef\\model\\images\\Tibame.png");
-		chefVO1.setLicense(pic1);
-
-		byte[] pic2 = getPictureByteArray("images/none3.jpg");
-		chefVO1.setIdCard(pic2);
-		byte[] pic3 = getPictureByteArray(	"images/none.jpg");
-		chefVO1.setIdCardBack(pic3);
-		byte[] pic4 = getPictureByteArray(	"images/none2.jpg");
-		chefVO1.setChefPhoto(pic4);
-		chefVO1.setChefIntroduction("我很厲害2");
-		dao.insert(chefVO1);
+//		ChefVO chefVO1 = new ChefVO();
+//		chefVO1.setChefName("吳永志2");
+//		chefVO1.setChefNickname("大吳2");
+//		chefVO1.setChefAccount("Account6");
+//		chefVO1.setChefPassword("Pass333");
+//		chefVO1.setChefPrice(99999);
+//		byte[] pic1 = getPictureByteArray(	"images/Tibame.png");
+////		byte[] pic1 = getPictureByteArray(
+////				"C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\CGA103G4HUNG\\src\\main\\java\\com\\chef\\model\\images\\Tibame.png");
+//		chefVO1.setLicense(pic1);
+//
+//		byte[] pic2 = getPictureByteArray("images/none3.jpg");
+//		chefVO1.setIdCard(pic2);
+//		byte[] pic3 = getPictureByteArray(	"images/none.jpg");
+//		chefVO1.setIdCardBack(pic3);
+//		byte[] pic4 = getPictureByteArray(	"images/none2.jpg");
+//		chefVO1.setChefPhoto(pic4);
+//		chefVO1.setChefIntroduction("我很厲害2");
+//		dao.insert(chefVO1);
 
 		// 修改
 //		ChefVO chefVO2 = new ChefVO();

@@ -51,7 +51,7 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO"); //ChefServlet.java (Con
 		</ul>
 	</c:if>
 
-	<FORM METHOD="post" ACTION="chef.do" name="form1">
+	<FORM METHOD="post" ACTION="chef.do" name="form1" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>私廚編號:<font color=red><b>*</b></font></td>
@@ -101,7 +101,7 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO"); //ChefServlet.java (Con
 			</tr>
 			<tr>
 				<td>廚師執照:</td>
-				<td><input type="file" id="p_file1"></td>
+				<td><input type="file" name="license" id="p_file1"></td>
 				<td id="drop_zone1"><span class="text">圖片拖曳至此處</span></td>
 				<td id="preview1"><img src="<%=request.getContextPath()%>/showLicensePicture?chefid=${chefVO.chefid}" width=100%>
 				<span class="text"></span></td>
@@ -109,21 +109,21 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO"); //ChefServlet.java (Con
 			</tr>
 			<tr>
 				<td>身分證(正):</td>
-				<td><input type="file" id="p_file2"></td>
+				<td><input type="file" name="idCard" id="p_file2"></td>
 				<td id="drop_zone2"><span class="text">圖片拖曳至此處</span></td>
 				<td id="preview2"><img src="<%=request.getContextPath()%>/showIdCardPicture?chefid=${chefVO.chefid}" width=100%>
 				<span class="text"></span></td>
 			</tr>
 			<tr>
 				<td>身分證(反):</td>
-				<td><input type="file" id="p_file3"></td>
+				<td><input type="file" name="idCardBack" id="p_file3"></td>
 				<td id="drop_zone3"><span class="text">圖片拖曳至此處</span></td>
 				<td id="preview3"><img src="<%=request.getContextPath()%>/showIdCardBackPicture?chefid=${chefVO.chefid}" width=100%>
 				<span class="text"></span></td>
 			</tr>
 			<tr>
 				<td>個人照:</td>
-				<td><input type="file" id="p_file4"></td>
+				<td><input type="file" name="chefPhoto" id="p_file4"></td>
 				<td id="drop_zone4"><span class="text">圖片拖曳至此處</span></td>
 				<td id="preview4"><img src="<%=request.getContextPath()%>/showChefPhotoPicture?chefid=${chefVO.chefid}" width=100%>
 				<span class="text"></span></td>

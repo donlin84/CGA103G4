@@ -57,7 +57,7 @@ th, td {
 
 </head>
 <body bgcolor='white'>
-<select class="selectpicker countrypicker"></select>
+<!-- <select class="selectpicker countrypicker"></select> -->
 	<table id="table-1">
 		<tr>
 			<td>

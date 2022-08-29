@@ -1,6 +1,6 @@
 package com.creditcardinformation.model;
 
-import static com.util.common.*;
+import static com.util.common_hung.*;
 
 import java.sql.*;
 import java.util.*;

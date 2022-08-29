@@ -92,19 +92,19 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO");
 				<td>身分證(正):</td>
 				<td><input type="file" name="idCard" id="p_file2"></td>
 				<td id="drop_zone2"><span class="text">圖片拖曳至此處</span></td>
-				<td id="preview2"><span class="text">預覽圖</span></td>
+				<td id="preview2"><span class="text"><%=(chefVO == null) ? "預覽圖" : chefVO.getIdCard()%></span></td>
 			</tr>
 			<tr>
 				<td>身分證(反):</td>
 				<td><input type="file" name="idCardBack" id="p_file3"></td>
 				<td id="drop_zone3"><span class="text">圖片拖曳至此處</span></td>
-				<td id="preview3"><span class="text">預覽圖</span></td>
+				<td id="preview3"><span class="text"><%=(chefVO == null) ? "預覽圖" : chefVO.getIdCardBack()%></span></td>
 			</tr>
 			<tr>
 				<td>個人照:</td>
 				<td><input type="file" name="chefPhoto" id="p_file4"></td>
 				<td id="drop_zone4"><span class="text">圖片拖曳至此處</span></td>
-				<td id="preview4"><span class="text">預覽圖</span></td>
+				<td id="preview4"><span class="text"><%=(chefVO == null) ? "預覽圖" : chefVO.getChefPhoto()%></span></td>
 			</tr>
 			
 			<tr>
@@ -119,11 +119,12 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO");
 
 		</table>
 		<br> <input type="hidden" name="action" value="insert"> 
-		<input type="submit" value="送出新增">
+		<input type="submit"  id="btn_submit" value="送出新增">
 	</FORM>
 	
 	
 		<script>
+		window.addEventListener("load", function(e){
 		var drop_zone1_el = document.getElementById("drop_zone1");
 		var drop_zone2_el = document.getElementById("drop_zone2");
 		var drop_zone3_el = document.getElementById("drop_zone3");
@@ -136,7 +137,7 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO");
 		var p_file2_el = document.getElementById("p_file2");
 		var p_file3_el = document.getElementById("p_file3");
 		var p_file4_el = document.getElementById("p_file4");
-
+		var btn_submit_el = document.getElementById("btn_submit");
 		// =========================== Drag and Drop ========================= //
 		drop_zone1_el.addEventListener("dragover", function(e) {
 			e.preventDefault();
@@ -294,6 +295,7 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO");
 		});
 
 
+      });
 </script>
 </body>
 

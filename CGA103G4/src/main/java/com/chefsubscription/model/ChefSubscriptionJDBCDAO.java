@@ -1,8 +1,8 @@
 package com.chefsubscription.model;
 
-import static com.util.common.PASSWORD;
-import static com.util.common.URL;
-import static com.util.common.USER;
+import static com.util.common_hung.PASSWORD;
+import static com.util.common_hung.URL;
+import static com.util.common_hung.USER;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

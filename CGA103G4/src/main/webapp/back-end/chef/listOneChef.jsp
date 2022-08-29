@@ -63,10 +63,14 @@
 		<td><%=chefVO.getReserve()%></td>
 		<td><%=chefVO.getCom()%></td>
 		<td><%=chefVO.getGomg()%></td>
-		<td><img onclick='showBgImg(this)' class='thum-img' src="data:image/jpeg;base64,${license}"></td>
-		<td><img onclick='showBgImg(this)' class='thum-img' src="data:image/jpeg;base64,${idCard}" ></td>
-		<td><img onclick='showBgImg(this)' class='thum-img' src="data:image/jpeg;base64,${idCardBack}" ></td>
-		<td><img onclick='showBgImg(this)' class='thum-img' src="data:image/jpeg;base64,${chefPhoto}" ></td>
+		<td><img onclick='showBgImg(this)' class='thum-img' src="<%=request.getContextPath()%>/showLicensePicture?chefid=${chefVO.chefid}"></td>
+		<td><img onclick='showBgImg(this)' class='thum-img' src="<%=request.getContextPath()%>/showIdCardPicture?chefid=${chefVO.chefid}" ></td>
+		<td><img onclick='showBgImg(this)' class='thum-img' src="<%=request.getContextPath()%>/showIdCardBackPicture?chefid=${chefVO.chefid}" ></td>
+		<td><img onclick='showBgImg(this)' class='thum-img' src="<%=request.getContextPath()%>/showChefPhotoPicture?chefid=${chefVO.chefid}" ></td>
+<%-- 		<td><img onclick='showBgImg(this)' class='thum-img' src="data:image/jpeg;base64,${license}"></td> --%>
+<%-- 		<td><img onclick='showBgImg(this)' class='thum-img' src="data:image/jpeg;base64,${idCard}" ></td> --%>
+<%-- 		<td><img onclick='showBgImg(this)' class='thum-img' src="data:image/jpeg;base64,${idCardBack}" ></td> --%>
+<%-- 		<td><img onclick='showBgImg(this)' class='thum-img' src="data:image/jpeg;base64,${chefPhoto}" ></td> --%>
 		<td><%=chefVO.getChefIntroduction()%></td>
 	</tr>
 </table>
