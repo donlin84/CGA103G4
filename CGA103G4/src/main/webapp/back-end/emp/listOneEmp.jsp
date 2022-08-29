@@ -67,6 +67,7 @@
 		<th>管理員等級</th>
 		<th>管理員狀態</th>
 		<th>雇用日期</th>
+		<th>管理員管理</th>
 	</tr>
 	<tr>
 		<td><%=empVO.getEmpid()%></td>
@@ -78,6 +79,12 @@
 		<td><%=empVO.getEmpLevel()%></td>
 		<td><%=empVO.getEmpStatus()%></td>
 		<td><%=empVO.getEmpHiredate()%></td>
+		<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/emp/emp.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="修改">
+			     <input type="hidden" name="empid"  value="${empVO.empid}">
+			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			</td>
 	</tr>
 </table>
 

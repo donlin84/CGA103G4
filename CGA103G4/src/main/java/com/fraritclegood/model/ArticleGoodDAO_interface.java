@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.frarticle.model.ArticleVO;
 
-public interface ArticleGoodDaoImpl {
+public interface ArticleGoodDAO_interface {
 	public void insert(ArticleGoodVO articleGoodVO);
 
 	public void delete(Integer memid);

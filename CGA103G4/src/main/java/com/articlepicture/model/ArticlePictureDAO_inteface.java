@@ -1,6 +1,6 @@
 package com.articlepicture.model;
 
-public interface ArticlePictureDaoImpl {
+public interface ArticlePictureDAO_inteface {
 	public void insert(ArticlePictureVO articlePictureVO);
 
 	public void update(ArticlePictureVO articlePictureVO);

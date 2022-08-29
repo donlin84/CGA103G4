@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArticleMsgJDBCDAO implements ArticleMsgDaoImpl {
+public class ArticleMsgJDBCDAO implements ArticleMsgDAO_interface {
 	private static final String INSERT_SQL = "INSERT INTO ArticleMsg(atcid,memid,msgContent) VALUES (?,?,?);";
 	private static final String UPDATE_SQL = "UPDATE ArticleMsg set msgStatus=? where atcMsgid = ?;";
 	private static final String GET_ONE_SQL = "SELECT * FROM ArticleMsg where atcMsgid=?;";

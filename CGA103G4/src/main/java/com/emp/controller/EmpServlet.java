@@ -62,6 +62,7 @@ public class EmpServlet extends HttpServlet {
 
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			String str = req.getParameter("empid");
+		
 			if (str == null || (str.trim()).length() == 0) { // null，防止出現NULLPOINTEXCEPTION。
 				errorMsgs.add("請輸入管理員編號");
 			}
@@ -71,8 +72,7 @@ public class EmpServlet extends HttpServlet {
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
-			
-			
+
 			Integer empid = null;
 			try {
 				empid = Integer.valueOf(str);
@@ -101,7 +101,7 @@ public class EmpServlet extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("empVO", empVO); // 資料庫取出的empVO物件,存入req
-			
+
 			String url = "/back-end/emp/listOneEmp.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 			successView.forward(req, res); // forward to view
@@ -242,7 +242,10 @@ public class EmpServlet extends HttpServlet {
 			} else if (!empPhone.trim().matches(phoneReg)) {
 				errorMsgs.add("電話只能是數字!且長度必須介於8-10之間");
 			}
-			
+
+			// 驗證帳號
+			String empAccount = req.getParameter("empAccount");
+
 			// 驗證密碼
 			String empPassword = req.getParameter("empPassword");
 			String passwordReg = "^[(a-zA-Z0-9]{5,20}$";
@@ -256,16 +259,17 @@ public class EmpServlet extends HttpServlet {
 			Part part = req.getPart("empPicture");
 			InputStream in = part.getInputStream();
 			byte[] empPicture = new byte[in.available()];
+			EmpService empSvc = new EmpService();
+			EmpVO empVOOld = empSvc.getOneEmp(empid);
 			in.read(empPicture);
 			in.close();
-			
 
 			// 管理員權限等級
 			Integer empLevel = Integer.valueOf(req.getParameter("empLevel"));
-			
-			//管理員狀態
+
+			// 管理員狀態
 			Integer empStatus = Integer.valueOf(req.getParameter("empStatus"));
-			
+
 			// 驗證入職日期
 			java.sql.Date empHiredate = null;
 			try {
@@ -274,28 +278,34 @@ public class EmpServlet extends HttpServlet {
 				empHiredate = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.add("請輸入日期!");
 			}
-
-
+			
 			EmpVO empVO = new EmpVO();
 			empVO.setEmpid(empid);
 			empVO.setEmpName(empName);
 			empVO.setEmpPhone(empPhone);
-			empVO.setEmpPicture(empPicture);
+			empVO.setEmpAccount(empAccount);
+			empVO.setEmpPassword(empPassword);
+			if (empPicture.length == 0) {
+				empPicture = empVOOld.getEmpPicture();
+				empVO.setEmpPicture(empPicture);
+			} else {
+				empVO.setEmpPicture(empPicture);
+			}
 			empVO.setEmpLevel(empLevel);
 			empVO.setEmpStatus(empStatus);
 			empVO.setEmpHiredate(empHiredate);
-			
+
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("empVO", empVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/emp/update_emp_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/emp/update_emp_input.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
 
 			/*************************** 2.開始修改資料 *****************************************/
-			EmpService empSvc = new EmpService();
-			empVO = empSvc.updateEmp(empid, empName, empPhone, empPicture, empPassword, empLevel, empStatus,empHiredate);
+			empVO = empSvc.updateEmp(empid, empName, empPhone, empPicture, empAccount, empPassword, empLevel, empStatus,
+					empHiredate);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("empVO", empVO); // 資料庫update成功後,正確的的empVO物件,存入req

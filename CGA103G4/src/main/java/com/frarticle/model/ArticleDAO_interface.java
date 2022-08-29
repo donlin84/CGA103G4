@@ -2,7 +2,7 @@ package com.frarticle.model;
 
 import java.util.List;
 
-public interface ArticleDaoImpl {
+public interface ArticleDAO_interface {
 	public void insert(ArticleVO articleVO);
 
 	public void update(ArticleVO articleVO);

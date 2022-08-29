@@ -2,7 +2,7 @@ package com.empfunction.model;
 
 import java.util.List;
 
-public interface FuncDaoImpl {
+public interface FuncDAO_interface {
 	public void insert(FuncVO FuncVO);
 
 	public void update(FuncVO FuncVO);

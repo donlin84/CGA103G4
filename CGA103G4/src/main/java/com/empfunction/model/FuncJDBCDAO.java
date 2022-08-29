@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;;
 
-public class FuncJDBCDAO implements FuncDaoImpl {
+public class FuncJDBCDAO implements FuncDAO_interface {
 	private static final String INSERT_SQL = "INSERT INTO EmpFunction(funcName) VALUES (?);";
 	private static final String GET_ALL_SQL = "SELECT funcid,funcName FROM EmpFunction order by funcid;";
 	private static final String GET_ONE_SQL = "SELECT funcid,funcName FROM EmpFunction where funcid = ?;";

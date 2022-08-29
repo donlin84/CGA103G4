@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class ArticleReportJDBCDAO implements ArticleReportDaoImpl {
+public class ArticleReportJDBCDAO implements ArticleReportDAO_interface {
 	private static final String INSERT_SQL = "INSERT INTO Report(atcid,memid,reportContent) VALUES (?,?,?);";
 	private static final String UPDATE_SQL = "UPDATE Report set reportStatus=? where atcReportid = ?;";
 	private static final String GET_ONE_SQL = "SELECT * FROM Report where atcid=?;";

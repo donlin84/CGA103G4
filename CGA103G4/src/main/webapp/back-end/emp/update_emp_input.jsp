@@ -1,9 +1,14 @@
+<%@page import="java.util.Arrays"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.emp.model.*"%>
+<%@ page import="java.time.LocalDate"%>
 
 <%
 EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+%>
+<%
+LocalDate now = LocalDate.now();
 %>
 
 <html>
@@ -116,7 +121,7 @@ img {
 			<tr>
 				<td>管理員照片:</td>
 				<td><input type="file" id="the_file" accept="image/*" multiple
-					name="empPicture" value="${empVO.empPicture} }" /></td>
+					name="empPicture" value="" /></td>
 				
 			</tr>
 			<tr>
@@ -146,6 +151,8 @@ img {
 		<br> 
 		<input type="hidden" name="action" value="update"> 
 		<input type="hidden" name="empid" value="<%=empVO.getEmpid()%>"> 
+		<input type="hidden" name="empAccount" value="<%=empVO.getEmpAccount()%>">
+		<input type="hidden" name="empPicture" value="<%=empVO.getEmpPicture()%>">
 		<input type="submit" value="送出修改">
 	</FORM>
 </body>
@@ -188,6 +195,18 @@ img {
  	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
  		   value: '<%=hiredate%>', //value:   new Date(),
 	});
+        //不能選擇當天之後的日期
+        var somedate2 = new Date('<%=now%>');
+             $('#f_date1').datetimepicker({
+                 beforeShowDay: function(date) {
+               	  if (  date.getYear() >  somedate2.getYear() || 
+        		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
+        		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
+                     ) {
+                          return [false, ""]
+                     }
+                     return [true, ""];
+             }});
 </script>
 <script src="./js/pictureView.js"></script>
 </html>

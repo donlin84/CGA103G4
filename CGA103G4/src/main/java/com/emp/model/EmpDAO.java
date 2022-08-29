@@ -12,7 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class EmpDAO implements EmpDaoImpl {
+public class EmpDAO implements EmpDAO_interface {
 
 	private static final String INSERT_STMT = "INSERT INTO EMPLOYEE(empName, empPhone, empPicture, empAccount, empPassword, empLevel, empHiredate) VALUES (?, ?, ?, ?, ?, ?, ?);";
 	private static final String GET_ALL_STMT = "SELECT * FROM EMPLOYEE order by empid;";

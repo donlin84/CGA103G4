@@ -2,7 +2,7 @@ package com.empauthority.model;
 
 import java.util.List;
 
-public interface AuthorityDaoImpl {
+public interface AuthorityDAO_interface {
 	public void insert(AuthorityVO authorityVO);
 
 	public void delete(Integer empid, Integer funcid);

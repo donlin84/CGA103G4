@@ -11,7 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class ArticlePictureJDBC implements ArticlePictureDaoImpl {
+public class ArticlePictureJDBC implements ArticlePictureDAO_inteface {
 
 	private static final String INSERT_SQL = "INSERT INTO articlePicture(atcid,atcPic) VALUES (?,?);";
 	private static final String UPDATE_SQL = "UPDATE articlePicture set atcpic where picid = ?;";

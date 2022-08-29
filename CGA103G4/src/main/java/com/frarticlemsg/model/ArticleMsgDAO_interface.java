@@ -2,7 +2,7 @@ package com.frarticlemsg.model;
 
 import java.util.List;
 
-public interface ArticleMsgDaoImpl {
+public interface ArticleMsgDAO_interface {
 	public void insert(ArticleMsgVO articleMsg);
 
 	public void update(ArticleMsgVO articleMsg);

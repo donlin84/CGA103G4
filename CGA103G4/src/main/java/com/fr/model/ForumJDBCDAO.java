@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ForumJDBCDAO implements ForumDaoImpl {
+public class ForumJDBCDAO implements ForumDAO_interface {
 	private static final String INSERT_SQL = "INSERT INTO Forum(frName) VALUES (?);";
 	private static final String UPDATE_SQL = "UPDATE Forum set frName=? where frid = ?;";
 	private static final String DELETE_SQL = "DELETE FROM Forum where frid = ?";

@@ -2,7 +2,7 @@ package com.fr.model;
 
 import java.util.List;
 
-public interface ForumDaoImpl {
+public interface ForumDAO_interface {
 	public void insert(ForumVO forumVO);
 
 	public void update(ForumVO forumVO);

@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuthorityJDBCDAO implements AuthorityDaoImpl {
+public class AuthorityJDBCDAO implements AuthorityDAO_interface {
 	private static final String INSERT_SQL = "INSERT INTO Authority(empid,funcid) VALUES (?,?);";
 	private static final String GET_ALL_SQL = "SELECT empid,funcid FROM Authority order by empid;";
 	private static final String GET_ONE_SQL = "SELECT empid,funcid FROM Authority where empid = ?;";

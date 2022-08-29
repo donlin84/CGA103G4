@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArticleJDBCDAO implements ArticleDaoImpl {
+public class ArticleJDBCDAO implements ArticleDAO_interface {
 	private static final String INSERT_SQL = "INSERT INTO Article(frid,memid,atcTitle,atcContent) VALUES (?,?,?,?);";
 	private static final String UPDATE_SQL = "UPDATE Article set atcContent=? where atcid = ?;";
 	private static final String GET_ONE_SQL = "SELECT * FROM Article where atcid=?;";

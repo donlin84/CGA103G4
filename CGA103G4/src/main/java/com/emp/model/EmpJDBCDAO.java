@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmpJDBCDAO implements EmpDaoImpl {
+public class EmpJDBCDAO implements EmpDAO_interface {
 
 	private static final String INSERT_STMT = "INSERT INTO EMPLOYEE(empName, empPhone, empAccount, empPassword) VALUES (?, ?, ?, ?);";
 	private static final String GET_ALL_STMT = "SELECT empid,empName, empPhone, empAccount, empPassword, empStatus, empHiredate FROM EMPLOYEE order by empid;";
