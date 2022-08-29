@@ -1,5 +1,8 @@
 package com.chef.model;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+
 public class ChefVO implements java.io.Serializable{
 	private Integer chefid;
 	private String chefAccount;
@@ -140,7 +143,14 @@ public class ChefVO implements java.io.Serializable{
 	public void setChefIntroduction(String chefIntroduction) {
 		this.chefIntroduction = chefIntroduction;
 	}
-	
+
+	public byte[] getPictureByteArray(String path) throws IOException {
+		FileInputStream fis = new FileInputStream(path);
+		byte[] buffer = new byte[fis.available()];
+		fis.read(buffer);
+		fis.close();
+		return buffer;
+	}
 	
 
 }

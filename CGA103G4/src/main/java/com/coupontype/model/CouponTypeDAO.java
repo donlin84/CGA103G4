@@ -284,5 +284,17 @@ public class CouponTypeDAO implements CouponTypeDAO_interface {
 		}
 		return couponTypeVO;
 	}
+<<<<<<< HEAD
 
+=======
+	
+	public static byte[] getPictureByteArray(String path) throws IOException {
+		FileInputStream fis = new FileInputStream(path);
+		byte[] buffer = new byte[fis.available()];
+		fis.read(buffer);
+		fis.close();
+		return buffer;
+	}
+	
+>>>>>>> refs/remotes/origin/sosohung
 }
