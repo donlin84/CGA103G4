@@ -7,4 +7,5 @@ public interface ProductDAO_interface {
 	public void update(ProductVO productVO);
 	public ProductVO findByPrimaryKey(Integer pdid);
 	public List<ProductVO> getAll();
+	public List<ProductVO> getAllPdName();
 }

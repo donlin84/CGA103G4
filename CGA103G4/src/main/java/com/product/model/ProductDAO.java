@@ -31,6 +31,9 @@ public class ProductDAO implements ProductDAO_interface {
 		"SELECT pdid,pdsid,pdName,pdPrice,pdDiscountPrice,pdDescription,pdStatus,pdUpdate FROM Product where pdid = ?";
 	private static final String UPDATE =
 		"UPDATE Product set pdsid=?, pdName=?, pdPrice=?, pdDiscountPrice=?, pdDescription=?, pdStatus=?, pdUpdate=? where pdid = ?";
+	private static final String ALL_PD_NAME = 
+		"SELECT pdname from product";
+
 	@Override
 	public void insert(ProductVO productVO) {
 		Connection con = null;
@@ -234,20 +237,80 @@ public class ProductDAO implements ProductDAO_interface {
 		}
 		return list;
 	}
-	public static void main(String[] args) {
 
-		ProductDAO dao = new ProductDAO();
-
+	@Override
+	public List<ProductVO> getAllPdName() {
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		ProductVO productVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(ALL_PD_NAME);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				productVO = new ProductVO();
+				productVO.setPdName(rs.getString("pdName"));
+				list.add(productVO); 
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+}
+	
+	
+//	public static void main(String[] args) {
+//
+//		ProductDAO dao = new ProductDAO();
+//
+//		List<ProductVO> list = dao.getAll();
+//		for (ProductVO aProduct : list) {
+//
+//			System.out.print(aProduct.getPdName() + ",");
+//
+//			System.out.println();
+//		
+//		
 		//新增
-		ProductVO productVO1 = new ProductVO();
-		productVO1.setPdsid(2);
-		productVO1.setPdName("utf188");
-		productVO1.setPdPrice(900);
-		productVO1.setPdDiscountPrice(900);
-		productVO1.setPdDescription("憭剖ˊ霈�");
-		productVO1.setPdStatus(1);
-		productVO1.setPdUpdate(LocalDateTime.now());
-		dao.insert(productVO1);
+//		ProductVO productVO1 = new ProductVO();
+//		productVO1.setPdsid(2);
+//		productVO1.setPdName("utf188");
+//		productVO1.setPdPrice(900);
+//		productVO1.setPdDiscountPrice(900);
+//		productVO1.setPdDescription("憭剖ˊ霈�");
+//		productVO1.setPdStatus(1);
+//		productVO1.setPdUpdate(LocalDateTime.now());
+//		dao.insert(productVO1);
 
 //		// 修改
 //		ProductVO productVO2 = new ProductVO();
@@ -288,5 +351,6 @@ public class ProductDAO implements ProductDAO_interface {
 //			System.out.print(aProduct.getPdUpdate());
 //			System.out.println();
 
-	}
-}
+	
+	
+

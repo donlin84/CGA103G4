@@ -155,7 +155,7 @@ text-overflow: ellipsis;
 			  <th>&emsp;優惠價格</th>
 			  <th>&emsp;商品描述</th>
 			  <th>&emsp;商品狀態</th>
-			  <th>&emsp;最後修改時間</th>
+			  <th>&emsp;上次修改</th>
 			  
 			</tr>
  			<%@	include file="page1.file" %>

@@ -53,4 +53,8 @@ public class ProductService {
 		public List<ProductVO> getAll() {
 			return dao.getAll();
 		}
-	}
+		public List<ProductVO> getAllProductName() {
+			
+			return dao.getAllPdName();
+		}
+}

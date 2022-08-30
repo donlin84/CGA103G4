@@ -2,7 +2,7 @@ package com.product.controller;
 
 import java.io.*;
 import java.time.LocalDateTime;
-
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -162,14 +162,30 @@ public class ProductServlet extends HttpServlet {
 //		System.out.println(pdsid);   
 		
 		String pdName = null;
-
+		
+		
 		pdName = req.getParameter(("PdName").trim());
+
+		
+		ProductService pdSvcForRepeatPdName = new ProductService();
+		List<ProductVO> pdNameList = pdSvcForRepeatPdName.getAllProductName();
+		
+		
+
 		String pdNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 			if (pdName == null || pdName.trim().length() == 0) {
 				errorMsgs.add("商品名稱請勿空白");
 			} else if(!pdName.trim().matches(pdNameReg)) { //以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("員工姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+				errorMsgs.add("商品名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
             } 
+			
+			for (ProductVO aProduct : pdNameList) {
+				String str = aProduct.getPdName();
+				System.out.print("新增商品"+"已存在的商品名"+str);
+				if (pdName.equals(str)) {
+					errorMsgs.add("商品名稱請勿重複");
+				}	
+			}
 		Integer pdPrice = null;
 			try {
 				pdPrice = Integer.valueOf(req.getParameter("PdPrice").trim());
@@ -182,16 +198,19 @@ public class ProductServlet extends HttpServlet {
 		Integer pdDiscountPrice = null;
 			try {
 				pdDiscountPrice = Integer.valueOf(req.getParameter("PdDiscountPrice").trim());
-				System.out.println("優惠價格為" + pdDiscountPrice);
+				System.out.println("新增商品"+"優惠價格為" + pdDiscountPrice);
 			} catch (NumberFormatException e) {
 				pdDiscountPrice = 0;
 				errorMsgs.add("商品優惠價格請填數字");
 			}
 			
-			
+		
 		String pdDescription = req.getParameter("PdDescription").trim();
-			
-//		System.out.println(pdDescription);
+		System.out.println("新增商品"+"已存在的商品名"+pdDescription);
+		
+		if(pdDescription.trim().length() > 500) { //以下練習正則(規)表示式(regular-expression)
+			errorMsgs.add("商品描述不超過500字");
+		}
 		
 		Integer pdStatus = null;
 		try {
@@ -204,6 +223,7 @@ public class ProductServlet extends HttpServlet {
 		
 		LocalDateTime pdUpdate = LocalDateTime.now();
 		
+		
 			ProductVO productVO = new ProductVO();
 			productVO.setPdsid(pdsid);
 			productVO.setPdName(pdName);
@@ -212,7 +232,7 @@ public class ProductServlet extends HttpServlet {
 			productVO.setPdDescription(pdDescription);
 			productVO.setPdStatus(pdStatus);
 			productVO.setPdUpdate(pdUpdate);
-			System.out.println(pdUpdate);
+			System.out.println("新增商品"+pdUpdate);
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("productVO", productVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -267,25 +287,21 @@ public class ProductServlet extends HttpServlet {
 		req.setAttribute("errorMsgs", errorMsgs);
 		System.out.println(action);
 	Integer pdid = Integer.valueOf(req.getParameter("Pdid").trim());
-	System.out.println(pdid);
+	System.out.println("update:"+pdid);
 	
 	Integer pdsid = Integer.valueOf(req.getParameter("Pdsid").trim());
 	System.out.println(pdsid);   
 	
 	
-	String pdName = null;
-	try {
-		pdName = req.getParameter(("PdName").trim());
-	} catch (RuntimeException e) {
-		errorMsgs.add("商品名稱請勿重複");
-	}
-	System.out.println(pdName);   
+	
+	String pdName = req.getParameter(("PdName").trim());
+	System.out.println("update:"+pdName); 
 	
 	String pdNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 		if (pdName == null || pdName.trim().length() == 0) {
 			errorMsgs.add("商品名稱請勿空白");
 		} else if(!pdName.trim().matches(pdNameReg)) { //以下練習正則(規)表示式(regular-expression)
-			errorMsgs.add("員工姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+			errorMsgs.add("商品名稱只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
         }
 		
 	Integer pdPrice = null;
@@ -295,7 +311,7 @@ public class ProductServlet extends HttpServlet {
 			pdPrice = 0;
 			errorMsgs.add("商品價格請填數字");
 		}
-	System.out.println(pdPrice); 
+	System.out.println("update:"+pdPrice); 
 	
 	Integer pdDiscountPrice = null;
 		try {
@@ -304,17 +320,21 @@ public class ProductServlet extends HttpServlet {
 			pdDiscountPrice = 0;
 			errorMsgs.add("商品優惠價格請填數字");
 		}
-		System.out.println(pdDiscountPrice);
-		
+		System.out.println("update:"+pdDiscountPrice);
+	
 	String pdDescription = req.getParameter("PdDescription").trim();
-		
-	System.out.println(pdDescription);
+
+	if(pdDescription.trim().length() > 500){ //以下練習正則(規)表示式(regular-expression)
+		errorMsgs.add("商品描述不超過250字");
+	}
+			
+	
 	
 	
 	Integer pdStatus = Integer.valueOf(req.getParameter("PdStatus").trim());
 	
 	LocalDateTime pdUpdate = LocalDateTime.now();
-	System.out.println(pdUpdate);
+	System.out.println("update:"+pdUpdate);
 	
 	ProductVO productVO = new ProductVO();
 	productVO.setPdid(pdid);
@@ -330,7 +350,7 @@ public class ProductServlet extends HttpServlet {
 		if (!errorMsgs.isEmpty()) {
 			req.setAttribute("productVO", productVO); // 含有輸入格式錯誤的productVO物件,也存入req
 			RequestDispatcher failureView = req
-				.getRequestDispatcher("/back-end/product/productAdd.jsp");
+				.getRequestDispatcher("/back-end/product/productModify.jsp");
 			failureView.forward(req, res);
 			return;
 		}
@@ -349,8 +369,8 @@ public class ProductServlet extends HttpServlet {
 // 新商品新增圖片		
 
 	if("addpic".equals(action2)) {
-		System.out.println(action2);
-		System.out.println(req.getParameter("PdPic1"));
+		System.out.println("新增圖片"+action2);
+		System.out.println("新增圖片"+req.getParameter("PdPic1"));
 		
 		List<String> errorMsgs = new LinkedList<String>();
 		req.setAttribute("errorMsgs", errorMsgs);
@@ -362,28 +382,28 @@ public class ProductServlet extends HttpServlet {
 		byte[] pdpicbyte = new byte[in.available()];
 		in.read(pdpicbyte);
 		in.close();
-		System.out.println(pdpicbyte);
-		System.out.println("pdpicbyte="+ pdpicbyte.length);
+		System.out.println("新增圖片"+pdpicbyte);
+		System.out.println("\"新增圖片\"+"+ pdpicbyte.length);
 		if (pdpicbyte.length != 0) {
 		productpicVO.setPdPic(pdpicbyte);
 		ProductpicService pdpicSvc = new ProductpicService();
 		productpicVO = pdpicSvc.insert(pdpicbyte);
 		}
-		else {System.out.println("無圖片新增");
+		else {System.out.println("新增圖片"+"無圖片新增");
 		req.setAttribute("productpicVO", productpicVO); // 資料庫取出的empVO物件,存入req 
 			}
 		}
 //	舊商品新增圖片	
 	
 	if("addpic2".equals(action3)) {
-		System.out.println(action3);
+		System.out.println("舊商品新增圖片"+action3);
 		System.out.println(req.getParameter("PdPic2"));
 		
 		List<String> errorMsgs = new LinkedList<String>();
 		req.setAttribute("errorMsgs", errorMsgs);
 		
 		Integer pdid = Integer.valueOf(req.getParameter("Pdid").trim());
-		System.out.println(pdid);
+		System.out.println("舊商品新增圖片"+pdid);
 
 		ProductpicVO productpicVO = new ProductpicVO();
 		Part part = req.getPart("PdPic2");
@@ -392,8 +412,8 @@ public class ProductServlet extends HttpServlet {
 		in.read(pdpicbyte);
 		in.close();
 		
-		System.out.println(pdpicbyte);
-		System.out.println("pdpicbyte="+ pdpicbyte.length);
+		System.out.println("舊商品新增圖片"+pdpicbyte);
+		System.out.println("舊商品新增圖片"+"pdpicbyte="+ pdpicbyte.length);
 		
 		if (pdpicbyte.length != 0) {
 		productpicVO.setPdPic(pdpicbyte);
@@ -401,7 +421,7 @@ public class ProductServlet extends HttpServlet {
 		productpicVO = pdpicSvc.existedInsert(pdid, pdpicbyte);
 		}
 		
-		else {System.out.println("無圖片上傳");
+		else {System.out.println("舊商品新增圖片"+"無圖片上傳");
 		req.setAttribute("productpicVO", productpicVO); // 資料庫取出的empVO物件,存入req 
 			}
 		}

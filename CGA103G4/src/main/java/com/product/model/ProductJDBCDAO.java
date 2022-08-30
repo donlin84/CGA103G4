@@ -1,8 +1,6 @@
 package com.product.model;
 
 import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -20,7 +18,8 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		"SELECT pdid,pdsid,pdName,pdPrice,pdDiscountPrice,pdDescription,pdStatus,pdUpdate FROM Product where pdid = ?";
 	private static final String UPDATE =
 		"UPDATE Product set pdsid=?, pdName=?, pdPrice=?, pdDiscountPrice=?, pdDescription=?, pdStatus=?, pdUpdate=? where pdid = ?";
-	
+	private static final String ALL_PD_NAME = 
+		"SELECT pdname from product";
 	
 	@Override
 	public void insert(ProductVO productVO) {
@@ -246,9 +245,84 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		}
 		return list;
 	}
+	
+	@Override
+	public List<ProductVO> getAllPdName() {
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		ProductVO productVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd); 
+			pstmt = con.prepareStatement(ALL_PD_NAME);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				productVO = new ProductVO();
+				productVO.setPdName(rs.getString("pdName"));
+				list.add(productVO); 
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		
+		} catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
 	public static void main(String[] args) {
 
 		ProductJDBCDAO dao = new ProductJDBCDAO();
+		
+		List<ProductVO> list = dao.getAllPdName();
+		for (ProductVO aProduct : list) {
+
+			System.out.print(aProduct.getPdName() + ",");
+
+		}
+//		List<ProductVO> list2 = dao.getAll();
+//		for (ProductVO aProduct : list2) {
+//			System.out.print(aProduct.getPdid() + ",");
+//			System.out.print(aProduct.getPdsid() + ",");
+//			System.out.print(aProduct.getPdName() + ",");
+//			System.out.print(aProduct.getPdPrice() + ",");
+//			System.out.print(aProduct.getPdDiscountPrice() + ",");
+//			System.out.print(aProduct.getPdDescription() + ",");
+//			System.out.print(aProduct.getPdStatus());
+//			System.out.print(aProduct.getPdUpdate());
+//			System.out.println();
+//		}
+	}
+}
 
 //		// 新增
 //		ProductVO productVO1 = new ProductVO();
@@ -262,18 +336,18 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 //		dao.insert(productVO1);
 
 		// 修改
-		ProductVO productVO2 = new ProductVO();
-		
-		productVO2.setPdsid(1);
-		productVO2.setPdName("宏碁筆電");
-		productVO2.setPdPrice(700);
-		productVO2.setPdDiscountPrice(700);
-		productVO2.setPdDescription("非常讚讚");
-		productVO2.setPdStatus(1);
-		productVO2.setPdUpdate(LocalDateTime.parse("2001-01-01T10:00:00"));
-		productVO2.setPdid(4009);
-		dao.update(productVO2);
-		System.out.println("updateSucceed");
+//		ProductVO productVO2 = new ProductVO();
+//		
+//		productVO2.setPdsid(1);
+//		productVO2.setPdName("宏碁筆電");
+//		productVO2.setPdPrice(700);
+//		productVO2.setPdDiscountPrice(700);
+//		productVO2.setPdDescription("非常讚讚");
+//		productVO2.setPdStatus(1);
+//		productVO2.setPdUpdate(LocalDateTime.parse("2001-01-01T10:00:00"));
+//		productVO2.setPdid(4009);
+//		dao.update(productVO2);
+//		System.out.println("updateSucceed");
 
 		// 查詢
 //		ProductVO productVO3 = dao.findByPrimaryKey(1);
@@ -287,21 +361,9 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 //		System.out.println(productVO3.getPdUpdate());
 //		System.out.println("---------------------");
 
-		// 查詢
-//		List<ProductVO> list = dao.getAll();
-//		for (ProductVO aProduct : list) {
-//			System.out.print(aProduct.getPdid() + ",");
-//			System.out.print(aProduct.getPdsid() + ",");
-//			System.out.print(aProduct.getPdName() + ",");
-//			System.out.print(aProduct.getPdPrice() + ",");
-//			System.out.print(aProduct.getPdDiscountPrice() + ",");
-//			System.out.print(aProduct.getPdDescription() + ",");
-//			System.out.print(aProduct.getPdStatus());
-//			System.out.print(aProduct.getPdUpdate());
-//			System.out.println();
-		}
+//		 查詢
 
-	}
+	
 
 	
 	
