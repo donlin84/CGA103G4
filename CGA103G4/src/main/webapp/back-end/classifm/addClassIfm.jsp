@@ -14,9 +14,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link   rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/backend/datetimepicker/jquery.datetimepicker.css" />
-        <script src="<%=request.getContextPath()%>/backend/datetimepicker/jquery.js"></script>
-        <script src="<%=request.getContextPath()%>/backend/datetimepicker/jquery.datetimepicker.full.js"></script>
+        <link   rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.datetimepicker.css" />
+        <script src="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.js"></script>
+        <script src="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.datetimepicker.full.js"></script>
     <style>
     	div>h1{
     		margin:0px;
@@ -33,7 +33,7 @@
             left: 480px;
             background-color: rgb(255, 185, 127);
             width: 700px;
-            height: 650px;
+            height: 875px;
             border-radius: 20px;
         }
         .classtitle{
@@ -47,25 +47,6 @@
         	display:inline-block;
         	width:40px
         }
-        #preview1{
-            border: 1px solid lightgray;
-            display: inline-block;
-            width: 100px;
-            min-height: 150px;
-            position: relative;
-        }
-        #preview1 span.text{
-            position: absolute;
-            display: inline-block;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            color: lightgray;
-        }
-        #preview1 img.preview_img{
-            width: 100%;
-        }
         #clapic1{
         	width:170px;
         }
@@ -77,32 +58,38 @@
         }
         .image_div{
         	background-color:white;
-         	display:flex; 
-        	width:400px;
-        	height:100px;
+      		display:flex; 
+        	width:600px;
+        	height:145px;
+        	margin-top:40px;
+        	position: relative;
+        	left:15px;
         }
         .small_div{
         	border: 3px dotted lightgray;
-        	width:130px;
-        	height:100px;
+        	width:192.5px;
+        	height:133px;
         	margin:0px;
         }
         #image1{
         	width:100%;
         	height:100%;
+        	padding:3px;
         }
         #image2{
         	width:100%;
         	height:100%;
+        	padding:3px;
         }
         #image3{
         	width:100%;
         	height:100%;
+        	padding:3px;
         }
     </style>
     </head>
 <body>
-<a href="<%=request.getContextPath()%>/backend/classifm/index_ClassIfm.jsp">回首頁</a>
+<a href="<%=request.getContextPath()%>/back-end/classifm/index_ClassIfm.jsp">回首頁</a>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color:red">請修正以下錯誤:</font>
 		<ul>
@@ -166,6 +153,7 @@
             <span>報名結束時間 :</span>
             <input id="end_date"   type="text" name="clafintime" value="${param.clafintime}">
         </div>
+        <br>
         <div>
             <span>課程圖片 :</span>
             <input type="file" accept="image/*"  name="clapic1" id="clapic1" onchange="loadImageFile1(event)">

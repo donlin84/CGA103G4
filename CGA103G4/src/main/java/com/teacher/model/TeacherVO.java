@@ -1,7 +1,8 @@
 package com.teacher.model;
-import java.util.Arrays;
 
-public class TeacherVO implements java.io.Serializable{
+import java.io.Serializable;
+
+public class TeacherVO implements Serializable {
 	private Integer thrid;
 	private String thrName;
 	private String thrGender;
@@ -11,15 +12,8 @@ public class TeacherVO implements java.io.Serializable{
 	private String thrIntroduction;
 	private Integer thrComment;
 	private Integer thrCmnumber;
-	private byte[] thrPic ; 
-
-	public byte[] getThrPic() {
-		return thrPic;
-	} 
+	private byte[] thrPic;
 	
-	public void setThrPic(byte[] thrPic) {
-		this.thrPic = thrPic;
-	} 
 	
 	public Integer getThrid() {
 		return thrid;
@@ -75,7 +69,12 @@ public class TeacherVO implements java.io.Serializable{
 	public void setThrCmnumber(Integer thrCmnumber) {
 		this.thrCmnumber = thrCmnumber;
 	}
-
+	public byte[] getThrPic() {
+		return thrPic;
+	}
+	public void setThrPic(byte[] thrPic) {
+		this.thrPic = thrPic;
+	}
+	
+	
 }
-
-

@@ -13,6 +13,8 @@ import java.util.List;
 
 import com.teacher.model.TeacherVO;
 
+import oracle.net.aso.a;
+
 public class ClassPictureJDBCDAO implements ClassPictureDAO_interface{
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei";
@@ -29,6 +31,8 @@ public class ClassPictureJDBCDAO implements ClassPictureDAO_interface{
 			"DELETE FROM ClassPicture where claPicid = ?";
 	private static final String UPDATE_ClassPicture = 
 			"UPDATE ClassPicture set claid=?, claPic=? where claPicid = ?" ;
+	private static final String get_clapicid = 
+			"select clapicid from ClassPicture where claid=?";
 	
 	
 	@Override
@@ -88,6 +92,7 @@ public class ClassPictureJDBCDAO implements ClassPictureDAO_interface{
 			
 			pstmt.setInt(1, classPictureVO.getClaid());
 			pstmt.setBytes(2, classPictureVO.getClaPic());
+			pstmt.setInt(3, classPictureVO.getClaPicid());
 
 			pstmt.executeUpdate();
 			
@@ -185,6 +190,69 @@ public class ClassPictureJDBCDAO implements ClassPictureDAO_interface{
 //				classPictureVO.setClaPicid(rs.getInt("claPicid"));
 //				classPictureVO.setClaid(rs.getInt("claid"));
 				classPictureVO.setClaPic(rs.getBytes("claPic"));
+				list.add(classPictureVO);
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<ClassPictureVO> get_clapicid(Integer claid) {
+		List<ClassPictureVO> list = new ArrayList();
+		ClassPictureVO classPictureVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(get_clapicid);
+
+			pstmt.setInt(1, claid);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// classPictureVO �]�٬� Domain objects
+				classPictureVO = new ClassPictureVO();
+				classPictureVO.setClaPicid(rs.getInt("claPicid"));
+//				classPictureVO.setClaid(rs.getInt("claid"));
+//				classPictureVO.setClaPic(rs.getBytes("claPic"));
 				list.add(classPictureVO);
 			}
 
@@ -352,9 +420,16 @@ Statement stmt=	con.createStatement();
 //		dao.delete(�ҵ{��뫽s��);
 //-------------------------------------------------------
 //		單一查詢
-		List<ClassPictureVO> list = dao.findByPrimaryKey(34);
+//		List<ClassPictureVO> list = dao.findByPrimaryKey(41);
+//		for(ClassPictureVO a : list) {
+//			System.out.print(a.getClaPic()+",");
+//			System.out.println();
+//		}
+//-------------------------------------------------------
+		//用課程編號抓到圖片編號
+		List<ClassPictureVO> list = dao.get_clapicid(43);
 		for(ClassPictureVO a : list) {
-			System.out.print(a.getClaPic()+",");
+			System.out.print(a.getClaPicid());
 			System.out.println();
 		}
 //-------------------------------------------------------

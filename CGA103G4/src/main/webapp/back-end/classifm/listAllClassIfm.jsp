@@ -58,7 +58,7 @@
 </style>
 </head>
 <body>
-	<a href="<%=request.getContextPath()%>/backend/classifm/index_ClassIfm.jsp">回首頁</a>
+	<a href="<%=request.getContextPath()%>/back-end/classifm/index_ClassIfm.jsp">回首頁</a>
 	這是查詢所有課程資訊
 	<table>
 		<tr>

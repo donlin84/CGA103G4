@@ -23,6 +23,28 @@ public class ClassIfmVO implements java.io.Serializable{
 	private Integer claStatus;
 	private LocalDateTime claStrTime;
 	private LocalDateTime claFinTime;
+	private String claTime_error;
+	private String claStrTime_error;
+	public String getClaTime_error() {
+		return claTime_error;
+	}
+	public void setClaTime_error(String claTime_error) {
+		this.claTime_error = claTime_error;
+	}
+	public String getClaStrTime_error() {
+		return claStrTime_error;
+	}
+	public void setClaStrTime_error(String claStrTime_error) {
+		this.claStrTime_error = claStrTime_error;
+	}
+	public String getClaFinTime_error() {
+		return claFinTime_error;
+	}
+	public void setClaFinTime_error(String claFinTime_error) {
+		this.claFinTime_error = claFinTime_error;
+	}
+
+	private String claFinTime_error;
 
 
 	public Integer getClaid() {

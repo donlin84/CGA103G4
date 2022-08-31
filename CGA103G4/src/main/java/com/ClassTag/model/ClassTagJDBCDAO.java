@@ -89,6 +89,7 @@ public class ClassTagJDBCDAO implements ClassTagDAO_interface{
 			
 			pstmt.setString(1, classTagVO.getClaTagName());
 			pstmt.setInt(2, classTagVO.getClaTagStatus());
+			pstmt.setInt(3, classTagVO.getClaTagid());
 
 			pstmt.executeUpdate();
 			

@@ -5,7 +5,7 @@ import java.util.List;
 public class ClassPictureService {
 	private ClassPictureDAO_interface dao;
 
-	ClassPictureService() {
+	public ClassPictureService() {
 		dao = new ClassPictureJDBCDAO();
 	}
 
@@ -26,6 +26,7 @@ public class ClassPictureService {
 
 		classPictureVO.setClaid(claid);
 		classPictureVO.setClaPic(claPic);
+		classPictureVO.setClaPicid(claPicid);
 		dao.update(classPictureVO);
 
 		return classPictureVO;

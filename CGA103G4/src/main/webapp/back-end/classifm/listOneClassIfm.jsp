@@ -48,7 +48,7 @@
 </style>
 </head>
 <body>
-	<a href="<%=request.getContextPath()%>/backend/classifm/index_ClassIfm.jsp">回首頁</a>
+	<a href="<%=request.getContextPath()%>/back-end/classifm/index_ClassIfm.jsp">回首頁</a>
 	這是查詢所有課程資訊
 	<table>
 		<tr>
@@ -82,13 +82,13 @@
 		          </div>
 		          <div class="carousel-inner">
 		            <div class="carousel-item active">
-		              <img src="<%=request.getContextPath()%>/backend/classifm/images/297cbc4b-c1d4-4b04-85d0-8932443dd219.jpeg" class="d-block w-100" alt="...">
+		              <img src="<%=request.getContextPath()%>/ClassIfmPic?id=${classIfmVO.claid}&page=0" class="d-block w-100" alt="...">
 		            </div>
 		            <div class="carousel-item">
-		              <img src="<%=request.getContextPath()%>/backend/classifm/images/ggg.jpg" class="d-block w-100" alt="...">
+		              <img src="<%=request.getContextPath()%>/ClassIfmPic?id=${classIfmVO.claid}&page=1" class="d-block w-100" alt="...">
 		            </div>
 		            <div class="carousel-item">
-		              <img src="<%=request.getContextPath()%>/backend/classifm/images/1062-5092x3395.jpg" class="d-block w-100" alt="...">
+		              <img src="<%=request.getContextPath()%>/ClassIfmPic?id=${classIfmVO.claid}&page=2" class="d-block w-100" alt="...">
 		            </div>
 		          </div>
 		          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

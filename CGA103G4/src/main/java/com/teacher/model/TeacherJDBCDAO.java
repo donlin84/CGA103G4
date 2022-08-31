@@ -1,9 +1,7 @@
 package com.teacher.model;
 import java.util.*;
 
-import static com.util.Common_15.PASSWORD;
-import static com.util.Common_15.URL;
-import static com.util.Common_15.USER;
+
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,6 +12,9 @@ import java.sql.*;
 
 public class TeacherJDBCDAO implements TeacherDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei";
+	String userid = "root";
+	String passwd = "Alan0622";
 	
 	private static final String INSERT_STMT = 
 		"INSERT INTO Teacher (thrName,thrGender,thrPhone,thrEmail,thrStatus,thrIntroduction,thrComment,thrCmnumber,thrPic) VALUES (?, ?, ?, ?, ?, ?,?,?,?)";
@@ -35,7 +36,7 @@ public class TeacherJDBCDAO implements TeacherDAO_interface {
 		try {
 
 			Class.forName(driver);
-			con = DriverManager.getConnection(URL, USER,PASSWORD);
+			con = DriverManager.getConnection(url, userid,passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, teacherVO.getThrName());
@@ -109,7 +110,7 @@ public class TeacherJDBCDAO implements TeacherDAO_interface {
 		try {
 
 			Class.forName(driver);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = DriverManager.getConnection(url, userid,passwd);
 			pstmt = con.prepareStatement(UPDATE);
 			pstmt.setString(1, teacherVO.getThrName());
 			pstmt.setString(2, teacherVO.getThrGender());
@@ -187,7 +188,7 @@ public class TeacherJDBCDAO implements TeacherDAO_interface {
 		try {
 
 			Class.forName(driver);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = DriverManager.getConnection(url, userid,passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setInt(1, thrid);
@@ -278,7 +279,7 @@ public class TeacherJDBCDAO implements TeacherDAO_interface {
 	try {
 
 		Class.forName(driver);
-		con = DriverManager.getConnection(URL, USER, PASSWORD);
+		con = DriverManager.getConnection(url, userid,passwd);
 		pstmt = con.prepareStatement(GET_ALL_STMT);
 		rs = pstmt.executeQuery();
 

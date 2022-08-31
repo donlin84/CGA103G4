@@ -37,8 +37,8 @@ public class ClassIfmPic extends HttpServlet {
 			Integer page = Integer.valueOf(req.getParameter("page").trim());
 			ClassPictureJDBCDAO classPictureJDBCDAO = new ClassPictureJDBCDAO();
 			List<ClassPictureVO> list = classPictureJDBCDAO.findByPrimaryKey(id);
-			System.out.println(list.size());
-			System.out.println(list.get(1));
+//			System.out.println(list.size());
+//			System.out.println(list.get(1));
 				if (list.get(page).getClaPic().length!=0) {
 					BufferedInputStream in = new BufferedInputStream(new ByteArrayInputStream(list.get(page).getClaPic()));
 					
@@ -48,7 +48,7 @@ public class ClassIfmPic extends HttpServlet {
 					in.close();
 				} else {
 //					res.sendError(HttpServletResponse.SC_NOT_FOUND);
-					InputStream in = getServletContext().getResourceAsStream("/backend/classifm/images/1062-5092x3395.jpg");
+					InputStream in = getServletContext().getResourceAsStream("/back-end/classifm/images/預設圖.jpg");
 					byte[] b = new byte[in.available()];
 					in.read(b);
 					out.write(b);
@@ -56,7 +56,7 @@ public class ClassIfmPic extends HttpServlet {
 				}
 		} catch (Exception e) {
 //			System.out.println(e);
-			InputStream in = getServletContext().getResourceAsStream("/backend/classifm/images/ggg.jpg");
+			InputStream in = getServletContext().getResourceAsStream("/back-end/classifm/images/ggg.jpg");
 			byte[] b = new byte[in.available()];
 			in.read(b);
 			out.write(b);
