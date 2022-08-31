@@ -22,7 +22,8 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		"SELECT pdname from product";
 	private static final String listByPdSort=
 		"SELECT pdid,pdsid,pdName,pdPrice,pdDiscountPrice,pdDescription,pdStatus,pdUpdate FROM Product where pdsid = ?";
-	
+	private static final String ListByPdStatus=
+		"SELECT pdid,pdsid,pdName,pdPrice,pdDiscountPrice,pdDescription,pdStatus,pdUpdate FROM Product where pdStatus = ?";
 	@Override
 	public void insert(ProductVO productVO) {
 		Connection con = null;
@@ -362,7 +363,70 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 					}
 				}
 				return list;
-			}
+		}
+		@Override
+		public List<ProductVO> listByPdStatus(Integer pdStatus) {
+				
+				List<ProductVO> list = new ArrayList<ProductVO>();
+					ProductVO productVO = null;
+					
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					
+				
+					try {
+						Class.forName(driver);
+						con = DriverManager.getConnection(url, userid, passwd); 
+						pstmt = con.prepareStatement(ListByPdStatus);
+						pstmt.setInt(1, pdStatus);
+						rs = pstmt.executeQuery();
+						while(rs.next()) {
+							productVO = new ProductVO();
+							
+							productVO.setPdid(rs.getInt("pdid"));
+							productVO.setPdsid(rs.getInt("pdsid"));
+							productVO.setPdName(rs.getString("pdName"));
+							productVO.setPdPrice(rs.getInt("pdPrice"));
+							productVO.setPdDiscountPrice(rs.getInt("pdDiscountPrice"));
+							productVO.setPdDescription(rs.getString("pdDescription"));
+							productVO.setPdStatus(rs.getInt("pdStatus"));
+							productVO.setPdUpdate(rs.getObject("pdUpdate",LocalDateTime.class));
+							list.add(productVO);
+						}
+					} catch (SQLException se) {
+						throw new RuntimeException("A database error occured. "
+								+ se.getMessage());
+						// Clean up JDBC resources
+					} catch (ClassNotFoundException e) {
+						
+						e.printStackTrace();
+					} finally {
+						if (rs != null) {
+							try {
+								rs.close();
+							} catch (SQLException se) {
+								se.printStackTrace(System.err);
+							}
+						}
+						if (pstmt != null) {
+							try {
+								pstmt.close();
+							} catch (SQLException se) {
+								se.printStackTrace(System.err);
+							}
+						}
+						if (con != null) {
+							try {
+								con.close();
+							} catch (Exception e) {
+								e.printStackTrace(System.err);
+							}
+						}
+					}
+					return list;
+				}
+			
 	
 
 	public static void main(String[] args) {
@@ -374,7 +438,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 //
 //			System.out.print(aProduct.getPdName() + ",");
 			
-			List<ProductVO> list2 = dao.listByPdSort(2);
+			List<ProductVO> list2 = dao.listByPdStatus(1);
 			for (ProductVO aProduct : list2) {
 			System.out.print(aProduct.getPdid() + ",");
 			System.out.print(aProduct.getPdsid() + ",");
@@ -389,6 +453,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		}
 	}
 }
+	
 //		List<ProductVO> list2 = dao.getAll();
 //		for (ProductVO aProduct : list2) {
 //			System.out.print(aProduct.getPdid() + ",");

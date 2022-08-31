@@ -61,4 +61,8 @@ public class ProductService {
 		public List<ProductVO> listByPdSort(Integer pdsid) {
 			return dao.listByPdSort(pdsid);
 		}
+		
+		public List<ProductVO> listByPdStatus(Integer pdStatus){
+			return dao.listByPdStatus(pdStatus);
+		}
 }

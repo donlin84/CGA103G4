@@ -150,7 +150,7 @@ public class ProductServlet extends HttpServlet {
 //	}
 	
 //===========================================insert==================================================	
-	System.out.println(action);
+	System.out.println("NowDoing:"+action);
 	if ("insert".equals(action)) {   
 		
 		List<String> errorMsgs = new LinkedList<String>();
@@ -161,7 +161,7 @@ public class ProductServlet extends HttpServlet {
 			/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 		
 		Integer pdsid = Integer.valueOf(req.getParameter("Pdsid"));
-//		System.out.println(pdsid);   
+		System.out.println("insertSort:"+pdsid);   
 		
 		String pdName = null;
 		
@@ -195,12 +195,12 @@ public class ProductServlet extends HttpServlet {
 				pdPrice = 0;
 				errorMsgs.add("商品價格請填數字");
 			}
-//		System.out.println(pdPrice); 
+		System.out.println("insertPrice=:"+pdPrice); 
 		
 		Integer pdDiscountPrice = null;
 			try {
 				pdDiscountPrice = Integer.valueOf(req.getParameter("PdDiscountPrice").trim());
-				System.out.println("新增商品"+"優惠價格為" + pdDiscountPrice);
+				System.out.println("insert:"+"優惠價格為" + pdDiscountPrice);
 			} catch (NumberFormatException e) {
 				pdDiscountPrice = 0;
 				errorMsgs.add("商品優惠價格請填數字");
@@ -208,11 +208,12 @@ public class ProductServlet extends HttpServlet {
 			
 		
 		String pdDescription = req.getParameter("PdDescription").trim();
-		System.out.println("新增商品"+"已存在的商品名"+pdDescription);
+		System.out.println("insert:"+pdDescription);
 		
 		if(pdDescription.trim().length() > 500) { //以下練習正則(規)表示式(regular-expression)
 			errorMsgs.add("商品描述不超過500字");
 		}
+		
 		
 		Integer pdStatus = null;
 		try {
@@ -221,8 +222,10 @@ public class ProductServlet extends HttpServlet {
 			pdStatus = 0;
 			errorMsgs.add("請決定是否立刻上架");
 		}
+		System.out.println("insert:"+pdStatus);
 			
 		LocalDateTime pdUpdate = LocalDateTime.now();
+		System.out.println("insert:"+pdUpdate);
 		
 			ProductVO productVO = new ProductVO();
 			productVO.setPdsid(pdsid);
@@ -265,7 +268,7 @@ public class ProductServlet extends HttpServlet {
 //		step1
 		
 		Integer pdid = Integer.valueOf(req.getParameter("pdid"));
-		System.out.println(pdid + "  step1");
+		System.out.println("get__" + pdid + "forUpdate");
 //		step2
 		ProductService pdSvc = new ProductService();
 		ProductVO productVO = pdSvc.getOneproduct(pdid);
@@ -279,7 +282,7 @@ public class ProductServlet extends HttpServlet {
 		//=========================================== update ==================================================		
 	}
 
-	System.out.println(action);
+	System.out.println("NowDoing:"+ action);
 	if("update".equals(action)) {
 		List<String> errorMsgs = new LinkedList<String>();
 		req.setAttribute("errorMsgs", errorMsgs);
@@ -365,7 +368,7 @@ public class ProductServlet extends HttpServlet {
 // 新商品新增圖片		
 	System.out.println(action2);
 	if("addpic".equals(action2)) {
-		System.out.println("新增圖片"+req.getParameter("PdPic1"));
+		
 		
 		List<String> errorMsgs = new LinkedList<String>();
 		req.setAttribute("errorMsgs", errorMsgs);
@@ -378,7 +381,7 @@ public class ProductServlet extends HttpServlet {
 		in.read(pdpicbyte);
 		in.close();
 		System.out.println("新增圖片"+pdpicbyte);
-		System.out.println("\"新增圖片\"+"+ pdpicbyte.length);
+		System.out.println("新增圖片"+ pdpicbyte.length);
 		if (pdpicbyte.length != 0) {
 		productpicVO.setPdPic(pdpicbyte);
 		ProductpicService pdpicSvc = new ProductpicService();
