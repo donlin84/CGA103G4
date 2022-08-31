@@ -2,11 +2,13 @@
 <%@ page import="com.productPicture.model.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-ProductVO productVO = (ProductVO) request.getAttribute("productVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
-%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%
+ProductVO productVO = (ProductVO) request.getAttribute("productVO");
+%>
 
 <STYLE>
 .table{
@@ -152,7 +154,12 @@ ProductVO productVO = (ProductVO) request.getAttribute("productVO"); //EmpServle
 							</tr>
 							<tr>
 								<td>商品狀態</td>
-								<td><%=productVO.getPdStatus()%></td>
+								<td>
+									<c:if test="${productVO.pdStatus == 1}" var="上架中" scope="page">
+									上架中</c:if>
+									<c:if test="${productVO.pdStatus == 0}" var="上架中" scope="page">
+									未上架</c:if>
+				</td>
 							</tr>
 							<tr>
 								<c:set var="string1" value="${productVO.getPdUpdate()}" />

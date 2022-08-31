@@ -6,14 +6,10 @@
            uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="java.util.*"%>
 
-<%
-  ProductVO productVO = (ProductVO) request.getAttribute("productVO");
-%>
 
 <%
-	ProductService productSvc = new ProductService();
-    List<ProductVO> list = productSvc.getAll();
-    pageContext.setAttribute("list",list);
+List<ProductVO> productVO = (List<ProductVO>)(request.getAttribute("productVO"));
+pageContext.setAttribute("productVO", productVO);
 %>
 
 <style>
@@ -130,21 +126,18 @@ text-overflow: ellipsis;
 	<jsp:useBean id="pdSortSvc" scope="page" class="com.productSort.model.ProductsortService" />
 
 <div>
-		
-		<FORM METHOD="post" ACTION="PdSearchBackend.do">
+		<FORM METHOD="post" ACTION="PdSearchBackend.do" >
 		<b>&emsp;&emsp;商品類別: </b>
 			&emsp;&emsp;
-			<select name = "pdsid" size="0.5" style="white-space:nowrap">
-				<c:forEach  var="ProductsortVO" items="${pdSortSvc.all}">
+			<select size="1" name="pdsid">
+				<c:forEach var="ProductsortVO" items="${pdSortSvc.all}">
 					<option value="${ProductsortVO.pdsid}" ${(ProductsortVO.pdsid==ProductsortVO.pdsid)? 'selected':'' } >${ProductsortVO.pdsName}
-					</option>
 				</c:forEach>
- 			</select>
- 			<input type="hidden" name="action4" value="list_pd_by_sort">
-        	<input type="submit" value="送出">
- 			
- 			</FORM>
 
+ 			</select>
+ 				<input type="hidden" name="action4" value="list_pd_by_sort">
+				<input type="submit" value="送出">
+ 			</FORM>
 		</div>
 	</li>
 </ul>
@@ -164,9 +157,9 @@ text-overflow: ellipsis;
 			  <th>&emsp;上次修改</th>
 			  
 			</tr>
- 			<%@	include file="page1.file" %>
-	<c:forEach var="productVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-			  
+ 			
+
+			  <c:forEach var="productVO" items="${productVO}">
 			<tr>
 			  
 			  <td> 
@@ -188,7 +181,6 @@ text-overflow: ellipsis;
 			</td>
 				<td>${productVO.pdid}</td>
 				<c:set var = "str1" value = "${productVO.productSortVO.pdsName}(${productVO.pdsid})"/>
-				
                 <td>${str1}</td>  
 <%-- 				<td>${productVO.pdsid}-[${productVO.productSortVO.pdsName}]</td> --%>
 				<td>${productVO.pdName}</td>
@@ -210,12 +202,12 @@ text-overflow: ellipsis;
 				<c:set var="string2" value="${fn:replace(string1, 
                                 'T', ' ')}" />
 				<td>${string2}</td>
-
+				
 
 			  </tr>
-		</c:forEach>
+				</c:forEach>
 		  </table>
-		 <%@include file="page2.file" %>
+
 		</div>
 		
 		<script>

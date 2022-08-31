@@ -39,6 +39,7 @@ public class ProductServlet extends HttpServlet {
 	String action = req.getParameter("action");
 	String action2 = req.getParameter("action2");
 	String action3 = req.getParameter("action3");
+	System.out.println(action);
 	if("getOne_For_Display".equals(action)) {
 		
 		List<String> errorMsgs = new LinkedList<String>();
@@ -149,6 +150,7 @@ public class ProductServlet extends HttpServlet {
 //	}
 	
 //===========================================insert==================================================	
+	System.out.println(action);
 	if ("insert".equals(action)) {   
 		
 		List<String> errorMsgs = new LinkedList<String>();
@@ -220,9 +222,7 @@ public class ProductServlet extends HttpServlet {
 			errorMsgs.add("請決定是否立刻上架");
 		}
 			
-		
 		LocalDateTime pdUpdate = LocalDateTime.now();
-		
 		
 			ProductVO productVO = new ProductVO();
 			productVO.setPdsid(pdsid);
@@ -250,8 +250,6 @@ public class ProductServlet extends HttpServlet {
 			
 			
 			String url = "/back-end/product/productShowAll.jsp";
-//			String url2 = "/backend/productShowOne.jsp";
-//			System.out.println(req.getParameter("pdid"));
 			req.setAttribute("pdid",req.getParameter("pdid"));
 			req.setAttribute("action2", "getOne_For_Display");
 			RequestDispatcher successView = req.getRequestDispatcher(url); 
@@ -281,16 +279,15 @@ public class ProductServlet extends HttpServlet {
 		//=========================================== update ==================================================		
 	}
 
-	
+	System.out.println(action);
 	if("update".equals(action)) {
 		List<String> errorMsgs = new LinkedList<String>();
 		req.setAttribute("errorMsgs", errorMsgs);
-		System.out.println(action);
 	Integer pdid = Integer.valueOf(req.getParameter("Pdid").trim());
 	System.out.println("update:"+pdid);
 	
 	Integer pdsid = Integer.valueOf(req.getParameter("Pdsid").trim());
-	System.out.println(pdsid);   
+	System.out.println("update:"+pdsid);   
 	
 	
 	
@@ -328,9 +325,6 @@ public class ProductServlet extends HttpServlet {
 		errorMsgs.add("商品描述不超過250字");
 	}
 			
-	
-	
-	
 	Integer pdStatus = Integer.valueOf(req.getParameter("PdStatus").trim());
 	
 	LocalDateTime pdUpdate = LocalDateTime.now();
@@ -352,12 +346,14 @@ public class ProductServlet extends HttpServlet {
 			RequestDispatcher failureView = req
 				.getRequestDispatcher("/back-end/product/productModify.jsp");
 			failureView.forward(req, res);
+			System.out.println("update:"+errorMsgs);
 			return;
 		}
 //	Step 2
 	ProductService pdSvc = new ProductService();
 	productVO = pdSvc.updateProduct(pdid, pdsid, pdName, pdPrice, pdDiscountPrice, pdDescription, pdStatus, pdUpdate);
 //	Step 3
+	
 	req.setAttribute("productVO", productVO); // 資料庫update成功後,正確的的productVO物件,存入req
 	String url = "/back-end/product/productShowOne.jsp";
 	RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
@@ -367,9 +363,8 @@ public class ProductServlet extends HttpServlet {
 	
 //	================================寫到這
 // 新商品新增圖片		
-
+	System.out.println(action2);
 	if("addpic".equals(action2)) {
-		System.out.println("新增圖片"+action2);
 		System.out.println("新增圖片"+req.getParameter("PdPic1"));
 		
 		List<String> errorMsgs = new LinkedList<String>();
@@ -394,9 +389,9 @@ public class ProductServlet extends HttpServlet {
 			}
 		}
 //	舊商品新增圖片	
-	
+	System.out.println(action3);
 	if("addpic2".equals(action3)) {
-		System.out.println("舊商品新增圖片"+action3);
+		
 		System.out.println(req.getParameter("PdPic2"));
 		
 		List<String> errorMsgs = new LinkedList<String>();

@@ -20,6 +20,8 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		"UPDATE Product set pdsid=?, pdName=?, pdPrice=?, pdDiscountPrice=?, pdDescription=?, pdStatus=?, pdUpdate=? where pdid = ?";
 	private static final String ALL_PD_NAME = 
 		"SELECT pdname from product";
+	private static final String listByPdSort=
+		"SELECT pdid,pdsid,pdName,pdPrice,pdDiscountPrice,pdDescription,pdStatus,pdUpdate FROM Product where pdsid = ?";
 	
 	@Override
 	public void insert(ProductVO productVO) {
@@ -298,17 +300,95 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		}
 		return list;
 	}
+		@Override
+		public List<ProductVO> listByPdSort(Integer pdsid) {
+			List<ProductVO> list = new ArrayList<ProductVO>();
+				ProductVO productVO = null;
+				
+				Connection con = null;
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+			
+				try {
+					Class.forName(driver);
+					con = DriverManager.getConnection(url, userid, passwd);
+					pstmt = con.prepareStatement(listByPdSort);
+
+					pstmt.setInt(1, pdsid);
+
+					rs = pstmt.executeQuery();
+					
+					while(rs.next()) {
+						productVO = new ProductVO();
+						
+						productVO.setPdid(rs.getInt("pdid"));
+						productVO.setPdsid(rs.getInt("pdsid"));
+						productVO.setPdName(rs.getString("pdName"));
+						productVO.setPdPrice(rs.getInt("pdPrice"));
+						productVO.setPdDiscountPrice(rs.getInt("pdDiscountPrice"));
+						productVO.setPdDescription(rs.getString("pdDescription"));
+						productVO.setPdStatus(rs.getInt("pdStatus"));
+						productVO.setPdUpdate(rs.getObject("pdUpdate",LocalDateTime.class));
+						list.add(productVO);
+					}
+				} catch (SQLException se) {
+					throw new RuntimeException("A database error occured. "
+							+ se.getMessage());
+					
+				} catch (ClassNotFoundException e) {
+					
+					e.printStackTrace();
+				} finally {
+					if (rs != null) {
+						try {
+							rs.close();
+						} catch (SQLException se) {
+							se.printStackTrace(System.err);
+						}
+					}
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException se) {
+							se.printStackTrace(System.err);
+						}
+					}
+					if (con != null) {
+						try {
+							con.close();
+						} catch (Exception e) {
+							e.printStackTrace(System.err);
+						}
+					}
+				}
+				return list;
+			}
+	
 
 	public static void main(String[] args) {
 
 		ProductJDBCDAO dao = new ProductJDBCDAO();
 		
-		List<ProductVO> list = dao.getAllPdName();
-		for (ProductVO aProduct : list) {
-
+//		List<ProductVO> list = dao.getAllPdName();
+//		for (ProductVO aProduct : list) {
+//
+//			System.out.print(aProduct.getPdName() + ",");
+			
+			List<ProductVO> list2 = dao.listByPdSort(2);
+			for (ProductVO aProduct : list2) {
+			System.out.print(aProduct.getPdid() + ",");
+			System.out.print(aProduct.getPdsid() + ",");
 			System.out.print(aProduct.getPdName() + ",");
+			System.out.print(aProduct.getPdPrice() + ",");
+			System.out.print(aProduct.getPdDiscountPrice() + ",");
+			System.out.print(aProduct.getPdDescription() + ",");
+			System.out.println(aProduct.getPdStatus());
+			System.out.println(aProduct.getPdUpdate());
+			System.out.println("---------------------");	
 
 		}
+	}
+}
 //		List<ProductVO> list2 = dao.getAll();
 //		for (ProductVO aProduct : list2) {
 //			System.out.print(aProduct.getPdid() + ",");
@@ -321,8 +401,8 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 //			System.out.print(aProduct.getPdUpdate());
 //			System.out.println();
 //		}
-	}
-}
+	
+
 
 //		// 新增
 //		ProductVO productVO1 = new ProductVO();
@@ -350,16 +430,7 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 //		System.out.println("updateSucceed");
 
 		// 查詢
-//		ProductVO productVO3 = dao.findByPrimaryKey(1);
-//		System.out.print(productVO3.getPdid() + ",");
-//		System.out.print(productVO3.getPdsid() + ",");
-//		System.out.print(productVO3.getPdName() + ",");
-//		System.out.print(productVO3.getPdPrice() + ",");
-//		System.out.print(productVO3.getPdDiscountPrice() + ",");
-//		System.out.print(productVO3.getPdDescription() + ",");
-//		System.out.println(productVO3.getPdStatus());
-//		System.out.println(productVO3.getPdUpdate());
-//		System.out.println("---------------------");
+
 
 //		 查詢
 

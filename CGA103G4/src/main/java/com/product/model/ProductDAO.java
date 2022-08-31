@@ -33,6 +33,8 @@ public class ProductDAO implements ProductDAO_interface {
 		"UPDATE Product set pdsid=?, pdName=?, pdPrice=?, pdDiscountPrice=?, pdDescription=?, pdStatus=?, pdUpdate=? where pdid = ?";
 	private static final String ALL_PD_NAME = 
 		"SELECT pdname from product";
+	private static final String listByPdSort=
+		"SELECT pdid,pdsid,pdName,pdPrice,pdDiscountPrice,pdDescription,pdStatus,pdUpdate FROM Product where pdsid = ?";
 
 	@Override
 	public void insert(ProductVO productVO) {
@@ -286,7 +288,68 @@ public class ProductDAO implements ProductDAO_interface {
 		}
 		return list;
 	}
-}
+	@Override
+	public List<ProductVO> listByPdSort(Integer pdsid) {
+		
+		List<ProductVO> list = new ArrayList<ProductVO>();
+			ProductVO productVO = null;
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+		
+			try {
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(listByPdSort);
+
+				pstmt.setInt(1, pdsid);
+
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					productVO = new ProductVO();
+					
+					productVO.setPdid(rs.getInt("pdid"));
+					productVO.setPdsid(rs.getInt("pdsid"));
+					productVO.setPdName(rs.getString("pdName"));
+					productVO.setPdPrice(rs.getInt("pdPrice"));
+					productVO.setPdDiscountPrice(rs.getInt("pdDiscountPrice"));
+					productVO.setPdDescription(rs.getString("pdDescription"));
+					productVO.setPdStatus(rs.getInt("pdStatus"));
+					productVO.setPdUpdate(rs.getObject("pdUpdate",LocalDateTime.class));
+					list.add(productVO);
+				}
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return list;
+		}
+	}
+
 	
 	
 //	public static void main(String[] args) {
