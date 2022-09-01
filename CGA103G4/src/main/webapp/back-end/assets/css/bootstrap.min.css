@@ -10899,10 +10899,10 @@ a.text-dark:hover {
     display: table-header-group
   }
 
-  img,
-  tr {
-    page-break-inside: avoid
-  }
+/*   img, */
+/*   tr { */
+/*     page-break-inside: avoid */
+/*   } */
 
   h2,
   h3,
@@ -10966,3 +10966,4 @@ a.text-dark:hover {
     border-color: #dee2e6
   }
 }
+
