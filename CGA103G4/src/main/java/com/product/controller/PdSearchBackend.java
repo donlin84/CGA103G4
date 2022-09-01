@@ -30,12 +30,14 @@ public class PdSearchBackend extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action4");
 		System.out.println("NowDoing:"+action);
+		
 		List<String> errorMsgs = new LinkedList<String>();
 		req.setAttribute("errorMsgs", errorMsgs);
 		
 		if ("list_pd_by_sort".equals(action)) {
 			
 			String str = req.getParameter("pdsid");
+			
 			 
 			Integer pdsid = Integer.valueOf(str);
 			 System.out.println(pdsid);
@@ -59,8 +61,10 @@ public class PdSearchBackend extends HttpServlet {
 			Integer pdStatus = Integer.valueOf(str);
 			 System.out.println(pdStatus);
 			 
+			 
 			ProductService pdSvc = new ProductService();
 			List<ProductVO> productVO = pdSvc.listByPdStatus(pdStatus); 
+
 			 
 			String url = "/back-end/product/productSearchList.jsp";
 			req.setAttribute("productVO", productVO); 

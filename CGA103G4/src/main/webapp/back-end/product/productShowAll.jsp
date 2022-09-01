@@ -136,7 +136,7 @@ text-overflow: ellipsis;
 			&emsp;&emsp;
 			<select name = "pdsid" size="0.5" style="white-space:nowrap">
 				<c:forEach  var="ProductsortVO" items="${pdSortSvc.all}">
-					<option value="${ProductsortVO.pdsid}" ${(ProductsortVO.pdsid==ProductsortVO.pdsid)? 'selected':'' } >${ProductsortVO.pdsName}
+					<option value="${ProductsortVO.pdsid}">${ProductsortVO.pdsName}
 					</option>
 				</c:forEach>
  			</select>
@@ -165,12 +165,11 @@ text-overflow: ellipsis;
 			  <FORM action="PdSearchBackend.do" method="post">
 <!-- 			  <select name = "action4" size="1" onchange= submit("list_pd_by_status")> -->
 			  <select name = "pdStatus" size="1">
-			  	<option>商品狀態</option>
 				<option value=1>上架中</option>
 				<option value=0>未上架</option>
 			  </select>
 			  <input type="hidden" name="action4" value="list_pd_by_status">
-        		<input type="submit" value="送出">
+        		<input type="submit" value="狀態查詢">
 			 </FORM>
 			  </th>
 			  
