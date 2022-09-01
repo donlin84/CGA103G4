@@ -1,12 +1,7 @@
 package com.chefskills.model;
 
-<<<<<<< HEAD
-import static com.util.Common_12.PASSWORD;
-import static com.util.Common_12.URL;
-import static com.util.Common_12.USER;
-=======
-import static com.util.common_hung.*;
->>>>>>> refs/remotes/origin/sosohung
+
+import static com.util.Common.*;
 
 import java.sql.*;
 import java.util.*;

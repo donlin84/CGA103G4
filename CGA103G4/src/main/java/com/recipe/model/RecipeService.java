@@ -9,10 +9,11 @@ public class RecipeService {
 			dao = new RecipeDAO();
 		}
 		
-		public RecipeVO addRecipe(Integer memid, String reContext) {
+		public RecipeVO addRecipe(Integer memid, String reTitle, String reContext) {
 			RecipeVO recipeVO = new RecipeVO();
 			
 			recipeVO.setMemid(memid);
+			recipeVO.setReTitle(reTitle);
 			recipeVO.setReContext(reContext);
 			
 			dao.insert(recipeVO);
@@ -20,10 +21,11 @@ public class RecipeService {
 			return recipeVO;
 		}
 		
-		public RecipeVO updateRecipe(Integer memid, String reContext, Integer reid) {
+		public RecipeVO updateRecipe(Integer memid, String reTitle, String reContext, Integer reid) {
 			RecipeVO recipeVO = new RecipeVO();
 			
 			recipeVO.setMemid(memid);
+			recipeVO.setReTitle(reTitle);
 			recipeVO.setReContext(reContext);
 			recipeVO.setReid(reid);
 			

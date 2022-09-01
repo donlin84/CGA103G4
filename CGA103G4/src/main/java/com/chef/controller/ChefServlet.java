@@ -218,14 +218,14 @@ public class ChefServlet extends HttpServlet {
 				}
 			}
 
-			ChefService chefSvc = new ChefService();
 
 			Part part = req.getPart("license");
 			InputStream in = part.getInputStream();
 			byte[] license = new byte[in.available()];
-			ChefVO chefVOld = chefSvc.getOneChef(chefid);
 			in.read(license);
 			in.close();
+			ChefService chefSvc = new ChefService();
+			ChefVO chefVOld = chefSvc.getOneChef(chefid);
 			if (license.length == 0) {
 				license = chefVOld.getLicense();
 			}
@@ -237,9 +237,9 @@ public class ChefServlet extends HttpServlet {
 			Part part1 = req.getPart("idCard");
 			InputStream in1 = part1.getInputStream();
 			byte[] idCard = new byte[in1.available()];
-			ChefVO chefVO1ld = chefSvc.getOneChef(chefid);
 			in1.read(idCard);
 			in1.close();
+			ChefVO chefVO1ld = chefSvc.getOneChef(chefid);
 			if (idCard.length == 0) {
 				idCard = chefVO1ld.getIdCard();
 			}
@@ -247,9 +247,9 @@ public class ChefServlet extends HttpServlet {
 			Part part2 = req.getPart("idCardBack");
 			InputStream in2 = part2.getInputStream();
 			byte[] idCardBack = new byte[in2.available()];
-			ChefVO chefVO2ld = chefSvc.getOneChef(chefid);
 			in2.read(idCardBack);
 			in2.close();
+			ChefVO chefVO2ld = chefSvc.getOneChef(chefid);
 			if (idCardBack.length == 0) {
 				idCardBack = chefVO2ld.getIdCardBack();
 			}
@@ -257,9 +257,9 @@ public class ChefServlet extends HttpServlet {
 			Part part3 = req.getPart("chefPhoto");
 			InputStream in3 = part3.getInputStream();
 			byte[] chefPhoto = new byte[in3.available()];
-			ChefVO chefVO3ld = chefSvc.getOneChef(chefid);
 			in3.read(chefPhoto);
 			in3.close();
+			ChefVO chefVO3ld = chefSvc.getOneChef(chefid);
 			if (chefPhoto.length == 0) {
 				chefPhoto = chefVO3ld.getChefPhoto();
 			}

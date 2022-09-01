@@ -93,7 +93,7 @@
 			<td>${ordersVO.ordDelivery}</td>
 			<td>${ordersVO.ordAddress}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/orders/orders.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/orders/orders.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="н╫зя">
 			     <input type="hidden" name="ordid"  value="${ordersVO.ordid}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>

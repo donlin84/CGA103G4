@@ -25,4 +25,18 @@ public class PromotionsDetailVO implements java.io.Serializable{
 	public void setPmPdDiscountPrice(Integer pmPdDiscountPrice) {
 		this.pmPdDiscountPrice = pmPdDiscountPrice;
 	}
+
+    public com.promotions.model.PromotionsVO getPromotionVO() {
+    	com.promotions.model.PromotionsService pmtSvc = new com.promotions.model.PromotionsService();
+    	com.promotions.model.PromotionsVO promotionsVO = pmtSvc.getOnePromotion(pmid);
+	    return promotionsVO;
+    }
+	
+    public com.product.model.ProductVO getProductVO() {
+    	com.product.model.ProductService pdSvc = new com.product.model.ProductService();
+    	com.product.model.ProductVO productVO = pdSvc.getOneproduct(pdid);
+	    return productVO;
+    }
+	
+	
 }

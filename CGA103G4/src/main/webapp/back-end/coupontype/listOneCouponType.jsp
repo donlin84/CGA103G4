@@ -47,12 +47,12 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 					<div class="page-title-box">
 						<div class="btn-group pull-right">
 							<ol class="breadcrumb hide-phone p-0 m-0">
-								<li class="breadcrumb-item"><a href="#">Zoter</a></li>
-								<li class="breadcrumb-item"><a href="#">Tables</a></li>
-								<li class="breadcrumb-item active">Editable</li>
+								<li class="breadcrumb-item active">優惠券單筆查詢</li>
+								<li class="breadcrumb-item"><a href="../discount-management/discount-management.jsp">優惠方案管理</a></li>
+								<li class="breadcrumb-item"><a href="../index-back.jsp">後台首頁</a></li>
 							</ol>
 						</div>
-						<h4 class="page-title">Editable</h4>
+						<h4 class="page-title">優惠券單筆查詢</h4>
 					</div>
 				</div>
 			</div>
@@ -82,8 +82,8 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 										<td><%=couponTypeVO.getCpDiscount()%></td>
 										<td><%=couponTypeVO.getCpStart()%></td>
 										<td><%=couponTypeVO.getCpEnd()%></td>
-										<td><%=couponTypeVO.getCpStatus()%></td>
-										<td><img src="<%=request.getContextPath()%>/ImagesServlet?cpTpid=${couponTypeVO.cpTpid}" width="150px;"></td>
+										<td><%=couponTypeVO.getCpStatus()==1?"已上架":"下架"%></td>
+										<td><img src="<%=request.getContextPath()%>/CouponTypePic?cpTpid=${couponTypeVO.cpTpid}" width="150px;"></td>
 									</tr>
 								</tbody>
 							</table>

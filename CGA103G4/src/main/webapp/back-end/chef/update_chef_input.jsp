@@ -5,12 +5,28 @@
 <%
 ChefVO chefVO = (ChefVO) request.getAttribute("chefVO"); //ChefServlet.java (Concroller) 存入req的chefVO物件 (包括幫忙取出的chefVO, 也包括輸入資料錯誤時的chefVO物件)
 %>
-
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>私廚資料修改 - update_chef_input.jsp</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 
+<title>私廚資料修改 - update_chef_input.jsp</title>
+<meta content="Admin Dashboard" name="description" />
+<meta content="Mannatthemes" name="author" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="shortcut icon" href="../assets/images/favicon.ico">
+<link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css"
+	rel="stylesheet">
+<link href="../assets/plugins/fullcalendar/vanillaCalendar.css"
+	rel="stylesheet" type="text/css" />
+<link href="../assets/plugins/morris/morris.css" rel="stylesheet">
+<link href="../assets/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css">
+<link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/style.css" rel="stylesheet" type="text/css">
 <link href="css/chefUpdateDragandDrop.css" rel="stylesheet"
 	type="text/css">
 <link href="css/chefUpdatePreview.css" rel="stylesheet" type="text/css">
@@ -18,134 +34,229 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO"); //ChefServlet.java (Con
 
 
 <style>
-.formGroup .input{
-  border: 0px;
-  border-bottom: 1px solid #b2b2b2;
-  width: calc(100% - 110px);
+.formGroup .input {
+	border: 0px;
+	border-bottom: 1px solid #b2b2b2;
+	width: calc(100% - 110px);
 }
 </style>
 </head>
 <body bgcolor='white'>
 
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>會員資料修改 - update_chef_input.jsp</h3>
-				<h4>
-					<a href="select_page.jsp"><img src="images/back1.gif"
-						width="100" height="32" border="0">回首頁</a>
-				</h4>
-			</td>
-		</tr>
-	</table>
+	<div id="preloader">
+		<div id="status">
+			<div class="spinner"></div>
+		</div>
+	</div>
+	<!-- Navigation Bar -->
+	<%@ include file="../tools/header.jsp"%>
 
-	<h3>資料修改:</h3>
+	<div class="wrapper">
+		<div class="container-fluid">
+			<!-- 			Page-Title -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="page-title-box">
+						<div class="btn-group pull-right">
+							<ol class="breadcrumb hide-phone p-0 m-0">
+								<li class="breadcrumb-item"><a href="#">Zoter</a></li>
+								<li class="breadcrumb-item"><a href="#">Tables</a></li>
+								<li class="breadcrumb-item active">Editable</li>
+							</ol>
+						</div>
+						<h4 class="page-title">Editable</h4>
+					</div>
+				</div>
+			</div>
 
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
+			<!-- end page title end breadcrumb -->
 
-	<FORM METHOD="post" ACTION="chef.do" name="form1" enctype="multipart/form-data">
-		<table>
-			<tr>
-				<td>私廚編號:<font color=red><b>*</b></font></td>
-				<td><%=chefVO.getChefid()%></td>
-			</tr>
-			<tr>
-				<td>帳號:</td>
-				<td><input type="TEXT" name="chefAccount" size="45"
-					value="<%=chefVO.getChefAccount()%>" readonly/></td>
-			</tr>
-			<tr>
-				<td><label for="chefPassword">密碼:</label></td>
-				<td><input type="password" name="chefPassword" size="45" id="chefPassword"
-					value="<%=chefVO.getChefPassword()%>" /></td>
-			</tr>
-			<tr>
-				<td><label for="chefName">私廚姓名:</label></td>
-				<td><input type="TEXT" name="chefName" size="45" id="chefName"
-					value="<%=chefVO.getChefName()%>" /></td>
-			</tr>
-			<tr>
-				<td><label for="chefNickname">私廚暱稱:</label></td>
-				<td><input type="TEXT" name="chefNickname" size="45" id="chefNickname"
-					value="<%=chefVO.getChefNickname()%>" /></td>
-			</tr>
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
 
-			<tr>
-				<td>狀態:</td>
-				<c:if test="${chefVO.getChefStatus() == 0}">
-					<td><select name="chefStatus" size="1">
-							<option value="0">0
-							<option value="1">1
-					</select></td>
-				</c:if>
-				<c:if test="${chefVO.getChefStatus() == 1}">
-					<td><select name="chefStatus" size="1">
-							<option value="1">1
-							<option value="0">0
-					</select></td>
-				</c:if>
-			</tr>
+							<div class="main_content">
+								<aside class="aside">
 
-			<tr>
-				<td><label for="chefPrice">價格:</label></td>
-				<td><input type="TEXT" name="chefPrice" size="45" id="chefPrice"
-					value="<%=chefVO.getChefPrice()%>" /></td>
-			</tr>
-			<tr>
-				<td>廚師執照:</td>
-				<td><input type="file" name="license" id="p_file1"></td>
-				<td id="drop_zone1"><span class="text">圖片拖曳至此處</span></td>
-				<td id="preview1"><img src="<%=request.getContextPath()%>/showLicensePicture?chefid=${chefVO.chefid}" width=100%>
-				<span class="text"></span></td>
+					<a href='addChef.jsp'>新增私廚帳號</a>
+											<br>
+										<a href='select_page.jsp'>私廚資訊查詢</a>
+											<br>
+										<a href='../chefSkillsType/select_page.jsp'>專長種類查詢</a>
+											<br>
+										<a href='../chefSkills/select_page.jsp'>私廚專長查詢</a>
+											<br>
+										<a href='../chefSubscription/select_page.jsp'>私廚訂閱清單查詢</a>
+											<br>
+										<a href='../chefSubscription/select_page.jsp'>私廚預約表查詢</a>
+											<br>
+										<a href='../chefSubscription/select_page.jsp'>預約單查詢</a>
+											<br>
+								</aside>
 
-			</tr>
-			<tr>
-				<td>身分證(正):</td>
-				<td><input type="file" name="idCard" id="p_file2"></td>
-				<td id="drop_zone2"><span class="text">圖片拖曳至此處</span></td>
-				<td id="preview2"><img src="<%=request.getContextPath()%>/showIdCardPicture?chefid=${chefVO.chefid}" width=100%>
-				<span class="text"></span></td>
-			</tr>
-			<tr>
-				<td>身分證(反):</td>
-				<td><input type="file" name="idCardBack" id="p_file3"></td>
-				<td id="drop_zone3"><span class="text">圖片拖曳至此處</span></td>
-				<td id="preview3"><img src="<%=request.getContextPath()%>/showIdCardBackPicture?chefid=${chefVO.chefid}" width=100%>
-				<span class="text"></span></td>
-			</tr>
-			<tr>
-				<td>個人照:</td>
-				<td><input type="file" name="chefPhoto" id="p_file4"></td>
-				<td id="drop_zone4"><span class="text">圖片拖曳至此處</span></td>
-				<td id="preview4"><img src="<%=request.getContextPath()%>/showChefPhotoPicture?chefid=${chefVO.chefid}" width=100%>
-				<span class="text"></span></td>
-			</tr>
+								<main class="main">
+									<table id="table-1">
+										<tr>
+											<td>
+												<h3>私廚資料修改 - update_chef_input.jsp</h3>
+												<h4>
+													<a href="select_page.jsp"><img src="images/back1.gif"
+														width="100" height="32" border="0">回首頁</a>
+												</h4>
+											</td>
+										</tr>
+									</table>
 
-			<tr>
-				<td><label for="chefIntroduction">簡介:</label></td>
-				<td><input type="TEXT" name="chefIntroduction" size="45" id="chefIntroduction"
-					value="<%=chefVO.getChefIntroduction()%>" /></td>
-			</tr>
-<!-- 			<tr> -->
-<!-- 				<td><label for="chefIntroduction">簡介:</label></td> -->
-<%-- 				<td><textarea rows="10" cols="44" id="chefIntroduction"><%=chefVO.getChefIntroduction()%></textarea></td> --%>
-<!-- 			</tr> -->
+									<h3>資料修改:</h3>
+
+									<%-- 錯誤表列 --%>
+									<c:if test="${not empty errorMsgs}">
+										<font style="color: red">請修正以下錯誤:</font>
+										<ul>
+											<c:forEach var="message" items="${errorMsgs}">
+												<li style="color: red">${message}</li>
+											</c:forEach>
+										</ul>
+									</c:if>
+
+									<FORM METHOD="post" ACTION="chef.do" name="form1"
+										enctype="multipart/form-data">
+										<table>
+											<tr>
+												<td>私廚編號:<font color=red><b>*</b></font></td>
+												<td><%=chefVO.getChefid()%></td>
+											</tr>
+											<tr>
+												<td>帳號:</td>
+												<td><input type="TEXT" name="chefAccount" size="45"
+													value="<%=chefVO.getChefAccount()%>" readonly /></td>
+											</tr>
+											<tr>
+												<td><label for="chefPassword">密碼:</label></td>
+												<td><input type="password" name="chefPassword"
+													size="45" id="chefPassword"
+													value="<%=chefVO.getChefPassword()%>" /></td>
+											</tr>
+											<tr>
+												<td><label for="chefName">私廚姓名:</label></td>
+												<td><input type="TEXT" name="chefName" size="45"
+													id="chefName" value="<%=chefVO.getChefName()%>" /></td>
+											</tr>
+											<tr>
+												<td><label for="chefNickname">私廚暱稱:</label></td>
+												<td><input type="TEXT" name="chefNickname" size="45"
+													id="chefNickname" value="<%=chefVO.getChefNickname()%>" /></td>
+											</tr>
+
+											<tr>
+												<td>狀態:</td>
+												<c:if test="${chefVO.getChefStatus() == 0}">
+													<td><select name="chefStatus" size="1">
+															<option value="0">0
+															<option value="1">1
+													</select></td>
+												</c:if>
+												<c:if test="${chefVO.getChefStatus() == 1}">
+													<td><select name="chefStatus" size="1">
+															<option value="1">1
+															<option value="0">0
+													</select></td>
+												</c:if>
+											</tr>
+
+											<tr>
+												<td><label for="chefPrice">價格:</label></td>
+												<td><input type="TEXT" name="chefPrice" size="45"
+													id="chefPrice" value="<%=chefVO.getChefPrice()%>" /></td>
+											</tr>
+											<tr>
+												<td>廚師執照:</td>
+												<td><input type="file" name="license" id="p_file1"></td>
+												<td id="drop_zone1"><span class="text">圖片拖曳至此處</span></td>
+												<td id="preview1"><img
+													src="<%=request.getContextPath()%>/showLicensePicture?chefid=${chefVO.chefid}"
+													width=100%> <span class="text"></span></td>
+
+											</tr>
+											<tr>
+												<td>身分證(正):</td>
+												<td><input type="file" name="idCard" id="p_file2"></td>
+												<td id="drop_zone2"><span class="text">圖片拖曳至此處</span></td>
+												<td id="preview2"><img
+													src="<%=request.getContextPath()%>/showIdCardPicture?chefid=${chefVO.chefid}"
+													width=100%> <span class="text"></span></td>
+											</tr>
+											<tr>
+												<td>身分證(反):</td>
+												<td><input type="file" name="idCardBack" id="p_file3"></td>
+												<td id="drop_zone3"><span class="text">圖片拖曳至此處</span></td>
+												<td id="preview3"><img
+													src="<%=request.getContextPath()%>/showIdCardBackPicture?chefid=${chefVO.chefid}"
+													width=100%> <span class="text"></span></td>
+											</tr>
+											<tr>
+												<td>個人照:</td>
+												<td><input type="file" name="chefPhoto" id="p_file4"></td>
+												<td id="drop_zone4"><span class="text">圖片拖曳至此處</span></td>
+												<td id="preview4"><img
+													src="<%=request.getContextPath()%>/showChefPhotoPicture?chefid=${chefVO.chefid}"
+													width=100%> <span class="text"></span></td>
+											</tr>
+
+											<tr>
+												<td><label for="chefIntroduction">簡介:</label></td>
+												<td><input type="TEXT" name="chefIntroduction"
+													size="45" id="chefIntroduction"
+													value="<%=chefVO.getChefIntroduction()%>" /></td>
+											</tr>
+											<!-- 			<tr> -->
+											<!-- 				<td><label for="chefIntroduction">簡介:</label></td> -->
+											<%-- 				<td><textarea rows="10" cols="44" id="chefIntroduction"><%=chefVO.getChefIntroduction()%></textarea></td> --%>
+											<!-- 			</tr> -->
 
 
-		</table>
-		<br> <input type="hidden" name="action" value="update"> <input
-			type="hidden" name="chefid" value="<%=chefVO.getChefid()%>">
-		<input type="submit" value="送出修改">
-	</FORM>
+										</table>
+										<br> <input type="hidden" name="action" value="update">
+										<input type="hidden" name="chefid"
+											value="<%=chefVO.getChefid()%>"> <input type="submit"
+											value="送出修改">
+									</FORM>
+								</main>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end col -->
+			</div>
+			<!-- end row -->
+		</div>
 
+		<!-- end container -->
+	</div>
+	<!-- end wrapper -->
+
+	<!-- Footer -->
+	<%@ include file="../tools/footer.jsp"%>
+	<!-- End Footer -->
+	<!-- jQuery -->
+	<script src="../assets/js/jquery.min.js"></script>
+	<script src="../assets/js/popper.min.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/modernizr.min.js"></script>
+	<script src="../assets/js/waves.js"></script>
+	<script src="../assets/js/jquery.nicescroll.js"></script>
+	<script
+		src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+	<script
+		src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="../assets/plugins/skycons/skycons.min.js"></script>
+	<script src="../assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
+	<script src="../assets/plugins/tiny-editable/numeric-input-example.js"></script>
+	<script src="../assets/plugins/fullcalendar/vanillaCalendar.js"></script>
+	<script src="../assets/plugins/raphael/raphael-min.js"></script>
+	<script src="../assets/plugins/morris/morris.min.js"></script>
+	<script src="../assets/js/app.js"></script>
 	<script>
 		var drop_zone1_el = document.getElementById("drop_zone1");
 		var drop_zone2_el = document.getElementById("drop_zone2");

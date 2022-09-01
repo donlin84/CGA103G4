@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>listAllMember.jsp</title>
-</head>
-<body>
-=======
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
@@ -111,7 +100,6 @@
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>
->>>>>>> refs/remotes/origin/sosohung
 
 </body>
 </html>

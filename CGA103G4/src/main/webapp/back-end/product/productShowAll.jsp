@@ -130,14 +130,20 @@ text-overflow: ellipsis;
 	<jsp:useBean id="pdSortSvc" scope="page" class="com.productSort.model.ProductsortService" />
 
 <div>
-		<Label for = "pdsid">&emsp;&emsp;商品類別: </Label>
+		
+		<FORM METHOD="post" ACTION="PdSearchBackend.do">
+		<b>&emsp;&emsp;商品類別: </b>
 			&emsp;&emsp;
-			<select size="1" name="Pdsid">
-				<c:forEach var="ProductsortVO" items="${pdSortSvc.all}">
-					<option value="${ProductsortVO.pdsid}" ${(ProductsortVO.pdsid==ProductsortVO.pdsid)? 'selected':'' } >${ProductsortVO.pdsName}
+			<select name = "pdsid" size="0.5" style="white-space:nowrap">
+				<c:forEach  var="ProductsortVO" items="${pdSortSvc.all}">
+					<option value="${ProductsortVO.pdsid}">${ProductsortVO.pdsName}
+					</option>
 				</c:forEach>
  			</select>
+ 			<input type="hidden" name="action4" value="list_pd_by_sort">
+        	<input type="submit" value="送出">
  			
+ 			</FORM>
 
 		</div>
 	</li>
@@ -154,8 +160,20 @@ text-overflow: ellipsis;
 			  <th>&emsp;商品價格</th>
 			  <th>&emsp;優惠價格</th>
 			  <th>&emsp;商品描述</th>
-			  <th>&emsp;商品狀態</th>
-			  <th>&emsp;最後修改時間</th>
+			  
+			  <th>
+			  <FORM action="PdSearchBackend.do" method="post">
+<!-- 			  <select name = "action4" size="1" onchange= submit("list_pd_by_status")> -->
+			  <select name = "pdStatus" size="1">
+				<option value=1>上架中</option>
+				<option value=0>未上架</option>
+			  </select>
+			  <input type="hidden" name="action4" value="list_pd_by_status">
+        		<input type="submit" value="狀態查詢">
+			 </FORM>
+			  </th>
+			  
+			  <th>&emsp;上次修改</th>
 			  
 			</tr>
  			<%@	include file="page1.file" %>
@@ -166,13 +184,13 @@ text-overflow: ellipsis;
 			  <td> 
 				<div class="row">
 				 <div>
-				  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/product.do" style="margin-bottom: 0px;">
+				  <FORM METHOD="post" ACTION="product.do" style="margin-bottom: 0px;">
 					 <input type="submit" value="修改" >
 					 <input type="hidden" name="pdid"  value="${productVO.pdid}">
 					 <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			     </div>
 				  <div>
-				 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backend/product.do" style="margin-bottom: 0px;">
+				 <FORM METHOD="post" ACTION="product.do" style="margin-bottom: 0px;">
 					 <input type="submit" value="查詢">
 					 <input type="hidden" name="pdid"  value="${productVO.pdid}">
 					 <input type="hidden" name="action"	value="getOne_For_Display">
@@ -191,14 +209,14 @@ text-overflow: ellipsis;
 				
 				<td class="table_tit">${productVO.pdDescription}</td> 
 				
-				<c:choose>
-				<c:when test="${productVO.pdStatus} == 1" >
-				<td>上架中</td>
-				</c:when>
-				 <c:otherwise> 
-				 <td>未上架</td>
-				 </c:otherwise>
-				</c:choose>
+				<td>
+				<c:if test="${productVO.pdStatus == 1}" var="上架中" scope="page">
+				上架中</c:if>
+				<c:if test="${productVO.pdStatus == 0}" var="上架中" scope="page">
+				未上架</c:if>
+				</td>
+<%-- 				<c:if test="${productVO.pdStatus == 0}" var="未上架" scope="page"/> --%>
+<%-- 				<td>value="${未上架}</td> --%>
 					
 				<c:set var="string1" value="${productVO.pdUpdate}"/>
 				<c:set var="string2" value="${fn:replace(string1, 

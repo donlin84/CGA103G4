@@ -47,7 +47,7 @@ public class PromotionsService {
 		dao.delete(pmid);
 	}
 
-	public PromotionsVO getOneMemberCoupon(Integer pmid) {
+	public PromotionsVO getOnePromotion(Integer pmid) {
 		return dao.findByPrimaryKey(pmid);
 	}
 

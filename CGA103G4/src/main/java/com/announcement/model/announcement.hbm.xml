@@ -4,22 +4,22 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.announcement.model.AnnouncementVO.java" table="announcement" >
-        
-        <id name="annid" column="annid">
-            <generator class="identity" />
-        </id>
-        
-        <property name="annContent" column="annContent" />
-        <property name="annPic" column="annPic" />
-        <property name="annStatus" column="annStatus" />
-        <property name="annUpdate" column="annUpdate" />
-        <property name="annTime" column="annTime" />
-        
-        <many-to-one name="empVO" class="com.dept.model.DeptVO" lazy="false">
-            <column name="empid" />
-        </many-to-one>
-        
-    </class>
+	<class name="com.announcement.model.AnnouncementVO" table="announcement">
+
+		<id name="annid" column="annid">
+			<generator class="identity" />
+		</id>
+
+		<many-to-one name="empVO" class="com.emp.model.EmpVO" lazy="false">
+			<column name="empid" />
+		</many-to-one>
+
+		<property name="annContent" column="annContent" />
+		<property name="annPic" column="annPic" />
+		<property name="annStatus" column="annStatus" />
+		<property name="annUpdate" column="annUpdate" />
+		<property name="annTime" column="annTime" />
+
+	</class>
 </hibernate-mapping>
 

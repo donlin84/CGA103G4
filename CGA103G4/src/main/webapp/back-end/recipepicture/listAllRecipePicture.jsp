@@ -77,13 +77,13 @@
 			<td>${recipePictureVO.reid}</td>
 			<td><img src="<%=request.getContextPath() %>/RecPicReader?rePicid=${recipePictureVO.rePicid}"></td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/recipepicture/recipePicture.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/recipepicture/recipePicture.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="­×§ï">
 			     <input type="hidden" name="rePicid"  value="${recipePictureVO.rePicid}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/recipepicture/recipePicture.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/recipepicture/recipePicture.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="§R°£">
 			     <input type="hidden" name="rePicid"  value="${recipePictureVO.rePicid}">
 			     <input type="hidden" name="action" value="delete"></FORM>
