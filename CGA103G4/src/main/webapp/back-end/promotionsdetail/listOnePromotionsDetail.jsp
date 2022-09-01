@@ -1,6 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.promotionsdetail.model.*"%>
+<%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
+<%
+PromotionsDetailVO promotionsDetailVO = (PromotionsDetailVO) request.getAttribute("promotionsDetailVO");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -10,7 +14,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 
-<title>優惠活動查詢首頁</title>
+<title>優惠券查詢首頁</title>
 
 <meta content="Admin Dashboard" name="description" />
 <meta content="Mannatthemes" name="author" />
@@ -43,75 +47,57 @@
 					<div class="page-title-box">
 						<div class="btn-group pull-right">
 							<ol class="breadcrumb hide-phone p-0 m-0">
-								<li class="breadcrumb-item"><a href="#">Zoter</a></li>
-								<li class="breadcrumb-item"><a href="#">Tables</a></li>
-								<li class="breadcrumb-item active">Editable</li>
+								<li class="breadcrumb-item active">優惠券單筆查詢</li>
+								<li class="breadcrumb-item"><a href="../discount-management/discount-management.jsp">優惠方案管理</a></li>
+								<li class="breadcrumb-item"><a href="../index-back.jsp">後台首頁</a></li>
 							</ol>
 						</div>
-						<h4 class="page-title">Editable</h4>
+						<h4 class="page-title">優惠券單筆查詢</h4>
 					</div>
 				</div>
 			</div>
 
-			<table id="table-1">
-				<tr>
-					<td><h3>優惠活動查詢</h3></td>
-				</tr>
-			</table>
 
-			<%-- 錯誤表列 --%>
-			<c:if test="${not empty errorMsgs}">
-				<font style="color: red">請修正以下錯誤:</font>
-				<ul>
-					<c:forEach var="message" items="${errorMsgs}">
-						<li style="color: red">${message}</li>
-					</c:forEach>
-				</ul>
-			</c:if>
-
-			<ul>
-				<li>
-					<FORM METHOD="post" ACTION="PromotionsServlet">
-						<b>依優惠活動編號搜尋:</b> <input type="text" name="pmid"> <input type="hidden" name="action"
-							value="getOne_For_Display"> <input type="submit" value="送出">
-					</FORM>
-				</li>
-
-				<li><a href='listAllPromotions.jsp'>優惠活動清單</a></li>
-
-				<jsp:useBean id="pmtSvc" scope="page" class="com.promotions.model.PromotionsService" />
-				<li>
-					<FORM METHOD="post" ACTION="PromotionsServlet">
-						<b>選擇優惠活動編號:</b> <select size="1" name="pmid">
-							<c:forEach var="promotionsVO" items="${pmtSvc.all}">
-								<option value="${promotionsVO.pmid}">${promotionsVO.pmid}
-							</c:forEach>
-						</select> <input type="hidden" name="action" value="getOne_For_Display"> <input type="submit" value="送出">
-					</FORM>
-				</li>
-
-				<li>
-					<FORM METHOD="post" ACTION="PromotionsServlet">
-						<b>選擇優惠活動名稱:</b> <select size="1" name="pmid">
-							<c:forEach var="promotionsVO" items="${pmtSvc.all}">
-								<option value="${promotionsVO.pmid}">${promotionsVO.pmName}
-							</c:forEach>
-						</select> <input type="hidden" name="action" value="getOne_For_Display"> <input type="submit" value="送出">
-					</FORM>
-				</li>
-			</ul>
-			<h3>新增活動</h3>
-
-			<ul>
-				<li><a href='addPromotions.jsp'>新增活動</a></li>
-			</ul>
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<h4 class="mt-0 header-title">優惠券單筆查詢</h4>
+							<table class="table" id="my-table">
+								<thead>
+									<tr>
+										<th>優惠券種類編號</th>
+										<th>優惠券名稱</th>
+										<th>優惠券折扣價格</th>
+										<th>起始時間</th>
+										<th>截止時間</th>
+										<th>優惠券狀態</th>
+										<th>優惠券圖片</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><%=promotionsDetailVO.getPmid()%></td>
+										<td><%=promotionsDetailVO.getPdid()%></td>
+										<td><%=promotionsDetailVO.getPmPdDiscountPrice()%></td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="continueToAdd" style="width: 100%; text-align: center;">
+								<a href="<%=request.getContextPath()%>/back-end/promotionsdetail/addPromotionsDetail.jsp"><input type="submit"
+									value="繼續新增"></a>
+							</div>
+						</div>
+					</div>
+					<!-- end col -->
+				</div>
+				<!-- end row -->
+			</div>
 
 		</div>
 		<!-- end container -->
 	</div>
 	<!-- end wrapper -->
-
-
 
 	<!-- Footer -->
 	<%@ include file="../tools/footer.jsp"%>
@@ -132,7 +118,5 @@
 	<script src="../assets/plugins/raphael/raphael-min.js"></script>
 	<script src="../assets/plugins/morris/morris.min.js"></script>
 	<script src="../assets/js/app.js"></script>
-
-
 </body>
 </html>

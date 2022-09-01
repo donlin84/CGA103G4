@@ -41,7 +41,7 @@ public class CouponTypeServlet extends HttpServlet {
 				errorMsgs.add("請輸入優惠券種類編號");
 			}
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/coupontype/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/discount-management/discount-management.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -52,7 +52,7 @@ public class CouponTypeServlet extends HttpServlet {
 				errorMsgs.add("活動優惠券種類編號格式不正確");
 			}
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/coupontype/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/discount-management/discount-management.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -65,7 +65,7 @@ public class CouponTypeServlet extends HttpServlet {
 				errorMsgs.add("查無資料");
 			}
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/coupontype/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/discount-management/discount-management.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -145,14 +145,22 @@ public class CouponTypeServlet extends HttpServlet {
 			Integer cpStatus = Integer.valueOf(req.getParameter("cpStatus").trim());
 
 			byte[] cpPic = null;
-
 			try {
+				
 				cpPic = req.getPart("cpPic").getInputStream().readAllBytes();
 			} catch (Exception e) {
 				errorMsgs.add("請上傳正確格式檔案");
 				System.out.println(cpPic);
 			}
 			
+			
+			CouponTypeService cpTpSvcOldCpPic = new CouponTypeService();
+			cpPic = req.getPart("cpPic").getInputStream().readAllBytes();
+			CouponTypeVO couponTypeOldCpPic = cpTpSvcOldCpPic.getOneCouponType(cpTpid);
+			if(cpPic.length == 0) {
+				cpPic = couponTypeOldCpPic.getCpPic();
+			}
+
 			CouponTypeVO couponTypeVO = new CouponTypeVO();
 			couponTypeVO.setCpTpid(cpTpid);
 			couponTypeVO.setCpName(cpName);

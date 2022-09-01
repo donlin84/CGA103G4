@@ -51,12 +51,12 @@ pageContext.setAttribute("list", list);
 					<div class="page-title-box">
 						<div class="btn-group pull-right">
 							<ol class="breadcrumb hide-phone p-0 m-0">
-								<li class="breadcrumb-item"><a href="#">Zoter</a></li>
-								<li class="breadcrumb-item"><a href="#">Tables</a></li>
-								<li class="breadcrumb-item active">Editable</li>
+								<li class="breadcrumb-item active">優惠券列表</li>
+								<li class="breadcrumb-item"><a href="../discount-management/discount-management.jsp">優惠方案管理</a></li>
+								<li class="breadcrumb-item"><a href="../index-back.jsp">後台首頁</a></li>
 							</ol>
 						</div>
-						<h4 class="page-title">Editable</h4>
+						<h4 class="page-title">優惠券列表</h4>
 					</div>
 				</div>
 			</div>
@@ -91,7 +91,7 @@ pageContext.setAttribute("list", list);
 											<td>${coupontypeVO.cpStart}</td>
 											<td>${coupontypeVO.cpEnd}</td>
 											<td>${coupontypeVO.cpStatus==1?"已上架":"下架"}</td>
-											<td><img src="<%=request.getContextPath()%>/ImagesServlet?cpTpid=${coupontypeVO.cpTpid}" width="150px;"></td>
+											<td><img src="<%=request.getContextPath()%>/CouponTypePic?cpTpid=${coupontypeVO.cpTpid}" width="150px;"></td>
 											<td>
 												<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/coupontype/CouponTypeServlet"
 													style="margin-bottom: 0px;">

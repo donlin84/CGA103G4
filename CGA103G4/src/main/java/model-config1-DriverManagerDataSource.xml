@@ -45,7 +45,7 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
         <property name="hibernateTemplate" ref="hibernateTemplate"/> 
     </bean>
 
-    <bean id="empDAO" class="com.emp.model.EmpDAO">
+    <bean id="empHibernateDAO" class="com.emp.model.EmpHibernateDAO">
         <property name="hibernateTemplate" ref="hibernateTemplate"/> 
     </bean>
 <!-- =================================================================================================================== -->

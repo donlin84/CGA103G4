@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.emp.model.EmpVO" table="employee" >
+        
+        <id name="empid" column="empid">
+            <generator class="identity" />
+        </id>
+        <property name="empName" column="empName" />
+        <property name="empPhone" column="empPhone" />
+        <property name="empPicture" column="empPicture" />
+        <property name="empAccount" column="empAccount" />
+        <property name="empPassword" column="empPassword" />
+        <property name="empLevel" column="empLevel" />
+        <property name="empStatus" column="empStatus" />
+        <property name="empHiredate" column="empHiredate" />
+        
+    </class>
+</hibernate-mapping>

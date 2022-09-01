@@ -57,7 +57,7 @@ public class PromotionsServlet extends HttpServlet {
 			/*************************** 2.開始查詢資料 *****************************************/
 			
 			PromotionsService pmtSvc = new PromotionsService();
-			PromotionsVO promotionsVO = pmtSvc.getOneMemberCoupon(pmid);
+			PromotionsVO promotionsVO = pmtSvc.getOnePromotion(pmid);
 			if (promotionsVO == null) {
 				errorMsgs.add("查無資料");
 			}
@@ -84,7 +84,7 @@ public class PromotionsServlet extends HttpServlet {
 			/*************************** 2.開始查詢資料 ****************************************/
 			
 			PromotionsService pmtSvc = new PromotionsService();
-			PromotionsVO promotionsVO = pmtSvc.getOneMemberCoupon(pmid);
+			PromotionsVO promotionsVO = pmtSvc.getOnePromotion(pmid);
 			
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			

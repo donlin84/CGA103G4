@@ -17,7 +17,7 @@ import com.announcement.model.AnnouncementVO;
 import com.emp.model.EmpService;
 import com.emp.model.EmpVO;
 
-@WebServlet("/back-end/announcement/AnnouncementServlet2")
+@WebServlet("/back-end/announcement/AnnouncementServlet")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class AnnouncementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -75,7 +75,7 @@ public class AnnouncementServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("announcementVO", announcementVO); // 資料庫取出的empVO物件,存入req
-				String url = "/back-end/announcement/listOneAnnouncement.jsp";
+				String url = "listOneAnnouncement.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
@@ -104,7 +104,7 @@ public class AnnouncementServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("announcementVO", announcementVO); // 資料庫取出的empVO物件,存入req
-				String url = "/back-end/announcement/updateAnnouncement.jsp";
+				String url = "updateAnnouncement.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交update_emp_input.jsp
 				successView.forward(req, res);
 
@@ -126,6 +126,8 @@ public class AnnouncementServlet extends HttpServlet {
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				Integer annid = new Integer(req.getParameter("annid").trim());
+				
+				Integer empid = new Integer(req.getParameter("empid").trim());
 
 				String annContent = req.getParameter("annContent");
 				if (annContent == null || annContent.trim().length() == 0) {
@@ -163,35 +165,32 @@ public class AnnouncementServlet extends HttpServlet {
 					errorMsgs.add("請輸入公告時間");
 				}
 
-				Integer empid = new Integer(req.getParameter("empid").trim());
-
 				AnnouncementVO announcementVO = new AnnouncementVO();
 				announcementVO.setAnnid(annid);
+				EmpVO empVO = new EmpVO();
+				empVO.setEmpid(empid);
+				announcementVO.setEmpVO(empVO);
 				announcementVO.setAnnContent(annContent);
 				announcementVO.setAnnPic(annPic);
 				announcementVO.setAnnStatus(annStatus);
 				announcementVO.setAnnUpdate(annUpdate);
 				announcementVO.setAnnTime(annTime);
-				EmpVO empVO = new EmpVO();
-				empVO.setEmpid(empid);
-				announcementVO.setEmpVO(empVO);
 
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("announcementVO", announcementVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/announcement/updateAnnouncement.jsp");
+							.getRequestDispatcher("updateAnnouncement.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
 				/*************************** 2.開始修改資料 *****************************************/
 				AnnouncementService annSvc = new AnnouncementService();
-				announcementVO = annSvc.updateAnnouncement(annid, annContent, annPic, annStatus, annUpdate, annTime,
-						empid);
+				announcementVO = annSvc.updateAnnouncement(annid, empid, annContent, annPic, annStatus, annUpdate,
+						annTime);
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				EmpService empSvc = new EmpService();
-				if (requestURL.equals("/back-end/announcement/listAnnouncementByEmpid.jsp")
-						|| requestURL.equals("/back-end/announcement/listAllAnnouncement.jsp"))
+				if (requestURL.equals("listAnnouncementByEmpid.jsp") || requestURL.equals("listAllAnnouncement.jsp"))
 					req.setAttribute("listAnnouncementByEmpid", empSvc.getAnnouncementByEmpid(empid)); // 資料庫取出的list物件,存入request
 
 				String url = requestURL;
@@ -202,7 +201,7 @@ public class AnnouncementServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/announcement/updateAnnouncement.jsp");
+						.getRequestDispatcher("updateAnnouncement.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -256,31 +255,31 @@ public class AnnouncementServlet extends HttpServlet {
 				Integer empid = new Integer(req.getParameter("empid").trim());
 
 				AnnouncementVO announcementVO = new AnnouncementVO();
-
+				
+				EmpVO empVO = new EmpVO();
+				empVO.setEmpid(empid);
+				announcementVO.setEmpVO(empVO);
 				announcementVO.setAnnContent(annContent);
 				announcementVO.setAnnPic(annPic);
 				announcementVO.setAnnStatus(annStatus);
 				announcementVO.setAnnUpdate(annUpdate);
 				announcementVO.setAnnTime(annTime);
-				EmpVO empVO = new EmpVO();
-				empVO.setEmpid(empid);
-				announcementVO.setEmpVO(empVO);
+
 
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("announcementVO", announcementVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/announcement/addAnnouncement.jsp");
+							.getRequestDispatcher("addAnnouncement.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
 				/*************************** 2.開始修改資料 *****************************************/
 				AnnouncementService annSvc = new AnnouncementService();
-				announcementVO = annSvc.addAnnouncement(annContent, annPic, annStatus, annUpdate, annTime, empid);
+				announcementVO = annSvc.addAnnouncement(empid, annContent, annPic, annStatus, annUpdate, annTime);
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				EmpService empSvc = new EmpService();
-				if (requestURL.equals("/back-end/announcement/listAnnouncementByEmpid.jsp")
-						|| requestURL.equals("/back-end/announcement/listAllAnnouncement.jsp"))
+				if (requestURL.equals("listAnnouncementByEmpid.jsp") || requestURL.equals("listAllAnnouncement.jsp"))
 					req.setAttribute("listAnnouncementByEmpid", empSvc.getAnnouncementByEmpid(empid)); // 資料庫取出的list物件,存入request
 
 				String url = requestURL;
@@ -290,7 +289,7 @@ public class AnnouncementServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/announcement/updateAnnouncement.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("addAnnouncement.jsp");
 				failureView.forward(req, res);
 			}
 
@@ -316,7 +315,8 @@ public class AnnouncementServlet extends HttpServlet {
 				EmpService empSvc = new EmpService();
 				if (requestURL.equals("/back-end/emp/listAnnouncementByEmp.jsp")
 						|| requestURL.equals("/emp/listAllEmp.jsp"))
-					req.setAttribute("listAnnouncementByEmp",empSvc.getAnnouncementByEmpid(announcementVO.getEmpVO().getEmpid())); // 資料庫取出的list物件,存入request
+					req.setAttribute("listAnnouncementByEmp",
+							empSvc.getAnnouncementByEmpid(announcementVO.getEmpVO().getEmpid())); // 資料庫取出的list物件,存入request
 
 				String url = requestURL;
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 刪除成功後,轉交回送出刪除的來源網頁

@@ -14,7 +14,8 @@ PromotionsVO promotionsVO = (PromotionsVO) request.getAttribute("promotionsVO");
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 
 <title>優惠活動新增</title>
 
@@ -22,10 +23,13 @@ PromotionsVO promotionsVO = (PromotionsVO) request.getAttribute("promotionsVO");
 <meta content="Mannatthemes" name="author" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <link rel="shortcut icon" href="../assets/images/favicon.ico">
-<link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
-<link href="../assets/plugins/fullcalendar/vanillaCalendar.css" rel="stylesheet" type="text/css" />
+<link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css"
+	rel="stylesheet">
+<link href="../assets/plugins/fullcalendar/vanillaCalendar.css"
+	rel="stylesheet" type="text/css" />
 <link href="../assets/plugins/morris/morris.css" rel="stylesheet">
-<link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css">
 <link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
 
@@ -49,12 +53,13 @@ PromotionsVO promotionsVO = (PromotionsVO) request.getAttribute("promotionsVO");
 					<div class="page-title-box">
 						<div class="btn-group pull-right">
 							<ol class="breadcrumb hide-phone p-0 m-0">
-								<li class="breadcrumb-item"><a href="#">Zoter</a></li>
-								<li class="breadcrumb-item"><a href="#">Tables</a></li>
-								<li class="breadcrumb-item active">Editable</li>
+								<li class="breadcrumb-item active">優惠活動新增</li>
+								<li class="breadcrumb-item"><a
+									href="../discount-management/discount-management.jsp">優惠方案管理</a></li>
+								<li class="breadcrumb-item"><a href="../index-back.jsp">後台首頁</a></li>
 							</ol>
 						</div>
-						<h4 class="page-title">Editable</h4>
+						<h4 class="page-title">優惠活動新增</h4>
 					</div>
 				</div>
 			</div>
@@ -78,33 +83,38 @@ PromotionsVO promotionsVO = (PromotionsVO) request.getAttribute("promotionsVO");
 									<tr>
 										<td>優惠活動名稱:</td>
 										<td><input type="TEXT" name="pmName" size="45"
-											value="<%=(promotionsVO == null) ? "活動名稱" : promotionsVO.getPmName()%>" /></td>
+											value="<%=(promotionsVO == null) ? "" : promotionsVO.getPmName()%>" placeholder="請輸入活動名稱"/></td>
 									</tr>
 									<tr>
 										<td>活動描述:</td>
 										<td><input type="TEXT" name="pmDescription" size="45"
-											value="<%=(promotionsVO == null) ? "活動描述" : promotionsVO.getPmDescription()%>" /></td>
+											value="<%=(promotionsVO == null) ? "" : promotionsVO.getPmDescription()%>" placeholder="請輸入活動描述"/></td>
 									</tr>
 									<tr>
 										<td>折扣幅度:</td>
 										<td><input type="TEXT" name="pmDiscount" size="45"
-											value="<%=(promotionsVO == null) ? "0.00" : promotionsVO.getPmDiscount()%>" /></td>
+											value="<%=(promotionsVO == null) ? "0.00" : promotionsVO.getPmDiscount()%>" placeholder="請輸入折扣金額" /></td>
 									</tr>
 									<tr>
 										<td>起始時間:</td>
-										<td><input name="pmStart" id="f_date1" type="text" autocomplete="off"></td>
+										<td><input name="pmStart" id="f_date1" type="text"
+											autocomplete="off"></td>
 									</tr>
 									<tr>
 										<td>截止時間:</td>
-										<td><input name="pmEnd" id="f_date2" type="text" autocomplete="off"></td>
+										<td><input name="pmEnd" id="f_date2" type="text"
+											autocomplete="off"></td>
 									</tr>
 									<tr>
 										<td>活動狀態:</td>
-										<td><input type="TEXT" name="pmStatus" size="45"
-											value="<%=(promotionsVO == null) ? "1" : promotionsVO.getPmStatus()%>" /></td>
+										<td><select name="pmStatus">
+												<option value="1">上架</option>
+												<option value="0">下架</option>
+										</select></td>
 									</tr>
 								</table>
-								<br> <input type="hidden" name="action" value="insert"> <input type="submit" value="送出新增">
+								<br> <input type="hidden" name="action" value="insert">
+								<input type="submit" value="送出新增">
 							</FORM>
 						</div>
 					</div>
@@ -138,9 +148,12 @@ try {
 	pmEnd = new java.sql.Date(System.currentTimeMillis());
 }
 %>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.datetimepicker.css" />
+<script
+	src="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.js"></script>
+<script
+	src="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
@@ -238,8 +251,10 @@ $('#f_date2').datetimepicker({
 <script src="../assets/js/modernizr.min.js"></script>
 <script src="../assets/js/waves.js"></script>
 <script src="../assets/js/jquery.nicescroll.js"></script>
-<script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-<script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script
+	src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+<script
+	src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="../assets/plugins/skycons/skycons.min.js"></script>
 <script src="../assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
 <script src="../assets/plugins/tiny-editable/numeric-input-example.js"></script>

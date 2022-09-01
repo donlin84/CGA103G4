@@ -149,13 +149,7 @@
 						<li class="has-submenu "><a href="#"><i class="mdi mdi-shopping"></i>商城管理</a>
 
 							<ul class="submenu">
-								<li class="has-submenu"><a href="discount-management/discount-management.jsp">優惠方案管理</a>
-									<ul class="submenu">
-										<li><a href="discount-management/discount-management.jsp" data-target="nav1" class="nav">行銷紀錄</a></li>
-										<li><a href="discount-management/discount-management.jsp" data-target="nav2" class="nav">促銷安排</a></li>
-										<li><a href="discount-management/discount-management.jsp" data-target="nav3" class="nav">修改/取消活動</a></li>
-										<li><a href="discount-management/discount-management.jsp" data-target="nav4" class="nav">發放優惠券</a></li>
-									</ul></li>
+								<li class="has-submenu"><a href="discount-management/discount-management.jsp">優惠方案管理</a></li>
 								<li class="has-submenu"><a href="#">商品管理</a>
 									<ul class="submenu">
 										<li><a href="#">上架/下架</a></li>
@@ -254,7 +248,7 @@
 					</div>
 				</div>
 			</div>
-
+			
 		</div>
 		<!-- end container -->
 	</div>

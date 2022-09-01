@@ -6,6 +6,10 @@ public class PromotionsDetailService {
 	
 	private PromotionsDetailDAO_interface dao;
 	
+	public PromotionsDetailService() {
+		dao = new PromotionsDetailDAO();
+	}
+	
 	public PromotionsDetailVO addPromotionsDetail(Integer pmid, Integer pdid, Integer pmPdDiscountPrice) {
 		
 		PromotionsDetailVO promotionsDetailVO = new PromotionsDetailVO();
@@ -30,8 +34,8 @@ public class PromotionsDetailService {
 		return promotionsDetailVO;
 	}
 	
-	public void deletePromotionsDetail(Integer pmid,Integer pdid) {
-		dao.delete(pmid,pdid);
+	public PromotionsDetailVO getOnePromotionDetail(Integer pmid,Integer pdid) {
+		return dao.findByPrimaryKey(pmid,pdid);
 	}
 
 	public List<PromotionsDetailVO> getParticipatePromotionsProduct(Integer pmid) {
