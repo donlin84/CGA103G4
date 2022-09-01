@@ -97,4 +97,6 @@ public class EmpVO implements java.io.Serializable {
 	public void setAnnoucements(Set<AnnouncementVO> annoucements) {
 		this.annoucements = annoucements;
 	}
+	
+
 }

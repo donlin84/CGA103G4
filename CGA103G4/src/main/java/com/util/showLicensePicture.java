@@ -66,7 +66,7 @@ public class showLicensePicture extends HttpServlet {
 //			System.out.println("aaaaaa");
 
 			Context ctx = new javax.naming.InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/David");
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Cga103G4");
 			con = ds.getConnection();
 	
 		}  	catch (NamingException e) {
