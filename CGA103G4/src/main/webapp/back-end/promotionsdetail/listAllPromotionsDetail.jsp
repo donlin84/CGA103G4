@@ -88,19 +88,21 @@ ProductVO productVO = (ProductVO) request.getAttribute("productVO");
 									<tbody>
 										<tr>
 											<td>${promotionsDetailVO.promotionsVO.pmName}</td>
-											<td>${promotionsDetailVO.ProductVO.pdName}</td>
+											<td>${promotionsDetailVO.productVO.pdid}</td>
 											<td>${promotionsDetailVO.pmPdDiscountPrice}</td>
 											<td>
-												<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/promotionsdetail/addPromotionsDetail.jsp"
+												<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/promotionsdetail/PromotionsDetailServlet"
 													style="margin-bottom: 0px;">
-													<input type="submit" value="修改"> <input type="hidden" name="cpTpid" value="${coupontypeVO.cpTpid}">
+													<input type="submit" value="修改"> <input type="hidden" name="pmid" value="${promotionsDetailVO.pmid}">
+													<input type="hidden" value="修改"> <input type="hidden" name="pdid" value="${promotionsDetailVO.pdid}">
 													<input type="hidden" name="action" value="getOne_For_Update">
 												</FORM>
 											</td>
 											<td>
-												<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/promotionsdetail/addPromotionsDetail.jsp"
+												<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/promotionsdetail/PromotionsDetailServlet"
 													style="margin-bottom: 0px;">
-													<input type="submit" value="刪除"> <input type="hidden" name="cpTpid" value="${coupontypeVO.cpTpid}">
+													<input type="submit" value="刪除"> <input type="hidden" name="pmid" value="${promotionsDetailVO.pmid}">
+													<input type="hidden" value="刪除"> <input type="hidden" name="pdid" value="${promotionsDetailVO.pdid}">
 													<input type="hidden" name="action" value="delete">
 												</FORM>
 											</td>

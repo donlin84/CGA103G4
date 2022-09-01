@@ -100,46 +100,7 @@
   
   
   <!--   =======================傅勝宏========================== -->
-  <servlet>
-		<servlet-name>PromotionsServlet</servlet-name>
-		<servlet-class>com.promotions.controller.PromotionsServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>PromotionsServlet</servlet-name>
-		<url-pattern>/back-end/promotions/PromotionsServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>CouponTypeServlet</servlet-name>
-		<servlet-class>com.coupontype.controller.CouponTypeServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>CouponTypeServlet</servlet-name>
-		<url-pattern>/back-end/coupontype/CouponTypeServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>"ImagesServlet"</servlet-name>
-		<servlet-class>com.images.ImagesServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>"ImagesServlet"</servlet-name>
-		<url-pattern>/ImagesServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>"LoginHandler"</servlet-name>
-		<servlet-class>com.login.LoginHandler</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>"LoginHandler"</servlet-name>
-		<url-pattern>/login/LoginHandler</url-pattern>
-	</servlet-mapping>
-
-<!-- 	<servlet-mapping> -->
-<!-- 		<servlet-name>MemberServlet</servlet-name> -->
-<!-- 		<url-pattern>/back-end/member/MemberServlet</url-pattern> -->
-<!-- 	</servlet-mapping> -->
+ 
 <!--    =======================傅勝宏========================== --> 
   
 <!--   =======================張正弘========================== -->
