@@ -12,7 +12,7 @@ public class ProductsortJDBCDAO implements ProductsortDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei";
 	String userid = "root";
-	String passwd = "tn00349903";
+	String passwd = "cga103g4";
 	
 	private static final String INSERT_STMT = 
 	 "INSERT INTO Productsort (pdsName) VALUES (?)";
