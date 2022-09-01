@@ -17,4 +17,7 @@ public interface EmpDAO_interface {
 	public EmpVO findLatestId();
 
 	public Set<AnnouncementVO> getAnnouncementByEmpid(Integer annid);
+	
+	//後台登入
+	public EmpVO get_one_account(String empAccount);
 }

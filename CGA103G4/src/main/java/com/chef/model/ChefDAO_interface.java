@@ -7,4 +7,7 @@ public interface ChefDAO_interface {
      public void update(ChefVO chefVO);
      public ChefVO findByPrimaryKey(Integer chefid);
      public List<ChefVO> getAll();
+     
+     //後台登入
+     public ChefVO get_one_account(String chefAccount);
 }

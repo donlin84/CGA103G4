@@ -22,7 +22,8 @@ public class EmpDAO implements EmpDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT * FROM EMPLOYEE where empid = ?;";
 	private static final String UPDATE = "UPDATE EMPLOYEE set empName=?, empPhone=?, empPicture=?, empPassword=?, empLevel=?, empStatus=?, empHiredate=? where empid = ?;";
 	private static final String GET_LATEST = "SELECT empid FROM EMPLOYEE ORDER BY empid DESC LIMIT 0,1";
-
+	//後台登入
+	private static final String GET_ONE_ACCOUNT = "select * from employee where BINARY empAccount = ?";
 	// 連線池
 	private static DataSource ds = null;
 	static {
@@ -301,5 +302,66 @@ public class EmpDAO implements EmpDAO_interface {
 	public Set<AnnouncementVO> getAnnouncementByEmpid(Integer empid) {
 		Set<AnnouncementVO> set = findByPrimaryKey(empid).getAnnoucements();
 		return set;
+	}
+
+	@Override
+	public EmpVO get_one_account(String empAccount) {
+		
+		EmpVO empVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_ACCOUNT);
+
+			pstmt.setString(1, empAccount);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVo Domain objects
+				empVO = new EmpVO();
+				empVO.setEmpid(rs.getInt("empid"));
+				empVO.setEmpName(rs.getString("empName"));
+				empVO.setEmpPhone(rs.getString("empPhone"));
+				empVO.setEmpPicture(rs.getBytes("empPicture"));
+				empVO.setEmpAccount(rs.getString("empAccount"));
+				empVO.setEmpPassword(rs.getString("empPassword"));
+				empVO.setEmpLevel(rs.getInt("empLevel"));
+				empVO.setEmpStatus(rs.getInt("empStatus"));
+				empVO.setEmpHiredate(rs.getDate("empHiredate"));
+			}
+
+			// Handle any driver errors
+		} catch (SQLException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return empVO;
 	}
 }

@@ -1,12 +1,12 @@
 package com.chef.model;
 
-<<<<<<< HEAD
+
 import static com.util.Common_12.PASSWORD;
 import static com.util.Common_12.URL;
 import static com.util.Common_12.USER;
-=======
+
 import static com.util.common_hung.*;
->>>>>>> refs/remotes/origin/sosohung
+
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -28,8 +28,11 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 	private static final String UPDATE = "UPDATE Chef set chefName=?, chefNickname=?, chefAccount=?, chefPassword=?,  chefStatus=?, "
 			+ "chefPrice=?, license=?, idCard=?, idCardBack=?, chefPhoto=?,  chefIntroduction=? " 
 			+ "where chefid = ?";
+	//後台登入
+	private static final String GET_ONE_ACCOUNT ="select * from chef where BINARY chefAccount = ?";
 
-
+	
+	
 	@Override
 	public void insert(ChefVO chefVO) {
 		Connection con = null;
@@ -260,6 +263,72 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 		fis.close();
 		return buffer;
 	}
+	
+	//後台登入
+	@Override
+	public ChefVO get_one_account(String chefAccount) {
+		ChefVO chefVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei", "root", "Alan0622");
+			pstmt = conn.prepareStatement(GET_ONE_ACCOUNT);
+			pstmt.setString(1, chefAccount);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				chefVO = new ChefVO();
+				chefVO.setChefid(rs.getInt("chefid"));
+				chefVO.setChefName(rs.getString("chefName"));
+				chefVO.setChefNickname(rs.getString("chefNickname"));
+				chefVO.setChefAccount(rs.getString("chefAccount"));
+				chefVO.setChefPassword(rs.getString("chefPassword"));
+				chefVO.setChefStatus(rs.getInt("chefStatus"));
+				chefVO.setChefPrice(rs.getInt("chefPrice"));
+				chefVO.setSchDate(rs.getString("schDate"));
+				chefVO.setReserve(rs.getInt("reserve"));
+				chefVO.setCom(rs.getInt("com"));
+				chefVO.setGomg(rs.getInt("gomg"));
+				chefVO.setLicense(rs.getBytes("license"));
+				chefVO.setIdCard(rs.getBytes("idCard"));
+				chefVO.setIdCardBack(rs.getBytes("idCardBack"));
+				chefVO.setChefPhoto(rs.getBytes("chefPhoto"));
+				chefVO.setChefIntroduction(rs.getString("chefIntroduction"));
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return chefVO;
+	}
 
 	public static void main(String[] args) throws IOException {
 		ChefJDBCDAO dao = new ChefJDBCDAO();
@@ -306,7 +375,49 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 //		dao.update(chefVO2);
 
 		// 查詢
-		ChefVO chefVO3 = dao.findByPrimaryKey(301);
+//		ChefVO chefVO3 = dao.findByPrimaryKey(301);
+//		System.out.print(chefVO3.getChefid() + ",");
+//		System.out.print(chefVO3.getChefName() + ",");
+//		System.out.print(chefVO3.getChefNickname() + ",");
+//		System.out.print(chefVO3.getChefAccount() + ",");
+//		System.out.print(chefVO3.getChefPassword() + ",");
+//		System.out.print(chefVO3.getChefStatus() + ",");
+//		System.out.print(chefVO3.getChefPrice() + ",");
+//		System.out.print(chefVO3.getSchDate() + ",");
+//		System.out.print(chefVO3.getReserve() + ",");
+//		System.out.print(chefVO3.getCom() + ",");
+//		System.out.print(chefVO3.getGomg() + ",");
+//		System.out.print(chefVO3.getLicense() + ",");
+//		System.out.print(chefVO3.getIdCard() + ",");
+//		System.out.print(chefVO3.getIdCardBack() + ",");
+//		System.out.print(chefVO3.getChefPhoto() + ",");
+//		System.out.println(chefVO3.getChefIntroduction());
+//		System.out.println("---------------------");
+
+		// 查詢
+//		List<ChefVO> list = dao.getAll();
+//		for (ChefVO aChef : list) {
+//			System.out.print(aChef.getChefid() + ",");
+//			System.out.print(aChef.getChefName() + ",");
+//			System.out.print(aChef.getChefNickname() + ",");
+//			System.out.print(aChef.getChefAccount() + ",");
+//			System.out.print(aChef.getChefPassword() + ",");
+//			System.out.print(aChef.getChefStatus() + ",");
+//			System.out.print(aChef.getChefPrice() + ",");
+//			System.out.print(aChef.getSchDate() + ",");
+//			System.out.print(aChef.getReserve() + ",");
+//			System.out.print(aChef.getCom() + ",");
+//			System.out.print(aChef.getGomg() + ",");
+//			System.out.print(aChef.getLicense() + ",");
+//			System.out.print(aChef.getIdCard() + ",");
+//			System.out.print(aChef.getIdCardBack() + ",");
+//			System.out.print(aChef.getChefPhoto() + ",");
+//			System.out.print(aChef.getChefIntroduction());
+//			System.out.println();
+//		}
+		
+		//後台登入測試
+		ChefVO chefVO3 = dao.get_one_account("chef1");
 		System.out.print(chefVO3.getChefid() + ",");
 		System.out.print(chefVO3.getChefName() + ",");
 		System.out.print(chefVO3.getChefNickname() + ",");
@@ -324,27 +435,6 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 		System.out.print(chefVO3.getChefPhoto() + ",");
 		System.out.println(chefVO3.getChefIntroduction());
 		System.out.println("---------------------");
-
-		// 查詢
-		List<ChefVO> list = dao.getAll();
-		for (ChefVO aChef : list) {
-			System.out.print(aChef.getChefid() + ",");
-			System.out.print(aChef.getChefName() + ",");
-			System.out.print(aChef.getChefNickname() + ",");
-			System.out.print(aChef.getChefAccount() + ",");
-			System.out.print(aChef.getChefPassword() + ",");
-			System.out.print(aChef.getChefStatus() + ",");
-			System.out.print(aChef.getChefPrice() + ",");
-			System.out.print(aChef.getSchDate() + ",");
-			System.out.print(aChef.getReserve() + ",");
-			System.out.print(aChef.getCom() + ",");
-			System.out.print(aChef.getGomg() + ",");
-			System.out.print(aChef.getLicense() + ",");
-			System.out.print(aChef.getIdCard() + ",");
-			System.out.print(aChef.getIdCardBack() + ",");
-			System.out.print(aChef.getChefPhoto() + ",");
-			System.out.print(aChef.getChefIntroduction());
-			System.out.println();
-		}
 	}
+
 }

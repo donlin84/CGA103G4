@@ -141,7 +141,7 @@ public class ClassIfmServlet extends HttpServlet {
 			}
 			String clafintime = clafintime_old.replace(" ", "T");
 			
-			Integer clapeople = Integer.valueOf(3);	//抓報名表的人數 不會顯示在新增表上
+			Integer clapeople = Integer.valueOf(3);	//抓報名表的人數 不會顯示在新增表上 要拿掉
 			
 			Part part1 = req.getPart("clapic1");
 			InputStream in1 = part1.getInputStream();
@@ -228,7 +228,7 @@ public class ClassIfmServlet extends HttpServlet {
 			classifmVO.setClaPrice(claprice);
 			classifmVO.setClaPeopleMax(clapeoplemax);
 			classifmVO.setClaPeopleMin(clapeoplemin);
-			classifmVO.setClaPeople(clapeople);
+			classifmVO.setClaPeople(clapeople);//要拿掉
 			classifmVO.setClaStatus(clastatus);
 			classifmVO.setClaStrTime(LocalDateTime.parse(clastrtime));
 			classifmVO.setClaFinTime(LocalDateTime.parse(clafintime));

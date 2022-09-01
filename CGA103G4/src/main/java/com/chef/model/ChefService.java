@@ -62,4 +62,8 @@ public class ChefService {
 //		System.out.println("testAll");
 		return dao.getAll();
 	}
+	//後台登入
+	public ChefVO getoneaccount(String chefAccount) {
+		return dao.get_one_account(chefAccount);
+	}
 }
