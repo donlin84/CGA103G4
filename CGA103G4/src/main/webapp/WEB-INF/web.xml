@@ -10,6 +10,7 @@
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
   </resource-ref>
+  <!--   =======================林俊宏========================== -->
   <servlet>
     <servlet-name>EmpServlet</servlet-name>
     <servlet-class>com.emp.controller.EmpServlet</servlet-class>
@@ -18,6 +19,9 @@
     <servlet-name>EmpServlet</servlet-name>
     <url-pattern>/back-end/emp/emp.do</url-pattern>
   </servlet-mapping>
+  <!--   =======================林俊宏========================== -->
+  
+ <!--   =======================鄭亦翔========================== -->
     <servlet>
     <servlet-name>OrdersServlet</servlet-name>
     <servlet-class>com.orders.controller.OrdersServlet</servlet-class>
@@ -34,7 +38,9 @@
     <servlet-name>RecipePictureServlet</servlet-name>
     <url-pattern>/recipepicture/recipePicture.do</url-pattern>
   </servlet-mapping>
+<!--   =======================鄭亦翔========================== -->
   
+<!--   =======================楊成昱========================== -->
   <servlet>
     <servlet-name>TeacherServlet</servlet-name>
     <servlet-class>com.teacher.controller.TeacherServlet</servlet-class>
@@ -59,8 +65,9 @@
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
   </resource-ref>
- 
- <!--   ========== pdservlet============ -->
+<!--   =======================楊成昱========================== -->
+
+<!--   =======================陳冠銓========================== -->
   
   <servlet>
     <servlet-name>ProductServlet</servlet-name>
@@ -89,8 +96,10 @@
     <url-pattern>/back-end/product/Productpic.do</url-pattern>
   </servlet-mapping>  
   
-  <!--   ========== pdservlet============ -->
+  <!--   =======================陳冠銓========================== -->
   
+  
+  <!--   =======================傅勝宏========================== -->
   <servlet>
 		<servlet-name>PromotionsServlet</servlet-name>
 		<servlet-class>com.promotions.controller.PromotionsServlet</servlet-class>
@@ -135,6 +144,100 @@
 		<servlet-name>MemberServlet</servlet-name>
 		<url-pattern>/back-end/member/MemberServlet</url-pattern>
 	</servlet-mapping>
+<!--   =======================傅勝宏========================== -->
+  
+<!--   =======================張正弘========================== -->
+  <servlet>
+		<servlet-name>MemberServlet</servlet-name>
+		<servlet-class>com.member.controller.MemberServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberServlet</servlet-name>
+		<url-pattern>/back-end/member/member.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ChefServlet</servlet-name>
+		<servlet-class>com.chef.controller.ChefServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChefServlet</servlet-name>
+		<url-pattern>/back-end/chef/chef.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ChefSkillsTypeServlet</servlet-name>
+		<servlet-class>com.chefskillstype.controller.ChefSkillsTypeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChefSkillsTypeServlet</servlet-name>
+		<url-pattern>/back-end/chefSkillsType/chefSkillsType.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CreditCardInformationServlet</servlet-name>
+		<servlet-class>com.creditcardinformation.controller.CreditCardInformationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreditCardInformationServlet</servlet-name>
+		<url-pattern>/back-end/creditCardInformation/creditCardInformation.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ChefSkillsServlet</servlet-name>
+		<servlet-class>com.chefskills.controller.ChefSkillsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChefSkillsServlet</servlet-name>
+		<url-pattern>/back-end/chefSkills/chefSkills.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ChefSubscriptionServlet</servlet-name>
+		<servlet-class>com.chefsubscription.controller.ChefSubscriptionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChefSubscriptionServlet</servlet-name>
+		<url-pattern>/back-end/chefSubscription/chefSubscription.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>showLicensePicture</servlet-name>
+		<servlet-class>com.util.showLicensePicture</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showLicensePicture</servlet-name>
+		<url-pattern>/showLicensePicture</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>showIdCardPicture</servlet-name>
+		<servlet-class>com.util.showIdCardPicture</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showIdCardPicture</servlet-name>
+		<url-pattern>/showIdCardPicture</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>showIdCardBackPicture</servlet-name>
+		<servlet-class>com.util.showIdCardBackPicture</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showIdCardBackPicture</servlet-name>
+		<url-pattern>/showIdCardBackPicture</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>showChefPhotoPicture</servlet-name>
+		<servlet-class>com.util.showChefPhotoPicture</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showChefPhotoPicture</servlet-name>
+		<url-pattern>/showChefPhotoPicture</url-pattern>
+	</servlet-mapping>
+<!--   =======================張正弘========================== -->
+
 
 	<!-- 以下為Filter的註冊 -->
 	<filter>
