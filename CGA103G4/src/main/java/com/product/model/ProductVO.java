@@ -18,6 +18,7 @@ public class ProductVO implements java.io.Serializable {
 	private LocalDateTime pdUpdate;
 	
 	
+	
 	public Integer getPdid() {
 		return pdid;
 	}
@@ -73,7 +74,7 @@ public class ProductVO implements java.io.Serializable {
 	return productsortVO;
 	}
 
-
+	
 	
 
 }

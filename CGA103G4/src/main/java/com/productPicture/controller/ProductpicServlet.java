@@ -22,6 +22,9 @@ import javax.sql.DataSource;
 
 public class ProductpicServlet extends HttpServlet {
 	
+	
+	
+	private static final long serialVersionUID = 1L;
 	Connection con;
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -53,7 +56,7 @@ public class ProductpicServlet extends HttpServlet {
 	public void init() throws ServletException {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/seefooddata?serverTimezone=Asia/Taipei", "root", "tn00349903");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei", "root", "tn00349903");
 		} catch (ClassNotFoundException e) {
 			throw new UnavailableException("Couldn't load JdbcOdbcDriver");
 		} catch (SQLException e) {

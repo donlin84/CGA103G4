@@ -9,7 +9,7 @@ import java.util.*;
 
 public class ReceiptInformationJDBCDAO implements ReceiptInformationDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/seefooddata?serverTimezone=Asia/Taipei";
+	String url = "jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei";
 	String userid = "root";
 	String passwd = "tn00349903";
 
@@ -298,31 +298,31 @@ public class ReceiptInformationJDBCDAO implements ReceiptInformationDAO_interfac
 
 		ReceiptInformationJDBCDAO dao = new ReceiptInformationJDBCDAO();
 
-		// ·s¼W
+		// ï¿½sï¿½W
 		ReceiptInformationVO receiptinformationVO1 = new ReceiptInformationVO();
 		receiptinformationVO1.setMemid(1);
 		receiptinformationVO1.setRcpName("Michael");
-		receiptinformationVO1.setRcpCvs("¥xªF¥«¥«¬F¸ô¤¤¤sµó¤@¬q¤¤¤sªù¥«");
-		receiptinformationVO1.setRcpAddress("ªá½¬¥«©M¥­¶m");
+		receiptinformationVO1.setRcpCvs("ï¿½xï¿½Fï¿½ï¿½ï¿½ï¿½ï¿½Fï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½@ï¿½qï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½");
+		receiptinformationVO1.setRcpAddress("ï¿½á½¬ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½m");
 		receiptinformationVO1.setRcpPhone("0987878877");
 		
 		dao.insert(receiptinformationVO1);
 
-		// ­×§ï
+		// ï¿½×§ï¿½
 		ReceiptInformationVO receiptinformationVO2 = new ReceiptInformationVO();
 		receiptinformationVO2.setRcpid(1);
 		receiptinformationVO2.setMemid(4);
-		receiptinformationVO2.setRcpName("«°ªZ");
-		receiptinformationVO2.setRcpCvs("¥x¥_¥«¤hªL°Ï©¾¸Û¸ô©¾¸Ûªù¥«");
-		receiptinformationVO2.setRcpAddress("·s¥_¥«·s²ø°Ï·s®õ¸ô¤@¬q");
+		receiptinformationVO2.setRcpName("ï¿½ï¿½ï¿½Z");
+		receiptinformationVO2.setRcpCvs("ï¿½xï¿½_ï¿½ï¿½ï¿½hï¿½Lï¿½Ï©ï¿½ï¿½Û¸ï¿½ï¿½ï¿½ï¿½Ûªï¿½ï¿½ï¿½");
+		receiptinformationVO2.setRcpAddress("ï¿½sï¿½_ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½Ï·sï¿½ï¿½ï¿½ï¿½ï¿½@ï¿½q");
 		receiptinformationVO2.setRcpPhone("0987878877");
 		
 		dao.update(receiptinformationVO2);
 
-		// §R°£
+		// ï¿½Rï¿½ï¿½
 //		dao.delete(1);
 
-		// ¬d¸ß
+		// ï¿½dï¿½ï¿½
 		ReceiptInformationVO receiptinformationVO3 = dao.findByPrimaryKey(2);
 		System.out.print(receiptinformationVO3.getRcpid() + ",");
 		System.out.print(receiptinformationVO3.getMemid() + ",");
@@ -333,7 +333,7 @@ public class ReceiptInformationJDBCDAO implements ReceiptInformationDAO_interfac
 		
 		System.out.println("---------------------");
 
-		// ¬d¸ß©Ò¦³
+		// ï¿½dï¿½ß©Ò¦ï¿½
 		List<ReceiptInformationVO> list = dao.getAll();
 		for (ReceiptInformationVO aReceiptinformation : list) {
 			System.out.print(aReceiptinformation.getRcpid() + ",");
