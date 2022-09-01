@@ -8,7 +8,8 @@
 
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 
 <title>優惠方案管理</title>
 
@@ -16,13 +17,17 @@
 <meta content="Mannatthemes" name="author" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <link rel="shortcut icon" href="../assets/images/favicon.ico">
-<link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
-<link href="../assets/plugins/fullcalendar/vanillaCalendar.css" rel="stylesheet" type="text/css" />
+<link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css"
+	rel="stylesheet">
+<link href="../assets/plugins/fullcalendar/vanillaCalendar.css"
+	rel="stylesheet" type="text/css" />
 <link href="../assets/plugins/morris/morris.css" rel="stylesheet">
-<link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css">
 <link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
-<link href="../css/discount-management/discount-management.css" rel="stylesheet" type="text/css">
+<link href="../css/discount-management/discount-management.css"
+	rel="stylesheet" type="text/css">
 
 </head>
 
@@ -43,25 +48,29 @@
 					<!-- Text Logo -->
 					<!--<a href="index.html" class="logo">-->
 					<!-- Image Logo -->
-					<a href="../index-back.jsp" class="logo"><img src="../assets/images/logo.png" alt="" class="logo-large">
-					</a>
+					<a href="../index-back.jsp" class="logo"><img
+						src="../assets/images/logo.png" alt="" class="logo-large"> </a>
 				</div>
 				<!-- End Logo container-->
 				<div class="menu-extras topbar-custom">
 					<ul class="list-inline float-right mb-0">
 						<li class="list-inline-item hide-phone app-search">
 							<form role="search" class="">
-								<input type="text" placeholder="Search..." class="form-control"><a href=""><i class="fa fa-search"></i></a>
+								<input type="text" placeholder="Search..." class="form-control"><a
+									href=""><i class="fa fa-search"></i></a>
 							</form>
 						</li>
 
 						<!-- notification-->
 
 						<li class="list-inline-item dropdown notification-list"><a
-							class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
-							aria-haspopup="false" aria-expanded="true"><i class="ti-bell noti-icon"></i><span
+							class="nav-link dropdown-toggle arrow-none waves-effect"
+							data-toggle="dropdown" href="#" role="button"
+							aria-haspopup="false" aria-expanded="true"><i
+								class="ti-bell noti-icon"></i><span
 								class="badge badge-danger noti-icon-badge">5</span></a>
-							<div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg"
+							<div
+								class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg"
 								style="position: absolute; transform: translate3d(-222px, 70px, 0px); top: 0px; left: 0px; will-change: transform;">
 								<!-- item-->
 
@@ -106,8 +115,10 @@
 
 						<!-- User-->
 						<li class="list-inline-item dropdown notification-list"><a
-							class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
-							aria-haspopup="false" aria-expanded="false"> <img src="../assets/images/users/avatar-1.jpg" alt="user"
+							class="nav-link dropdown-toggle arrow-none waves-effect nav-user"
+							data-toggle="dropdown" href="#" role="button"
+							aria-haspopup="false" aria-expanded="false"> <img
+								src="../assets/images/users/avatar-1.jpg" alt="user"
 								class="rounded-circle">
 						</a>
 
@@ -119,11 +130,13 @@
 									</h5>
 								</div>
 
-								<a class="dropdown-item" href="#"> <i class="mdi mdi-settings m-r-5 text-muted"></i>設定
+								<a class="dropdown-item" href="#"> <i
+									class="mdi mdi-settings m-r-5 text-muted"></i>設定
 								</a>
 
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#"> <i class="mdi mdi-logout m-r-5 text-muted"></i>登出
+								<a class="dropdown-item" href="#"> <i
+									class="mdi mdi-logout m-r-5 text-muted"></i>登出
 								</a>
 
 							</div></li>
@@ -148,87 +161,44 @@
 					<!-- Navigation Menu-->
 					<ul class="navigation-menu text-center">
 
-						<li class="has-submenu "><a href="#"><i class="mdi mdi-shopping"></i>商城管理</a>
+						<li class="has-submenu "><a href="#"><i
+								class="mdi mdi-shopping"></i>商城管理</a>
 
 							<ul class="submenu">
-								<li class="has-submenu"><a href="discount-management.jsp" data-target="nav0" class="nav">優惠方案管理</a>
-									<ul class="submenu">
-										<li><a href="#" data-target="nav1" class="nav">行銷紀錄</a></li>
-										<li><a href="#" data-target="nav2" class="nav">促銷安排</a></li>
-										<li><a href="#" data-target="nav3" class="nav">修改/取消活動</a></li>
-										<li><a href="#" data-target="nav4" class="nav">發放優惠券</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">商品管理</a>
-									<ul class="submenu">
-										<li><a href="#">上架/下架</a></li>
-										<li><a href="#">修改定價</a></li>
-									</ul></li>
+								<li><a href="discount-management.jsp" data-target="nav0" class="nav">優惠方案管理</a>
+								<li><a href="#">商品管理</a></li>
 								<li><a href="#">訂單管理</a></li>
 							</ul>
-						<li class="has-submenu "><a href="#"><i class="mdi ion-ios7-people"></i>課程管理</a>
+						<li class="has-submenu "><a href="#"><i
+								class="mdi ion-ios7-people"></i>課程管理</a>
 
 							<ul class="submenu">
-								<li class="has-submenu"><a href="#">課程</a>
-									<ul class="submenu">
-										<li><a href="#">上架/下架</a></li>
-										<li><a href="#">修改課程</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">課程標籤</a>
-									<ul class="submenu">
-										<li><a href="#">上架/下架</a></li>
-										<li><a href="#">修改標籤</a></li>
-									</ul></li>
+								<li><a href="#">課程</a></li>
+								<li><a href="#">課程標籤</a></li>
 								<li><a href="#">教師管理</a></li>
 								<li><a href="#">查看報名表</a></li>
 								<li><a href="#">課程紀錄</a></li>
 							</ul>
-						<li class="has-submenu "><a href="#"><i class="mdi ion-spoon"></i>私廚管理</a>
+						<li class="has-submenu "><a href="#"><i
+								class="mdi ion-spoon"></i>私廚管理</a>
 
 							<ul class="submenu">
-								<li class="has-submenu"><a href="#">預約管理</a>
-									<ul class="submenu">
-										<li><a href="#">設定預約時段</a></li>
-										<li><a href="#">查看預約單</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">個人資料管理</a>
-									<ul class="submenu">
-										<li><a href="#">基本資料設定修改</a></li>
-										<li><a href="#">密碼修改</a></li>
-									</ul></li>
+								<li><a href="#">預約管理</a></li>
+								<li><a href="#">個人資料管理</a></li>
 							</ul>
-						<li class="has-submenu"><a href="#"><i class="mdi dripicons-device-desktop"></i>前台管理</a>
+						<li class="has-submenu"><a href="#"><i
+								class="mdi dripicons-device-desktop"></i>前台管理</a>
 							<ul class="submenu">
-								<li class="has-submenu"><a href="#">客服管理</a>
-									<ul class="submenu">
-										<li><a href="#">訂單狀態</a></li>
-										<li><a href="#">自動回覆機器人設定</a></li>
-										<li><a href="#">查看客服紀錄</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">公告管理</a>
-									<ul class="submenu">
-										<li><a href="#">新增公告</a></li>
-										<li><a href="#">廣告管理</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">公司資料管理</a></li>
-								<li class="has-submenu"><a href="#">食譜管理</a>
-									<ul class="submenu">
-										<li><a href="#">食譜審核</a></li>
-										<li><a href="#">熱門食譜編排</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">討論區管理</a>
-									<ul class="submenu">
-										<li><a href="#">檢舉管理</a></li>
-									</ul></li>
-							</ul></li>
-
-						<li class="has-submenu "><a href="#"><i class="mdi mdi-layers"></i>後台管理</a>
-
+								<li><a href="#">客服管理</a></li>
+								<li><a href="#">公告管理</a></li>
+								<li><a href="#">公司資料管理</a></li>
+								<li><a href="#">食譜管理</a></li>
+								<li><a href="#">討論區管理</a>
+							</ul>
+						<li class="has-submenu "><a href="#"><i
+								class="mdi mdi-layers"></i>後台管理</a>
 							<ul class="submenu">
-								<li class="has-submenu"><a href="#">管理員系統</a>
-									<ul class="submenu">
-										<li><a href="#">新增/停用管理員</a></li>
-										<li><a href="#">權限管理</a></li>
-									</ul></li>
+								<li><a href="#">管理員系統</a></li>
 								<li><a href="#">會員</a></li>
 							</ul>
 					</ul>
@@ -249,11 +219,14 @@
 					<div class="page-title-box">
 						<div class="btn-group pull-right">
 							<ol class="breadcrumb hide-phone p-0 m-0">
-								<li class="breadcrumb-item"><a href="discount-management.jsp">優惠方案管理</a></li>
+								<li class="breadcrumb-item"><a
+									href="discount-management.jsp">優惠方案管理</a></li>
 								<li class="breadcrumb-item"><a href="../index-back.jsp">後台首頁</a></li>
 							</ol>
 						</div>
-						<h4 class="page-title">優惠方案管理</h4>
+						<h4 class="page-title">
+							<a href="discount-management.jsp">優惠方案管理</a>
+						</h4>
 					</div>
 				</div>
 			</div>
@@ -271,24 +244,25 @@
 			<aside class="col-sm-2">
 
 				<div class="section">
-					<a href="../promotions/select_page.jsp">優惠活動管理</a>
+					<a href="#" data-target="nav1" class="nav">行銷紀錄</a>
 				</div>
 
 				<div class="horizen"></div>
 
 				<div class="section">
-					<a href="../coupontype/select_page.jsp">優惠券管理</a>
+					<a href="#" data-target="nav2" class="nav">促銷安排</a>
 				</div>
 
 				<div class="horizen"></div>
 
 				<div class="section">
-					<a href="#">訂單狀態</a>
+					<a href="#" data-target="nav3" class="nav">發放優惠券</a>
 				</div>
+
 				<div class="horizen"></div>
 
 				<div class="section">
-					<a href="#">訂單狀態</a>
+					<a href="#" data-target="nav4" class="nav">修改/取消活動</a>
 				</div>
 
 			</aside>
@@ -298,18 +272,109 @@
 
 
 					<div id="indexPageContent">
+						<div class="container-fluid">
+							<!-- end page title end breadcrumb -->
+							<div class="row">
+								<div class="col-md-6 col-lg-6 col-xl-6">
+									<!-- Simple card -->
+									<div class="card">
+										<div class="card-body">
+											<h4 class="card-title font-20 mt-0">優惠券搜尋</h4>
+										</div>
+										<%-- 錯誤表列 --%>
+										<c:if test="${not empty errorMsgs}">
+											<font style="color: red">請修正以下錯誤:</font>
+											<ul>
+												<c:forEach var="message" items="${errorMsgs}">
+													<li style="color: red">${message}</li>
+												</c:forEach>
+											</ul>
+										</c:if>
+										<ul class="list-group list-group-flush">
 
-						<div class="title">優惠方案管理</div>
+											<li class="list-group-item">
+												<FORM METHOD="post" ACTION="../coupontype/CouponTypeServlet">
+													<b>輸入編號搜尋:</b> <input type="text" name="cpTpid"
+														placeholder="請輸入編號搜尋"> <input type="hidden"
+														name="action" value="getOne_For_Display"> <input
+														type="submit" value="搜尋">
+												</FORM>
+											</li>
+											<jsp:useBean id="cpTpSvc" scope="page"
+												class="com.coupontype.model.CouponTypeService" />
+											<li class="list-group-item">
+												<FORM METHOD="post" ACTION="../coupontype/CouponTypeServlet">
+													<b>優惠券名稱搜尋:</b> <select size="1" name="cpTpid">
+														<c:forEach var="couponTypeVO" items="${cpTpSvc.all}">
+															<option value="${couponTypeVO.cpTpid}">${couponTypeVO.cpName}
+														</c:forEach>
+													</select> <input type="hidden" name="action"
+														value="getOne_For_Display"> <input type="submit"
+														value="搜尋">
+												</FORM>
+											</li>
+											<li class="list-group-item"><a
+												href='../coupontype/listAllCouponType.jsp'
+												class="btn btn-primary waves-effect waves-light">查看優惠券清單</a>
+												<a href="../coupontype/addCouponType.jsp"
+												class="btn btn-primary waves-effect waves-light">新增優惠券</a></li>
+										</ul>
+									</div>
+								</div>
+								<!-- end col -->
 
-						<div class="section x">分區一</div>
+								<div class="col-md-6 col-lg-6 col-xl-6">
 
-						<div class="horizen"></div>
+									<div class="card">
+										<div class="card-body">
+											<h4 class="card-title font-20 mt-0">優惠活動搜尋</h4>
+										</div>
+										<%-- 錯誤表列 --%>
+										<c:if test="${not empty errorMsgs}">
+											<font style="color: red">請修正以下錯誤:</font>
+											<ul>
+												<c:forEach var="message" items="${errorMsgs}">
+													<li style="color: red">${message}</li>
+												</c:forEach>
+											</ul>
+										</c:if>
+										<ul class="list-group list-group-flush">
 
-						<div class="section y">分區二</div>
+											<li class="list-group-item">
+												<FORM METHOD="post" ACTION="../promotions/PromotionsServlet">
+													<b>輸入編號搜尋:</b> <input type="text" name="pmid"
+														placeholder="請輸入編號搜尋"> <input type="hidden"
+														name="action" value="getOne_For_Display"> <input
+														type="submit" value="搜尋">
+												</FORM>
+											</li>
+											<jsp:useBean id="pmtSvc" scope="page"
+												class="com.promotions.model.PromotionsService" />
+											<li class="list-group-item">
+												<FORM METHOD="post" ACTION="../promotions/PromotionsServlet">
+													<b>優惠活動名稱搜尋:</b> <select size="1" name="pmid">
+														<c:forEach var="promotionsVO" items="${pmtSvc.all}">
+															<option value="${promotionsVO.pmid}">${promotionsVO.pmName}
+														</c:forEach>
+													</select> <input type="hidden" name="action"
+														value="getOne_For_Display"> <input type="submit"
+														value="搜尋">
+												</FORM>
+											</li>
+											<li class="list-group-item"><a
+												href='../promotions/listAllPromotions.jsp'
+												class="btn btn-primary waves-effect waves-light">查看優惠活動清單</a>
+												<a href="../promotions/addPromotions.jsp"
+												class="btn btn-primary waves-effect waves-light">新增優惠券</a></li>
+										</ul>
+									</div>
+								</div>
+								<!-- end col -->
+							</div>
+							<!-- end container -->
+						</div>
 
 					</div>
-
-
 
 				</div>
 
@@ -350,7 +415,7 @@
 					<div id="coursePageContent">
 
 
-						<div class="title">修改/取消活動</div>
+						<div class="title">發放優惠券</div>
 
 						<div class="section x">分區一</div>
 
@@ -367,7 +432,7 @@
 
 					<div id="chefPageContent">
 
-						<div class="title">發放優惠券</div>
+						<div class="title">修改/取消活動</div>
 
 						<div class="section x">分區一</div>
 
@@ -395,8 +460,10 @@
 	<script src="../assets/js/modernizr.min.js"></script>
 	<script src="../assets/js/waves.js"></script>
 	<script src="../assets/js/jquery.nicescroll.js"></script>
-	<script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-	<script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<script
+		src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+	<script
+		src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 	<script src="../assets/plugins/skycons/skycons.min.js"></script>
 	<script src="../assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
 	<script src="../assets/plugins/tiny-editable/numeric-input-example.js"></script>

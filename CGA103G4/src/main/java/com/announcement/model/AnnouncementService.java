@@ -18,22 +18,22 @@ public class AnnouncementService {
 		//註2: 但為了使用Apache DBCP連線池,以提高效能,所以底下的model-config2-JndiObjectFactoryBean.xml內部dataSource設定是採用org.springframework.jndi.JndiObjectFactoryBean
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("model-config2-JndiObjectFactoryBean.xml");
-		dao =(AnnouncementDAO_interface) context.getBean("announcementDAO");
+		dao =(AnnouncementDAO_interface) context.getBean("AnnouncementHibernateDAO");
 	}
 
-	public AnnouncementVO addAnnouncement(String annContent, byte[] annPic, Integer annStatus,
-			Date annUpdate, Date annTime,Integer empid) {
+	public AnnouncementVO addAnnouncement(Integer empid , String annContent, byte[] annPic, Integer annStatus,
+			Date annUpdate, Date annTime) {
 		
 		AnnouncementVO announcementVO = new AnnouncementVO();
 		
+		EmpVO empVO = new EmpVO();
+		empVO.setEmpid(empid);
+		announcementVO.setEmpVO(empVO);
 		announcementVO.setAnnContent(annContent);
 		announcementVO.setAnnPic(annPic);
 		announcementVO.setAnnStatus(annStatus);
 		announcementVO.setAnnUpdate(annUpdate);
 		announcementVO.setAnnTime(annTime);
-		EmpVO empVO = new EmpVO();
-		empVO.setEmpid(empid);
-		announcementVO.setEmpVO(empVO);
 		
 		dao.insert(announcementVO);
 		
@@ -46,20 +46,20 @@ public class AnnouncementService {
 		dao.insert(announcementVO);
 	}
 	
-	public AnnouncementVO updateAnnouncement(Integer annid, String annContent, byte[] annPic, Integer annStatus,
-			Date annUpdate, Date annTime,Integer empid) {
+	public AnnouncementVO updateAnnouncement(Integer annid, Integer empid, String annContent, byte[] annPic, Integer annStatus,
+			Date annUpdate, Date annTime) {
 		
 		AnnouncementVO announcementVO = new AnnouncementVO();
 		
+		EmpVO empVO = new EmpVO();
+		empVO.setEmpid(empid);
+		announcementVO.setEmpVO(empVO);
 		announcementVO.setAnnid(annid);
 		announcementVO.setAnnContent(annContent);
 		announcementVO.setAnnPic(annPic);
 		announcementVO.setAnnStatus(annStatus);
 		announcementVO.setAnnUpdate(annUpdate);
 		announcementVO.setAnnTime(annTime);
-		EmpVO empVO = new EmpVO();
-		empVO.setEmpid(empid);
-		announcementVO.setEmpVO(empVO);
 		
 		dao.update(announcementVO);
 		

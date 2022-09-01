@@ -8,7 +8,7 @@
 					<!-- Text Logo -->
 					<!--<a href="index.html" class="logo">-->
 					<!-- Image Logo -->
-					<a href="select_page.jsp" class="logo"><img src="../assets/images/logo.png" alt="" class="logo-large"> </a>
+					<a href="../index-back.jsp" class="logo"><img src="../assets/images/logo.png" alt="" class="logo-large"> </a>
 				</div>
 				<!-- End Logo container-->
 				<div class="menu-extras topbar-custom">
@@ -115,33 +115,15 @@
 						<li class="has-submenu "><a href="#"><i class="mdi mdi-shopping"></i>商城管理</a>
 
 							<ul class="submenu">
-								<li class="has-submenu"><a href="#">優惠方案管理</a>
-									<ul class="submenu">
-										<li><a href="#">行銷紀錄</a></li>
-										<li><a href="#">促銷安排</a></li>
-										<li><a href="#">修改/取消活動</a></li>
-										<li><a href="#">發放優惠券</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">商品管理</a>
-									<ul class="submenu">
-										<li><a href="#">上架/下架</a></li>
-										<li><a href="#">修改定價</a></li>
-									</ul></li>
+								<li><a href="../discount-management/discount-management.jsp">優惠方案管理</a></li>
+								<li><a href="#">商品管理</a></li>
 								<li><a href="#">訂單管理</a></li>
 							</ul>
 						<li class="has-submenu "><a href="#"><i class="mdi ion-ios7-people"></i>課程管理</a>
 
 							<ul class="submenu">
-								<li class="has-submenu"><a href="#">課程</a>
-									<ul class="submenu">
-										<li><a href="#">上架/下架</a></li>
-										<li><a href="#">修改課程</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">課程標籤</a>
-									<ul class="submenu">
-										<li><a href="#">上架/下架</a></li>
-										<li><a href="#">修改標籤</a></li>
-									</ul></li>
+								<li><a href="#">課程</a></li>
+								<li><a href="#">課程標籤</a></li>
 								<li><a href="#">教師管理</a></li>
 								<li><a href="#">查看報名表</a></li>
 								<li><a href="#">課程紀錄</a></li>
@@ -149,50 +131,21 @@
 						<li class="has-submenu "><a href="#"><i class="mdi ion-spoon"></i>私廚管理</a>
 
 							<ul class="submenu">
-								<li class="has-submenu"><a href="#">預約管理</a>
-									<ul class="submenu">
-										<li><a href="#">設定預約時段</a></li>
-										<li><a href="#">查看預約單</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">個人資料管理</a>
-									<ul class="submenu">
-										<li><a href="#">基本資料設定修改</a></li>
-										<li><a href="#">密碼修改</a></li>
-									</ul></li>
+								<li><a href="#">預約管理</a></li>
+								<li><a href="#">個人資料管理</a></li>
 							</ul>
 						<li class="has-submenu"><a href="#"><i class="mdi dripicons-device-desktop"></i>前台管理</a>
 							<ul class="submenu">
-								<li class="has-submenu"><a href="#">客服管理</a>
-									<ul class="submenu">
-										<li><a href="#">訂單狀態</a></li>
-										<li><a href="#">自動回覆機器人設定</a></li>
-										<li><a href="#">查看客服紀錄</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">公告管理</a>
-									<ul class="submenu">
-										<li><a href="#">新增公告</a></li>
-										<li><a href="#">廣告管理</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">公司資料管理</a></li>
-								<li class="has-submenu"><a href="#">食譜管理</a>
-									<ul class="submenu">
-										<li><a href="#">食譜審核</a></li>
-										<li><a href="#">熱門食譜編排</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">討論區管理</a>
-									<ul class="submenu">
-										<li><a href="#">檢舉管理</a></li>
-									</ul></li>
-							</ul></li>
+								<li><a href="#">客服管理</a></li>
+								<li><a href="#">公告管理</a></li>
+								<li><a href="#">公司資料管理</a></li>
+								<li><a href="#">食譜管理</a></li>
+								<li><a href="#">討論區管理</a>
+							</ul>
 
 						<li class="has-submenu "><a href="#"><i class="mdi mdi-layers"></i>後台管理</a>
-
 							<ul class="submenu">
-								<li class="has-submenu"><a href="#">管理員系統</a>
-									<ul class="submenu">
-										<li><a href="#">新增/停用管理員</a></li>
-										<li><a href="#">權限管理</a></li>
-									</ul></li>
+								<li><a href="#">管理員系統</a></li>
 								<li><a href="#">會員</a></li>
 							</ul>
 					</ul>

@@ -31,7 +31,7 @@ div.horizen {
 	height: 0.01rem;
 	margin: 0.1rem 0;
 	background: #c1c1c1;
-	padding:0;
+	padding: 0;
 }
 
 div.main {
@@ -39,29 +39,37 @@ div.main {
 }
 
 div.row aside {
-	margin:0;
-	padding:0;
+	margin: 0;
+	padding: 0;
 	height: 100%;
 	width: 100%;
-	text-align: center;
 }
 
-div.row aside div.section {
-	margin:0;
-	padding:18px 0;
-	background-color: white;
+
+div.row aside div.section>a:hover{
+	color: white;
+	transition-duration: 0.4s;
+	background: linear-gradient(to bottom, #878cc9, #353982 98%);
 }
-div.main div.row aside div.section>a{
-	font-size:18px;
-	margin:0;
-	padding:20px 30px;
-	border: 1px solid #b59668;
+div.main div.row aside div.section:hover {
+	transition-duration: 0.4s;
+}
+
+div.row aside div.section > a{
+	font-size: 18px;
+	padding: 15px 30px;
+	margin: 0;
+}
+
+div.row aside > div{
+	text-align: center;
+	margin: 0;
+	padding: 0;
 }
 
 div.main div div.container {
 	float: right;
 	text-align: center;
-	background-color: white;
 	border-radius: 10px;
 }
 
@@ -72,4 +80,3 @@ div.main div div.container {
 div.main div div.container.-on {
 	display: block;
 }
-

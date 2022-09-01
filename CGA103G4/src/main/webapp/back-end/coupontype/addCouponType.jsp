@@ -14,7 +14,8 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 
 <title>優惠券新增</title>
 
@@ -22,10 +23,13 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 <meta content="Mannatthemes" name="author" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <link rel="shortcut icon" href="../assets/images/favicon.ico">
-<link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
-<link href="../assets/plugins/fullcalendar/vanillaCalendar.css" rel="stylesheet" type="text/css" />
+<link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css"
+	rel="stylesheet">
+<link href="../assets/plugins/fullcalendar/vanillaCalendar.css"
+	rel="stylesheet" type="text/css" />
 <link href="../assets/plugins/morris/morris.css" rel="stylesheet">
-<link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css">
 <link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
 
@@ -74,12 +78,13 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 					<div class="page-title-box">
 						<div class="btn-group pull-right">
 							<ol class="breadcrumb hide-phone p-0 m-0">
-								<li class="breadcrumb-item"><a href="#">Zoter</a></li>
-								<li class="breadcrumb-item"><a href="#">Tables</a></li>
-								<li class="breadcrumb-item active">Editable</li>
+								<li class="breadcrumb-item active">優惠券新增</li>
+								<li class="breadcrumb-item"><a
+									href="../discount-management/discount-management.jsp">優惠方案管理</a></li>
+								<li class="breadcrumb-item"><a href="../index-back.jsp">後台首頁</a></li>
 							</ol>
 						</div>
-						<h4 class="page-title">Editable</h4>
+						<h4 class="page-title">優惠券新增</h4>
 					</div>
 				</div>
 			</div>
@@ -99,35 +104,41 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 								</ul>
 							</c:if>
 
-							<FORM METHOD="post" ACTION="CouponTypeServlet" name="form1" enctype="multipart/form-data">
+							<FORM METHOD="post" ACTION="CouponTypeServlet" name="form1"
+								enctype="multipart/form-data">
 								<table class="table" id="my-table">
 									<tr>
 										<td>優惠券名稱:</td>
 										<td><input type="TEXT" name="cpName" size="45"
-											value="<%=(couponTypeVO == null) ? "優惠券名稱" : couponTypeVO.getCpName()%>" /></td>
+											value="<%=(couponTypeVO == null) ? "" : couponTypeVO.getCpName()%>" placeholder="請輸入優惠券名稱" /></td>
 									</tr>
 									<tr>
 										<td>優惠券折扣價格:</td>
 										<td><input type="TEXT" name="cpDiscount"
-											value="<%=(couponTypeVO == null) ? "0" : couponTypeVO.getCpDiscount()%>" /></td>
+											value="<%=(couponTypeVO == null) ? "" : couponTypeVO.getCpDiscount()%>" placeholder="請輸入折扣金額"/></td>
 									</tr>
 									<tr>
 										<td>起始時間:</td>
-										<td><input name="cpStart" id="f_date1" type="text" autocomplete="off"></td>
+										<td><input name="cpStart" id="f_date1" type="text"
+											autocomplete="off"></td>
 									</tr>
 									<tr>
 										<td>截止時間:</td>
-										<td><input name="cpEnd" id="f_date2" type="text" autocomplete="off"></td>
+										<td><input name="cpEnd" id="f_date2" type="text"
+											autocomplete="off"></td>
 									</tr>
 									<tr>
 										<td>活動狀態:</td>
-										<td><input type="TEXT" name="cpStatus"
-											value="<%=(couponTypeVO == null) ? "1" : couponTypeVO.getCpStatus()%>" /></td>
+										<td><select name="cpStatus">
+												<option value="1">上架</option>
+												<option value="0">下架</option>
+										</select></td>
 									</tr>
 									<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
 									<tr>
 										<td>優惠券圖片:</td>
-										<td><input type="file" name="cpPic" accept="image/*" id="file0"></td>
+										<td><input type="file" name="cpPic" accept="image/*"
+											id="file0"></td>
 									</tr>
 									<tr>
 										<td>優惠券圖片預覽:</td>
@@ -136,7 +147,8 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 											</div></td>
 									</tr>
 								</table>
-								<br> <input type="hidden" name="action" value="insert"> <input type="submit" value="送出新增">
+								<br> <input type="hidden" name="action" value="insert">
+								<input type="submit" value="送出新增">
 							</FORM>
 						</div>
 
@@ -171,9 +183,12 @@ try {
 	cpEnd = new java.sql.Date(System.currentTimeMillis());
 }
 %>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.datetimepicker.css" />
+<script
+	src="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.js"></script>
+<script
+	src="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
@@ -278,8 +293,10 @@ $('#f_date2').datetimepicker({
 <script src="../assets/js/modernizr.min.js"></script>
 <script src="../assets/js/waves.js"></script>
 <script src="../assets/js/jquery.nicescroll.js"></script>
-<script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-<script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script
+	src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+<script
+	src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="../assets/plugins/skycons/skycons.min.js"></script>
 <script src="../assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
 <script src="../assets/plugins/tiny-editable/numeric-input-example.js"></script>
