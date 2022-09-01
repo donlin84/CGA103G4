@@ -147,10 +147,6 @@
 <!--   =======================傅勝宏========================== -->
   
 <!--   =======================張正弘========================== -->
-  <servlet>
-		<servlet-name>MemberServlet</servlet-name>
-		<servlet-class>com.member.controller.MemberServlet</servlet-class>
-	</servlet>
 	<servlet-mapping>
 		<servlet-name>MemberServlet</servlet-name>
 		<url-pattern>/back-end/member/member.do</url-pattern>
