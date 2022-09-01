@@ -188,11 +188,7 @@ public class CouponTypeServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-<<<<<<< HEAD
 
-=======
-			
->>>>>>> refs/remotes/origin/AnthonyFu
 			String cpName = req.getParameter("cpName");
 			String cpNameReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,45}$";
 
