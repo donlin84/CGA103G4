@@ -285,8 +285,4 @@ public class CouponTypeDAO implements CouponTypeDAO_interface {
 		return couponTypeVO;
 	}
 
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/sosohung
 }

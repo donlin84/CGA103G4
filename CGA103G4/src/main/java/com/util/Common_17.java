@@ -8,7 +8,7 @@ public class Common_17 {
 	// public final static String URL = "jdbc:mysql://localhost:3306/seefoodtest";
 	
 	public final static String user = "root";
-	public final static String password = "tn00349903";
+	public final static String password = "cga103g4";
 	
 	
 }

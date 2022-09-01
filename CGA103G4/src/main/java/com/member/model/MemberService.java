@@ -63,12 +63,11 @@ public class MemberService {
 	}
 
 	
-<<<<<<< HEAD
-=======
+
 	public List<Integer> getAllMemid() {
 //		System.out.println("testAll");
 		return dao.getAllMemid();
 	}	
->>>>>>> refs/remotes/origin/sosohung
+
 
 }
