@@ -1,5 +1,5 @@
-<%@page import="com.recipe.model.RecipeVO"%>
-<%@page import="com.recipe.model.RecipeService"%>
+<%-- <%@page import="com.recipe.model.RecipeVO"%> --%>
+<%-- <%@page import="com.recipe.model.RecipeService"%> --%>
 <%-- <%@page import="com.recipe.model.RecipeService"%> --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -77,12 +77,12 @@
 		<tr>
 			<td>${recipeVO.reid}</td>
 			<td>${recipeVO.memid}</td>
-			<td>${recipeVO.reTitle}</td>
+			<td>${recipeVO.getReTitle()}</td>
 			<td>${recipeVO.reContext}</td>
 			<td>${recipeVO.reSTime}</td>
 			<td>${recipeVO.reLTime}</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/recipe/recipe.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="Recipe.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="н╫зя">
 			     <input type="hidden" name="reid"  value="${recipeVO.reid}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>

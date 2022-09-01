@@ -25,18 +25,19 @@ public class RecipeDAO implements RecipeDAO_interface{
 	}
 	
 	private static final String INSERT = 
-			"insert into recipe (memid, recontext) values (?, ?)";
+			"insert into recipe (memid, reTitle, recontext) values (?, ?, ?)";
 	private static final String UPDATE = 
-			"update recipe set memid = ?, recontext = ? where reid = ?";
+			"update recipe set memid = ?, reTitle = ?, recontext = ? where reid = ?";
 	private static final String SELECT_ALL = 
-			"select reid, memid, recontext, reStime, reLtime from recipe order by reid";
+			"select reid, memid, reTitle, recontext, reStime, reLtime from recipe order by reid";
 	private static final String SELECT_ONE = 
-			"select reid, memid, recontext, reStime, reLtime from recipe where reid = ?";
+			"select reid, memid, reTitle, recontext, reStime, reLtime from recipe where reid = ?";
 	@Override
 	public void insert(RecipeVO recipeVO) {
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(INSERT);){
 			ps.setInt(1, recipeVO.getMemid());
-			ps.setString(2, recipeVO.getReContext());
+			ps.setString(2, recipeVO.getReTitle());
+			ps.setString(3, recipeVO.getReContext());
 			
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -48,8 +49,9 @@ public class RecipeDAO implements RecipeDAO_interface{
 	public void update(RecipeVO recipeVO) {
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(UPDATE);){
 			ps.setInt(1, recipeVO.getMemid());
-			ps.setString(2, recipeVO.getReContext());
-			ps.setInt(3, recipeVO.getReid());
+			ps.setString(2, recipeVO.getReTitle());
+			ps.setString(3, recipeVO.getReContext());
+			ps.setInt(4, recipeVO.getReid());
 			
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -69,7 +71,8 @@ public class RecipeDAO implements RecipeDAO_interface{
 				
 				recipeVO.setReid(rs.getInt(1));
 				recipeVO.setMemid(rs.getInt(2));
-				recipeVO.setReContext(rs.getString(3));
+				recipeVO.setReTitle(rs.getString(3));
+				recipeVO.setReContext(rs.getString(4));
 				recipeVO.setReSTime(rs.getObject("reStime", LocalDateTime.class));
 				recipeVO.setReLTime(rs.getObject("reLtime", LocalDateTime.class));
 				
@@ -95,7 +98,8 @@ ps.setInt(1, reid);
 				recipeVO = new RecipeVO();
 				recipeVO.setReid(rs.getInt(1));
 				recipeVO.setMemid(rs.getInt(2));
-				recipeVO.setReContext(rs.getString(3));
+				recipeVO.setReTitle(rs.getString(3));
+				recipeVO.setReContext(rs.getString(4));
 				recipeVO.setReSTime(rs.getObject("reStime", LocalDateTime.class));
 				recipeVO.setReLTime(rs.getObject("reLtime", LocalDateTime.class));
 			}

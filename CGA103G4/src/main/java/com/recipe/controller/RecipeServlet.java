@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.recipe.model.RecipeService;
 import com.recipe.model.RecipeVO;
-@WebServlet("/Recipe")
+@WebServlet("/back-end/recipe/Recipe.do")
 public class RecipeServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
@@ -145,7 +145,7 @@ public class RecipeServlet extends HttpServlet{
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("recipeVO", recipeVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			String url ="/back-end/recipe/recipe.do?action=getOne_For_Display";
+			String url ="Recipe.do?action=getOne_For_Display";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -203,7 +203,7 @@ public class RecipeServlet extends HttpServlet{
 			recipeVO = ordSvc.addRecipe(memid, reTitle, reContext);
 			
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/back-end/recipe/listAllOrders.jsp";
+			String url = "/back-end/recipe/listAllRecipe.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // �s�W���\�����listAllEmp.jsp
 			successView.forward(req, res);
 		}

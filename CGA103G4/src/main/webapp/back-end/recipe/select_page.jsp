@@ -52,7 +52,7 @@
   
   
   <li>
-    <FORM METHOD="post" ACTION="recipe.do" >
+    <FORM METHOD="post" ACTION="Recipe.do" >
         <b>輸入食譜編號 (如1):</b>
         <input type="text" name="reid">
         <input type="hidden" name="action" value="getOne_For_Display">
@@ -63,7 +63,7 @@
   <jsp:useBean id="recipeSvc" scope="page" class="com.recipe.model.RecipeService" />
    
   <li>
-     <FORM METHOD="post" ACTION="recipe.do" >
+     <FORM METHOD="post" ACTION="Recipe.do" >
        <b>選擇食譜編號:</b>
        <select size="1" name="reid">
          <c:forEach var="recipeVO" items="${recipeSvc.getAll()}" > 

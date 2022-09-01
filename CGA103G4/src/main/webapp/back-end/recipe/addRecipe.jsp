@@ -81,7 +81,7 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="recipe.do" name="form1">
+<FORM METHOD="post" ACTION="Recipe.do" name="form1">
 <table>
 	<tr>
 		<td>·|­û½s¸¹:</td>
