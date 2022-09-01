@@ -135,10 +135,7 @@ ProductVO productVO = (ProductVO) request.getAttribute("productVO");
 										<tr>
 
 											<td>折扣後金額:</td>
-											<td>
-											<c:forEach var="ProductVO" items="${pdSvc.all}">
-											<input type="TEXT" name="pmPdDiscountPrice" value="${ProductVO.pdPrice}" id="DiscountPrice" readonly>
-											</c:forEach>
+											<td><input type="TEXT" name="pmPdDiscountPrice" value="<%=promotionsVO.getPmDiscount() ? "" : promotionsVO.get%>" id="DiscountPrice" readonly></td>
 										</tr>
 									</tbody>
 								</table>

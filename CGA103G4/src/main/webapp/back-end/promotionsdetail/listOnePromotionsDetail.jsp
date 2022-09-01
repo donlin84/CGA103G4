@@ -47,12 +47,12 @@ PromotionsDetailVO promotionsDetailVO = (PromotionsDetailVO) request.getAttribut
 					<div class="page-title-box">
 						<div class="btn-group pull-right">
 							<ol class="breadcrumb hide-phone p-0 m-0">
-								<li class="breadcrumb-item active">優惠券單筆查詢</li>
+								<li class="breadcrumb-item active">優惠明細單筆查詢</li>
 								<li class="breadcrumb-item"><a href="../discount-management/discount-management.jsp">優惠方案管理</a></li>
 								<li class="breadcrumb-item"><a href="../index-back.jsp">後台首頁</a></li>
 							</ol>
 						</div>
-						<h4 class="page-title">優惠券單筆查詢</h4>
+						<h4 class="page-title">優惠明細單筆查詢</h4>
 					</div>
 				</div>
 			</div>
@@ -62,17 +62,15 @@ PromotionsDetailVO promotionsDetailVO = (PromotionsDetailVO) request.getAttribut
 				<div class="col-12">
 					<div class="card">
 						<div class="card-body">
-							<h4 class="mt-0 header-title">優惠券單筆查詢</h4>
+							<h4 class="mt-0 header-title">優惠明細單筆查詢</h4>
 							<table class="table" id="my-table">
 								<thead>
 									<tr>
-										<th>優惠券種類編號</th>
-										<th>優惠券名稱</th>
-										<th>優惠券折扣價格</th>
-										<th>起始時間</th>
-										<th>截止時間</th>
-										<th>優惠券狀態</th>
-										<th>優惠券圖片</th>
+										<th>優惠活動名稱</th>
+										<th>產品名稱</th>
+										<th>折扣後金額</th>
+										<th>修改</th>
+										<th>刪除</th>
 									</tr>
 								</thead>
 								<tbody>

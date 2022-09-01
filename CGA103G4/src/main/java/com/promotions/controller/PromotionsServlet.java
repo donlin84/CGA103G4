@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.promotions.model.PromotionsService;
 import com.promotions.model.PromotionsVO;
 
-@WebServlet("/back-end/promotions/PromotionsServlet2")
+@WebServlet("/back-end/promotions/PromotionsServlet")
 public class PromotionsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

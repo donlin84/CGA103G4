@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.coupontype.model.CouponTypeService;
 import com.coupontype.model.CouponTypeVO;
 
-@WebServlet("/back-end/coupontype/CoupontypeServlet2")
+@WebServlet("/back-end/coupontype/CouponTypeServlet")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class CouponTypeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
