@@ -1,8 +1,7 @@
 package com.orders.model;
 
-import static com.util.Common_22.PASSWORD;
-import static com.util.Common_22.URL;
-import static com.util.Common_22.USER;
+import static com.util.Common.*;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;

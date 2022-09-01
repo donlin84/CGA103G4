@@ -1,8 +1,5 @@
 package com.productPicture.model;
-import static com.util.Common_17.password;
-import static com.util.Common_17.url;
-import static com.util.Common_17.user;
-
+import static com.util.Common.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -40,7 +37,7 @@ public class ProductpicJDBCDAO implements ProductpicDAO_interface {
 		
 		try {
 
-			Connection con = DriverManager.getConnection(url, user, password);
+			Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
 			PreparedStatement pstmt = con.prepareStatement(INSERT_PICTURE);
 			
 			pstmt.setBytes(1, productpicVO.getPdPic());
@@ -55,7 +52,7 @@ public class ProductpicJDBCDAO implements ProductpicDAO_interface {
 	public void existedInsert(ProductpicVO productpicVO) {
 		
 		try {
-			Connection con = DriverManager.getConnection(url, user, password);
+			Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
 			PreparedStatement pstmt = con.prepareStatement(INSERT_PIC_TO＿EXISTED_PRODUCT);
 			
 			pstmt.setInt(1, productpicVO.getPdid());
@@ -73,7 +70,7 @@ public class ProductpicJDBCDAO implements ProductpicDAO_interface {
 
 		try {
 		
-			Connection con = DriverManager.getConnection(url, user, password);
+			Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
 			PreparedStatement pstmt = con.prepareStatement(UPDATE);	
 			
 		    pstmt.setBytes(1, productpicVO.getPdPic());
@@ -93,7 +90,7 @@ public class ProductpicJDBCDAO implements ProductpicDAO_interface {
 		
  
 		try {
-			Connection con = DriverManager.getConnection(url, user, password);
+			Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
 			PreparedStatement pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, pdPicid);
@@ -112,7 +109,7 @@ public class ProductpicJDBCDAO implements ProductpicDAO_interface {
 		ProductpicVO productpicVO = null;
 
 		try (
-			Connection con = DriverManager.getConnection(url, user, password);
+			Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
 			PreparedStatement pstmt = con.prepareStatement(GET_ONE_STMT);
 		){	
 			pstmt.setInt(1, pdPicid);
@@ -139,7 +136,7 @@ public class ProductpicJDBCDAO implements ProductpicDAO_interface {
 		ProductpicVO productpicVO = null;
 
 		try (	
-			Connection con = DriverManager.getConnection(url, user, password);
+			Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
 			PreparedStatement pstmt = con.prepareStatement(GET_ALL_STMT);
 			){
 			ResultSet rs = pstmt.executeQuery();

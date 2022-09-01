@@ -1,7 +1,7 @@
 package com.chef.model;
 
 
-import static com.util.common_hung.*;
+import static com.util.Common.*;
 
 
 import java.io.FileInputStream;

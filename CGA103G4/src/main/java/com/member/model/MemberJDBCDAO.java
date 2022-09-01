@@ -1,10 +1,5 @@
 package com.member.model;
-import static com.util.common_hung.*;
-
-
-import static com.util.Common_15.PASSWORD;
-import static com.util.Common_15.URL;
-import static com.util.Common_15.USER;
+import static com.util.Common.*;
 
 import java.io.Console;
 import java.sql.*;

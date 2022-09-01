@@ -1,9 +1,6 @@
 package com.memberservicepicture.model;
 
-import static com.util.Common_15.PASSWORD;
-import static com.util.Common_15.URL;
-import static com.util.Common_15.USER;
-
+import static com.util.Common.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
