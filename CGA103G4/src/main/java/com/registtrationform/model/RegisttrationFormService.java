@@ -57,7 +57,7 @@ public class RegisttrationFormService {
 	public List<RegisttrationFormVO> getAll() {
 		return dao.getAll();
 	}
-	
+
 	public List<Integer> getAllmemid(){
 		return membersrc.getAllMemid();
 	}

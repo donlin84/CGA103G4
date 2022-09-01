@@ -284,9 +284,7 @@ public class CouponTypeDAO implements CouponTypeDAO_interface {
 		}
 		return couponTypeVO;
 	}
-<<<<<<< HEAD
 
-=======
 	
 	public static byte[] getPictureByteArray(String path) throws IOException {
 		FileInputStream fis = new FileInputStream(path);
@@ -295,6 +293,5 @@ public class CouponTypeDAO implements CouponTypeDAO_interface {
 		fis.close();
 		return buffer;
 	}
-	
->>>>>>> refs/remotes/origin/sosohung
+
 }

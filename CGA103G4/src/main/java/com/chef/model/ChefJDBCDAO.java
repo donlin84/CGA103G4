@@ -1,12 +1,11 @@
 package com.chef.model;
 
-<<<<<<< HEAD
+
 import static com.util.Common_12.PASSWORD;
 import static com.util.Common_12.URL;
 import static com.util.Common_12.USER;
-=======
-import static com.util.common_hung.*;
->>>>>>> refs/remotes/origin/sosohung
+
+
 
 import java.io.FileInputStream;
 import java.io.IOException;
