@@ -141,7 +141,7 @@ public class RecipeServlet extends HttpServlet{
 
 			/*************************** 2.開始修改資料 *****************************************/
 			RecipeService ordSvc = new RecipeService();
-			recipeVO = ordSvc.updateRecipe(memid, reTitle, reContext, reid, reSTime, reLTime);
+			recipeVO = ordSvc.updateRecipe(memid, reTitle, reContext, reid);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("recipeVO", recipeVO); // 資料庫update成功後,正確的的empVO物件,存入req
