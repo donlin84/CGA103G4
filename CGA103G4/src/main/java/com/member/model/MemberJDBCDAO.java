@@ -1,17 +1,21 @@
 package com.member.model;
+import static com.util.common_hung.*;
 
+<<<<<<< HEAD
 
 import static com.util.Common_15.PASSWORD;
 import static com.util.Common_15.URL;
 import static com.util.Common_15.USER;
 
 import java.io.Console;
+=======
+>>>>>>> refs/remotes/origin/sosohung
 import java.sql.*;
 import java.util.*;
 
 
 public class MemberJDBCDAO implements MemberDAO_interface{
-	String driver = "com.mysql.cj.jdbc.Driver";
+
 
 	private static final String INSERT_STMT = "INSERT INTO Member (memName, "
 			+ "memAccount, memPassword, memGender, memPhone, memEmail, memAddres, "
@@ -29,7 +33,6 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 			+ "memPassword=?, memGender=?, memPhone=?, memEmail=?, memAddres=?, "
 			+ "memBirthday=?, memStatus=?, memNation=? " 
 			+ "where memid = ?";
-	
 	private static final String GET_ALL_MEMID = "select memid from CGA103G4.Member order by memid" ;
 
 	@Override
@@ -37,7 +40,7 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, memberVO.getMemName());
@@ -81,7 +84,7 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(UPDATE);
 			pstmt.setString(1, memberVO.getMemName());
@@ -129,7 +132,7 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(GET_ONE_STMT);
 			pstmt.setInt(1, memid);
@@ -190,7 +193,7 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
@@ -249,7 +252,7 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(GET_ALL_MEMID);
 			rs = pstmt.executeQuery();
@@ -290,10 +293,7 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 		return list;
 	}
 
-	
-	
-	
-	
+
 	public static void main(String[] args) {
 		MemberJDBCDAO dao = new MemberJDBCDAO();
 
@@ -358,6 +358,7 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 		}
 //		查詢全部memid
 		List list1 = dao.getAllMemid();
+<<<<<<< HEAD
 		System.out.println(list1);}}
 	
 //import static com.util.common_hung.*;
@@ -662,3 +663,9 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 //
 //	}
 //}
+=======
+		System.out.println(list1);
+	}
+	}
+
+>>>>>>> refs/remotes/origin/sosohung

@@ -1,6 +1,9 @@
 package com.chefsubscription.model;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/sosohung
 import static com.util.common_hung.PASSWORD;
 import static com.util.common_hung.URL;
 import static com.util.common_hung.USER;
