@@ -20,7 +20,7 @@ public class ClassIfmJDBCDAO implements ClassIfmDAO_interface{
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei";
 	String userid = "root";
-	String passwd = "Alan0622";
+	String passwd = "cga103g4";
 
 	private static final String INSERT_STMT = 
 		"INSERT INTO ClassIfm (thrid,claTagid,claTitle,claIntroduction,claTime,claPrice,claPeopleMax,claPeopleMin,claPeople,claStatus,claStrTime,claFinTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -34,7 +34,8 @@ public class ClassIfmJDBCDAO implements ClassIfmDAO_interface{
 		"UPDATE ClassIfm set thrid=?, claTagid=?, claTitle=?, claIntroduction=?, claTime=? ,claPrice=?,claPeopleMax=?,claPeopleMin=?,claPeople=?,claStatus=?,claStrTime=?,claFinTime=? where claid = ?";
 	private static final String JOINTEACHER =
 		"select thrName from classifm c join teacher t on c.thrid = t.thrid where t.thrid=? limit 1";
-			
+	//只更改報名人數
+	private static final String UPDATE_CLAPEOPLE="UPDATE classIfm set claPeople = ? where claid = ?";
 			
 	@Override
 	public void insert(ClassIfmVO classIfmVO) {
@@ -381,6 +382,49 @@ Statement stmt=	con.createStatement();
 			}
 		}
 	}
+	//單一更新報名人數
+	@Override
+	public void update_clapeople(ClassIfmVO classIfmVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid,passwd);
+			pstmt = con.prepareStatement(UPDATE_CLAPEOPLE);
+			
+			pstmt.setInt(1, classIfmVO.getClaPeople());
+			pstmt.setInt(2, classIfmVO.getClaid());
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
 
 
 /*---------------------------------------------------------------------------------------*/
@@ -439,24 +483,33 @@ Statement stmt=	con.createStatement();
 //		System.out.print(vo3.getClaFinTime()+ ",");
 //		System.out.println();
 //	查詢全部
-	List<ClassIfmVO> list = dao.getAll();
-	for (ClassIfmVO aEmp : list) {
-		System.out.print(aEmp.getClaid() + ",");
-		System.out.print(aEmp.getThrid() + ",");
-		System.out.print(aEmp.getClaTagid() + ",");
-		System.out.print(aEmp.getClaTitle() + ",");
-		System.out.print(aEmp.getClaIntroduction() + ",");
-		System.out.print(aEmp.getClaTime() + ",");
-		System.out.print(aEmp.getClaPrice()+ ",");
-		System.out.print(aEmp.getClaPeopleMax()+ ",");
-		System.out.print(aEmp.getClaPeopleMin()+ ",");
-		System.out.print(aEmp.getClaPeople()+ ",");
-		System.out.print(aEmp.getClaStatus()+ ",");
-		System.out.print(aEmp.getClaStrTime()+ ",");
-		System.out.print(aEmp.getClaFinTime()+ ",");
-		System.out.println();
+//	List<ClassIfmVO> list = dao.getAll();
+//	for (ClassIfmVO aEmp : list) {
+//		System.out.print(aEmp.getClaid() + ",");
+//		System.out.print(aEmp.getThrid() + ",");
+//		System.out.print(aEmp.getClaTagid() + ",");
+//		System.out.print(aEmp.getClaTitle() + ",");
+//		System.out.print(aEmp.getClaIntroduction() + ",");
+//		System.out.print(aEmp.getClaTime() + ",");
+//		System.out.print(aEmp.getClaPrice()+ ",");
+//		System.out.print(aEmp.getClaPeopleMax()+ ",");
+//		System.out.print(aEmp.getClaPeopleMin()+ ",");
+//		System.out.print(aEmp.getClaPeople()+ ",");
+//		System.out.print(aEmp.getClaStatus()+ ",");
+//		System.out.print(aEmp.getClaStrTime()+ ",");
+//		System.out.print(aEmp.getClaFinTime()+ ",");
+//		System.out.println();
+//		
+//		}
+		//單一更新報名人數
+		ClassIfmVO vo2 = new ClassIfmVO();
 		
-		}
+		vo2.setClaPeople(10);
+		vo2.setClaid(2);
+		
+		dao.update_clapeople(vo2);	
 
 	}
+
+	
 }

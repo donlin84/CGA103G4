@@ -68,6 +68,15 @@ public ClassIfmVO updateClassIfm(Integer claid,Integer thrid,Integer claTagid,St
 	public List<ClassIfmVO> getAll(){
 		return dao.getAll();
 	}
+	//單一更新報名人數
+	public ClassIfmVO update_clapeople(Integer claPeople,Integer claid) {
+		
+		ClassIfmVO classIfmVO = new ClassIfmVO();
+		classIfmVO.setClaPeople(claPeople);
+		classIfmVO.setClaid(claid);
+		dao.update_clapeople(classIfmVO);
+		return classIfmVO;
+	}
 
 	
 

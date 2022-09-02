@@ -14,4 +14,6 @@ public interface ClassIfmDAO_interface {
     
     //同時新增課程資訊 和 課程圖片 1對多
     public void insertwithclapic(ClassIfmVO classIfmVO,List<ClassPictureVO> list);
+    //單一更新報名人數
+    public void update_clapeople(ClassIfmVO classIfmVO);
 }
