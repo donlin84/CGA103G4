@@ -10,4 +10,5 @@ public interface ProductDAO_interface {
 	public List<ProductVO> getAllPdName();
 	public List<ProductVO> listByPdSort(Integer pdsid);
 	public List<ProductVO> listByPdStatus(Integer pdStatus);
+	public List<ProductVO> getAll(Map<String, String[]> map); 
 }

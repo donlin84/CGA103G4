@@ -2,6 +2,7 @@ package com.product.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public class ProductService {
 	
@@ -65,4 +66,7 @@ public class ProductService {
 		public List<ProductVO> listByPdStatus(Integer pdStatus){
 			return dao.listByPdStatus(pdStatus);
 		}
-}
+		public List<ProductVO> getAll(Map<String, String[]> map) {
+			return dao.getAll(map);
+		}
+}		

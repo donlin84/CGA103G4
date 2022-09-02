@@ -35,7 +35,7 @@ public class RecipePictureServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/recipepicture/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/recipepicture/select_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -48,7 +48,7 @@ public class RecipePictureServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/recipepicture/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/recipepicture/select_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -61,14 +61,14 @@ public class RecipePictureServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/recipepicture/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/recipepicture/select_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("recipePictureVO", recipePictureVO); // 資料庫取出的empVO物件,存入req
-			String url = "/recipepicture/listOneRecipePicture.jsp";
+			String url = "/back-end/recipepicture/listOneRecipePicture.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -89,7 +89,7 @@ public class RecipePictureServlet extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("recipePictureVO", recipePictureVO); // 資料庫取出的empVO物件,存入req
-			String url = "/recipepicture/update_recipePicture_input.jsp";
+			String url = "/back-end/recipepicture/update_recipePicture_input.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// ���\��� update_emp_input.jsp
 			successView.forward(req, res);
 		}
@@ -136,7 +136,7 @@ public class RecipePictureServlet extends HttpServlet {
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("recipePictureVO", recipePictureVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/recipepicture/update_recipepicture_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/recipepicture/update_recipepicture_input.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -147,7 +147,7 @@ public class RecipePictureServlet extends HttpServlet {
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("recipePictureVO", recipePictureVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			String url = "/recipepicture/listOneRecipePicture.jsp";
+			String url = "/back-end/recipepicture/listOneRecipePicture.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -193,7 +193,7 @@ public class RecipePictureServlet extends HttpServlet {
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("recipePictureVO", recipePictureVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/recipepicture/addRecipePicture.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/recipepicture/addRecipePicture.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -206,7 +206,7 @@ public class RecipePictureServlet extends HttpServlet {
 //			empVO = empSvc.addEmp(ename, job, hiredate, sal, comm, deptno);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/recipepicture/listAllRecipePicture.jsp";
+			String url = "/back-end/recipepicture/listAllRecipePicture.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // �s�W���\�����listAllEmp.jsp
 			successView.forward(req, res);
 		}
@@ -226,7 +226,7 @@ public class RecipePictureServlet extends HttpServlet {
 			rePicSvc.deleteRecipePicture(rePicid);
 
 			/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-			String url = "/recipepicture/listAllRecipePicture.jsp";
+			String url = "/back-end/recipepicture/listAllRecipePicture.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// �R�����\��,���^�e�X�R�����ӷ�����
 			successView.forward(req, res);
 		}

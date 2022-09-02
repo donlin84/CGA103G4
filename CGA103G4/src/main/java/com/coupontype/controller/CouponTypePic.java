@@ -1,4 +1,4 @@
-package com.images;
+package com.coupontype.controller;
 
 import java.io.*;
 import java.sql.*;
@@ -9,8 +9,8 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
-@WebServlet("/ImagesServlet2")
-public class ImagesServlet extends HttpServlet {
+@WebServlet("/CouponTypePic")
+public class CouponTypePic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Connection con;
 
@@ -43,7 +43,7 @@ public class ImagesServlet extends HttpServlet {
 
 			} else {
 //					res.sendError(HttpServletResponse.SC_NOT_FOUND);
-				InputStream in = getServletContext().getResourceAsStream("/NoData/none2.jpg");
+				InputStream in = getServletContext().getResourceAsStream("/images/NoData_22/none2.jpg");
 				byte[] b = new byte[in.available()];
 				in.read(b);
 				out.write(b);
@@ -53,7 +53,7 @@ public class ImagesServlet extends HttpServlet {
 			stmt.close();
 		} catch (Exception e) {
 //				System.out.println(e);
-			InputStream in = getServletContext().getResourceAsStream("/NoData/null.jpg");
+			InputStream in = getServletContext().getResourceAsStream("/images/NoData_22/null.jpg");
 			byte[] b = new byte[in.available()];
 			in.read(b);
 			out.write(b);

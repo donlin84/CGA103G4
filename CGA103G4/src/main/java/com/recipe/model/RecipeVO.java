@@ -9,6 +9,7 @@ public class RecipeVO implements Serializable{
 	
 	private Integer reid;
 	private Integer memid;
+	private String reTitle;
 	private String reContext;
 	private LocalDateTime reSTime;
 	private LocalDateTime reLTime;
@@ -45,6 +46,12 @@ public class RecipeVO implements Serializable{
 	}
 	public void setReContext(String reContext) {
 		this.reContext = reContext;
+	}
+	public String getReTitle() {
+		return reTitle;
+	}
+	public void setReTitle(String reTitle) {
+		this.reTitle = reTitle;
 	}
 	
 	

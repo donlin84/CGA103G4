@@ -18,6 +18,15 @@
 
 <style>
 
+.border-box{
+  width:50%; 
+  height:100px;
+  float:center; 
+  background:#fff; 
+  border: 5px solid #1b73ba;
+}
+
+
 .table{
 text-align:center;
 text-valign:center;
@@ -117,39 +126,50 @@ text-overflow: ellipsis;
 	</ul>
 </c:if>
 		
-<ul>
-  <li>
-    <FORM METHOD="post" ACTION="product.do" >
-        <b>&emsp;&emsp;輸入商品編號:</b>
-        <input type="text" name="pdid" required>
-        <input type="hidden" name="action" value="getOne_For_Display">
-        <input type="submit" value="送出">
-    </FORM>
-	</li>
-	<li>
-	<jsp:useBean id="pdSortSvc" scope="page" class="com.productSort.model.ProductsortService" />
+<!-- 		================================================================= -->
 
-<div>
-		
-		<FORM METHOD="post" ACTION="PdSearchBackend.do">
-		<b>&emsp;&emsp;商品類別: </b>
-			&emsp;&emsp;
-			<select name = "pdsid" size="0.5" style="white-space:nowrap">
+
+
+<%-- 萬用複合查詢-以下欄位-可隨意增減 --%>
+
+<div class="border-box">
+<ul sytle="margin-left:auto; 
+margin-right:auto;">  
+
+  <li>   
+    <FORM METHOD="post" ACTION="PdSearchBackend.do" name="form1">
+    
+        <b>輸入商品編號:</b>
+        <input type="text" size="10" style="font-size:12px" name="pdid" >
+           
+       <b>輸入商品名:</b>
+       <input type="text" size="10" style="font-size:12px" name="pdName">
+       
+       <b>輸入商品價格:</b>
+       <input type="text" size="10" style="font-size:12px" name="pdPrice">
+       
+       <b>上次修改日期:</b>
+	   <input name="pdUpdate" size="10" style="font-size:12px" id="f_date1" type="text"><br>
+       
+    <jsp:useBean id="pdSortSvc" scope="page" class="com.productSort.model.ProductsortService" />
+       <b>選擇商品類別:</b>
+       	<select name = "pdsid" size="0.5" style="white-space:nowrap">
 				<c:forEach  var="ProductsortVO" items="${pdSortSvc.all}">
 					<option value="${ProductsortVO.pdsid}">${ProductsortVO.pdsName}
 					</option>
 				</c:forEach>
- 			</select>
- 			<input type="hidden" name="action4" value="list_pd_by_sort">
-        	<input type="submit" value="送出">
- 			
- 			</FORM>
-
-		</div>
-	</li>
+ 		</select>
+ 		<select name = "pdStatus" size="0.5">
+				<option value=1>上架中</option>
+				<option value=0>未上架</option>
+		</select>
+		        
+        <input type="submit" value="送出">
+        <input type="hidden" name="action4" value="listProduct_ByCompositeQuery">
+     </FORM>
+  </li>
 </ul>
-
-
+</div>
 <div class="table">
 		  <table class="tableResult" id = "table1">
 			<tr>
@@ -184,13 +204,13 @@ text-overflow: ellipsis;
 			  <td> 
 				<div class="row">
 				 <div>
-				  <FORM METHOD="post" ACTION="product.do" style="margin-bottom: 0px;">
+				  <FORM METHOD="post" ACTION="ProductServlet.do" style="margin-bottom: 0px;">
 					 <input type="submit" value="修改" >
 					 <input type="hidden" name="pdid"  value="${productVO.pdid}">
 					 <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			     </div>
 				  <div>
-				 <FORM METHOD="post" ACTION="product.do" style="margin-bottom: 0px;">
+				 <FORM METHOD="post" ACTION="ProductServlet.do" style="margin-bottom: 0px;">
 					 <input type="submit" value="查詢">
 					 <input type="hidden" name="pdid"  value="${productVO.pdid}">
 					 <input type="hidden" name="action"	value="getOne_For_Display">

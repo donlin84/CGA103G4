@@ -452,6 +452,11 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 
 		}
 	}
+	@Override
+	public List<ProductVO> getAll(Map<String, String[]> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 	
 //		List<ProductVO> list2 = dao.getAll();

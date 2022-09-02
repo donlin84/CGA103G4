@@ -1,15 +1,16 @@
 package com.product.controller;
 
 import java.io.*;
+
 import java.time.LocalDateTime;
-import java.util.Iterator;
+
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import com.product.model.ProductVO;
 import com.productPicture.model.ProductpicService;
 import com.productPicture.model.ProductpicVO;
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
+@WebServlet("/back-end/product/ProductServlet.do")
 public class ProductServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;

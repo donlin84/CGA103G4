@@ -15,11 +15,12 @@ import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.UnavailableException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-
+@WebServlet("/back-end/product/Productpic.do")
 public class ProductpicServlet extends HttpServlet {
 	
 	

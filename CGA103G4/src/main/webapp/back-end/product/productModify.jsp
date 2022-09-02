@@ -31,7 +31,7 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" action= "product.do" name="form1" enctype="multipart/form-data">
+<FORM METHOD="post" action= "ProductServlet.do" name="form1" enctype="multipart/form-data">
 
         <div id="pdid">
         <Label>&emsp;商品編號:</Label>

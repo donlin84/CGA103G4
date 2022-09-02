@@ -19,7 +19,7 @@ public class ProductsortDAO implements ProductsortDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB2");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc//Cga103G4");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

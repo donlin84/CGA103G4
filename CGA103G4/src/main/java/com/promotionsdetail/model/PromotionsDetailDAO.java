@@ -29,7 +29,7 @@ public class PromotionsDetailDAO implements PromotionsDetailDAO_interface {
 
 	private static final String UPDATE = "UPDATE cga103g4.PromotionsDetail set pdid=?, pmPdDiscountPrice=? where pmid = ?";
 
-	private static final String DELETE = "DELETE FROM cga103g4.PromotionsDetail where pmid = ? && pdid = ?";
+	private static final String GET_ONE_STMT = "SELECT pmid,pdid,pmPdDiscountPrice FROM cga103g4.PromotionsDetail where pmid = ? && pdid = ?";
 
 	private static final String GET_ALL_STMT = "SELECT pmid,pdid,pmPdDiscountPrice FROM cga103g4.PromotionsDetail order by pmid";
 
@@ -48,7 +48,7 @@ public class PromotionsDetailDAO implements PromotionsDetailDAO_interface {
 
 			pstmt.setInt(1, promotionsDetailVO.getPmid());
 			pstmt.setInt(2, promotionsDetailVO.getPdid());
-			
+
 //			pstmt.setInt(3, promotionsDetailVO.getPmPdDiscountPrice());
 			Integer pmPdDiscountPrice = promotionsDetailVO.getPmPdDiscountPrice();
 			if (pmPdDiscountPrice == null) {
@@ -89,7 +89,7 @@ public class PromotionsDetailDAO implements PromotionsDetailDAO_interface {
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setInt(1, promotionsDetailVO.getPdid());
-			
+
 //			pstmt.setInt(2, promotionsDetailVO.getPmPdDiscountPrice());
 			Integer pmPdDiscountPrice = promotionsDetailVO.getPmPdDiscountPrice();
 			if (pmPdDiscountPrice == null) {
@@ -97,8 +97,7 @@ public class PromotionsDetailDAO implements PromotionsDetailDAO_interface {
 			} else {
 				pstmt.setInt(2, pmPdDiscountPrice);
 			}
-			
-			
+
 			pstmt.setInt(3, promotionsDetailVO.getPmid());
 
 			pstmt.executeUpdate();
@@ -125,24 +124,43 @@ public class PromotionsDetailDAO implements PromotionsDetailDAO_interface {
 	}
 
 	@Override
-	public void delete(Integer pmid, Integer pdid) {
+	public PromotionsDetailVO findByPrimaryKey(Integer pmid, Integer pdid) {
 
+		PromotionsDetailVO promotionsDetailVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
 		try {
+
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(DELETE);
+			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setInt(1, pmid);
 			pstmt.setInt(2, pdid);
 
-			pstmt.executeUpdate();
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVo 也稱為 Domain object
+				promotionsDetailVO = new PromotionsDetailVO();
+				promotionsDetailVO.setPmid(rs.getInt("pmid"));
+				promotionsDetailVO.setPdid(rs.getInt("pdid"));
+				promotionsDetailVO.setPmPdDiscountPrice(rs.getInt("pmPdDiscountPrice"));
+				// null相關
+			}
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-
+			// Clean up JDBC resources
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -153,11 +171,12 @@ public class PromotionsDetailDAO implements PromotionsDetailDAO_interface {
 			if (con != null) {
 				try {
 					con.close();
-				} catch (SQLException e) {
+				} catch (Exception e) {
 					e.printStackTrace(System.err);
 				}
 			}
 		}
+		return promotionsDetailVO;
 	}
 
 	@Override
@@ -180,12 +199,12 @@ public class PromotionsDetailDAO implements PromotionsDetailDAO_interface {
 				promotionsDetailVO = new PromotionsDetailVO();
 				promotionsDetailVO.setPmid(rs.getInt("pmid"));
 				promotionsDetailVO.setPdid(rs.getInt("pdid"));
-				
+
 //				promotionsDetailVO.setPmPdDiscountPrice(rs.getInt("pmPdDiscountPrice"));
 				if (rs.wasNull()) {
 					promotionsDetailVO.setPmPdDiscountPrice(null);
 				}
-				
+
 				list.add(promotionsDetailVO);
 			}
 
@@ -229,7 +248,7 @@ public class PromotionsDetailDAO implements PromotionsDetailDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			
+
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_BY_PMID);
 			pstmt.setInt(1, pmid);
@@ -240,12 +259,12 @@ public class PromotionsDetailDAO implements PromotionsDetailDAO_interface {
 				promotionsDetailVO = new PromotionsDetailVO();
 				promotionsDetailVO.setPmid(rs.getInt("pmid"));
 				promotionsDetailVO.setPdid(rs.getInt("pdid"));
-				
+
 //				promotionsDetailVO.setPmPdDiscountPrice(rs.getInt("pmPdDiscountPrice"));
 				if (rs.wasNull()) {
 					promotionsDetailVO.setPmPdDiscountPrice(null);
 				}
-				
+
 				list.add(promotionsDetailVO);
 			}
 
@@ -293,7 +312,7 @@ public class PromotionsDetailDAO implements PromotionsDetailDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			
+
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_BY_PDID);
 			pstmt.setInt(1, pdid);
@@ -304,15 +323,15 @@ public class PromotionsDetailDAO implements PromotionsDetailDAO_interface {
 				promotionsDetailVO = new PromotionsDetailVO();
 				promotionsDetailVO.setPmid(rs.getInt("pmid"));
 				promotionsDetailVO.setPdid(rs.getInt("pdid"));
-				
+
 //				promotionsDetailVO.setPmPdDiscountPrice(rs.getInt("pmPdDiscountPrice"));
 				if (rs.wasNull()) {
 					promotionsDetailVO.setPmPdDiscountPrice(null);
 				}
-				
+
 				list.add(promotionsDetailVO);
 			}
-			
+
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 

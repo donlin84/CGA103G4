@@ -15,7 +15,8 @@ AnnouncementVO announcementVO = (AnnouncementVO) request.getAttribute("announcem
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 
 <title>公告新增</title>
 
@@ -23,10 +24,13 @@ AnnouncementVO announcementVO = (AnnouncementVO) request.getAttribute("announcem
 <meta content="Mannatthemes" name="author" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <link rel="shortcut icon" href="../assets/images/favicon.ico">
-<link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
-<link href="../assets/plugins/fullcalendar/vanillaCalendar.css" rel="stylesheet" type="text/css" />
+<link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css"
+	rel="stylesheet">
+<link href="../assets/plugins/fullcalendar/vanillaCalendar.css"
+	rel="stylesheet" type="text/css" />
 <link href="../assets/plugins/morris/morris.css" rel="stylesheet">
-<link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css">
 <link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
 
@@ -100,8 +104,20 @@ AnnouncementVO announcementVO = (AnnouncementVO) request.getAttribute("announcem
 								</ul>
 							</c:if>
 
-							<FORM METHOD="post" ACTION="AnnouncementServlet" name="form1" enctype="multipart/form-data">
+							<FORM METHOD="post" ACTION="AnnouncementServlet" name="form1"
+								enctype="multipart/form-data">
 								<table class="table" id="my-table">
+								
+									<jsp:useBean id="empHiberSvc" scope="page" class="com.emp.model.EmpHibernateService" />
+									<tr>
+										<td>員工:<font color=red><b>*</b></font></td>
+										<td><select size="1" name="empid">
+												<c:forEach var="empHibernateDAO" items="${empHiberSvc.all}">
+													<option value="${empVO.empid}"
+														${(announcementVO.empVO.empid==empVO.empid)? 'selected':'' }>${empid.empName}
+												</c:forEach>
+										</select></td>
+									</tr>
 									<tr>
 										<td>公告名稱:</td>
 										<td><input type="TEXT" name="annContent"
@@ -109,7 +125,8 @@ AnnouncementVO announcementVO = (AnnouncementVO) request.getAttribute("announcem
 									</tr>
 									<tr>
 										<td>公告圖片:</td>
-										<td><input type="file" name="annPic" accept="image/*" id="file0"></td>
+										<td><input type="file" name="annPic" accept="image/*"
+											id="file0"></td>
 									</tr>
 									<tr>
 										<td>公告圖片預覽:</td>
@@ -121,23 +138,21 @@ AnnouncementVO announcementVO = (AnnouncementVO) request.getAttribute("announcem
 									</tr>
 									<tr>
 										<td>活動狀態:</td>
-										<td><input type="TEXT" name="annStatus"
-											value="<%=(announcementVO == null) ? "1" : announcementVO.getAnnStatus()%>" /></td>
+										<td><select name="annStatus">
+												<option value="1">上架</option>
+												<option value="0">下架</option>
+										</select></td>
 									</tr>
 									<tr>
 										<td>起始時間:</td>
-										<td><input name="annUpdate" id="f_date1" type="text" autocomplete="off"></td>
+										<td><input name="annUpdate" id="f_date1" type="text"
+											autocomplete="off"></td>
 									</tr>
 									<tr>
 										<td>截止時間:</td>
-										<td><input name="annTime" id="f_date2" type="text" autocomplete="off"></td>
+										<td><input name="annTime" id="f_date2" type="text"
+											autocomplete="off"></td>
 									</tr>
-									<tr>
-										<td>員工編號:</td>
-										<td><input type="TEXT" name="empid"
-											value="<%=(announcementVO == null) ? "0" : announcementVO.getEmpVO().getEmpid()%>" /></td>
-									</tr>
-
 
 									<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
 									<!-- 	private Integer annid; -->
@@ -149,7 +164,8 @@ AnnouncementVO announcementVO = (AnnouncementVO) request.getAttribute("announcem
 									<!-- 	private EmpVO empVO; -->
 									<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
 								</table>
-								<br> <input type="hidden" name="action" value="insert"> <input type="submit" value="送出新增">
+								<br> <input type="hidden" name="action" value="insert">
+								<input type="submit" value="送出新增">
 							</FORM>
 						</div>
 
@@ -184,9 +200,12 @@ try {
 	annTime = new java.sql.Date(System.currentTimeMillis());
 }
 %>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.datetimepicker.css" />
+<script
+	src="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.js"></script>
+<script
+	src="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
 .xdsoft_datetimepicker .xdsoft_datepicker {
@@ -291,8 +310,10 @@ $('#f_date2').datetimepicker({
 <script src="../assets/js/modernizr.min.js"></script>
 <script src="../assets/js/waves.js"></script>
 <script src="../assets/js/jquery.nicescroll.js"></script>
-<script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-<script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script
+	src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+<script
+	src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="../assets/plugins/skycons/skycons.min.js"></script>
 <script src="../assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
 <script src="../assets/plugins/tiny-editable/numeric-input-example.js"></script>

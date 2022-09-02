@@ -35,7 +35,7 @@ public class OrdersServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/orders/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/orders/select_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -48,7 +48,7 @@ public class OrdersServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/orders/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/orders/select_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
@@ -61,14 +61,14 @@ public class OrdersServlet extends HttpServlet {
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/orders/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/orders/select_page.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("ordersVO", ordersVO); // 資料庫取出的empVO物件,存入req
-			String url = "/orders/listOneOrders.jsp";
+			String url = "/back-end/orders/listOneOrders.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -89,7 +89,7 @@ public class OrdersServlet extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			req.setAttribute("ordersVO", ordersVO); // 資料庫取出的empVO物件,存入req
-			String url = "/orders/update_orders_input.jsp";
+			String url = "/back-end/orders/update_orders_input.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);// ���\��� update_emp_input.jsp
 			successView.forward(req, res);
 		}
@@ -236,7 +236,7 @@ public class OrdersServlet extends HttpServlet {
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("ordersVO", ordersVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/orders/update_orders_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/orders/update_orders_input.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -251,7 +251,7 @@ public class OrdersServlet extends HttpServlet {
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("ordersVO", ordersVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			String url = "/orders/listOneOrders.jsp";
+			String url = "/back-end/orders/listOneOrders.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
@@ -400,7 +400,7 @@ public class OrdersServlet extends HttpServlet {
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("ordersVO", ordersVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/orders/addOrders.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/orders/addOrders.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -414,7 +414,7 @@ public class OrdersServlet extends HttpServlet {
 //			empVO = empSvc.addEmp(ename, job, hiredate, sal, comm, deptno);
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/orders/listAllOrders.jsp";
+			String url = "/back-end/orders/listAllOrders.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // �s�W���\�����listAllEmp.jsp
 			successView.forward(req, res);
 		}

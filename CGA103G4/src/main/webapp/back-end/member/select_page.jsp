@@ -4,7 +4,13 @@
 <html>
 <head>
 <title>Member: Home</title>
-
+<link rel="shortcut icon" href="../assets/images/favicon.ico">
+<link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+<link href="../assets/plugins/fullcalendar/vanillaCalendar.css" rel="stylesheet" type="text/css" />
+<link href="../assets/plugins/morris/morris.css" rel="stylesheet">
+<link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/style.css" rel="stylesheet" type="text/css">
 <style>
   table#table-1 {
 	width: 450px;
@@ -28,6 +34,9 @@
 
 </head>
 <body bgcolor='white'>
+
+	<!-- Navigation Bar-->
+	<%@ include file="../tools/header.jsp"%>
 
 <table id="table-1">
    <tr><td><h3>Member: Home</h3><h4>( MVC )</h4></td></tr>
@@ -95,7 +104,25 @@
 <ul>
   <li><a href='addMember.jsp'>Add</a> a new Member.</li>
 </ul>
-
+	<!-- Footer -->
+	<%@ include file="../tools/footer.jsp"%>
+	<!-- End Footer -->
+	<!-- jQuery -->
+<script src="../assets/js/jquery.min.js"></script>
+	<script src="../assets/js/popper.min.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/modernizr.min.js"></script>
+	<script src="../assets/js/waves.js"></script>
+	<script src="../assets/js/jquery.nicescroll.js"></script>
+	<script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+	<script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="../assets/plugins/skycons/skycons.min.js"></script>
+	<script src="../assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
+	<script src="../assets/plugins/tiny-editable/numeric-input-example.js"></script>
+	<script src="../assets/plugins/fullcalendar/vanillaCalendar.js"></script>
+	<script src="../assets/plugins/raphael/raphael-min.js"></script>
+	<script src="../assets/plugins/morris/morris.min.js"></script>
+	<script src="../assets/js/app.js"></script>
 
 </body>
 </html>

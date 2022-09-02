@@ -119,7 +119,7 @@
 		</c:forEach>
 	</ul>
 </c:if>
- <FORM METHOD="post" action= "product.do" name="form1" enctype="multipart/form-data">
+ <FORM METHOD="post" action= "ProductServlet.do" name="form1" enctype="multipart/form-data">
 
 <jsp:useBean id="pdSortSvc" scope="page" class="com.productSort.model.ProductsortService" />
 <div>

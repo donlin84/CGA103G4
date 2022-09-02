@@ -8,7 +8,8 @@
 
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 
 <title>後台首頁</title>
 
@@ -16,10 +17,13 @@
 <meta content="Mannatthemes" name="author" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <link rel="shortcut icon" href="assets/images/favicon.ico">
-<link href="assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
-<link href="assets/plugins/fullcalendar/vanillaCalendar.css" rel="stylesheet" type="text/css" />
+<link href="assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css"
+	rel="stylesheet">
+<link href="assets/plugins/fullcalendar/vanillaCalendar.css"
+	rel="stylesheet" type="text/css" />
 <link href="assets/plugins/morris/morris.css" rel="stylesheet">
-<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="assets/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css">
 <link href="assets/css/icons.css" rel="stylesheet" type="text/css">
 <link href="assets/css/style.css" rel="stylesheet" type="text/css">
 
@@ -42,24 +46,29 @@
 					<!-- Text Logo -->
 					<!--<a href="index.html" class="logo">-->
 					<!-- Image Logo -->
-					<a href="index-back.jsp" class="logo"><img src="assets/images/logo.png" alt="" class="logo-large"> </a>
+					<a href="index-back.jsp" class="logo"><img
+						src="assets/images/logo.png" alt="" class="logo-large"> </a>
 				</div>
 				<!-- End Logo container-->
 				<div class="menu-extras topbar-custom">
 					<ul class="list-inline float-right mb-0">
 						<li class="list-inline-item hide-phone app-search">
 							<form role="search" class="">
-								<input type="text" placeholder="Search..." class="form-control"><a href=""><i class="fa fa-search"></i></a>
+								<input type="text" placeholder="Search..." class="form-control"><a
+									href=""><i class="fa fa-search"></i></a>
 							</form>
 						</li>
 
 						<!-- notification-->
 
 						<li class="list-inline-item dropdown notification-list"><a
-							class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
-							aria-haspopup="false" aria-expanded="true"><i class="ti-bell noti-icon"></i><span
+							class="nav-link dropdown-toggle arrow-none waves-effect"
+							data-toggle="dropdown" href="#" role="button"
+							aria-haspopup="false" aria-expanded="true"><i
+								class="ti-bell noti-icon"></i><span
 								class="badge badge-danger noti-icon-badge">5</span></a>
-							<div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg"
+							<div
+								class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg"
 								style="position: absolute; transform: translate3d(-222px, 70px, 0px); top: 0px; left: 0px; will-change: transform;">
 								<!-- item-->
 
@@ -104,8 +113,10 @@
 
 						<!-- User-->
 						<li class="list-inline-item dropdown notification-list"><a
-							class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
-							aria-haspopup="false" aria-expanded="false"> <img src="assets/images/users/avatar-1.jpg" alt="user"
+							class="nav-link dropdown-toggle arrow-none waves-effect nav-user"
+							data-toggle="dropdown" href="#" role="button"
+							aria-haspopup="false" aria-expanded="false"> <img
+								src="assets/images/users/avatar-1.jpg" alt="user"
 								class="rounded-circle">
 						</a>
 
@@ -117,11 +128,13 @@
 									</h5>
 								</div>
 
-								<a class="dropdown-item" href="#"> <i class="mdi mdi-settings m-r-5 text-muted"></i>設定
+								<a class="dropdown-item" href="#"> <i
+									class="mdi mdi-settings m-r-5 text-muted"></i>設定
 								</a>
 
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#"> <i class="mdi mdi-logout m-r-5 text-muted"></i>登出
+								<a class="dropdown-item" href="#"> <i
+									class="mdi mdi-logout m-r-5 text-muted"></i>登出
 								</a>
 
 							</div></li>
@@ -146,92 +159,49 @@
 					<!-- Navigation Menu-->
 					<ul class="navigation-menu text-center">
 
-						<li class="has-submenu "><a href="#"><i class="mdi mdi-shopping"></i>商城管理</a>
-
+						<li class="has-submenu "><a href="#"><i
+								class="mdi mdi-shopping"></i>商城管理</a>
 							<ul class="submenu">
-								<li class="has-submenu"><a href="discount-management/discount-management.jsp">優惠方案管理</a>
-									<ul class="submenu">
-										<li><a href="discount-management/discount-management.jsp" data-target="nav1" class="nav">行銷紀錄</a></li>
-										<li><a href="discount-management/discount-management.jsp" data-target="nav2" class="nav">促銷安排</a></li>
-										<li><a href="discount-management/discount-management.jsp" data-target="nav3" class="nav">修改/取消活動</a></li>
-										<li><a href="discount-management/discount-management.jsp" data-target="nav4" class="nav">發放優惠券</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">商品管理</a>
-									<ul class="submenu">
-										<li><a href="#">上架/下架</a></li>
-										<li><a href="#">修改定價</a></li>
-									</ul></li>
+								<li><a href="discount-management/discount-management.jsp">優惠方案管理</a></li>
+								<li><a href="#">商品管理</a></li>
 								<li><a href="#">訂單管理</a></li>
 							</ul>
-						<li class="has-submenu "><a href="#"><i class="mdi ion-ios7-people"></i>課程管理</a>
+						<li class="has-submenu "><a href="#"><i
+								class="mdi ion-ios7-people"></i>課程管理</a>
 
 							<ul class="submenu">
-								<li class="has-submenu"><a href="#">課程</a>
-									<ul class="submenu">
-										<li><a href="#">上架/下架</a></li>
-										<li><a href="#">修改課程</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">課程標籤</a>
-									<ul class="submenu">
-										<li><a href="#">上架/下架</a></li>
-										<li><a href="#">修改標籤</a></li>
-									</ul></li>
+								<li><a href="#">課程</a></li>
+								<li><a href="#">課程標籤</a></li>
 								<li><a href="#">教師管理</a></li>
 								<li><a href="#">查看報名表</a></li>
 								<li><a href="#">課程紀錄</a></li>
 							</ul>
-						<li class="has-submenu "><a href="#"><i class="mdi ion-spoon"></i>私廚管理</a>
+						<li class="has-submenu "><a href="#"><i
+								class="mdi ion-spoon"></i>私廚管理</a>
 
 							<ul class="submenu">
-								<li class="has-submenu"><a href="#">預約管理</a>
-									<ul class="submenu">
-										<li><a href="#">設定預約時段</a></li>
-										<li><a href="#">查看預約單</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">個人資料管理</a>
-									<ul class="submenu">
-										<li><a href="#">基本資料設定修改</a></li>
-										<li><a href="#">密碼修改</a></li>
-									</ul></li>
+								<li><a href="#">預約管理</a></li>
+								<li><a href="#">個人資料管理</a></li>
 							</ul>
-						<li class="has-submenu"><a href="#"><i class="mdi dripicons-device-desktop"></i>前台管理</a>
+						<li class="has-submenu"><a href="#"><i
+								class="mdi dripicons-device-desktop"></i>前台管理</a>
 							<ul class="submenu">
-								<li class="has-submenu"><a href="#">客服管理</a>
-									<ul class="submenu">
-										<li><a href="#">訂單狀態</a></li>
-										<li><a href="#">自動回覆機器人設定</a></li>
-										<li><a href="#">查看客服紀錄</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">公告管理</a>
-									<ul class="submenu">
-										<li><a href="#">新增公告</a></li>
-										<li><a href="#">廣告管理</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">公司資料管理</a></li>
-								<li class="has-submenu"><a href="#">食譜管理</a>
-									<ul class="submenu">
-										<li><a href="#">食譜審核</a></li>
-										<li><a href="#">熱門食譜編排</a></li>
-									</ul></li>
-								<li class="has-submenu"><a href="#">討論區管理</a>
-									<ul class="submenu">
-										<li><a href="#">檢舉管理</a></li>
-									</ul></li>
-							</ul></li>
-
-						<li class="has-submenu "><a href="#"><i class="mdi mdi-layers"></i>後台管理</a>
-
+								<li><a href="#">客服管理</a></li>
+								<li><a href="#">公告管理</a></li>
+								<li><a href="#">公司資料管理</a></li>
+								<li><a href="#">食譜管理</a></li>
+								<li><a href="#">討論區管理</a>
+							</ul>
+						<li class="has-submenu "><a href="#"><i
+								class="mdi mdi-layers"></i>後台管理</a>
 							<ul class="submenu">
-								<li class="has-submenu"><a href="#">管理員系統</a>
-									<ul class="submenu">
-										<li><a href="#">新增/停用管理員</a></li>
-										<li><a href="#">權限管理</a></li>
-									</ul></li>
+								<li><a href="#">管理員系統</a></li>
 								<li><a href="#">會員</a></li>
 							</ul>
 					</ul>
 					<!-- End navigation menu -->
 				</div>
+
 				<!-- end #navigation -->
 			</div>
 			<!-- end container -->
@@ -271,7 +241,8 @@
 	<script src="assets/js/waves.js"></script>
 	<script src="assets/js/jquery.nicescroll.js"></script>
 	<script src="assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-	<script src="assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<script
+		src="assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 	<script src="assets/plugins/skycons/skycons.min.js"></script>
 	<script src="assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
 	<script src="assets/plugins/tiny-editable/numeric-input-example.js"></script>
