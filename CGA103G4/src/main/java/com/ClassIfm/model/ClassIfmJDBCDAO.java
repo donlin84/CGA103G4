@@ -425,6 +425,78 @@ Statement stmt=	con.createStatement();
 		}
 		
 	}
+	//萬用查詢
+	@Override
+	public List<ClassIfmVO> cangetall(String xxx) {
+		List<ClassIfmVO> list = new ArrayList<ClassIfmVO>();
+		ClassIfmVO classIfmVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid,passwd);
+			pstmt = con.prepareStatement(xxx);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				classIfmVO = new ClassIfmVO();
+				classIfmVO.setClaid(rs.getInt("claid"));
+				classIfmVO.setThrid(rs.getInt("thrid"));
+				classIfmVO.setClaTagid(rs.getInt("clatagid"));
+				classIfmVO.setClaTitle(rs.getString("clatitle"));
+				classIfmVO.setClaIntroduction(rs.getString("claintroduction"));
+				classIfmVO.setClaTime(rs.getObject("clatime",LocalDateTime.class));
+				classIfmVO.setClaPrice(rs.getInt("claprice"));
+				classIfmVO.setClaPeopleMax(rs.getInt("clapeoplemax"));
+				classIfmVO.setClaPeopleMin(rs.getInt("clapeoplemin"));
+				classIfmVO.setClaPeople(rs.getInt("clapeople"));
+				classIfmVO.setClaStatus(rs.getInt("clastatus"));
+				classIfmVO.setClaStrTime(rs.getObject("clastrtime",LocalDateTime.class));
+				classIfmVO.setClaFinTime(rs.getObject("clafintime",LocalDateTime.class));
+
+				
+				list.add(classIfmVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 
 
 /*---------------------------------------------------------------------------------------*/
@@ -502,12 +574,12 @@ Statement stmt=	con.createStatement();
 //		
 //		}
 		//單一更新報名人數
-		ClassIfmVO vo2 = new ClassIfmVO();
-		
-		vo2.setClaPeople(10);
-		vo2.setClaid(2);
-		
-		dao.update_clapeople(vo2);	
+//		ClassIfmVO vo2 = new ClassIfmVO();
+//		
+//		vo2.setClaPeople(10);
+//		vo2.setClaid(2);
+//		
+//		dao.update_clapeople(vo2);	
 
 	}
 

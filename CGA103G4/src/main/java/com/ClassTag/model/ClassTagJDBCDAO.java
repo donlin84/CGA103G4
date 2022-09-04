@@ -18,7 +18,7 @@ public class ClassTagJDBCDAO implements ClassTagDAO_interface{
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei";
 	String userid = "root";
-	String passwd = "Alan0622";
+	String passwd = "cga103g4";
 	
 	private static final String INSERT_ClassTag = 
 			"INSERT INTO ClassTag (claTagName,claTagStatus) VALUES (?, ?)";

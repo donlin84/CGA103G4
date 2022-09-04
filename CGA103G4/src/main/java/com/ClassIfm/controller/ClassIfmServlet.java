@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import org.eclipse.jdt.internal.compiler.batch.Main;
+import org.hibernate.engine.query.spi.FilterQueryPlan;
 
 import com.ClassIfm.model.ClassIfmJDBCDAO;
 import com.ClassIfm.model.ClassIfmService;
@@ -482,6 +483,92 @@ public class ClassIfmServlet extends HttpServlet {
 		String url ="/back-end/classifm/listOneClassIfm.jsp";
 		RequestDispatcher getOneClassIfm = req.getRequestDispatcher(url);
 		getOneClassIfm.forward(req, resp);
+		}
+		
+		//前端篩選功能
+		if("browse".equals(req.getParameter("action"))) {
+			String thr[]=req.getParameterValues("teacher");
+			System.out.println(Arrays.toString(thr));
+			String tag[]=req.getParameterValues("clatag");
+			System.out.println(Arrays.toString(tag));
+			
+			Integer claprice_min = Integer.valueOf(req.getParameter("claprice_min"));
+			Integer claprice_max = Integer.valueOf(req.getParameter("claprice_max"));
+			
+			System.out.println("claprice_min="+claprice_min);
+			System.out.println("claprice_max="+claprice_max);
+			
+			String thr_sentence="";
+			String tag_sentence="";
+			String clatagid_string="";
+			String thrid_string="";
+			//教師
+			if(thr!=null) {
+				for(int i =0;i<thr.length;i++) {
+					if(i==0) {
+						thr_sentence+=(thr[i]);
+					}else {
+						thr_sentence+=(","+thr[i]);
+					}
+				}
+				thrid_string=" and thrid in ("+thr_sentence+")";
+			}else {
+				
+			}
+			
+			System.out.println("教師語句結果="+thr_sentence);
+			
+			//課程種類
+			if(tag!=null) {
+				for(int i =0;i<tag.length;i++) {
+					if(i==0) {
+						tag_sentence+=(tag[i]);
+					}else {
+						tag_sentence+=(","+tag[i]);
+					}
+				}
+				clatagid_string=" and clatagid in ("+tag_sentence+")";
+			}else {
+				
+			}
+			
+			System.out.println("課程種類語句結果="+tag_sentence);
+			
+			String claprice_string = " and claprice between "+claprice_min+" and "+claprice_max;
+			
+			String dao_string;
+			dao_string="select * from classifm where 1=1"+clatagid_string+thrid_string+claprice_string+" and claStatus = 1"+";";
+			
+			System.out.println("dao_string="+dao_string);
+			
+			ClassIfmService classifmSrv = new ClassIfmService();
+			List<ClassIfmVO> list=classifmSrv.cangetall(dao_string);
+			
+			req.setAttribute("cangetall", list);
+			
+			for (ClassIfmVO cangetall : list) {
+				System.out.print(cangetall.getClaid() + ",");
+				System.out.print(cangetall.getThrid() + ",");
+				System.out.print(cangetall.getClaTagid() + ",");
+				System.out.print(cangetall.getClaTitle() + ",");
+				System.out.print(cangetall.getClaIntroduction() + ",");
+				System.out.print(cangetall.getClaTime() + ",");
+				System.out.print(cangetall.getClaPrice()+ ",");
+				System.out.print(cangetall.getClaPeopleMax()+ ",");
+				System.out.print(cangetall.getClaPeopleMin()+ ",");
+				System.out.print(cangetall.getClaPeople()+ ",");
+				System.out.print(cangetall.getClaStatus()+ ",");
+				System.out.print(cangetall.getClaStrTime()+ ",");
+				System.out.print(cangetall.getClaFinTime()+ ",");
+				System.out.println();
+				
+				}
+			//保留check box勾選過的
+//			RequestDispatcher xxx = req.getRequestDispatcher("/front-end/classifm/classifm_browse.jsp");
+//			xxx.forward(req, resp);
+			
+//			resp.sendRedirect("/CGA103G4/front-end/classifm/classifm_browse.jsp");
+			
 		}
 		
 	}

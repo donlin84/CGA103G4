@@ -77,8 +77,10 @@ public ClassIfmVO updateClassIfm(Integer claid,Integer thrid,Integer claTagid,St
 		dao.update_clapeople(classIfmVO);
 		return classIfmVO;
 	}
-
-	
+	//萬用查詢
+	public List<ClassIfmVO> cangetall(String xxx){
+		return dao.cangetall(xxx);
+	}
 
 	
 	

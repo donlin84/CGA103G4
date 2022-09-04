@@ -16,4 +16,6 @@ public interface ClassIfmDAO_interface {
     public void insertwithclapic(ClassIfmVO classIfmVO,List<ClassPictureVO> list);
     //單一更新報名人數
     public void update_clapeople(ClassIfmVO classIfmVO);
+    //前台萬用查詢
+    public List<ClassIfmVO> cangetall(String xxx);
 }
