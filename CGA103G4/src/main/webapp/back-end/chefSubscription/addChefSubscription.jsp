@@ -76,7 +76,7 @@ th, td {
 		</ul>
 	</c:if>
 
-	<FORM METHOD="post" ACTION="chefSubscription.do" name="form1">
+	<FORM METHOD="post" ACTION="ChefSubscription.do" name="form1">
 		<table>
 			<tr>
 				<td>私廚編號:</td>

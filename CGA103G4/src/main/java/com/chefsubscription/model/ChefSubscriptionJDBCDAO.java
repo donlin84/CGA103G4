@@ -9,6 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+
+
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_ChefSubscription;
 
 public class ChefSubscriptionJDBCDAO implements ChefSubscriptionDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
@@ -170,6 +175,67 @@ public class ChefSubscriptionJDBCDAO implements ChefSubscriptionDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<ChefSubscriptionVO> getAll(Map<String, String[]> map) {
+		List<ChefSubscriptionVO> list = new ArrayList<ChefSubscriptionVO>();
+		ChefSubscriptionVO chefSubscriptionVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+
+			String finalSQL = "select * from chefSubscription "
+		          + jdbcUtil_CompositeQuery_ChefSubscription.get_WhereCondition(map)
+		          + "order by chefid";
+			pstmt = conn.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				chefSubscriptionVO = new ChefSubscriptionVO();
+				chefSubscriptionVO.setChefid(rs.getInt("chefid"));
+				chefSubscriptionVO.setMemid(rs.getInt("memid"));
+				list.add(chefSubscriptionVO); // Store the row in the List
+			}
+	
+			// Handle any SQL errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {

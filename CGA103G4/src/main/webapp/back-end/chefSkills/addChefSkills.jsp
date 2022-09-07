@@ -12,22 +12,7 @@ ChefSkillsVO chefSkillsVO = (ChefSkillsVO) request.getAttribute("chefSkillsVO");
 <title>私廚專長資料新增 - addChefSkills.jsp</title>
 
 <style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
 
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
 </style>
 
 <style>
@@ -64,7 +49,7 @@ th, td {
 		</tr>
 	</table>
 
-	<h3>資料新增:</h3>
+	<h3>建立專長種類:</h3>
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -76,7 +61,7 @@ th, td {
 		</ul>
 	</c:if>
 
-	<FORM METHOD="post" ACTION="chefSkills.do" name="form1">
+	<FORM METHOD="post" ACTION="ChefSkills.do" name="form1">
 		<table>
 			<tr>
 				<td>私廚編號:</td>

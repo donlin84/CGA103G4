@@ -1,6 +1,9 @@
 package com.chefskills.model;
 
 import java.util.List;
+import java.util.Map;
+
+
 
 public class ChefSkillsService {
 	private ChefSkillsDAO_interface dao;
@@ -40,5 +43,8 @@ public class ChefSkillsService {
 
 	public List<ChefSkillsVO> getAll() {
 		return dao.getAll();
+	}
+	public List<ChefSkillsVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
 	}
 }

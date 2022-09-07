@@ -1,16 +1,17 @@
 package com.chef.controller;
 
 import java.io.*;
-
 import java.util.*;
 
 import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import com.chef.model.*;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 500 * 1024 * 1024, maxRequestSize = 5 * 500 * 1024
 		* 1024) // 上傳三要素之二
+@WebServlet("/back-end/chef/Chef.do")
 public class ChefServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String saveDirectory = "/images_uploaded"; // 上傳檔案的目的地目錄;
@@ -22,7 +23,8 @@ public class ChefServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-
+//		System.out.println(action);
+//		System.out.println("test");
 //============================================================================
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -122,7 +124,7 @@ public class ChefServlet extends HttpServlet {
 		}
 //============================================================================
 		if ("getOne_For_Update".equals(action)) { // 來自listAllChef.jsp的請求
-
+//System.out.println("aaa");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -144,7 +146,7 @@ public class ChefServlet extends HttpServlet {
 		}
 //============================================================================
 		if ("update".equals(action)) { // 來自update_chef_input.jsp的請求
-
+			System.out.println("aaa");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -438,7 +440,43 @@ public class ChefServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 
-//		
+//============================================================================
+		
+		if ("listChef_ByCompositeQuery".equals(action)) { // 來自select_page.jsp的複合查詢請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+				
+				/***************************1.將輸入資料轉為Map**********************************/ 
+				//採用Map<String,String[]> getParameterMap()的方法 
+				//注意:an immutable java.util.Map 
+				//Map<String, String[]> map = req.getParameterMap();
+				HttpSession session = req.getSession();
+				Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
+				
+				// 以下的 if 區塊只對第一次執行時有效
+				if (req.getParameter("whichPage") == null){
+					Map<String, String[]> map1 = new HashMap<String, String[]>(req.getParameterMap());
+					session.setAttribute("map",map1);
+					map = map1;
+				} 
+				
+				/***************************2.開始複合查詢***************************************/
+				ChefService chefSvc = new ChefService();
+				List<ChefVO> list  = chefSvc.getAll(map);
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				req.setAttribute("listChef_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+				RequestDispatcher successView = req.getRequestDispatcher("/back-end/chef/listChef_ByCompositeQuery.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+				successView.forward(req, res);
+		}
+
+		
+		
+		
+		
 	}
 
 	private byte[] getPictureByteArray(String path) throws IOException {

@@ -79,34 +79,53 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO"); //ChefServlet.java (Con
 							<div class="main_content">
 								<aside class="aside">
 
-					<a href='addChef.jsp'>新增私廚帳號</a>
-											<br>
-										<a href='select_page.jsp'>私廚資訊查詢</a>
-											<br>
-										<a href='../chefSkillsType/select_page.jsp'>專長種類查詢</a>
-											<br>
-										<a href='../chefSkills/select_page.jsp'>私廚專長查詢</a>
-											<br>
-										<a href='../chefSubscription/select_page.jsp'>私廚訂閱清單查詢</a>
-											<br>
-										<a href='../chefSubscription/select_page.jsp'>私廚預約表查詢</a>
-											<br>
-										<a href='../chefSubscription/select_page.jsp'>預約單查詢</a>
-											<br>
+		<div class="btn-group mo-mb-2" 
+                     			style="top: 0px; left: 0px;">
+                                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false" style="width:140px">私廚資訊 </button>
+                                    <div class="dropdown-menu">
+                                    <a class="dropdown-item" href='../chef/addChef.jsp'>新增私廚帳號</a>
+                                    <a class="dropdown-item" href='../chef/select_page.jsp'>搜尋私廚</a>
+                                    <a class="dropdown-item" href='../chef/listAllChef.jsp'>私廚列表</a>
+                                    </div>
+                                </div>
+
+                                <div class="btn-group mo-mb-2"
+                                style="top: 20px; left: 0px;">
+                                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false" style="width:140px">專長種類 </button>
+                                    <div class="dropdown-menu">
+                                    <a class="dropdown-item" href='../chefSkillsType/addChefSkillsType.jsp'>新增專長</a>
+                                    <a class="dropdown-item" href='../chefSkillsType/select_page.jsp'>搜尋專長</a>
+                                    <a class="dropdown-item" href='../chefSkillsType/listAllChefSkillsType.jsp'>專長列表</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="btn-group mo-mb-2"
+                                style="top: 40px; left: 0px;">
+                                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false" style="width:140px">私廚專長 </button>
+                                    <div class="dropdown-menu">
+<!--                                     <a class="dropdown-item" href='../chefSkills/select_page.jsp'>新增私廚專長</a> -->
+                                    <a class="dropdown-item" href='../chefSkills/select_page.jsp'>搜尋私廚專長</a>
+                                    <a class="dropdown-item" href='../chefSkills/listAllChefSkills.jsp'>私廚專長列表</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="btn-group mo-mb-2"
+                                style="top: 60px; left: 0px;">
+                                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false" style="width:140px">私廚訂閱 </button>
+                                    <div class="dropdown-menu">
+<!--                                     <a class="dropdown-item" href='../chefSubscription/select_page.jsp'>新增專長</a> -->
+                                    <a class="dropdown-item" href='../chefSubscription/select_page.jsp'>搜尋私廚訂閱</a>
+                                    <a class="dropdown-item" href='../chefSubscription/listAllChefSubscription.jsp'>私廚訂閱列表</a>
+                                    </div>
+                                </div>
 								</aside>
 
 								<main class="main">
-									<table id="table-1">
-										<tr>
-											<td>
-												<h3>私廚資料修改 - update_chef_input.jsp</h3>
-												<h4>
-													<a href="select_page.jsp"><img src="images/back1.gif"
-														width="100" height="32" border="0">回首頁</a>
-												</h4>
-											</td>
-										</tr>
-									</table>
+						
 
 									<h3>資料修改:</h3>
 
@@ -120,7 +139,7 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO"); //ChefServlet.java (Con
 										</ul>
 									</c:if>
 
-									<FORM METHOD="post" ACTION="chef.do" name="form1"
+									<FORM METHOD="post" ACTION="Chef.do" name="form1"
 										enctype="multipart/form-data">
 										<table>
 											<tr>
@@ -153,14 +172,14 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO"); //ChefServlet.java (Con
 												<td>狀態:</td>
 												<c:if test="${chefVO.getChefStatus() == 0}">
 													<td><select name="chefStatus" size="1">
-															<option value="0">0
-															<option value="1">1
+															<option value="0">啟用
+															<option value="1">停權
 													</select></td>
 												</c:if>
 												<c:if test="${chefVO.getChefStatus() == 1}">
 													<td><select name="chefStatus" size="1">
-															<option value="1">1
-															<option value="0">0
+															<option value="1">停權
+															<option value="0">啟用
 													</select></td>
 												</c:if>
 											</tr>

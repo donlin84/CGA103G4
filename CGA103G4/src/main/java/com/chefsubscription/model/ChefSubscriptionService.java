@@ -1,6 +1,9 @@
 package com.chefsubscription.model;
 
 import java.util.List;
+import java.util.Map;
+
+
 
 public class ChefSubscriptionService {
 	private ChefSubscriptionDAO_interface dao;
@@ -31,5 +34,9 @@ public class ChefSubscriptionService {
 
 	public List<ChefSubscriptionVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public List<ChefSubscriptionVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
 	}
 }

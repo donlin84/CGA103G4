@@ -1,6 +1,8 @@
 package com.creditcardinformation.model;
 
 import java.util.List;
+import java.util.Map;
+
 
 
 public class CreditCardInformationService {
@@ -35,5 +37,9 @@ public class CreditCardInformationService {
 
 	public List<CreditCardInformationVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public List<CreditCardInformationVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
 	}
 }

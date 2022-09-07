@@ -1,6 +1,7 @@
 package com.chef.model;
 
 import java.util.List;
+import java.util.Map;
 
 public class ChefService {
 	private ChefDAO_interface dao;
@@ -9,9 +10,8 @@ public class ChefService {
 		dao = new ChefJDBCDAO();
 	}
 
-	public ChefVO addChef(String chefAccount, String chefPassword, String chefName, String chefNickname,
-			Integer chefPrice, byte[] license, byte[] idCard, byte[] idCardBack, byte[] chefPhoto,
-			String chefIntroduction) {
+	public ChefVO addChef(String chefAccount, String chefPassword, String chefName,
+			String chefNickname, Integer chefPrice, byte[] license, byte[] idCard, byte[] idCardBack, byte[] chefPhoto, String chefIntroduction) {
 
 		ChefVO chefVO = new ChefVO();
 		chefVO.setChefAccount(chefAccount);
@@ -29,9 +29,8 @@ public class ChefService {
 		return chefVO;
 	}
 
-	public ChefVO updateChef(Integer chefid, String chefName, String chefNickname, String chefAccount,
-			String chefPassword, Integer chefStatus, Integer chefPrice, byte[] license, byte[] idCard,
-			byte[] idCardBack, byte[] chefPhoto, String chefIntroduction) {
+	public ChefVO updateChef(Integer chefid, String chefName, String chefNickname, String chefAccount, String chefPassword, 
+			Integer chefStatus, Integer chefPrice, byte[] license, byte[] idCard, byte[] idCardBack, byte[] chefPhoto, String chefIntroduction) {
 //		public ChefVO updateChef(Integer chefid, String chefAccount, String chefPassword, Integer chefStatus, String chefName,
 //				String chefNickname, Integer chefPrice, String schDate, Integer reserve, Integer com, Integer gomg,
 //				byte[] license, byte[] idCard, byte[] idCardBack, byte[] chefPhoto, String chefIntroduction) {
@@ -64,9 +63,8 @@ public class ChefService {
 //		System.out.println("testAll");
 		return dao.getAll();
 	}
-
-	public ChefVO getoneaccount(String chefAccount) {
-		return dao.get_one_account(chefAccount);
+	
+	public List<ChefVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
 	}
-
 }

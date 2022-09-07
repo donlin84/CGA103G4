@@ -9,8 +9,10 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Chef;
+
 public class ChefJDBCDAO implements ChefDAO_interface {
-	String driver = "com.mysql.cj.jdbc.Driver";
+//	String driver = "com.mysql.cj.jdbc.Driver";
 
 	private static final String INSERT_STMT = "INSERT INTO Chef(chefName, chefNickname, "
 			+ "chefAccount, chefPassword, chefPrice, license, idCard, idCardBack, chefPhoto, chefIntroduction ) "
@@ -31,7 +33,7 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, chefVO.getChefName());
@@ -76,7 +78,7 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(UPDATE);
 			pstmt.setString(1, chefVO.getChefName());
@@ -125,7 +127,7 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(GET_ONE_STMT);
 			pstmt.setInt(1, chefid);
@@ -191,7 +193,7 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
@@ -223,6 +225,73 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<ChefVO> getAll(Map<String, String[]> map) {
+		List<ChefVO> list = new ArrayList<ChefVO>();
+		ChefVO chefVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+
+			String finalSQL = "select * from chef "
+		          + jdbcUtil_CompositeQuery_Chef.get_WhereCondition(map)
+		          + "order by chefid";
+			pstmt = conn.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				chefVO = new ChefVO();
+				chefVO.setChefid(rs.getInt("chefid"));
+				chefVO.setChefAccount(rs.getString("chefAccount"));
+				chefVO.setChefPassword(rs.getString("chefPassword"));
+				chefVO.setChefStatus(rs.getInt("chefStatus"));
+				chefVO.setChefName(rs.getString("chefName"));
+				chefVO.setChefNickname(rs.getString("chefNickname"));
+				chefVO.setChefPrice(rs.getInt("chefPrice"));
+				chefVO.setChefIntroduction(rs.getString("chefIntroduction"));
+				list.add(chefVO); // Store the row in the List
+			}
+	
+			// Handle any SQL errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {

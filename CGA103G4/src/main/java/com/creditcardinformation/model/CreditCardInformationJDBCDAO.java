@@ -5,8 +5,12 @@ import static com.util.Common.*;
 import java.sql.*;
 import java.util.*;
 
+import com.chef.model.ChefVO;
+
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Chef;
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_CreditCardInformation;
+
 public class CreditCardInformationJDBCDAO implements CreditCardInformationDAO_interface{
-	String driver = "com.mysql.cj.jdbc.Driver";
 
 	private static final String INSERT_STMT = "INSERT INTO CreditCardInformation (memid, "
 			+ "creditCardNumber, creditCardName, creditCardTime, cvcCode) VALUES (?,?,?,?,?)";
@@ -23,7 +27,7 @@ public class CreditCardInformationJDBCDAO implements CreditCardInformationDAO_in
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(INSERT_STMT);
 			pstmt.setInt(1, creditCardInformationVO.getMemid());
@@ -65,7 +69,7 @@ public class CreditCardInformationJDBCDAO implements CreditCardInformationDAO_in
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(DELETE);
 			pstmt.setInt(1, creditCardid);
@@ -105,7 +109,7 @@ public class CreditCardInformationJDBCDAO implements CreditCardInformationDAO_in
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(GET_ONE_STMT);
 			pstmt.setInt(1, creditCardid);
@@ -163,7 +167,7 @@ public class CreditCardInformationJDBCDAO implements CreditCardInformationDAO_in
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
@@ -187,6 +191,71 @@ public class CreditCardInformationJDBCDAO implements CreditCardInformationDAO_in
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<CreditCardInformationVO> getAll(Map<String, String[]> map) {
+		List<CreditCardInformationVO> list = new ArrayList<CreditCardInformationVO>();
+		CreditCardInformationVO creditCardInformationVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+
+			String finalSQL = "select * from creditcardinformation "
+		          + jdbcUtil_CompositeQuery_CreditCardInformation.get_WhereCondition(map)
+		          + "order by creditCardid";
+			pstmt = conn.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				creditCardInformationVO = new CreditCardInformationVO();
+				creditCardInformationVO.setCreditCardid(rs.getInt("creditCardid"));
+				creditCardInformationVO.setMemid(rs.getInt("memid"));
+				creditCardInformationVO.setCreditCardNumber(rs.getString("creditCardNumber"));
+				creditCardInformationVO.setCreditCardName(rs.getString("creditCardName"));
+				creditCardInformationVO.setCreditCardTime(rs.getString("creditCardTime"));
+				creditCardInformationVO.setCvcCode(rs.getString("cvcCode"));
+				list.add(creditCardInformationVO); // Store the row in the List
+			}
+	
+			// Handle any SQL errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {

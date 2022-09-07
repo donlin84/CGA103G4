@@ -10,9 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_ChefSkillsType;
 
 public class ChefSkillsTypeJDBCDAO implements ChefSkillsTypeDAO_interface {
-	String driver = "com.mysql.cj.jdbc.Driver";
 
 	private static final String INSERT_STMT = "INSERT INTO ChefSkillsType (skill) VALUES (?)";
 	private static final String GET_ALL_STMT = "SELECT skillid,skill FROM ChefSkillsType order by skillid";
@@ -24,7 +27,7 @@ public class ChefSkillsTypeJDBCDAO implements ChefSkillsTypeDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(INSERT_STMT);
 			pstmt.setString(1, chefskillstypeVO.getSkill());
@@ -60,7 +63,7 @@ public class ChefSkillsTypeJDBCDAO implements ChefSkillsTypeDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(UPDATE);
 			pstmt.setString(1, chefskillstypeVO.getSkill());
@@ -99,7 +102,7 @@ public class ChefSkillsTypeJDBCDAO implements ChefSkillsTypeDAO_interface {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(GET_ONE_STMT);
 			pstmt.setInt(1, skillid);
@@ -151,7 +154,7 @@ public class ChefSkillsTypeJDBCDAO implements ChefSkillsTypeDAO_interface {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(driver);
+			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = conn.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
@@ -195,6 +198,67 @@ public class ChefSkillsTypeJDBCDAO implements ChefSkillsTypeDAO_interface {
 		return list;
 	}
 
+	@Override
+	public List<ChefSkillsTypeVO> getAll(Map<String, String[]> map) {
+		List<ChefSkillsTypeVO> list = new ArrayList<ChefSkillsTypeVO>();
+		ChefSkillsTypeVO chefSkillsTypeVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+
+			String finalSQL = "select * from chefSkillsType "
+		          + jdbcUtil_CompositeQuery_ChefSkillsType.get_WhereCondition(map)
+		          + "order by skillid";
+			pstmt = conn.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				chefSkillsTypeVO = new ChefSkillsTypeVO();
+				chefSkillsTypeVO.setSkillid(rs.getInt("skillid"));
+				chefSkillsTypeVO.setSkill(rs.getString("skill"));
+				list.add(chefSkillsTypeVO); // Store the row in the List
+			}
+	
+			// Handle any SQL errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
 	public static void main(String[] args) {
 		ChefSkillsTypeJDBCDAO dao = new ChefSkillsTypeJDBCDAO();
 

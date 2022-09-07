@@ -84,7 +84,7 @@ th, td {
 		</ul>
 	</c:if>
 
-	<FORM METHOD="post" ACTION="member.do" name="form1">
+	<FORM METHOD="post" ACTION="Member.do" name="form1">
 		<table>
 			<tr>
 				<td><label for="memName">姓名:</label></td>

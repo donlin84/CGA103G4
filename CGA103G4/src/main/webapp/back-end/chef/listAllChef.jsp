@@ -71,20 +71,49 @@
 								<aside class="aside">
 
 							
-										<a href='addChef.jsp'>新增私廚帳號</a>
-											<br>
-										<a href='select_page.jsp'>私廚資訊查詢</a>
-											<br>
-										<a href='../chefSkillsType/select_page.jsp'>專長種類查詢</a>
-											<br>
-										<a href='../chefSkills/select_page.jsp'>私廚專長查詢</a>
-											<br>
-										<a href='../chefSubscription/select_page.jsp'>私廚訂閱清單查詢</a>
-											<br>
-										<a href='../chefSubscription/select_page.jsp'>私廚預約表查詢</a>
-											<br>
-										<a href='../chefSubscription/select_page.jsp'>預約單查詢</a>
-											<br>
+						<div class="btn-group mo-mb-2" 
+                     			style="top: 0px; left: 0px;">
+                                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false" style="width:140px">私廚資訊 </button>
+                                    <div class="dropdown-menu">
+                                    <a class="dropdown-item" href='../chef/addChef.jsp'>新增私廚帳號</a>
+                                    <a class="dropdown-item" href='../chef/select_page.jsp'>搜尋私廚</a>
+                                    <a class="dropdown-item" href='../chef/listAllChef.jsp'>私廚列表</a>
+                                    </div>
+                                </div>
+
+                                <div class="btn-group mo-mb-2"
+                                style="top: 20px; left: 0px;">
+                                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false" style="width:140px">專長種類 </button>
+                                    <div class="dropdown-menu">
+                                    <a class="dropdown-item" href='../chefSkillsType/addChefSkillsType.jsp'>新增專長</a>
+                                    <a class="dropdown-item" href='../chefSkillsType/select_page.jsp'>搜尋專長</a>
+                                    <a class="dropdown-item" href='../chefSkillsType/listAllChefSkillsType.jsp'>專長列表</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="btn-group mo-mb-2"
+                                style="top: 40px; left: 0px;">
+                                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false" style="width:140px">私廚專長 </button>
+                                    <div class="dropdown-menu">
+<!--                                     <a class="dropdown-item" href='../chefSkills/select_page.jsp'>新增私廚專長</a> -->
+                                    <a class="dropdown-item" href='../chefSkills/select_page.jsp'>搜尋私廚專長</a>
+                                    <a class="dropdown-item" href='../chefSkills/listAllChefSkills.jsp'>私廚專長列表</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="btn-group mo-mb-2"
+                                style="top: 60px; left: 0px;">
+                                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false" style="width:140px">私廚訂閱 </button>
+                                    <div class="dropdown-menu">
+<!--                                     <a class="dropdown-item" href='../chefSubscription/select_page.jsp'>新增專長</a> -->
+                                    <a class="dropdown-item" href='../chefSubscription/select_page.jsp'>搜尋私廚訂閱</a>
+                                    <a class="dropdown-item" href='../chefSubscription/listAllChefSubscription.jsp'>私廚訂閱列表</a>
+                                    </div>
+                                </div>
 									
 								</aside>
 
@@ -95,15 +124,11 @@
 <img id='bgImg' />
 </div>
 </div>
-<table id="table-1">
-	<tr><td>
-		 <h3>所有私廚資料 - listAllChef.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
+
 <table>
 	<tr>
-		<th>編號</th>
+		<th>修改</th>
+		<th width="80px">編號</th>
 		<th>帳號</th>
 		<th>密碼</th>
 		<th>狀態</th>
@@ -118,8 +143,10 @@
 		<th>身分證(反)</th>
 		<th>個人照</th>
 		<th>簡介</th>
-		<th>修改</th>
 
+		
+<!-- 	white-space:nowrap; -->
+<!-- 	overflow:hidden; -->
 	</tr>
 
 	
@@ -128,10 +155,22 @@
 <c:set var="a" value="2"/>
 
 		<tr>
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/chef/Chef.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="修改">
+			     <input type="hidden" name="chefid"  value="${chefVO.chefid}">
+			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			</td>
 			<td>${chefVO.chefid}</td>
 			<td>${chefVO.chefAccount}</td>
 			<td>${chefVO.chefPassword}</td>
-			<td>${chefVO.chefStatus}</td>
+		
+			<c:if test="${chefVO.getChefStatus() == 0}">
+				<td>啟用</td>	
+			</c:if>
+			<c:if test="${chefVO.getChefStatus() == 1}">
+				<td>停權</td>
+			</c:if>
 			<td>${chefVO.chefName}</td>
 			<td>${chefVO.chefNickname}</td> 
 			<td>${chefVO.chefPrice}</td>
@@ -145,18 +184,13 @@
 
 
 			
-			<td>${chefVO.chefIntroduction}</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/chef/chef.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="chefid"  value="${chefVO.chefid}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-			</td>
+			<td id="test">${chefVO.chefIntroduction}</td>
 		
 		</tr>
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>
+
 	</main>
 							</div>
 			</div>

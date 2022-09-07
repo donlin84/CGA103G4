@@ -1,0 +1,54 @@
+footer.footer {
+  font-size: 1.6rem;
+  text-align: center;
+  width: 100%;
+  padding: 10px 0 30px;
+  margin-top: -10px;
+  background: #f3e3c9;
+  box-sizing: inherit;
+}
+
+footer.footer div.us a {
+  text-decoration: none;
+}
+
+footer.footer div.us a.pic img {
+  width: 200px;
+}
+
+footer.footer div.us li {
+  text-decoration: none;
+  display: inline-block;
+}
+
+footer.footer div.us li a.pic img {
+  width: 45px;
+}
+
+footer.footer div.about_us li {
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  padding: 10px 20px;
+  width: 150px;
+}
+
+footer.footer div.us div.about_us li a.footer_contain {
+  color: gray;
+}
+
+footer.footer div.copyright li{
+  text-decoration: none;
+  display: block;
+  color: gray;
+  margin: 10px 0;
+}
+
+footer.footer div.another li {
+  display: inline-block;
+}
+footer.footer div.another li a{
+  text-decoration: none;
+  color: gray;
+  margin: 10px 10px;
+}

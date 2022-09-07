@@ -65,7 +65,7 @@ CreditCardInformationVO creditCardInformationVO = (CreditCardInformationVO) requ
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="creditCardInformation.do" name="form1">
+<FORM METHOD="post" ACTION="CreditCardInformation.do" name="form1">
 <table>
 	<tr>
 		<td>會員編號:</td>

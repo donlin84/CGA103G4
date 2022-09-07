@@ -7,6 +7,5 @@ public interface ChefDAO_interface {
      public void update(ChefVO chefVO);
      public ChefVO findByPrimaryKey(Integer chefid);
      public List<ChefVO> getAll();
-     public ChefVO get_one_account(String chefAccount);
-
+     public List<ChefVO> getAll(Map<String, String[]> map); 
 }

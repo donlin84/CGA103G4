@@ -91,20 +91,49 @@ main.main {
 
 							<div class="main_content">
 								<aside class="aside">
-					<a href='addChef.jsp'>新增私廚帳號</a>
-											<br>
-										<a href='select_page.jsp'>私廚資訊查詢</a>
-											<br>
-										<a href='../chefSkillsType/select_page.jsp'>專長種類查詢</a>
-											<br>
-										<a href='../chefSkills/select_page.jsp'>私廚專長查詢</a>
-											<br>
-										<a href='../chefSubscription/select_page.jsp'>私廚訂閱清單查詢</a>
-											<br>
-										<a href='../chefSubscription/select_page.jsp'>私廚預約表查詢</a>
-											<br>
-										<a href='../chefSubscription/select_page.jsp'>預約單查詢</a>
-											<br>
+									<div class="btn-group mo-mb-2" 
+                     			style="top: 0px; left: 0px;">
+                                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false" style="width:140px">私廚資訊 </button>
+                                    <div class="dropdown-menu">
+                                    <a class="dropdown-item" href='../chef/addChef.jsp'>新增私廚帳號</a>
+                                    <a class="dropdown-item" href='../chef/select_page.jsp'>搜尋私廚</a>
+                                    <a class="dropdown-item" href='../chef/listAllChef.jsp'>私廚列表</a>
+                                    </div>
+                                </div>
+
+                                <div class="btn-group mo-mb-2"
+                                style="top: 20px; left: 0px;">
+                                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false" style="width:140px">專長種類 </button>
+                                    <div class="dropdown-menu">
+                                    <a class="dropdown-item" href='../chefSkillsType/addChefSkillsType.jsp'>新增專長</a>
+                                    <a class="dropdown-item" href='../chefSkillsType/select_page.jsp'>搜尋專長</a>
+                                    <a class="dropdown-item" href='../chefSkillsType/listAllChefSkillsType.jsp'>專長列表</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="btn-group mo-mb-2"
+                                style="top: 40px; left: 0px;">
+                                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false" style="width:140px">私廚專長 </button>
+                                    <div class="dropdown-menu">
+<!--                                     <a class="dropdown-item" href='../chefSkills/select_page.jsp'>新增私廚專長</a> -->
+                                    <a class="dropdown-item" href='../chefSkills/select_page.jsp'>搜尋私廚專長</a>
+                                    <a class="dropdown-item" href='../chefSkills/listAllChefSkills.jsp'>私廚專長列表</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="btn-group mo-mb-2"
+                                style="top: 60px; left: 0px;">
+                                <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false" style="width:140px">私廚訂閱 </button>
+                                    <div class="dropdown-menu">
+<!--                                     <a class="dropdown-item" href='../chefSubscription/select_page.jsp'>新增專長</a> -->
+                                    <a class="dropdown-item" href='../chefSubscription/select_page.jsp'>搜尋私廚訂閱</a>
+                                    <a class="dropdown-item" href='../chefSubscription/listAllChefSubscription.jsp'>私廚訂閱列表</a>
+                                    </div>
+                                </div>
 								</aside>
 
 								<main class="main">
@@ -130,7 +159,7 @@ main.main {
 
 
 										<li>
-											<FORM METHOD="post" ACTION="chef.do">
+											<FORM METHOD="post" ACTION="Chef.do">
 												<b>輸入私廚編號 (如301):</b> <input type="text" name="chefid">
 												<input type="hidden" name="action"
 													value="getOne_For_Display"> <input type="submit"
@@ -142,7 +171,7 @@ main.main {
 											class="com.chef.model.ChefService" />
 
 										<li>
-											<FORM METHOD="post" ACTION="chef.do">
+											<FORM METHOD="post" ACTION="Chef.do">
 												<b>選擇私廚編號:</b> <select size="1" name="chefid">
 													<c:forEach var="chefVO" items="${chefSvc.all}">
 														<option value="${chefVO.chefid}">${chefVO.chefid}
@@ -154,7 +183,7 @@ main.main {
 										</li>
 
 										<li>
-											<FORM METHOD="post" ACTION="chef.do">
+											<FORM METHOD="post" ACTION="Chef.do">
 												<b>選擇私廚姓名:</b> <select size="1" name="chefid">
 													<c:forEach var="chefVO" items="${chefSvc.all}">
 														<option value="${chefVO.chefid}">${chefVO.chefName}
@@ -166,13 +195,44 @@ main.main {
 										</li>
 									</ul>
 
-
-									<h3>私廚管理</h3>
-
+									<%-- 萬用複合查詢-以下欄位-可隨意增減 --%>
 									<ul>
-										<li><a href='addChef.jsp'>Add</a> a new Chef.</li>
-									</ul>
+										<li>
+											<FORM METHOD="post" ACTION="Chef.do"
+<%-- 											<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/chef/Chef.do" --%>
+												name="form1">
+												<b><font color=blue>萬用複合查詢:</font></b> <br> 
+																							
+<!-- 													<b>選擇私廚編號:</b>  -->
+<!-- 													<select size="1" name="chefid"> -->
+<%-- 													<c:forEach var="chefVO" items="${chefSvc.all}"> --%>
+<%-- 														<option value="${chefVO.chefid}">${chefVO.chefid} --%>
+<%-- 													</c:forEach> --%>
+<!-- 												</select> <input type="hidden" name="chefid"><br> -->
 
+												<b>輸入私廚姓名:</b> <input type="text" name="chefName" value=""><br>
+
+										
+													<b>選擇私廚狀態:</b> 
+													<select size="1" name="chefStatus">
+														<c:forEach var="chefVO" items="${chefSvc.all}">
+															<option value="${chefVO.chefStatus}">${chefVO.chefStatus}
+														</c:forEach>
+												</select> <input type="hidden" name="chefStatus"><br> 
+ 
+													<input type="submit" value="送出">
+												<input type="hidden" name="action"
+													value="listChef_ByCompositeQuery">
+											</FORM>
+										</li>
+									</ul>
+									
+									
+<!-- 									<h3>私廚管理</h3> -->
+
+<!-- 									<ul> -->
+<!-- 										<li><a href='addChef.jsp'>Add</a> a new Chef.</li> -->
+<!-- 									</ul> -->
 								</main>
 							</div>
 						</div>

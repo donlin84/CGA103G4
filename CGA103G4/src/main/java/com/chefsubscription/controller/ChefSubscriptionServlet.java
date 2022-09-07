@@ -4,11 +4,16 @@ import java.io.*;
 import java.util.*;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import com.chefsubscription.model.*;
 
+import com.chefsubscription.model.*;
+@WebServlet("/back-end/chefSubscription/ChefSubscription.do")
 public class ChefSubscriptionServlet extends HttpServlet {
+
+
+	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
@@ -186,9 +191,67 @@ public class ChefSubscriptionServlet extends HttpServlet {
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
 				String url = "/back-end/chefSubscription/listAllChefSubscription.jsp";
+				
+				
+		
+//				if(requestURL.equals("/dept/listChefSubscription_ByDeptno.jsp"))
+//					req.setAttribute("listChefSubscription_ByDeptno",deptSvc.getEmpsByDeptno(empVO.getDeptno())); // 資料庫取出的list物件,存入request
+//				
+//				if(requestURL.equals("/emp/listEmps_ByCompositeQuery.jsp")){
+//					HttpSession session = req.getSession();
+//					Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
+//					List<EmpVO> list  = empSvc.getAll(map);
+//					req.setAttribute("listEmps_ByCompositeQuery",list); //  複合查詢, 資料庫取出的list物件,存入request
+//				}
+//				
+//				String url = requestURL;
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 刪除成功後,轉交回送出刪除的來源網頁
+//				successView.forward(req, res);
+				
+				
+				
+				
+				
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 		}
+		
+//============================================================================
+		
+				if ("listChefSubscription_ByCompositeQuery".equals(action)) { // 來自select_page.jsp的複合查詢請求
+					List<String> errorMsgs = new LinkedList<String>();
+					// Store this set in the request scope, in case we need to
+					// send the ErrorPage view.
+					req.setAttribute("errorMsgs", errorMsgs);
+
+						
+						/***************************1.將輸入資料轉為Map**********************************/ 
+						//採用Map<String,String[]> getParameterMap()的方法 
+						//注意:an immutable java.util.Map 
+						//Map<String, String[]> map = req.getParameterMap();
+						HttpSession session = req.getSession();
+						@SuppressWarnings("unchecked")
+						Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
+						
+						// 以下的 if 區塊只對第一次執行時有效
+						if (req.getParameter("whichPage") == null){
+							Map<String, String[]> map1 = new HashMap<String, String[]>(req.getParameterMap());
+							session.setAttribute("map",map1);
+							map = map1;
+						} 
+						
+						/***************************2.開始複合查詢***************************************/
+						ChefSubscriptionService chefSubscriptionSvc = new ChefSubscriptionService();
+						List<ChefSubscriptionVO> list  = chefSubscriptionSvc.getAll(map);
+						
+						/***************************3.查詢完成,準備轉交(Send the Success view)************/
+						req.setAttribute("listChefSubscription_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+						RequestDispatcher successView = req.getRequestDispatcher("/back-end/chefSubscription/listChefSubscription_ByCompositeQuery.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+						successView.forward(req, res);
+				}
+
 	}
+	
+	
 	
 }

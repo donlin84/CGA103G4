@@ -2,6 +2,8 @@ package com.member.model;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
+
 
 
 public class MemberService {
@@ -69,5 +71,8 @@ public class MemberService {
 		return dao.getAllMemid();
 	}	
 
+	public List<MemberVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
+	}
 
 }
