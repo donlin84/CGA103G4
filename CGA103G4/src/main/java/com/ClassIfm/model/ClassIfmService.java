@@ -81,6 +81,22 @@ public ClassIfmVO updateClassIfm(Integer claid,Integer thrid,Integer claTagid,St
 	public List<ClassIfmVO> cangetall(String xxx){
 		return dao.cangetall(xxx);
 	}
+	//給前台getall上架客程
+	public List<ClassIfmVO> front_getall(){
+		return dao.front_getall();
+	}
+	//給TIMER用的
+	public List<ClassIfmVO> timer_getcancel(){
+		return dao.timer_getcancel();
+	}
+	//單一修改課程狀態
+	public ClassIfmVO update_clastatus(Integer claid) {
+
+		ClassIfmVO classIfmVO = new ClassIfmVO();
+		classIfmVO.setClaid(claid);
+		dao.update_clastatus(classIfmVO);
+		return classIfmVO;
+	}
 
 	
 	

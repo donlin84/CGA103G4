@@ -18,4 +18,10 @@ public interface ClassIfmDAO_interface {
     public void update_clapeople(ClassIfmVO classIfmVO);
     //前台萬用查詢
     public List<ClassIfmVO> cangetall(String xxx);
+    //前台只查詢以上架客程
+    public List<ClassIfmVO> front_getall();
+    //給email的timer
+    public List<ClassIfmVO> timer_getcancel();
+    //單一修改課程狀態
+    public void update_clastatus(ClassIfmVO classIfmVO);
 }

@@ -313,8 +313,11 @@ public class ClassIfmServlet extends HttpServlet {
 		
 		ClassIfmService classSrv_use = new ClassIfmService();
 		List<ClassIfmVO> list_use=classSrv_use.getAll();
+		ClassIfmService claSrv = new ClassIfmService();
+		ClassIfmVO clavo=claSrv.getOneClassIfm(claid);
 		for(ClassIfmVO classIfmVO:list_use) {
-			if(clatitle.equals(classIfmVO.getClaTitle().trim())) {
+			if(clatitle.equals(classIfmVO.getClaTitle().trim()) && !clatitle.equals(clavo.getClaTitle())) {
+				
 				errorMsgs.add("課程名稱已經存在囉");
 			}
 		}
@@ -488,9 +491,9 @@ public class ClassIfmServlet extends HttpServlet {
 		//前端篩選功能
 		if("browse".equals(req.getParameter("action"))) {
 			String thr[]=req.getParameterValues("teacher");
-			System.out.println(Arrays.toString(thr));
+			System.out.println("thr[]="+Arrays.toString(thr));
 			String tag[]=req.getParameterValues("clatag");
-			System.out.println(Arrays.toString(tag));
+			System.out.println("tag[]="+Arrays.toString(tag));
 			
 			Integer claprice_min = Integer.valueOf(req.getParameter("claprice_min"));
 			Integer claprice_max = Integer.valueOf(req.getParameter("claprice_max"));
@@ -498,10 +501,14 @@ public class ClassIfmServlet extends HttpServlet {
 			System.out.println("claprice_min="+claprice_min);
 			System.out.println("claprice_max="+claprice_max);
 			
+			String cla_keyword = req.getParameter("cla_keyword");
+			System.out.println("cla_keyword="+cla_keyword);
+			
 			String thr_sentence="";
 			String tag_sentence="";
 			String clatagid_string="";
 			String thrid_string="";
+			String cla_keyword_string="";
 			//教師
 			if(thr!=null) {
 				for(int i =0;i<thr.length;i++) {
@@ -536,39 +543,73 @@ public class ClassIfmServlet extends HttpServlet {
 			
 			String claprice_string = " and claprice between "+claprice_min+" and "+claprice_max;
 			
+			if(cla_keyword.trim().length()!=0) {
+				cla_keyword_string=" and clatitle like '%"+cla_keyword+"%'" +" or claIntroduction like '%"+cla_keyword+"%'";
+			}
+			
+			System.out.println("cla_keyword_string="+cla_keyword_string);
+			
 			String dao_string;
-			dao_string="select * from classifm where 1=1"+clatagid_string+thrid_string+claprice_string+" and claStatus = 1"+";";
+			dao_string="select * from classifm where 1=1"+clatagid_string+thrid_string+claprice_string+cla_keyword_string+" and claStatus = 1"+";";
 			
 			System.out.println("dao_string="+dao_string);
 			
 			ClassIfmService classifmSrv = new ClassIfmService();
 			List<ClassIfmVO> list=classifmSrv.cangetall(dao_string);
 			
-			req.setAttribute("cangetall", list);
-			
-			for (ClassIfmVO cangetall : list) {
-				System.out.print(cangetall.getClaid() + ",");
-				System.out.print(cangetall.getThrid() + ",");
-				System.out.print(cangetall.getClaTagid() + ",");
-				System.out.print(cangetall.getClaTitle() + ",");
-				System.out.print(cangetall.getClaIntroduction() + ",");
-				System.out.print(cangetall.getClaTime() + ",");
-				System.out.print(cangetall.getClaPrice()+ ",");
-				System.out.print(cangetall.getClaPeopleMax()+ ",");
-				System.out.print(cangetall.getClaPeopleMin()+ ",");
-				System.out.print(cangetall.getClaPeople()+ ",");
-				System.out.print(cangetall.getClaStatus()+ ",");
-				System.out.print(cangetall.getClaStrTime()+ ",");
-				System.out.print(cangetall.getClaFinTime()+ ",");
-				System.out.println();
-				
-				}
 			//保留check box勾選過的
-//			RequestDispatcher xxx = req.getRequestDispatcher("/front-end/classifm/classifm_browse.jsp");
-//			xxx.forward(req, resp);
+			if(Arrays.toString(thr)!=null) {
+				req.setAttribute("thr", Arrays.toString(thr));
+			}
+			if(Arrays.toString(tag)!=null) {
+				req.setAttribute("tag", Arrays.toString(tag));
+			}
 			
-//			resp.sendRedirect("/CGA103G4/front-end/classifm/classifm_browse.jsp");
+			req.setAttribute("claprice_min", claprice_min);
+			req.setAttribute("claprice_max", claprice_max);
+			req.setAttribute("cangetall", list);
+			//印出list
+//			for (ClassIfmVO cangetall : list) {
+//				System.out.print(cangetall.getClaid() + ",");
+//				System.out.print(cangetall.getThrid() + ",");
+//				System.out.print(cangetall.getClaTagid() + ",");
+//				System.out.print(cangetall.getClaTitle() + ",");
+//				System.out.print(cangetall.getClaIntroduction() + ",");
+//				System.out.print(cangetall.getClaTime() + ",");
+//				System.out.print(cangetall.getClaPrice()+ ",");
+//				System.out.print(cangetall.getClaPeopleMax()+ ",");
+//				System.out.print(cangetall.getClaPeopleMin()+ ",");
+//				System.out.print(cangetall.getClaPeople()+ ",");
+//				System.out.print(cangetall.getClaStatus()+ ",");
+//				System.out.print(cangetall.getClaStrTime()+ ",");
+//				System.out.print(cangetall.getClaFinTime()+ ",");
+//				System.out.println();
+//				
+//				}
 			
+			RequestDispatcher checkbox = req.getRequestDispatcher("/front-end/classifm/classifm_browse.jsp");
+			checkbox.forward(req, resp);
+			
+			
+		}
+		
+		if("second_page".equals(action)) {
+			//前端課程資訊
+			
+			//拿到?後的課程ID 
+			Integer claid = Integer.valueOf(req.getParameter("claid"));
+			
+			//看是哪個客程送過來的請求
+			System.out.println(claid);	
+			
+			//去查出課程資訊
+			ClassIfmService claSrv = new ClassIfmService();
+			ClassIfmVO classifmvo=claSrv.getOneClassIfm(claid);
+			
+			req.setAttribute("classifmvo", classifmvo);
+			//跳轉道前端頁面
+			RequestDispatcher second_page = req.getRequestDispatcher("/front-end/classifm/classifm_second_browse.jsp");
+			second_page.forward(req, resp); 
 		}
 		
 	}

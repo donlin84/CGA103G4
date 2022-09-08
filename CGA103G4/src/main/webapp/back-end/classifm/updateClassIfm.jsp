@@ -142,6 +142,7 @@
                 <option value="1" ${(classIfmVO.claStatus==1)?"selected":" "}>上架</option>
                 <option value="2" ${(classIfmVO.claStatus==2)?"selected":" "}>已結束</option>
                 <option value="3" ${(classIfmVO.claStatus==3)?"selected":" "}>取消</option>
+                <option value="4" ${(classIfmVO.claStatus==4)?"selected":" "}>取消已通知</option>
             </select>
         </div>
         <div>

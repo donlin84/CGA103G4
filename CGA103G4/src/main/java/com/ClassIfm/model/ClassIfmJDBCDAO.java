@@ -36,7 +36,13 @@ public class ClassIfmJDBCDAO implements ClassIfmDAO_interface{
 		"select thrName from classifm c join teacher t on c.thrid = t.thrid where t.thrid=? limit 1";
 	//只更改報名人數
 	private static final String UPDATE_CLAPEOPLE="UPDATE classIfm set claPeople = ? where claid = ?";
-			
+	//給前台getall上架客程
+	private static final String FRONT_GETALL = 
+	"SELECT claid,thrid,claTagid,claTitle,claIntroduction,claTime,claPrice,claPeopleMax,claPeopleMin,claPeople,claStatus,claStrTime,claFinTime FROM ClassIfm where claStatus = 1 order by claid";		
+	private static final String TIMER_GETCANCEL = 
+			"SELECT claid,thrid,claTagid,claTitle,claIntroduction,claTime,claPrice,claPeopleMax,claPeopleMin,claPeople,claStatus,claStrTime,claFinTime FROM ClassIfm where claStatus = 3 order by claid";		
+	//單純修改課程狀態
+	private static final String UPDATE_CLASTATUS="UPDATE classifm SET claStatus = 4 WHERE claid = ?";
 	@Override
 	public void insert(ClassIfmVO classIfmVO) {
 		Connection con = null;
@@ -497,6 +503,195 @@ Statement stmt=	con.createStatement();
 		}
 		return list;
 	}
+	
+	@Override
+	public List<ClassIfmVO> front_getall() {
+		List<ClassIfmVO> list = new ArrayList<ClassIfmVO>();
+		ClassIfmVO classIfmVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid,passwd);
+			pstmt = con.prepareStatement(FRONT_GETALL);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				classIfmVO = new ClassIfmVO();
+				classIfmVO.setClaid(rs.getInt("claid"));
+				classIfmVO.setThrid(rs.getInt("thrid"));
+				classIfmVO.setClaTagid(rs.getInt("clatagid"));
+				classIfmVO.setClaTitle(rs.getString("clatitle"));
+				classIfmVO.setClaIntroduction(rs.getString("claintroduction"));
+				classIfmVO.setClaTime(rs.getObject("clatime",LocalDateTime.class));
+				classIfmVO.setClaPrice(rs.getInt("claprice"));
+				classIfmVO.setClaPeopleMax(rs.getInt("clapeoplemax"));
+				classIfmVO.setClaPeopleMin(rs.getInt("clapeoplemin"));
+				classIfmVO.setClaPeople(rs.getInt("clapeople"));
+				classIfmVO.setClaStatus(rs.getInt("clastatus"));
+				classIfmVO.setClaStrTime(rs.getObject("clastrtime",LocalDateTime.class));
+				classIfmVO.setClaFinTime(rs.getObject("clafintime",LocalDateTime.class));
+
+				
+				list.add(classIfmVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	//給TIMER用的
+	@Override
+	public List<ClassIfmVO> timer_getcancel() {
+		List<ClassIfmVO> list = new ArrayList<ClassIfmVO>();
+		ClassIfmVO classIfmVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid,passwd);
+			pstmt = con.prepareStatement(TIMER_GETCANCEL);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				classIfmVO = new ClassIfmVO();
+				classIfmVO.setClaid(rs.getInt("claid"));
+				classIfmVO.setThrid(rs.getInt("thrid"));
+				classIfmVO.setClaTagid(rs.getInt("clatagid"));
+				classIfmVO.setClaTitle(rs.getString("clatitle"));
+				classIfmVO.setClaIntroduction(rs.getString("claintroduction"));
+				classIfmVO.setClaTime(rs.getObject("clatime",LocalDateTime.class));
+				classIfmVO.setClaPrice(rs.getInt("claprice"));
+				classIfmVO.setClaPeopleMax(rs.getInt("clapeoplemax"));
+				classIfmVO.setClaPeopleMin(rs.getInt("clapeoplemin"));
+				classIfmVO.setClaPeople(rs.getInt("clapeople"));
+				classIfmVO.setClaStatus(rs.getInt("clastatus"));
+				classIfmVO.setClaStrTime(rs.getObject("clastrtime",LocalDateTime.class));
+				classIfmVO.setClaFinTime(rs.getObject("clafintime",LocalDateTime.class));
+
+				
+				list.add(classIfmVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	//單一修改課程狀態
+	@Override
+	public void update_clastatus(ClassIfmVO classIfmVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid,passwd);
+			pstmt = con.prepareStatement(UPDATE_CLASTATUS);
+			
+			pstmt.setInt(1,classIfmVO.getClaid());
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+
+	
+	
 
 
 /*---------------------------------------------------------------------------------------*/
@@ -580,6 +775,13 @@ Statement stmt=	con.createStatement();
 //		vo2.setClaid(2);
 //		
 //		dao.update_clapeople(vo2);	
+		
+		//單一修改課程狀態
+		ClassIfmVO vo2 = new ClassIfmVO();
+//		
+		vo2.setClaid(1);
+		
+		dao.update_clastatus(vo2);	
 
 	}
 

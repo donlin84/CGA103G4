@@ -111,20 +111,23 @@
 			</td>
 			<td>${classIfmVO.claPeopleMax}</td>
 			<td>${classIfmVO.claPeopleMin}</td>
-			<td>${classIfmVO.claPeople}</td>
+			<td style="${(classIfmVO.claPeople<classIfmVO.claPeopleMin)?'color:red;font-weight: 700;':''}">${classIfmVO.claPeople}</td>
 			<td>
 				<c:choose>
-		            <c:when test="${classIfmVO.claStatus==0}">
+		            <c:when test="${alllist.claStatus==0}">
 		                下架
 		            </c:when>
-		            <c:when test="${classIfmVO.claStatus==1}">
+		            <c:when test="${alllist.claStatus==1}">
 		                上架
 		            </c:when>
-		            <c:when test="${classIfmVO.claStatus==2}">
+		            <c:when test="${alllist.claStatus==2}">
 		                已結束
 		            </c:when>
-		            <c:otherwise>
+		            <c:when test="${alllist.claStatus==3}">
 		                取消
+		            </c:when>
+		            <c:otherwise>
+		                取消已通知
 		            </c:otherwise>
 		        </c:choose>
 			</td>

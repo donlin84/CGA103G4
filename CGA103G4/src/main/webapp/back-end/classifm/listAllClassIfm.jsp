@@ -122,7 +122,7 @@
 			</td>
 			<td>${alllist.claPeopleMax}</td>
 			<td>${alllist.claPeopleMin}</td>
-			<td>${alllist.claPeople}</td>
+			<td style="${(alllist.claPeople<alllist.claPeopleMin)?'color:red;font-weight: 700;':''}">${alllist.claPeople}</td>
 			<td>
 				<c:choose>
 		            <c:when test="${alllist.claStatus==0}">
@@ -134,8 +134,11 @@
 		            <c:when test="${alllist.claStatus==2}">
 		                已結束
 		            </c:when>
-		            <c:otherwise>
+		            <c:when test="${alllist.claStatus==3}">
 		                取消
+		            </c:when>
+		            <c:otherwise>
+		                取消已通知
 		            </c:otherwise>
 		        </c:choose>
 			</td>

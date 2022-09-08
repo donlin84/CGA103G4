@@ -145,6 +145,7 @@
                 <option value="1" ${(param.clastatus==1)?"selected":" "}>上架</option>
                 <option value="2" ${(param.clastatus==2)?"selected":" "}>已結束</option>
                 <option value="3" ${(param.clastatus==3)?"selected":" "}>取消</option>
+                <option value="4" ${(param.clastatus==4)?"selected":" "}>取消已通知</option>
             </select>
         </div>
         <div>
