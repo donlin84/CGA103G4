@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -544,7 +545,7 @@ public class ClassIfmServlet extends HttpServlet {
 			String claprice_string = " and claprice between "+claprice_min+" and "+claprice_max;
 			
 			if(cla_keyword.trim().length()!=0) {
-				cla_keyword_string=" and clatitle like '%"+cla_keyword+"%'" +" or claIntroduction like '%"+cla_keyword+"%'";
+				cla_keyword_string=" and ( clatitle like '%"+cla_keyword+"%'" +" or claIntroduction like '%"+cla_keyword+"%' ) ";
 			}
 			
 			System.out.println("cla_keyword_string="+cla_keyword_string);
@@ -610,6 +611,74 @@ public class ClassIfmServlet extends HttpServlet {
 			//跳轉道前端頁面
 			RequestDispatcher second_page = req.getRequestDispatcher("/front-end/classifm/classifm_second_browse.jsp");
 			second_page.forward(req, resp); 
+		}
+		
+		//給後台看每個課程狀態
+		if("getall_status".equals(action)) {
+			Integer claStatus = Integer.valueOf(req.getParameter("clastatus"));
+			
+			ClassIfmService claSrv = new ClassIfmService();
+			List<ClassIfmVO> list=claSrv.getAll();
+			
+			RequestDispatcher getallstatusview = req.getRequestDispatcher("/back-end/classifm/listAllClassIfm.jsp");
+			//下架
+			if(claStatus==0) {
+				System.out.println("下架");
+				
+				req.setAttribute("getallstatus", list.stream()
+						.filter(c -> c.getClaStatus()== 0)
+						.collect(Collectors.toList()));
+				req.setAttribute("clastatus",0);
+				
+				getallstatusview.forward(req, resp);
+				
+				
+			}
+			//上架
+			if(claStatus==1) {
+				System.out.println("上架");
+				
+				req.setAttribute("getallstatus", list.stream()
+						.filter(c -> c.getClaStatus()== 1)
+						.collect(Collectors.toList()));
+				req.setAttribute("clastatus",1);
+				
+				getallstatusview.forward(req, resp);
+			}
+			//已結束
+			if(claStatus==2) {
+				System.out.println("已結束");
+				
+				req.setAttribute("getallstatus", list.stream()
+						.filter(c -> c.getClaStatus()== 2)
+						.collect(Collectors.toList()));
+				req.setAttribute("clastatus",2);
+				
+				
+				getallstatusview.forward(req, resp);
+			}
+			//取消
+			if(claStatus==3) {
+				System.out.println("取消");
+				
+				req.setAttribute("getallstatus", list.stream()
+						.filter(c -> c.getClaStatus()== 3)
+						.collect(Collectors.toList()));
+				req.setAttribute("clastatus",3);
+				
+				getallstatusview.forward(req, resp);
+			}
+			//通知已取消
+			if(claStatus==4) {
+				System.out.println("通知已取消");
+				
+				req.setAttribute("getallstatus", list.stream()
+						.filter(c -> c.getClaStatus()== 4)
+						.collect(Collectors.toList()));
+				req.setAttribute("clastatus",4);
+				
+				getallstatusview.forward(req, resp);
+			}
 		}
 		
 	}
