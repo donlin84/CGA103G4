@@ -24,13 +24,20 @@ public class LoginFilter implements Filter {
 		// 【取得 session】
 		HttpSession session = req.getSession();
 		// 【從 session 判斷此user是否登入過】
-		Object account = session.getAttribute("account");
-		if (account == null) {
-			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect(req.getContextPath() + "/login.html");
-			return;
-		} else {
+		
+		Object account_emp = session.getAttribute("empVO");
+		Object account_chef = session.getAttribute("chefVO");
+		
+		if(account_chef==null && account_emp==null) {
+				session.setAttribute("location", req.getRequestURI());
+				res.sendRedirect(req.getContextPath() + "/back-end/backend_login/BackendLogin.jsp");
+				return;
+		}else if(account_chef!=null){
+			chain.doFilter(request, response);
+		}else if(account_emp!=null){
 			chain.doFilter(request, response);
 		}
+		
+		
 	}
 }

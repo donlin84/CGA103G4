@@ -93,7 +93,7 @@
 }
 .select_bar{
 	left:12px;
-	position: fixed;
+	position: absolute;
 	background-color: rgb(248, 184, 110);
 	border-radius: 10px;
 	width:180px;
@@ -105,6 +105,20 @@
 	font-size:20px;
 	letter-spacing: 2px;
 	color:white;
+}
+.img2{
+	
+}
+#a_modal{
+	position: absolute;
+	display:block;
+	line-height: 0px;
+	width:40px;
+	height:40px;
+	top:600px;
+}
+a{
+	text-decoration:none
 }
 </style>
 </head>
@@ -179,7 +193,7 @@
 		          </button>
 		        </div>
 			</td>
-			<td>${alllist.thrid} ${alllist.teacherVO.thrName}</td>
+			<td>${alllist.thrid}${alllist.teacherVO.thrName}</td>
 			<td>${alllist.claTagid} ${alllist.classTagVO.claTagName}</td>
 			<td class="td_introduct">${alllist.claIntroduction}</td>
 			<td class="td_time">${fn:replace((alllist.claTime), "T", " ")}</td> 
@@ -189,7 +203,7 @@
 			</td>
 			<td>${alllist.claPeopleMax}</td>
 			<td>${alllist.claPeopleMin}</td>
-			<td style="${(alllist.claPeople<alllist.claPeopleMin)?'color:red;font-weight: 700;':''}">${alllist.claPeople}</td>
+			<td ><a href="<%=request.getContextPath()%>/NewRegisttrationformServlet?claid=${alllist.claid}&action=getclaid_allmember" id="clean_a" style="${(alllist.claPeople<alllist.claPeopleMin)?'color:red;font-weight: 700;':''}">${alllist.claPeople}</a></td>
 			<td>
 				<c:choose>
 		            <c:when test="${alllist.claStatus==0}">

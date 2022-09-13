@@ -2,10 +2,9 @@
 <%@ page import="com.registtrationform.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%
-	RegisttrationFormVO registtrationFormVO = (RegisttrationFormVO) request.getAttribute("registtrationFormVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
-%>
 
 <html>
 <head>
@@ -47,12 +46,8 @@
 </head>
 <body bgcolor='white'>
 
-<table id="table-1">
-	<tr><td>
-		 <h3>員工資料 - ListOneRegisttrationForm.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
+<h3>員工資料 - ListOneRegisttrationForm.jsp</h3>
+<h4><a href="<%=request.getContextPath()%>/back-end/registtrationform/select_page.jsp">回首頁</a></h4>
 
 
 <table>
@@ -62,18 +57,41 @@
 		<th>付款方式</th>
 		<th>報名時間</th>
 		<th>訂單狀態</th>
+		<th>報名人數</th>
 		<th>評價</th>
 		<th>評價內容</th>
+		<th>操作</th>
 	</tr>
 	<tr>
 
-		<td>${registtrationFormVO.claid }</td>
-		<td>${registtrationFormVO.memid}</td>
-		<td>${registtrationFormVO.regPayment}</td>
-		<td>${fn:replace(registtrationFormVO.regTime, "T", " ")}</td>
-		<td>${registtrationFormVO.regStatus}</td>
-		<td>${registtrationFormVO.regReview}</td>
-		<td>${registtrationFormVO.regReviewContent}</td>
+		<td>${regvo.claid }</td>
+		<td>${regvo.memid}</td>
+		<td>${(regvo.regPayment==1)?'信用卡':'轉帳'}</td>
+		<td>${fn:replace(regvo.regTime, "T", " ")}</td>
+		<td>
+			<c:choose>
+		            <c:when test="${regvo.regStatus==0}">
+		                已報名
+		            </c:when>
+		            <c:when test="${regvo.regStatus==1}">
+		                取消
+		            </c:when>
+		            <c:otherwise>
+		                已退款
+		            </c:otherwise>
+		     </c:choose>
+		</td>
+		<td>${regvo.regPeople}</td>
+		<td>${regvo.regReview}</td>
+		<td>${regvo.regReviewContent}</td>
+		<td>
+			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/NewRegisttrationformServlet">
+				     <input type="submit" value="修改">
+				     <input type="hidden" name="claid"  value="${regvo.claid}">
+				     <input type="hidden" name="memid"  value="${regvo.memid}">
+				     <input type="hidden" name="action"	value="forward_to_update">
+			 </FORM>
+		</td>
 	</tr>
 </table>
 

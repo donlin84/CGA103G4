@@ -96,14 +96,24 @@ public class ClassTagServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
-			Integer claTagid = Integer.valueOf(req.getParameter("claTagid"));
 
-			
-			ClassTagService classtagSrv = new ClassTagService();
-			ClassTagVO classTagVO=classtagSrv.getOneClassTag(claTagid);
-			if(classTagVO==null) {
-				errorMsgs.add("沒有這一筆資料!");
+			Integer claTagid = null;
+			try {
+				claTagid =Integer.valueOf(req.getParameter("claTagid").trim());
+			} catch (NumberFormatException e) {
+				errorMsgs.add("請輸入課程種類編號!");
 			}
+			
+			
+			ClassTagVO classTagVO = null;
+			if(claTagid!=null) {
+				ClassTagService classtagSrv = new ClassTagService();
+				classTagVO=classtagSrv.getOneClassTag(claTagid);
+				if(classTagVO==null) {
+					errorMsgs.add("沒有這一筆資料!");
+				}
+			}
+			
 			
 			
 			if(!errorMsgs.isEmpty()) {

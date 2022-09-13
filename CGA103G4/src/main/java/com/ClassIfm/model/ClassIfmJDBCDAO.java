@@ -43,6 +43,8 @@ public class ClassIfmJDBCDAO implements ClassIfmDAO_interface{
 			"SELECT claid,thrid,claTagid,claTitle,claIntroduction,claTime,claPrice,claPeopleMax,claPeopleMin,claPeople,claStatus,claStrTime,claFinTime FROM ClassIfm where claStatus = 3 order by claid";		
 	//單純修改課程狀態
 	private static final String UPDATE_CLASTATUS="UPDATE classifm SET claStatus = 4 WHERE claid = ?";
+	//抓出課程完成的會員
+	private static final String CLA_FINISH="SELECT claid,thrid,claTagid,claTitle,claIntroduction,claTime,claPrice,claPeopleMax,claPeopleMin,claPeople,claStatus,claStrTime,claFinTime FROM ClassIfm where claStatus = 2  and claid = ? order by claid";
 	@Override
 	public void insert(ClassIfmVO classIfmVO) {
 		Connection con = null;
@@ -689,6 +691,80 @@ Statement stmt=	con.createStatement();
 			}
 		}
 	}
+	
+	//抓課程完成的會員
+	@Override
+	public List<ClassIfmVO> cla_finish(Integer claid) {
+		List<ClassIfmVO> list = new ArrayList<ClassIfmVO>();
+		ClassIfmVO classIfmVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid,passwd);
+			pstmt = con.prepareStatement(CLA_FINISH);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				pstmt.setInt(1, classIfmVO.getClaid());
+				classIfmVO = new ClassIfmVO();
+				classIfmVO.setClaid(rs.getInt("claid"));
+				classIfmVO.setThrid(rs.getInt("thrid"));
+				classIfmVO.setClaTagid(rs.getInt("clatagid"));
+				classIfmVO.setClaTitle(rs.getString("clatitle"));
+				classIfmVO.setClaIntroduction(rs.getString("claintroduction"));
+				classIfmVO.setClaTime(rs.getObject("clatime",LocalDateTime.class));
+				classIfmVO.setClaPrice(rs.getInt("claprice"));
+				classIfmVO.setClaPeopleMax(rs.getInt("clapeoplemax"));
+				classIfmVO.setClaPeopleMin(rs.getInt("clapeoplemin"));
+				classIfmVO.setClaPeople(rs.getInt("clapeople"));
+				classIfmVO.setClaStatus(rs.getInt("clastatus"));
+				classIfmVO.setClaStrTime(rs.getObject("clastrtime",LocalDateTime.class));
+				classIfmVO.setClaFinTime(rs.getObject("clafintime",LocalDateTime.class));
+
+				
+				list.add(classIfmVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 
 	
 	
@@ -784,6 +860,7 @@ Statement stmt=	con.createStatement();
 		dao.update_clastatus(vo2);	
 
 	}
+
 
 	
 }

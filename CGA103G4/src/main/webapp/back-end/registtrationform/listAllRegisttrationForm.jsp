@@ -3,13 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.registtrationform.model.*"%>
-
+<%@ page import="com.ClassIfm.model.ClassIfmVO"%>
+<%@ page import="com.ClassIfm.model.ClassIfmService"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%
 	RegisttrationFormService registtrationFormSvc = new RegisttrationFormService();
     List<RegisttrationFormVO> list = registtrationFormSvc.getAll();
-    request.setAttribute("list", list);
-//     pageContext.setAttribute("list",list);
+    pageContext.setAttribute("list", list);
 %>
 
 <html>
@@ -54,12 +55,8 @@
 </head>
 <body bgcolor='white'>
 
-<table id="table-1">
-	<tr><td>
-		 <h3>"所有員工資料 - listAllRegisttrationForm.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
+<h3>"所有員工資料 - listAllRegisttrationForm.jsp</h3>
+<h4><a href="<%=request.getContextPath()%>/back-end/registtrationform/select_page.jsp">回首頁</a></h4>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -70,7 +67,6 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
 <table>
 	<tr>
 		<th>課程ID</th>
@@ -78,62 +74,44 @@
 		<th>付款方式</th>
 		<th>報名時間</th>
 		<th>訂單狀態</th>
+		<th>報名人數</th>
 		<th>評價</th>
 		<th>評價內容</th>
 		<th>操作</th>
-		
 	</tr>
-	<%@ include file="page1.file" %> 
-	<c:forEach var="registtrationFormVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-	
-		<tr>
-			<FORM METHOD="post" enctype= "multipart/form-data" ACTION="<%=request.getContextPath()%>/back-end/registtrationform/RegisttrationForm.do" style="margin-bottom: 0px;">
-			<td><input type="TEXT" name="claid"  value=${registtrationFormVO.claid} style="background-color: #EFEFEF;color: #919191"  readonly ></td>
-			<td><input type="TEXT" name="memid"  value=${registtrationFormVO.memid} style="background-color: #EFEFEF;color: #919191"  readonly ></td>
-			<td>
-			<select  name="regPayment">
-    			<option value=${registtrationFormVO.regPayment} selected>${registtrationFormVO.regPayment == 0 ?"轉帳":"信用卡"}</option>
-    			<option value= 0>轉帳</option>
-    			<option value= 1>信用卡</option>
-			</select>
-			</td>
-			<td><input type="TEXT" name="regTime"  value="${registtrationFormVO.regTime.toString().replace("T"," ")}" style="background-color: #EFEFEF;color: #919191"  readonly ></td> 
-			<td>			
-				<select  name="regStatus">
-			
-	    			<option value=${registtrationFormVO.regStatus} selected>${registtrationFormVO.regStatus == 0?"已報名":"取消"}</option>
-	    			<option value= 0>已報名</option>
-	    			<option value= 1>取消</option>
-
-				</select>
-			</td>
-			<td>			
-				<select  name="regReview">
-	    			<option value=${registtrationFormVO.regReview == null ?0:registtrationFormVO.regReview} selected>${registtrationFormVO.regReview == null ?"請選擇評價":registtrationFormVO.regReview}</option>
-	    			<option value= 1>1</option>
-	    			<option value= 2>2</option>
-	    			<option value= 3>3</option>
-	    			<option value= 4>4</option>
-	    			<option value= 5>5</option>
-				</select>
-			</td>
-			<td><input type="TEXT" name="regReviewContent"  value=${registtrationFormVO.regReviewContent}></td>
-		
-			<td>
-			  
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="action"	value="update"></FORM>
-			</td>
-<!-- 			<td> -->
-<%-- 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/teacher/teacher.do" style="margin-bottom: 0px;"> --%>
-<!-- 			     <input type="submit" value="刪除"> -->
-<%-- 			     <input type="hidden" name="thrid"  value="${teacherVO.thrid}"> --%>
-<!-- 			     <input type="hidden" name="action" value="delete"></FORM> -->
-<!-- 			</td> -->
-		</tr>
+	<c:forEach var="list" items="${list}">
+	<tr>
+		<td>${list.claid}</td>
+		<td>${list.memid}</td>
+		<td>${(list.regPayment==1)?'信用卡':'轉帳'}</td>
+		<td>${fn:replace((list.regTime), "T", " ")}</td>
+		<td>
+			<c:choose>
+		            <c:when test="${list.regStatus==0}">
+		                已報名
+		            </c:when>
+		            <c:when test="${list.regStatus==1}">
+		                取消
+		            </c:when>
+		            <c:otherwise>
+		                已退款
+		            </c:otherwise>
+		     </c:choose>
+		</td>
+		<td>${list.regPeople}</td>
+		<td>${list.regReview}</td>
+		<td>${list.regReviewContent}</td>
+		<td>
+			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/NewRegisttrationformServlet">
+				     <input type="submit" value="修改">
+				     <input type="hidden" name="claid"  value="${list.claid}">
+				     <input type="hidden" name="memid"  value="${list.memid}">
+				     <input type="hidden" name="action"	value="forward_to_update">
+			 </FORM>
+		</td>
+	</tr>
 	</c:forEach>
 </table>
-<%@ include file="page2.file" %>
 
 <script>
 

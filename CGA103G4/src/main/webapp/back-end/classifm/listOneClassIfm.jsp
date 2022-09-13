@@ -12,39 +12,68 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <style>
   table {
-    width: 2050px;
+    width: 1988px;
     background-color: white;
-    margin-left: 66px;
+    margin-left: 20px;
     border: 1px solid #CCCCFF;
   }
   th{
-    border: 1px solid #CCCCFF;
+	font-weight: 700;
     display:inline-block;
   	width:110px;
     line-height: 50px;
     padding: 5px;
     text-align: center;
+    background-color: rgb(248, 184, 110);
+    color: white;
   }
   td {
+  	font-weight: 500;
   	display:inline-block;
   	width:110px;
     height:200px;
     padding: 5px;
+    text-align: center;
+ 	line-height: 180px;
+
+  }
+  tr{
+  	border: 1px solid #CCCCFF;
+  }
+  .td_introduct{
+  	display:inline-block;
+  	width:210px;
+    height:200px;
+    padding: 1px;
     border: #CCCCFF 1px solid;
     text-align: center;
-    vertical-align:bottom;
+ 	line-height: 20px;
+ 	overflow:scroll;
+  }
+  .update_colume2{
+  	display:inline-block;
+    padding-top: 80px;
+    text-align: center;
+ 	line-height: 30px;
+  }
+  .td_title{ 
+  	 line-height: 20px;
+	 padding-top:70px;
+  }
+  .td_time{
+  	 line-height: 20px;
+	 padding-top:75px;
+  	 text-align: left;
   }
   .clapic{
     width: 345px;
   }
-  .claIntroduction{
-    width: 200px;
-    overflow:hidden;
-  }
+
   img{
     width: 100%;
     height:100%;
   }
+
 </style>
 </head>
 <body>
@@ -57,7 +86,7 @@
 			<th class="clapic">課程圖片</th>
 			<th>教師name</th>
 			<th>課程標籤</th>
-			<th class="claIntroduction">課程簡介</th>
+			<th style="width:210px;">課程簡介</th>
 			<th>授課時間</th>
 			<th>課程價格</th>
 			<th>課程人數上限</th>
@@ -69,16 +98,14 @@
 			<th class="update_colume1">編輯</th>
 		</tr>
 		<tr>
-			<td>${classIfmVO.claid}</td>
-			<div class="cladiv">
-				<td class="clatitle">${classIfmVO.claTitle}</td>
-			</div>
+			<td style="font-weight: 700;">${classIfmVO.claid}</td>
+			<td class="td_title">${classIfmVO.claTitle}</td>
 			<td class="clapic">
-		        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+		        <div id="carouselExampleIndicators${abc.index}" class="carousel slide" data-bs-ride="carousel">
 		          <div class="carousel-indicators">
-		            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-		            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-		            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+		            <button type="button" data-bs-target="#carouselExampleIndicators${abc.index}" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+		            <button type="button" data-bs-target="#carouselExampleIndicators${abc.index}" data-bs-slide-to="1" aria-label="Slide 2"></button>
+		            <button type="button" data-bs-target="#carouselExampleIndicators${abc.index}" data-bs-slide-to="2" aria-label="Slide 3"></button>
 		          </div>
 		          <div class="carousel-inner">
 		            <div class="carousel-item active">
@@ -91,11 +118,11 @@
 		              <img src="<%=request.getContextPath()%>/ClassIfmPic?id=${classIfmVO.claid}&page=2" class="d-block w-100" alt="...">
 		            </div>
 		          </div>
-		          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+		          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators${abc.index}" data-bs-slide="prev">
 		            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 		            <span class="visually-hidden">Previous</span>
 		          </button>
-		          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+		          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators${abc.index}" data-bs-slide="next">
 		            <span class="carousel-control-next-icon" aria-hidden="true"></span>
 		            <span class="visually-hidden">Next</span>
 		          </button>
@@ -103,8 +130,8 @@
 			</td>
 			<td>${classIfmVO.thrid} ${classIfmVO.teacherVO.thrName}</td>
 			<td>${classIfmVO.claTagid} ${classIfmVO.classTagVO.claTagName}</td>
-			<td class="claIntroduction">${classIfmVO.claIntroduction}</td>
-			<td>${fn:replace((classIfmVO.claTime), "T", " ")}</td> 
+			<td class="td_introduct">${classIfmVO.claIntroduction}</td>
+			<td class="td_time">${fn:replace((classIfmVO.claTime), "T", " ")}</td> 
 			<td>
 				<span>$</span>
 				${classIfmVO.claPrice}
@@ -114,16 +141,16 @@
 			<td style="${(classIfmVO.claPeople<classIfmVO.claPeopleMin)?'color:red;font-weight: 700;':''}">${classIfmVO.claPeople}</td>
 			<td>
 				<c:choose>
-		            <c:when test="${alllist.claStatus==0}">
+		            <c:when test="${classIfmVO.claStatus==0}">
 		                下架
 		            </c:when>
-		            <c:when test="${alllist.claStatus==1}">
+		            <c:when test="${classIfmVO.claStatus==1}">
 		                上架
 		            </c:when>
-		            <c:when test="${alllist.claStatus==2}">
+		            <c:when test="${classIfmVO.claStatus==2}">
 		                已結束
 		            </c:when>
-		            <c:when test="${alllist.claStatus==3}">
+		            <c:when test="${classIfmVO.claStatus==3}">
 		                取消
 		            </c:when>
 		            <c:otherwise>
@@ -131,8 +158,8 @@
 		            </c:otherwise>
 		        </c:choose>
 			</td>
-			<td>${fn:replace((classIfmVO.claStrTime), "T", " ")}</td>
-			<td>${fn:replace((classIfmVO.claFinTime), "T", " ")}</td>
+			<td class="td_time">${fn:replace((classIfmVO.claStrTime), "T", " ")}</td>
+			<td class="td_time">${fn:replace((classIfmVO.claFinTime), "T", " ")}</td>
 			<td class="update_colume2">
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ClassIfmServlet">
 				     <input type="submit" value="修改">

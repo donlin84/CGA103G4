@@ -2,12 +2,15 @@ package com.registtrationform.model;
 
 import java.time.LocalDateTime;
 
-public class RegisttrationFormVO {
+import com.ClassIfm.model.ClassIfmService;
+
+public class RegisttrationFormVO implements java.io.Serializable{
 	private Integer claid;
 	private Integer memid;
 	private Integer regPayment;
 	private LocalDateTime regTime;
 	private Integer regStatus;
+	private Integer regPeople;
 	private Integer regReview;
 	private String regReviewContent;
 	
@@ -52,6 +55,19 @@ public class RegisttrationFormVO {
 	}
 	public void setRegReviewContent(String regReviewContent) {
 		this.regReviewContent = regReviewContent;
+	}
+	public Integer getRegPeople() {
+		return regPeople;
+	}
+	public void setRegPeople(Integer regPeople) {
+		this.regPeople = regPeople;
+	}
+	
+	
+	public com.ClassIfm.model.ClassIfmVO getClassIfmVO(){
+		com.ClassIfm.model.ClassIfmService classSrv = new com.ClassIfm.model.ClassIfmService();
+		com.ClassIfm.model.ClassIfmVO classifmVO = classSrv.getOneClassIfm(claid);
+		return classifmVO;
 	}
 	
 }

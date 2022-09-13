@@ -140,9 +140,9 @@
             <select id="" name="clastatus">
                 <option value="0" ${(classIfmVO.claStatus==0)?"selected":" "}>下架</option>
                 <option value="1" ${(classIfmVO.claStatus==1)?"selected":" "}>上架</option>
-                <option value="2" ${(classIfmVO.claStatus==2)?"selected":" "}>已結束</option>
-                <option value="3" ${(classIfmVO.claStatus==3)?"selected":" "}>取消</option>
-                <option value="4" ${(classIfmVO.claStatus==4)?"selected":" "}>取消已通知</option>
+                <option value="2" ${(classIfmVO.claStatus==2)?"selected":" "} ${(classIfmVO.claPeople)<(classIfmVO.claPeopleMin)?'disabled':''}>已結束</option>
+                <option value="3" ${(classIfmVO.claStatus==3)?"selected":" "} ${(classIfmVO.claPeople)>(classIfmVO.claPeopleMin)?'disabled':''}>取消</option>
+                <option value="4" ${(classIfmVO.claStatus==4)?"selected":" "} ${(classIfmVO.claPeople)>(classIfmVO.claPeopleMin)?'disabled':''}>取消已通知</option>
             </select>
         </div>
         <div>

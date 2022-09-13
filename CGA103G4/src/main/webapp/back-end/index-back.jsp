@@ -15,13 +15,13 @@
 <meta content="Admin Dashboard" name="description" />
 <meta content="Mannatthemes" name="author" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<link rel="shortcut icon" href="assets/images/favicon.ico">
-<link href="assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
-<link href="assets/plugins/fullcalendar/vanillaCalendar.css" rel="stylesheet" type="text/css" />
-<link href="assets/plugins/morris/morris.css" rel="stylesheet">
-<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="assets/css/icons.css" rel="stylesheet" type="text/css">
-<link href="assets/css/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/back-end/assets/images/favicon.ico">
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/fullcalendar/vanillaCalendar.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/morris/morris.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/icons.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/style.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -113,7 +113,7 @@
 								<!-- item-->
 								<div class="dropdown-item noti-title">
 									<h5>
-										<span>歡迎</span><span>xxx</span>
+										<span>歡迎</span><span>${(empVO==null)?(chefVO.chefName):(empVO.empName)}</span>
 									</h5>
 								</div>
 
@@ -121,7 +121,7 @@
 								</a>
 
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#"> <i class="mdi mdi-logout m-r-5 text-muted"></i>登出
+								<a class="dropdown-item" href="<%=request.getContextPath()%>/BackendLogin?action=remove_account"> <i class="mdi mdi-logout m-r-5 text-muted"></i>登出
 								</a>
 
 							</div></li>

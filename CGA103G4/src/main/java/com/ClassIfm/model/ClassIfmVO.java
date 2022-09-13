@@ -6,7 +6,6 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import com.ClassTag.model.ClassTagService;
-import com.ClassTag.model.ClassTagVO;
 import com.teacher.model.TeacherService;
 
 public class ClassIfmVO implements java.io.Serializable{	

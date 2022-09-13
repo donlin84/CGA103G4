@@ -24,4 +24,6 @@ public interface ClassIfmDAO_interface {
     public List<ClassIfmVO> timer_getcancel();
     //單一修改課程狀態
     public void update_clastatus(ClassIfmVO classIfmVO);
+    //抓出課程已完成的會員id
+    public List<ClassIfmVO> cla_finish(Integer claid);
 }

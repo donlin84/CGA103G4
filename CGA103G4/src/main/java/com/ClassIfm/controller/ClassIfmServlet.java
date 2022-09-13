@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,6 +38,10 @@ import com.ClassPicture.model.ClassPictureJDBCDAO;
 import com.ClassPicture.model.ClassPictureService;
 import com.ClassPicture.model.ClassPictureVO;
 import com.ClassTag.model.ClassTagVO;
+import com.member.model.MemberService;
+import com.member.model.MemberVO;
+import com.registtrationform.model.RegisttrationFormService;
+import com.registtrationform.model.RegisttrationFormVO;
 
 
 @WebServlet("/ClassIfmServlet")
@@ -263,13 +268,21 @@ public class ClassIfmServlet extends HttpServlet {
 
 		List<String> errorMsgs = new LinkedList<String>();
 		req.setAttribute("errorMsgs", errorMsgs);
-
-		Integer claid = Integer.valueOf(req.getParameter("claid"));
-			
-		ClassIfmService classifmSvc = new ClassIfmService();
-		ClassIfmVO classIfmVO=classifmSvc.getOneClassIfm(claid);
-		if(classIfmVO==null) {
-			errorMsgs.add("沒有這一筆資料!");
+		
+		Integer claid = null;
+		try {
+			claid =Integer.valueOf(req.getParameter("claid").trim());
+		} catch (NumberFormatException e) {
+			errorMsgs.add("請輸入課程編號!");
+		}
+		
+		ClassIfmVO classIfmVO = null;
+		if(claid!=null) {
+			ClassIfmService classifmSvc = new ClassIfmService();
+			classIfmVO=classifmSvc.getOneClassIfm(claid);
+			if(classIfmVO==null) {
+				errorMsgs.add("沒有這一筆資料!");
+			}
 		}
 		
 		if(!errorMsgs.isEmpty()) {
@@ -481,8 +494,83 @@ public class ClassIfmServlet extends HttpServlet {
 		ClassIfmService classifmSvr = new ClassIfmService();
 		classIfmVO=classifmSvr.updateClassIfm(claid,thrid, clatagid, clatitle, claintroduction, LocalDateTime.parse(clatime), claprice, clapeoplemax, clapeoplemin, clapeople, clastatus, LocalDateTime.parse(clastrtime), LocalDateTime.parse(clafintime));
 		req.setAttribute("classIfmVO", classIfmVO);
-		//更新課程圖片
-		
+		//傳送email
+		if(classIfmVO.getClaStatus()==3) {
+			ClassIfmService claSrv_email = new ClassIfmService();
+			List<ClassIfmVO> list_email=claSrv_email.timer_getcancel();
+			//c.getClaid()課程狀態為3(已取消)的claid
+			for(ClassIfmVO c : list_email) {
+				
+				RegisttrationFormService regSrv = new RegisttrationFormService();
+				List<RegisttrationFormVO> list1=regSrv.timer_getmemid(c.getClaid());
+				//reg.getMemid()抓出報名到的會員id
+				for(RegisttrationFormVO reg : list1) {
+					//在用會員id抓出email
+					MemberService memSrv = new MemberService();
+					MemberVO memberVO=memSrv.getOneMember(reg.getMemid());
+					System.out.println(memberVO.getMemEmail());
+					//memberVO.getMemEmail()為會員的email
+					System.out.println(memberVO.getMemName());
+					//開始寄email
+					String to = memberVO.getMemEmail();
+				      
+				      String subject = "seefood課程通知";
+				      
+				      
+				      DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				      String ch_name = memberVO.getMemName();
+				      String claname=c.getClaTitle();
+				      String clatime1=df.format(c.getClaTime());
+				      
+				      String messageText = "您好 不好意思打擾您 " + ch_name +" 貴賓"+"\n"+"由於您你所報名 "+clatime1+"  "+claname
+				    		  +"的課程 因為人數不足開課標準"+"\n"+"在這邊通知您課程已取消 造成你的困擾真的很不好意思"+"\n"+"更多的課程資訊可以在參考seefood官方網站"+"\n"+"有任何問題都請與我們聯繫 03-3333333 謝謝您 !"; 
+				       
+				      Email mailService = new Email();
+				      mailService.sendMail(to, subject, messageText);
+					
+				}
+				//並把課程狀態改成4(取消已通知)
+				claSrv.update_clastatus(c.getClaid());
+			}
+		}
+		//送email到課程已完成 回饋信
+		if(classIfmVO.getClaStatus()==2) {
+			ClassIfmService claSrv_finish = new ClassIfmService();
+			List<ClassIfmVO> list_finish=claSrv_finish.cla_finish(claid);
+			//c.getClaid()課程狀態為3(已取消)的claid
+			for(ClassIfmVO c : list_finish) {
+				
+				RegisttrationFormService regSrv = new RegisttrationFormService();
+				List<RegisttrationFormVO> list1=regSrv.timer_getmemid(c.getClaid());
+				//reg.getMemid()抓出報名到的會員id
+				for(RegisttrationFormVO reg : list1) {
+					//在用會員id抓出email
+					MemberService memSrv = new MemberService();
+					MemberVO memberVO=memSrv.getOneMember(reg.getMemid());
+					System.out.println(memberVO.getMemEmail());
+					//memberVO.getMemEmail()為會員的email
+					System.out.println(memberVO.getMemName());
+					//開始寄email
+					String to = memberVO.getMemEmail();
+				      
+				      String subject = "seefood課程滿意度調查表通知";
+				      
+				      
+				      DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				      String ch_name = memberVO.getMemName(); //會員name
+				      String claname=c.getClaTitle();	//課程名稱
+				      String clatime1=df.format(c.getClaTime());	//課程時間
+				      String reviewwebString="http://localhost:8081/CGA103G4/back-end/registtrationform/ReviewForm.jsp?claid="+claid;
+				      
+				      String messageText = "您好 不好意思打擾您 " + ch_name +" 貴賓"+"\n"+"感謝您今天參與了seefood "+clatime1+"  "+claname
+				    		  +"的課程"+"\n"+"這邊有一張意見調查表 還請您幫忙填寫 貴賓小小的鼓勵都是我們seefood 進步的動力 如果有需要改進的地方也請不要吝嗇"+"\n"+reviewwebString+"\n"+"更多的課程資訊可以在參考seefood官方網站"+"\n"+"有任何問題都請與我們聯繫 03-3333333 謝謝您 !"; 
+				       
+				      Email mailService = new Email();
+				      mailService.sendMail(to, subject, messageText);
+					
+				}
+			}
+		}
 		//跳轉道單查詢網頁
 		String url ="/back-end/classifm/listOneClassIfm.jsp";
 		RequestDispatcher getOneClassIfm = req.getRequestDispatcher(url);

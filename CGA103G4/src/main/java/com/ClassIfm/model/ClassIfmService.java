@@ -98,7 +98,10 @@ public ClassIfmVO updateClassIfm(Integer claid,Integer thrid,Integer claTagid,St
 		return classIfmVO;
 	}
 
-	
+	//抓出課程以完成的會員
+	public List<ClassIfmVO> cla_finish(Integer claid){
+		return dao.cla_finish(claid);
+	}
 	
 	
 	
