@@ -9,6 +9,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@page import="com.member.model.MemberVO"%>
+<%@page import="com.member.model.MemberService"%>
+<%@page import="java.util.List"%>
+<%@page import="com.registtrationform.model.RegisttrationFormService"%>
+<%@page import="com.ClassIfm.model.ClassIfmVO"%>
+<%@page import="com.ClassIfm.model.ClassIfmService"%>
+<%@page import="com.registtrationform.model.RegisttrationFormVO"%>
+<%@page import="java.util.ArrayList"%>
 <% 
 	ClassIfmService classifmSvc =  new ClassIfmService();
  	List<ClassIfmVO> list=classifmSvc.getAll();
@@ -120,6 +128,10 @@
 a{
 	text-decoration:none
 }
+/* .click_people{ */
+/* 	width:200px; */
+/* 	height:200px; */
+/* } */
 </style>
 </head>
 <body>
@@ -193,7 +205,7 @@ a{
 		          </button>
 		        </div>
 			</td>
-			<td>${alllist.thrid}${alllist.teacherVO.thrName}</td>
+			<td>${alllist.thrid} ${alllist.teacherVO.thrName}</td>
 			<td>${alllist.claTagid} ${alllist.classTagVO.claTagName}</td>
 			<td class="td_introduct">${alllist.claIntroduction}</td>
 			<td class="td_time">${fn:replace((alllist.claTime), "T", " ")}</td> 
@@ -203,7 +215,11 @@ a{
 			</td>
 			<td>${alllist.claPeopleMax}</td>
 			<td>${alllist.claPeopleMin}</td>
-			<td ><a href="<%=request.getContextPath()%>/NewRegisttrationformServlet?claid=${alllist.claid}&action=getclaid_allmember" id="clean_a" style="${(alllist.claPeople<alllist.claPeopleMin)?'color:red;font-weight: 700;':''}">${alllist.claPeople}</a></td>
+			
+			<td ><a href="#" style="${(alllist.claPeople<alllist.claPeopleMin)?'color:red;font-weight: 700;':''}" data-bs-toggle="modal" data-bs-target="#exampleModal${alllist.claid}">${alllist.claPeople}</a></td>
+			<jsp:include page="/back-end/classifm/click_people.jsp">
+				<jsp:param name="claid" value="${alllist.claid}"/>
+			</jsp:include>
 			<td>
 				<c:choose>
 		            <c:when test="${alllist.claStatus==0}">
