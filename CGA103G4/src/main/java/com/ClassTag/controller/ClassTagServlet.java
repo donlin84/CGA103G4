@@ -3,6 +3,7 @@ package com.ClassTag.controller;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ClassIfm.model.ClassIfmService;
+import com.ClassIfm.model.ClassIfmVO;
 import com.ClassTag.model.ClassTagService;
 import com.ClassTag.model.ClassTagVO;
 
@@ -145,8 +148,10 @@ public class ClassTagServlet extends HttpServlet {
 			
 			ClassTagService classSrv_use = new ClassTagService();
 			List<ClassTagVO> list=classSrv_use.getAll();
-			for(ClassTagVO clatagvo:list) {
-				if(claTagName.equals(clatagvo.getClaTagName().trim())) {
+			ClassTagService claTag = new ClassTagService();
+			ClassTagVO clatagvo=claTag.getOneClassTag(claTagid);
+			for(ClassTagVO c:list) {
+				if(claTagName.equals(c.getClaTagName().trim()) && !claTagName.equals(clatagvo.getClaTagName())) {
 					errorMsgs.add("課程標籤已經存在囉");
 				}
 			}
@@ -179,6 +184,39 @@ public class ClassTagServlet extends HttpServlet {
 			
 			
 		}
+		//給後台看每個標籤狀態
+				if("getall_status".equals(action)) {
+					Integer claTagStatus = Integer.valueOf(req.getParameter("claTagStatus"));
+					
+					ClassTagService claSrv = new ClassTagService();
+					List<ClassTagVO> list=claSrv.getAll();
+					
+					RequestDispatcher abc = req.getRequestDispatcher("/back-end/classtag/listAllClassTag.jsp");
+					//下架
+					if(claTagStatus==0) {
+//						System.out.println("下架");
+						
+						req.setAttribute("getallstatus", list.stream()
+								.filter(c -> c.getClaTagStatus()== 0)
+								.collect(Collectors.toList()));
+						req.setAttribute("claTagStatus",0);
+						
+						abc.forward(req, resp);
+						
+						
+					}
+					//上架
+					if(claTagStatus==1) {
+//						System.out.println("上架");
+						
+						req.setAttribute("getallstatus", list.stream()
+								.filter(c -> c.getClaTagStatus()== 1)
+								.collect(Collectors.toList()));
+						req.setAttribute("claTagStatus",1);
+						
+						abc.forward(req, resp);
+					}
+				}
 		
 		
 		

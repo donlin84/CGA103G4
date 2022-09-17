@@ -46,50 +46,44 @@ pageContext.setAttribute("claifmvo", claifmvo);
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">
+        <span class="claxxx">課程 :</span>
+		<span class="claxxx">${claifmvo.claTitle}</span>
+		<span class="claxxx">  的會員</span>
+		</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <table class="click_people">
-		<h3>這是clickpeople</h3>
-		<span>報名課程 :</span>
-		<tr>${claifmvo.claid} ${claifmvo.claTitle}</tr>
-		<span>  的會員</span>
-		<tr>
-			<th>會員id</th>
-			<th>會員name</th>
-			<th>會員性別</th>
-			<th>會員電話</th>
-			<th>報名人數</th>
-			<th>狀態</th>
-		</tr>
+		<div class="head">
+			<span class="head_span">會員id</span>
+			<span class="head_span">會員name</span>
+			<span class="head_span">會員性別</span>
+			<span class="head_span_phone">會員電話</span>
+			<span class="head_span">報名人數</span>
+			<span class="head_span_status">狀態</span>
+		</div>
 		<c:forEach var="regall" items="${regall}">
-		<tr>
-			<td>${regall.memid}</td>
-			<td>${regall.memName}</td>
-			<td>${(regall.memGender=='m')?'男性':'女性'}</td>
-			<td>${regall.memPhone}</td>
-			<td>${regall.people}</td>
-			<td>
-				<c:choose>
-		            <c:when test="${regall.regstatus==0}">
-		                已報名
-		            </c:when>
-		            <c:when test="${regall.regstatus==1}">
-		                取消
-		            </c:when>
-		            <c:otherwise>
-		                已退款
-		        </c:otherwise>
-		     </c:choose>
-			</td>
-		</tr>
+			<div class="xxx">
+				<span class="head_memid">${regall.memid}</span>
+				<span class="head_memname">${regall.memName}</span>
+				<span class="head_gender">${(regall.memGender=='m')?'男性':'女性'}</span>
+				<span class="head_phone">${regall.memPhone}</span>
+				<span class="head_people">${regall.people}</span>
+				<span class="head_status">
+					<c:choose>
+					     <c:when test="${regall.regstatus==0}">
+					          已報名
+					     </c:when>
+					     <c:when test="${regall.regstatus==1}">
+					          取消
+					     </c:when>
+					     <c:otherwise>
+					          已退款
+					     </c:otherwise>
+					 </c:choose>
+				</span>
+			</div>
 		</c:forEach>
-	</table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

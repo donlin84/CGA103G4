@@ -86,6 +86,10 @@ public class ClassIfmServlet extends HttpServlet {
 			}else if(clatitle.length()>25){
 				errorMsgs.add("字數請在25字以下");
 			}
+			String clatime_old = req.getParameter("clatime");
+			if(clatime_old.trim().equals("")) {
+				errorMsgs.add("課程日期 請輸入日期");
+			}
 			
 			Integer thrid = Integer.valueOf(req.getParameter("thrid")); 
 			Integer clatagid = Integer.valueOf(req.getParameter("clatagid"));; 
@@ -119,20 +123,12 @@ public class ClassIfmServlet extends HttpServlet {
 			
 			
 			Integer clastatus =Integer.valueOf(req.getParameter("clastatus"));
-			String claintroduction = req.getParameter("claintroduction");
-			if(claintroduction == null || claintroduction.trim().length() == 0) {
-				errorMsgs.add("課程簡介 請勿空白!");
-			}else if(claintroduction.length()>250){
-				errorMsgs.add("字數請在250字以下");
-			}
+			
 			
 			//做時間處理=>符合localdatetime格式
 			
 			
-			String clatime_old = req.getParameter("clatime");
-			if(clatime_old.trim().equals("")) {
-				errorMsgs.add("課程日期 請輸入日期");
-			}
+			
 
 			String clatime = clatime_old.replace(" ", "T");
 			
@@ -149,6 +145,13 @@ public class ClassIfmServlet extends HttpServlet {
 			String clafintime = clafintime_old.replace(" ", "T");
 			
 			Integer clapeople = Integer.valueOf(0);	//抓報名表的人數 不會顯示在新增表上 要拿掉
+			
+			String claintroduction = req.getParameter("claintroduction");
+			if(claintroduction == null || claintroduction.trim().length() == 0) {
+				errorMsgs.add("課程簡介 請勿空白!");
+			}else if(claintroduction.length()>250){
+				errorMsgs.add("字數請在250字以下");
+			}
 			
 			Part part1 = req.getPart("clapic1");
 			InputStream in1 = part1.getInputStream();
@@ -402,7 +405,10 @@ public class ClassIfmServlet extends HttpServlet {
 		}
 		String clafintime = clafintime_old.replace(" ", "T");
 		
-		Integer clapeople = Integer.valueOf(3);	//抓報名表的人數 不會顯示在新增表上
+		ClassIfmService claSrv123 = new ClassIfmService();
+		ClassIfmVO clavo123=claSrv123.getOneClassIfm(claid);
+		
+		Integer clapeople = clavo123.getClaPeople();	//抓報名表的人數 不會顯示在新增表上
 		
 		//處理圖片
 		

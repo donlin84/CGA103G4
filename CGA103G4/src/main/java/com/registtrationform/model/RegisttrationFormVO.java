@@ -70,4 +70,10 @@ public class RegisttrationFormVO implements java.io.Serializable{
 		return classifmVO;
 	}
 	
+	public com.member.model.MemberVO getmemberVO(){
+		com.member.model.MemberService memberSrv = new com.member.model.MemberService();
+		com.member.model.MemberVO memberVO = memberSrv.getOneMember(memid);
+		return memberVO;
+	}
+	
 }

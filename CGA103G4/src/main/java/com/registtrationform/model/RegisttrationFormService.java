@@ -73,7 +73,8 @@ public class RegisttrationFormService {
 	
 	//單純修改訂單狀態
 	public void update_status(Integer claid, Integer memid) {
-		return;
+		dao.update_status(claid, memid);
+		return ;
 	}
 	//更新review和reviewcontent
 	public RegisttrationFormVO update_review(Integer regReview,String regReviewContent, Integer claid, Integer memid) {
@@ -88,4 +89,8 @@ public class RegisttrationFormService {
 
 		return registtrationFormVO;
 	}
+	//給click_people用的
+		public List<RegisttrationFormVO> click_people(Integer claid) {
+			return dao.click_people(claid);
+		}
 }

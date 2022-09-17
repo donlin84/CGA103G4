@@ -4,10 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="BIG5">
+<meta charset="UTF-8">
 <title>Insert title here</title>
+<meta content="Admin Dashboard" name="description" />
+<meta content="Mannatthemes" name="author" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/back-end/assets/images/favicon.ico">
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/fullcalendar/vanillaCalendar.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/morris/morris.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/icons.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/style.css" rel="stylesheet" type="text/css">
 <style>
-        form{
+        .my_form{
             position: relative;
             top: 200px;
             left: 550px;
@@ -49,20 +59,28 @@
             padding: 10px 20px;
             background-color: aliceblue;
         }
+        .error_div{
+        	font-size:18px;
+        	position: absolute;
+        	left:30px;
+        	margin-top:170px;
+        }
     </style>
 </head>
 <body>
-	<a href="<%=request.getContextPath()%>/back-end/classtag/index_ClassTag.jsp">回首頁</a>
+	<%@ include file="../tools/header.jsp"%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color:red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color:red">${message}</li>
-			</c:forEach>
-		</ul>
+		<div class="error_div">
+			<font style="color:red">請修正以下錯誤:</font>
+			<ul>
+				<c:forEach var="message" items="${errorMsgs}">
+					<li style="color:red">${message}</li>
+				</c:forEach>
+			</ul>
+		</div>
 	</c:if>
 	這是新增課程標籤
-	<form action="<%=request.getContextPath()%>/ClassTagServlet" method="post">
+	<form action="<%=request.getContextPath()%>/ClassTagServlet" method="post" class="my_form">
         <div class="div_title">
             <h1>新增課程標籤</h1>
         </div>
@@ -82,5 +100,22 @@
         <input type="hidden" value="add" name="action">
         <input type="submit" value="新增資料" class="addbutton">
     </form>
+    <%@ include file="../tools/footer.jsp"%>
+    <!-- End Footer -->
+	<!-- jQuery -->
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/popper.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/modernizr.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/waves.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/jquery.nicescroll.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/skycons/skycons.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/tiny-editable/numeric-input-example.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/fullcalendar/vanillaCalendar.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/raphael/raphael-min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/morris/morris.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/app.js"></script>
 </body>
 </html>

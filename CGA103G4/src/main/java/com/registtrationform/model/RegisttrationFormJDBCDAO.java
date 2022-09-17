@@ -30,6 +30,8 @@ public class RegisttrationFormJDBCDAO implements RegisttrationFormDAO_interface 
 		private static final String UPDATE_SATATUS="UPDATE registtrationform SET regStatus = 1 WHERE claid = ? and memid = ?";
 		//用來更新評價及評分用的
 		private static final String UPDATE_REVIEW ="UPDATE RegisttrationForm set regReview=?,regReviewContent=? where claid = ? and memid= ? ";
+		//給click_people用的 按照狀態排
+		private static final String CLICL_PEOPLE ="select * from registtrationform where claid = ? order by regStatus";
 		
 		
 		@Override 
@@ -485,6 +487,67 @@ public class RegisttrationFormJDBCDAO implements RegisttrationFormDAO_interface 
 				}
 			}
 		}
+		//給click_people用
+		@Override
+		public List<RegisttrationFormVO> click_people(Integer claid) {
+			List<RegisttrationFormVO> list = new ArrayList<RegisttrationFormVO>();
+			RegisttrationFormVO registtrationFormVO = null;
+
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+
+			try {
+
+				Class.forName(driver);
+				con = DriverManager.getConnection(URL, USER, PASSWORD);
+				pstmt = con.prepareStatement(CLICL_PEOPLE);
+				pstmt.setInt(1, claid);
+				rs = pstmt.executeQuery();
+				
+				while (rs.next()) {
+					// empVO 也稱為 Domain objects
+					registtrationFormVO = new RegisttrationFormVO();
+					registtrationFormVO.setMemid(rs.getInt("memid"));
+
+					
+					list.add(registtrationFormVO); // Store the row in the list
+				}
+
+				// Handle any driver errors
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException("Couldn't load database driver. "
+						+ e.getMessage());
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return list;
+		}
 		
 		
 		
@@ -551,5 +614,6 @@ public class RegisttrationFormJDBCDAO implements RegisttrationFormDAO_interface 
 			//單純修改訂單狀態
 			dao.update_status(1, 201);
 		}
+		
 		
 }

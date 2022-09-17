@@ -57,7 +57,7 @@ public class BackendLogin extends HttpServlet {
 			}else {
 				errorMsgs.add("管理員您輸入的帳號並未與系統連結");
 			}
-			System.out.println(empVO.getEmpLevel());
+//			System.out.println(empVO.getEmpLevel());
 			
 			
 			//有錯誤訊息
@@ -122,7 +122,12 @@ public class BackendLogin extends HttpServlet {
 		if("remove_account".equals(action)) {
 			HttpSession session = req.getSession();
 			
-			session.invalidate();
+//			if() {
+//				
+//			}
+			
+			session.removeAttribute("empVO");
+			session.removeAttribute("chefVO");
 				
 //			RequestDispatcher remove_account = req.getRequestDispatcher("/back-end/backend_login/BackendLogin.jsp");
 //			remove_account.forward(req, resp);

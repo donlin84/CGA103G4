@@ -18,14 +18,14 @@
 	List<ClassTagVO> list2=classSrv.getAll();
 	pageContext.setAttribute("classtagall",list2);
 	
-	ClassIfmService classSrv1 = new ClassIfmService();
+	ClassIfmService classSrv1 = new ClassIfmService(); 
 	List<ClassIfmVO> list3=classSrv1.front_getall();
 	pageContext.setAttribute("classifmall",list3);
 	
 %>
 <html>
 <head>
-<meta charset="BIG5">
+<meta charset="UTF-8">
 <title>瀏覽頁面</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/classifm/classifm_css/classifm.css">
 </head>
