@@ -25,8 +25,28 @@ public class MemberServlet2 extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
+//==================================================================================================
 
-		
+		if ("getOne_For_Update".equals(action)) { 
+
+			List<String> errorMsgs = new LinkedList<String>();
+
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+				/***************************1.接收請求參數****************************************/
+				Integer memid = Integer.valueOf(req.getParameter("memid"));
+				
+				/***************************2.開始查詢資料****************************************/
+				MemberService memberSvc = new MemberService();
+				MemberVO memberVO = memberSvc.getOneMember(memid);
+								
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				req.setAttribute("memberVO", memberVO);         // 資料庫取出的memberVO物件,存入req
+				String url = "/front-end/member/update_member_input.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_member_input.jsp
+				successView.forward(req, res);
+		}		
+//==================================================================================================
 		
 		if ("update".equals(action)) { // 來自update_member_input.jsp的請求
 			
@@ -34,9 +54,9 @@ public class MemberServlet2 extends HttpServlet{
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-		
+
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				Integer memid = Integer.valueOf(req.getParameter("memid").trim());
+				Integer memid = Integer.valueOf(req.getParameter("memid"));
 
 				String memName = req.getParameter("memName");
 				String memNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
@@ -70,7 +90,7 @@ public class MemberServlet2 extends HttpServlet{
 				if (memEmail == null || memEmail.trim().length() == 0) {
 					errorMsgs.add("信箱請勿空白");
 				}	
-				
+
 				String memAddres = req.getParameter("memAddres").trim();
 				if (memAddres == null || memAddres.trim().length() == 0) {
 					errorMsgs.add("地址請勿空白");
@@ -84,20 +104,14 @@ public class MemberServlet2 extends HttpServlet{
 					errorMsgs.add("請輸入生日!");
 				}
 
-				Integer memStatus = null;
-				try {
-					memStatus = Integer.valueOf(req.getParameter("memStatus").trim());
-				} catch (NumberFormatException e) {
-					memStatus = 0;
-					errorMsgs.add("狀態請填數字.");
-				}
+	
 				
 				String memNation = req.getParameter("memNation").trim();
 				if (memNation == null || memNation.trim().length() == 0) {
 					errorMsgs.add("國家請勿空白");
 				}	
 				
-	
+				Integer memStatus =0;
 				MemberVO memberVO = new MemberVO();
 				memberVO.setMemid(memid);
 				memberVO.setMemName(memName);
@@ -115,7 +129,7 @@ public class MemberServlet2 extends HttpServlet{
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memberVO", memberVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/member/update_member_input.jsp");
+							.getRequestDispatcher("/front-end/member/update_member_input.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
@@ -127,13 +141,13 @@ public class MemberServlet2 extends HttpServlet{
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("memberVO", memberVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/back-end/member/listOneMember.jsp";
+				String url = "/front-end/member/update.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneMember.jsp
 				successView.forward(req, res);
 		}
 //==================================================================================================
         if ("insert".equals(action)) { // 來自addMember.jsp的請求  
-
+//System.out.println(action);
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -173,10 +187,15 @@ public class MemberServlet2 extends HttpServlet{
 					errorMsgs.add("信箱請勿空白");
 				}	
 				
-				String memAddres = req.getParameter("memAddres").trim();
-				if (memAddres == null || memAddres.trim().length() == 0) {
+				String memAddres1 = req.getParameter("memAddres1");
+				String memAddres2 = req.getParameter("memAddres2");
+				String memAddres3 = req.getParameter("memAddres3");
+				String memAddres = memAddres1+memAddres2+memAddres3;
+				if (memAddres1 == null || memAddres1.trim().length() == 0 || 
+					memAddres2 == null || memAddres2.trim().length() == 0 ||
+					memAddres3 == null || memAddres3.trim().length() == 0) {
 					errorMsgs.add("地址請勿空白");
-				}	
+				}
 				
 				java.sql.Date memBirthday = null;
 				try {
@@ -215,6 +234,7 @@ public class MemberServlet2 extends HttpServlet{
 				
 				/***************************2.開始新增資料***************************************/
 				MemberService memberSvc = new MemberService();
+//				System.out.println(memberSvc);
 				memberVO = memberSvc.addMember(memName, memAccount, memPassword, 
 						memGender, memPhone, memEmail, memAddres, memBirthday, memNation);
 				
@@ -224,40 +244,42 @@ public class MemberServlet2 extends HttpServlet{
 				successView.forward(req, res);
 				
 		}
+    	}
+	}
+
 //============================================================================
 		
-      		if ("listMember_ByCompositeQuery".equals(action)) { // 來自select_page.jsp的複合查詢請求
-      			List<String> errorMsgs = new LinkedList<String>();
-      			// Store this set in the request scope, in case we need to
-      			// send the ErrorPage view.
-      			req.setAttribute("errorMsgs", errorMsgs);
-
-      				
-      				/***************************1.將輸入資料轉為Map**********************************/ 
-      				//採用Map<String,String[]> getParameterMap()的方法 
-      				//注意:an immutable java.util.Map 
-      				//Map<String, String[]> map = req.getParameterMap();
-      				HttpSession session = req.getSession();
-      				@SuppressWarnings("unchecked")
-					Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
-      				
-      				// 以下的 if 區塊只對第一次執行時有效
-      				if (req.getParameter("whichPage") == null){
-      					Map<String, String[]> map1 = new HashMap<String, String[]>(req.getParameterMap());
-      					session.setAttribute("map",map1);
-      					map = map1;
-      				} 
-      				
-      				/***************************2.開始複合查詢***************************************/
-      				MemberService memberSvc = new MemberService();
-      				List<MemberVO> list  = memberSvc.getAll(map);
-      				
-      				/***************************3.查詢完成,準備轉交(Send the Success view)************/
-      				req.setAttribute("listMember_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
-      				RequestDispatcher successView = req.getRequestDispatcher("/back-end/member/listMember_ByCompositeQuery.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
-      				successView.forward(req, res);
-      		}
+//      		if ("listMember_ByCompositeQuery".equals(action)) { // 來自select_page.jsp的複合查詢請求
+//      			List<String> errorMsgs = new LinkedList<String>();
+//      			// Store this set in the request scope, in case we need to
+//      			// send the ErrorPage view.
+//      			req.setAttribute("errorMsgs", errorMsgs);
+//
+//      				
+//      				/***************************1.將輸入資料轉為Map**********************************/ 
+//      				//採用Map<String,String[]> getParameterMap()的方法 
+//      				//注意:an immutable java.util.Map 
+//      				//Map<String, String[]> map = req.getParameterMap();
+//      				HttpSession session = req.getSession();
+//      				@SuppressWarnings("unchecked")
+//					Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
+//      				
+//      				// 以下的 if 區塊只對第一次執行時有效
+//      				if (req.getParameter("whichPage") == null){
+//      					Map<String, String[]> map1 = new HashMap<String, String[]>(req.getParameterMap());
+//      					session.setAttribute("map",map1);
+//      					map = map1;
+//      				} 
+//      				
+//      				/***************************2.開始複合查詢***************************************/
+//      				MemberService memberSvc = new MemberService();
+//      				List<MemberVO> list  = memberSvc.getAll(map);
+//      				
+//      				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+//      				req.setAttribute("listMember_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+//      				RequestDispatcher successView = req.getRequestDispatcher("/back-end/member/listMember_ByCompositeQuery.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+//      				successView.forward(req, res);
+//      		}
 		
 
-	}
-}
+

@@ -61,29 +61,29 @@ public class showLicensePicture extends HttpServlet {
 		}
 	}
 
-	public void init() throws ServletException {
-		try {
-//			System.out.println("aaaaaa");
-
-			Context ctx = new javax.naming.InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Cga103G4");
-			con = ds.getConnection();
-	
-		}  	catch (NamingException e) {
-			e.printStackTrace();
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		} 
-	}
-
-	public void destroy() {
-		try {
-			if (con != null)
-				con.close();
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
-	}
+//	public void init() throws ServletException {
+//		try {
+////			System.out.println("aaaaaa");
+//
+//			Context ctx = new javax.naming.InitialContext();
+//			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Cga103G4");
+//			con = ds.getConnection();
+//	
+//		}  	catch (NamingException e) {
+//			e.printStackTrace();
+//		}
+//		catch (SQLException e) {
+//			e.printStackTrace();
+//		} 
+//	}
+//
+//	public void destroy() {
+//		try {
+//			if (con != null)
+//				con.close();
+//		} catch (SQLException e) {
+//			System.out.println(e);
+//		}
+//	}
 
 }

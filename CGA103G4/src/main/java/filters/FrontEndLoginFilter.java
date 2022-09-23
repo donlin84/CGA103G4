@@ -27,7 +27,7 @@ public class FrontEndLoginFilter implements Filter {
 		Object account = session.getAttribute("account");
 		if (account == null) {
 			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect(req.getContextPath() + "/frontEndLogin.html");
+			res.sendRedirect(req.getContextPath() + "/front-end/member/frontEndLogin.jsp");
 			return;
 		} else {
 			chain.doFilter(request, response);

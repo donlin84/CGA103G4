@@ -1,0 +1,357 @@
+*{
+  box-sizing: border-box;
+  font-family: Microsoft JhengHei;
+}
+
+.main{
+  max-width: 1480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title{
+  margin-top: 70px;
+  margin-bottom: 70px;
+  text-align: center;
+  font-size: 25px;
+}
+
+.title h3{
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+#big-content{
+  height: auto;
+}
+
+.loge-area{
+  border-bottom: 10px white solid;
+  height:120px;
+}
+
+.loge-area img{
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.big-left{
+  margin: 0px 20px 0px 20px;
+  height: auto;
+  background-color:#f5f5f2;
+}
+
+.left-side-1{
+  width: 310px;
+  height: auto;
+  background-color:#f5f5f2;
+  margin: 0px 15px 0px 30px;
+  float: left;
+}
+
+.left-side-2-1{
+  display: flex;
+}
+
+.left-side-2-1 h3{
+  font-size: 25px;
+  margin-left: 20px;
+}
+
+#broom{
+  position: relative;
+  top: 20px;
+  left: 100px;
+  width: 40px;
+  height: 40px;
+}
+
+.right-side{
+  width: 71%;
+  height: 100%;
+  margin: 0px 30px 0px 30px;
+  float: right;
+}
+
+
+.clear{
+  clear: both;
+  height: 200px;
+}
+
+.checkbox{
+  margin: 12px 0px 12px 0px;
+  font-size: 20px;
+}
+
+.aaa{
+  width: 18px;
+  height: 18px;
+  display: inline-block; 
+  vertical-align: middle; 
+  margin-bottom: 3px;
+  accent-color: #60492d;
+}
+
+.bbb{
+  cursor:pointer; 
+  margin:3px 0px 0px 10px; 
+  vertical-align: middle;
+}
+
+.little_title{
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 35px;
+}
+
+.price_div{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.price_input{
+  width: 70px;
+  border-radius: 5px;
+}
+
+.price_span_1{
+  font-size: 20px;
+}
+
+.price_span_2{
+  font-size: 20px;
+  margin-left: 15px;
+}
+
+.keyword_div{
+	margin-top: 30px;
+}
+
+#onload_submit{
+	margin-top: 20px;
+	position: relative;
+	left:7px;
+	background-color: #60492d;
+	color: white;
+	padding: 5px 80px 5px 80px;
+	letter-spacing: 5px;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+
+/* -------------------------------------------- */
+/* right side */
+
+.clatag{
+  display: block;
+  position: absolute;
+  background-color: black;
+  color: #fff;
+  top: 20px;
+  padding: 12px 15px 12px 15px;
+  font-size: 15px;
+  letter-spacing: 3px;
+  transition: 0.3s all ;
+}
+
+.clatag:hover{
+  background-color: rgb(242, 169, 80);
+}
+
+#right_a{
+  display: block;
+  display: flex;
+  width: 1050px;
+  height:430px;
+  margin: auto;
+  border: black 1px solid;
+  text-decoration: none;
+  color: black;
+  position: relative;
+  transition: 0.5s;
+  margin: 0px 0px 60px 0px;
+  background-color:#f5f5f2;   
+}
+
+#right_a:hover{
+  animation-name: anim;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes anim{
+  0%{
+      top: 0px;
+  }
+  100%{
+      top: -10px;
+      box-shadow: 1px 1px 10px rgb(143, 143, 143);
+  }
+}
+
+.pic{
+  width: 55%;
+  height: 100%;
+}
+
+.pic .img1{
+  width: 100%;
+  height: 100%;
+}
+
+.clafintime_div{
+  width: 55%;
+  text-align: center;
+  background-color: rgb(0, 0, 0);
+  position: absolute;
+  top: 389px;
+  padding: 8px 10px 8px 10px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #fff;
+  font-weight: bolder;
+  font-size :15px;
+}
+
+.clafintime_div:hover{
+  background-color: rgb(242, 169, 80);
+}
+
+.content{
+  width: 45%;
+  height: 100%;
+  padding: 20px 50px 20px 20px;
+}
+
+.peopleimg{
+  display: block;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 0px;
+  right: -35px;
+}
+
+.peopleimg > .img2{
+  width: 100%;
+  height: 100%;
+}
+
+.clapeople{
+  position: absolute;
+  top: 10px;
+  right: 45px;
+  color: black;
+}
+
+.content_1 h3{
+  font-size: 25px;
+  margin: 0px 0px 5px 0px;
+}
+
+.teacher_name{
+  display: block;
+  margin-top: 30px;
+  font-weight: 600;
+  font-size: 20px;
+}
+.content_1 p{
+  letter-spacing: 2px;
+  font-size: 18px;
+  position:relative;
+  line-height:1.4em;
+  height:4.2em;
+  overflow:hidden;
+}
+
+
+.content_1 p::after{
+  content:'...';
+  font-weight:bold;
+  position:absolute;
+  bottom:0;
+  right:0;
+  padding:0px;
+  background-color:#f5f5f2; 
+}
+
+.content_2{
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.content_2 .price{
+  width: 30%;
+  height: 80px;
+  padding: 0px 20px;
+}
+
+.content_2 .price h5{
+  font-size: 20px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.content_2 > .price  div,span{
+  font-weight: bolder;
+  font-size :18px;
+}
+
+.content_2 .class_time{
+  width: 70%;
+  height: 80px;
+  padding: 0px 20px;
+}
+
+.content_2 .class_time h5{
+  font-size: 20px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.content_2 > .class_time span{
+  font-weight: bolder;
+  font-size :20px;
+}
+
+.content_3{
+  color: white;
+  text-align: center;
+  background-color: rgb(63, 43, 11);
+  border-radius: 20px;
+  margin-bottom: 2px;
+  padding: 8px 0px;
+  transition: 0.3s all ;
+  font-size: 15px;
+}
+
+.content_3:hover{
+  background-color: rgb(242, 169, 80);
+}
+
+hr{
+  border: 0.5px solid rgb(137, 137, 137);;
+  background-color: rgb(137, 137, 137);
+}
+
+#clean_a{
+  width: 1px;
+  height: 1px;
+}
+.cla_price2{
+	font-weight: bolder;
+    font-size: 20px;
+}
+.cla_price3{
+	font-weight: bolder;
+    font-size: 20px;
+}
+.cla_price4{
+	font-weight: bolder;
+    font-size: 20px;
+}

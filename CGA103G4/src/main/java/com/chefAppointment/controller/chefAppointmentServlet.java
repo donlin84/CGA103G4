@@ -24,7 +24,7 @@ import com.chefschedule.model.ChefScheduleService;
 import com.chefschedule.model.ChefScheduleVO;
 import com.emp.model.EmpService;
 import com.emp.model.EmpVO;
-import com.util.MailService;
+import com.util.MailService2;
 
 
 
@@ -44,20 +44,21 @@ public class chefAppointmentServlet extends HttpServlet {
 
 		// Fetch 查詢該私廚全部班次
 		if ("getAllById".equals(action)) {
-			Integer chef = null;
-			HttpSession session = req.getSession();
-			session.setAttribute("chefid", "302");
-			try {
-				chef = Integer.valueOf((String) session.getAttribute("chefid"));
-			} catch (Exception e) {
-				res.getWriter().print("noInfo");
-				return;
-			}
+			Integer chefid = Integer.valueOf(req.getParameter("chefid"));
+//			Integer chef = null;
+//			HttpSession session = req.getSession();
+//			session.setAttribute("chefid", "302");
+//			try {
+//				chef = Integer.valueOf((String) session.getAttribute("chefid"));
+//			} catch (Exception e) {
+//				res.getWriter().print("noInfo");
+//				return;
+//			}
 			JSONArray jsons = new JSONArray();
 
 			ChefScheduleService chefschSvc = new ChefScheduleService();
 
-			List<ChefScheduleVO> list = chefschSvc.getAllById(chef);
+			List<ChefScheduleVO> list = chefschSvc.getAllById(chefid);
 
 			for (ChefScheduleVO cs : list) {
 				JSONObject json = new JSONObject();
@@ -136,7 +137,7 @@ public class chefAppointmentServlet extends HttpServlet {
 
 			String messageText = "Hello! " + ch_name + "恭喜你預約私廚服務，日期:"+ apmDate +"成功!"+ "\n"+"請三天內轉帳訂金$1000至本司銀行，讓私廚能盡速與您聯絡!"+"\n"+"帳戶代碼:822"+"\n"+"帳號:123123213123";
 
-			MailService mailService = new MailService();
+			MailService2 mailService = new MailService2();
 			mailService.sendMail(to, subject, messageText);
 			
 			ChefScheduleService chefschsvc = new ChefScheduleService();
@@ -287,6 +288,19 @@ public class chefAppointmentServlet extends HttpServlet {
 					RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 					successView.forward(req, res);
 				}
+				
+				/*接收chefid */
+				if ("getchefid".equals(action)) {
+
+					/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+					Integer chefid = Integer.valueOf(req.getParameter("chefid"));
+					/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+					req.setAttribute("chefid", chefid); // 資料庫update成功後,正確的的empVO物件,存入req
+					String url = "../chefAppointment/Appointment.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+					successView.forward(req, res);
+				}
+				
 	}
 	
 }

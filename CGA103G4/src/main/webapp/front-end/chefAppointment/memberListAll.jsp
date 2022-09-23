@@ -10,26 +10,24 @@
     List<ChefAppointmentFormVO> list = dao.getAllByMem(201);       // 此行的list變數(物件)將提供page1.file的第11行取得查詢到的總筆數，再由page1.file進行分頁的需要
     pageContext.setAttribute("list",list); // 將上一行的list變數(物件)存入當前頁面pageContext，再由底下的第83行由JSTL的forEach列印出結果
 %>
-
+<!DOCTYPE html>
 <html>
 <head>
 <title>所有管理員資料</title>
-
+ <link rel="stylesheet" href="../css/common/all.css">
+ <link rel="stylesheet" href="../css/common/header.css">
+ <link rel="stylesheet" href="../css/common/footer.css">
+ <link rel="stylesheet" href="../css/common/main.css">
+ <link rel="stylesheet" href="../css/chef.css">
+ <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/style.css" rel="stylesheet" type="text/css">
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
   h4 {
     color: blue;
     display: inline;
   }
+
 </style>
 
 <style>
@@ -38,6 +36,7 @@
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	margin-left:25%;
   }
   table, th, td {
     border: 1px solid #CCCCFF;
@@ -50,9 +49,11 @@
 
 </head>
 <body bgcolor='white'>
-
-
-
+<%@ include file="./tools/header.jsp"%>
+  <div class="main">
+  <div class="container -on" id="chefPage">
+  <div id="chefPageContent">
+  <div class="sectionOne">
 <table>
 	<tr>
 		<th>預約單編號</th>
@@ -92,7 +93,7 @@
 			<td>${chefapp.star}</td>
 			<td>${chefapp.comments}</td>
 			<td>
-			  <FORM METHOD="get" ACTION="<%=request.getContextPath()%>/front-end/chefAppointment/chefapp.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/chefAppointment/chefapp.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="給予評價">
 			     <input type="hidden" name="apmid"  value="${chefapp.apmid}">
 			     <input type="hidden" name="action"	value="MemgetOne_For_Update"></FORM>
@@ -101,6 +102,10 @@
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>
-
+  </div>
+  </div>
+  </div>
+  </div>
 </body>
 </html>
+<%@ include file="../tools/footer.jsp"%>

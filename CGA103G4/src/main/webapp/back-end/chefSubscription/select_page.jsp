@@ -148,8 +148,7 @@ main.main {
 									</c:if>
 
 									<ul>
-										<li><a href='listAllChefSubscription.jsp'>List</a> all
-											ChefSubscription. <br>
+										<li><a href='listAllChefSubscription.jsp'>所有私廚訂閱列表</a> <br>
 										<br></li>
 
 
@@ -194,7 +193,7 @@ main.main {
 											<FORM METHOD="post" ACTION="ChefSubscription.do"
 												<%-- 											<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/chefSubscription/ChefSubscription.do" --%>
 												name="form1">
-												<b><font color=blue>萬用複合查詢:</font></b> <br> <b>輸入私廚編號:</b>
+												<b><font color=blue>查詢條件:</font></b> <br> <b>輸入私廚編號:</b>
 												<input type="text" name="chefid" value=""><br>
 												<b>輸入會員編號:</b> <input type="text" name="memid" value=""><br>
 
@@ -207,12 +206,12 @@ main.main {
 											</FORM>
 										</li>
 									</ul>
-									<h3>訂閱管理</h3>
+<!-- 									<h3>訂閱管理</h3> -->
 
-									<ul>
-										<li><a href='addChefSubscription.jsp'>Add</a> a new
-											ChefSubscription.</li>
-									</ul>
+<!-- 									<ul> -->
+<!-- 										<li><a href='addChefSubscription.jsp'>Add</a> a new -->
+<!-- 											ChefSubscription.</li> -->
+<!-- 									</ul> -->
 								</main>
 							</div>
 						</div>
@@ -248,5 +247,10 @@ main.main {
 	<script src="../assets/plugins/raphael/raphael-min.js"></script>
 	<script src="../assets/plugins/morris/morris.min.js"></script>
 	<script src="../assets/js/app.js"></script>
+	<script>
+		$('select option').each(function() {
+			$(this).prevAll('option[value="' + this.value + '"]').remove();
+		});
+	</script>
 </body>
 </html>

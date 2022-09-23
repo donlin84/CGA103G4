@@ -91,8 +91,8 @@
 										</ul>
 									</c:if>
 
-									<!-- <ul> -->
-									<!--   <li><a href='listAllMember.jsp'>List</a> all Members.  <br><br></li> -->
+									<ul>
+									  <li><a href='listAllMember.jsp'>所有會員列表</a>  <br><br></li>
 
 
 									<!--   <li> -->
@@ -132,44 +132,46 @@
 									<!--        <input type="submit" value="送出"> -->
 									<!--      </FORM> -->
 									<!--   </li> -->
-									<!-- </ul> -->
+									
 									<%-- 萬用複合查詢-以下欄位-可隨意增減 --%>
+										<li>
 									<FORM METHOD="post" ACTION="Member.do" name="form1">
-										<ul>
-											<li><b>選擇會員編號:</b> <select size="1" name="memid">
+										<b><font color=blue>查詢條件:</font></b> <br> 
+											<b>選擇會員編號:</b> <select size="1" name="memid">
 													<option value="">
 														<c:forEach var="memberVO" items="${memberSvc.all}">
 															<option value="${memberVO.memid}">${memberVO.memid}
 														</c:forEach>
-											</select> <input type="hidden" name="memid"><br></li>
-											<li><b>選擇會員姓名:</b> <select size="1" name="memName">
+											</select> <input type="hidden" name="memid"><br>
+											<b>選擇會員姓名:</b> <select size="1" name="memName">
 													<option value="">
 														<c:forEach var="memberVO" items="${memberSvc.all}">
 															<option value="${memberVO.memName}">${memberVO.memName}
 														</c:forEach>
 											</select> <input type="hidden" name="memName"><br> <!-- 												<b>輸入會員姓名:</b> <input type="text" name="memName" value=""><br> -->
 
-											</li>
-											<li><b>選擇會員性別:</b> <select size="1" name="memGender">
+											
+											<b>選擇會員性別:</b> <select size="1" name="memGender">
 													<option value="">
 													<option value="f">女
 													<option value="m">男
-											</select> <input type="hidden" name="memGender"> <br></li>
-											<li><b>選擇會員狀態:</b> <select size="1" name="memStatus">
+											</select> <input type="hidden" name="memGender"> <br>
+											<b>選擇會員狀態:</b> <select size="1" name="memStatus">
 													<option value="">
 													<option value="0">啟用
 													<option value="1">停權
-											</select> <input type="hidden" name="memStatus"> <br></li>
-											<li><b>選擇國家:</b> <select size="1" name="memNation">
+											</select> <input type="hidden" name="memStatus"> <br>
+											<b>選擇國家:</b> <select size="1" name="memNation">
 													<option value="">
 														<c:forEach var="memberVO" items="${memberSvc.all}">
 															<option value="${memberVO.memNation}">${memberVO.memNation}
 														</c:forEach>
 											</select> <input type="hidden" name="memNation"> <br> <input
 												type="submit" value="送出"> <input type="hidden"
-												name="action" value="listMember_ByCompositeQuery"></li>
-										</ul>
+												name="action" value="listMember_ByCompositeQuery">
 									</FORM>
+										</li>
+										</ul>
 
 									<!-- <h3>會員管理</h3> -->
 

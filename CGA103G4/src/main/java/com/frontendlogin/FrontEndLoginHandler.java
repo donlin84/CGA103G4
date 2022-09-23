@@ -12,8 +12,12 @@ import com.member.model.MemberVO;
 
 import javax.servlet.annotation.WebServlet;
 
+
+
 @WebServlet("/front-end/member/frontendloginhandler")
 public class FrontEndLoginHandler extends HttpServlet {
+	
+	
 	private static final long serialVersionUID = 1L;
 
 	// 【檢查使用者輸入的帳號(account) 密碼(password)是否有效】
@@ -37,6 +41,19 @@ public class FrontEndLoginHandler extends HttpServlet {
 			return true;
 		else
 			return false;
+	}
+	
+	protected Integer getid(String account, String password) {
+		
+		MemberJDBCDAO dao = new MemberJDBCDAO();
+		List<MemberVO> list = dao.getAll();
+		for (MemberVO aMember : list) {
+			
+			if ((aMember.getMemAccount().equals(account) && aMember.getMemPassword().equals(password)))
+				return aMember.getMemid();
+		}
+		return null;
+		
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -69,6 +86,7 @@ public class FrontEndLoginHandler extends HttpServlet {
 		} else { // 【帳號 , 密碼有效時, 才做以下工作】
 			HttpSession session = req.getSession();
 			session.setAttribute("account", account); // *工作1: 才在session內做已經登入過的標識
+			session.setAttribute("id", getid(account, password)); 
 
 			try {
 				String location = (String) session.getAttribute("location");
@@ -80,7 +98,7 @@ public class FrontEndLoginHandler extends HttpServlet {
 			} catch (Exception ignored) {
 			}
 
-			res.sendRedirect(req.getContextPath() + "/front-end/member/frontEndLogin_success.jsp"); // *工作3: (-->如無來源網頁:則重導至login_success.jsp)
+			res.sendRedirect(req.getContextPath() + "/front-end/index-front.jsp"); // *工作3: (-->如無來源網頁:則重導至login_success.jsp)
 		}
 	}
 }

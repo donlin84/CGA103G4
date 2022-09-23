@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.chef.model.*"%>
 <!DOCTYPE html>
 <html lang="zh-tw">
 
@@ -9,6 +11,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Appointment</title>
 <link href='./lib/main.css' rel='stylesheet' />
+<link rel="stylesheet" href="../css/common/all.css">
+  <link rel="stylesheet" href="../css/common/header.css">
+  <link rel="stylesheet" href="../css/common/footer.css">
+  <link rel="stylesheet" href="../css/common/main.css">
+  <link rel="stylesheet" href="../css/chef.css">
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/style.css" rel="stylesheet" type="text/css">
+  <script src="../js/chef.js"></script>
+  <script src="../js/nav.js"></script>
 <script src='./lib/main.js'></script>
 <script src="./lib/locales-all.js"></script>
 <!--     <script src="./js/fullcalendar.js"></script> -->
@@ -111,7 +123,7 @@ body, div, li {
 </head>
 
 <body>
-
+<%@ include file="./tools/header.jsp"%>
 	<div id='calendar'></div>
 <!-- 	<div id="div1"> -->
 <!--         <div id="div2">OOO你好</div> -->
@@ -128,10 +140,11 @@ body, div, li {
 	</div>
 
 	<script>
+	
     document.addEventListener('DOMContentLoaded', function() {
     	var calendarEl = document.getElementById('calendar');
-
-    	let MyPoint = "/front-end/chefAppointment/chefapp.do?action=getAllById";
+		let chefid = localStorage.getItem("chefid");
+    	let MyPoint = "/front-end/chefAppointment/chefapp.do?action=getAllById&chefid="+chefid;
     	let host = window.location.host;
     	let path = window.location.pathname;
     	let webCtx = path.substring(0, path.indexOf('/', 1));
@@ -147,6 +160,8 @@ body, div, li {
     		}
     		return false
     	}, false)
+    	
+    	//送請求拿班表
     	fetch(URL).then(response => response.json("jsons"))
     		.then(jsons => {
     			console.log(jsons);
@@ -200,6 +215,7 @@ body, div, li {
     		});
    });
     </script>
+
 </body>
 
 </html>

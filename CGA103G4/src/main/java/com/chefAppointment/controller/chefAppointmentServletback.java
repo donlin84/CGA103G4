@@ -23,7 +23,7 @@ import com.chefappointmentform.model.ChefAppointmentFormVO;
 import com.chefschedule.model.ChefScheduleService;
 import com.chefschedule.model.ChefScheduleVO;
 
-import com.util.MailService;
+import com.util.MailService2;
 
 
 

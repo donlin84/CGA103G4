@@ -21,7 +21,7 @@
          <c:choose>
 
 						<c:when test="${empty account}">
-							<a href="./member/frontEndLogin.jsp">登入</a>
+							<a href="../member/frontEndLogin.jsp">登入</a>
 						</c:when>
 						<c:otherwise>
 							<div class="btn-group mo-mb-2"
@@ -31,12 +31,13 @@
 									aria-expanded="false">會員</button>
 								<div class="dropdown-menu">
 									<a class="dropdown-item" href="../member/update.jsp">修改資料</a>
-									<a class="dropdown-item" href="#">信用卡</a> <a
+									<a class="dropdown-item" href="../creditCardInformation/CreditCardInformation.jsp">信用卡</a> <a
 										class="dropdown-item" href="#">查看訂單</a> <a
 										class="dropdown-item" href="#">查看商品</a> <a
 										class="dropdown-item" href="#">查看優惠卷</a> <a
 										class="dropdown-item" href="#">查看課程</a> <a
-										class="dropdown-item" href="#">查看預約</a> <a
+										class="dropdown-item" href="../chef/addChefSubscription.jsp">查看訂閱</a> <a
+										class="dropdown-item" href="../chefAppointment/memberListAll.jsp">查看預約</a> <a
 										class="dropdown-item" href="#">查看食譜</a> <a
 										class="dropdown-item" href="#">查看通知</a> <a
 										class="dropdown-item" href="../member/frontEndLogout.jsp">登出</a>

@@ -164,7 +164,13 @@
 			<td>${chefVO.chefid}</td>
 			<td>${chefVO.chefAccount}</td>
 			<td>${chefVO.chefPassword}</td>
-			<td>${chefVO.chefStatus}</td>
+<%-- 			<td>${chefVO.chefStatus}</td> --%>
+			<c:if test="${chefVO.chefStatus == 0}">
+				<td>啟用</td>	
+			</c:if>
+			<c:if test="${chefVO.chefStatus == 1}">
+				<td>停權</td>
+			</c:if>
 			<td>${chefVO.chefName}</td>
 			<td>${chefVO.chefNickname}</td> 
 			<td>${chefVO.chefPrice}</td>

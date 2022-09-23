@@ -85,7 +85,7 @@
 </c:if>
 
 <ul>
-  <li><a href='listAllCreditCardInformation.jsp'>List</a> all CreditCardInformations.  <br><br></li>
+  <li><a href='listAllCreditCardInformation.jsp'>所有信用卡列表</a><br><br></li>
   
   
   <li>
@@ -119,7 +119,7 @@
 											<FORM METHOD="post" ACTION="CreditCardInformation.do"
 <%-- 											<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/chef/Chef.do" --%>
 												name="form1">
-											
+											<b><font color=blue>查詢條件:</font></b> <br> 
 																							
 
 

@@ -156,13 +156,13 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO");
 										<tr>
 											<td><label for="chefAccount">帳號:</label></td>
 											<td><input type="TEXT" name="chefAccount" size="25"
-												value="<%=(chefVO == null) ? "AccountTest" : chefVO.getChefAccount()%>"
+												value="<%=(chefVO == null) ? "" : chefVO.getChefAccount()%>"
 												id="chefAccount" placeholder="帳號" /></td>
 										</tr>
 										<tr>
 											<td><label for="chefPassword">密碼:</label></td>
 											<td><input type="TEXT" name="chefPassword" size="25"
-												value="<%=(chefVO == null) ? "passTest" : chefVO.getChefPassword()%>"
+												value="<%=(chefVO == null) ? "" : chefVO.getChefPassword()%>"
 												id="chefPassword" placeholder="密碼" /></td>
 										</tr>
 										<tr>
@@ -201,15 +201,18 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO");
 											<td id="preview4"><span class="text"><%=(chefVO == null) ? "預覽圖" : chefVO.getChefPhoto()%></span></td>
 										</tr>
 
-										<tr>
-											<td><label for="chefIntroduction">簡介:</label></td>
-											<td><input type="TEXT" name="chefIntroduction" size="45"
-												value="<%=(chefVO == null) ? "測試用" : chefVO.getChefIntroduction()%>"
-												id="chefIntroduction" placeholder="簡介" /></td>
-										</tr>
-
-
-
+<!-- 										<tr> -->
+<!-- 											<td><label for="chefIntroduction">簡介:</label></td> -->
+<!-- 											<td><input type="TEXT" name="chefIntroduction" size="45" -->
+<%-- 												value="<%=(chefVO == null) ? "" : chefVO.getChefIntroduction()%>" --%>
+<!-- 												id="chefIntroduction" placeholder="簡介" /></td> -->
+<!-- 										</tr> -->
+										<tr class="form-group">
+   									<td><label for="chefIntroduction">簡介:</label></td>
+                                    <td><textarea required class="form-control" rows="5" name="chefIntroduction" 
+                                    size="45" value="<%=(chefVO == null) ? "" : chefVO.getChefIntroduction()%>"
+                                     id="chefIntroduction" placeholder="簡介"></textarea></td>
+                              			</tr>
 
 									</table>
 									<br> <input type="reset" value="清空資料">

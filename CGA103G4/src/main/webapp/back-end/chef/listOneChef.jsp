@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.chef.model.*"%>
 
 <%
@@ -163,7 +164,12 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO"); //ChefServlet.java(Conc
 											<td><%=chefVO.getChefid()%></td>
 											<td><%=chefVO.getChefAccount()%></td>
 											<td><%=chefVO.getChefPassword()%></td>
-											<td><%=chefVO.getChefStatus()%></td>
+											<c:if test="${chefVO.getChefStatus() == 0}">
+				<td>啟用</td>	
+			</c:if>
+			<c:if test="${chefVO.getChefStatus() == 1}">
+				<td>停權</td>
+			</c:if>
 											<td><%=chefVO.getChefName()%></td>
 											<td><%=chefVO.getChefNickname()%></td>
 											<td><%=chefVO.getChefPrice()%></td>
@@ -186,6 +192,13 @@ ChefVO chefVO = (ChefVO) request.getAttribute("chefVO"); //ChefServlet.java(Conc
 
 										</tr>
 									</table>
+									<br>
+									<br>
+									<br>
+									<br>
+									<br>
+									<br>
+									<br>
 								</main>
 							</div>
 						</div>

@@ -3,11 +3,19 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="java.util.*"%>
 <%@ page import="com.chef.model.*"%>
+<%@ page import="com.chefsubscription.model.*"%>
+
 <%
 ChefService chefSvc = new ChefService();
 List<ChefVO> list = chefSvc.getAll();
 pageContext.setAttribute("list", list);
 %>
+<%
+ChefSubscriptionService chefSubscriptionSvc = new ChefSubscriptionService();
+List<ChefSubscriptionVO> listSubscription = chefSubscriptionSvc.getAll();
+pageContext.setAttribute("listSubscription", listSubscription);
+%>
+
 <!DOCTYPE html>
 <html lang="zh-Hant" dir="ltr">
 
@@ -28,7 +36,7 @@ pageContext.setAttribute("list", list);
 <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
   <script src="../js/chef.js"></script>
   <script src="../js/nav.js"></script>
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/classifm/classifm_css/classifm.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/chef/css/chef.css">
   <style>
 *{
         box-sizing: border-box;
@@ -46,14 +54,15 @@ pageContext.setAttribute("list", list);
      
       /* ==================== aside 區域 ==================== */
       aside.aside{
-        border: 1px solid blue;
+/*         border: 1px solid blue; */
          position: absolute; 
         top: var(--header-height);
         left: 0;
 /*         height: calc(100% - var(--header-height)); */
-        height: 800px;
+        height: 950px;
         width: var(--aside-width);
-        background-color: #efefef;
+/*         background-color: #efefef; */
+background: linear-gradient(to bottom, #faf1e3, #f0e3cc 7%);
         overflow-y: auto;
         padding: 20px 0;
         transition: all 1s;
@@ -80,19 +89,20 @@ pageContext.setAttribute("list", list);
       }
       aside.aside > nav.nav > ul.nav_list > li > a{
         display: inline-block;
-        border: 1px solid lightblue;
+/*         border: 1px solid lightblue; */
         width: 100%;
         padding: 3px 10px;
       }
 
 /* ==================== main 區域 ==================== */
       main.main{
-        border: 1px solid red;
+/*         border: 1px solid red; */
         margin-left: var(--aside-width);
         width: calc(100% - var(--aside-width));
-        height: 800px;
+        height: 1150px;
         padding: 20px;
-        background-color: hsl(34, 100%, 84%);
+/*         background-color: hsl(34, 100%, 84%); */
+background: linear-gradient(to bottom, #faf1e3, #f0e3cc 7%);
         min-height: calc(100vh - var(--header-height));
         transition: all 1s;
       }
@@ -108,6 +118,7 @@ pageContext.setAttribute("list", list);
         list-style:none;
         display: flex;
         flex-wrap: wrap;
+        height:500px;
       }
       main.main ul.item_list > li{
         width: calc((100% - 60px) / 4);
@@ -129,7 +140,7 @@ pageContext.setAttribute("list", list);
       }
       main.main ul.item_list > li > a{
         display: inline-block;
-        border: 1px solid red;
+/*         border: 1px solid red; */
         text-decoration: none;
         width: 100%;
       }
@@ -145,6 +156,8 @@ pageContext.setAttribute("list", list);
         display: block;
         width: 100%;
       }
+      
+
 </style>
 </head>
 
@@ -161,67 +174,74 @@ pageContext.setAttribute("list", list);
           <div class="left-side-2">
             <div class="left-side-2-1">
               <h3>條件篩選</h3>
-              <a href="<%=request.getContextPath()%>/front-end/classifm/classifm_browse.jsp" id="clean_a">
-              	<img src="<%=request.getContextPath()%>/front-end/classifm/classifm_image/clean.svg" alt="" id="broom">
-              </a>
+
             </div>
-		<form method="post" action="<%=request.getContextPath()%>/ClassIfmServlet" >
-            <div>
-              <div class="price_div">
-                <span class="little_title">價格</span>
-                <hr>
-                           
-                <label data-v-60c2b4db="" role="checkbox" class="el-checkbox">
-                <span aria-checked="mixed" class="el-checkbox__input">
-                <span class="el-checkbox__inner"></span>
-                <input type="checkbox" aria-hidden="true" name="option" class="el-checkbox__original" value="1"></span>
-                <span class="el-checkbox__label">$5000 以下<!----></span>
-                </label>
-                <label data-v-60c2b4db="" role="checkbox" class="el-checkbox">
-                <span aria-checked="mixed" class="el-checkbox__input">
-                <span class="el-checkbox__inner"></span>
-                <input type="checkbox" aria-hidden="true" name="option" class="el-checkbox__original" value="2"></span>
-                <span class="el-checkbox__label">$5000 ~ $10000<!----></span>
-                </label>
-                <label data-v-60c2b4db="" role="checkbox" class="el-checkbox">
-                <span aria-checked="mixed" class="el-checkbox__input">
-                <span class="el-checkbox__inner"></span>
-                <input type="checkbox" aria-hidden="true" name="option" class="el-checkbox__original" value="2"></span>
-                <span class="el-checkbox__label">$10000 ~ $15000<!----></span>
-                </label>
-                <label data-v-60c2b4db="" role="checkbox" class="el-checkbox">
-                <span aria-checked="mixed" class="el-checkbox__input">
-                <span class="el-checkbox__inner"></span>
-                <input type="checkbox" aria-hidden="true" name="option" class="el-checkbox__original" value="2"></span>
-                <span class="el-checkbox__label">$15000 ~ $20000<!----></span>
-                </label>
-                <label data-v-60c2b4db="" role="checkbox" class="el-checkbox">
-                <span aria-checked="mixed" class="el-checkbox__input">
-                <span class="el-checkbox__inner"></span>
-                <input type="checkbox" aria-hidden="true" name="option" class="el-checkbox__original" value="1"></span>
-                <span class="el-checkbox__label">$20000 以上<!----></span>
-                </label>
-                
-                <div class="keyword_div">
-                	<span>關鍵字查詢 :</span>
-                	<input type="text" name="cla_keyword" value="${param.cla_keyword}" >
-                </div>
-              </div>
-              <span class="little_title">廚師姓名</span>
-              <hr>
-<!--               <FORM METHOD="post" ACTION="Chef.do"> -->
+            
+           
+            
+            <jsp:useBean id="chefSvc1" scope="page" class="com.chef.model.ChefService" />
+            <FORM METHOD="post" ACTION="frontEndChef.do">
 												<b>選擇私廚姓名:</b> <select size="1" name="chefid">
-													<c:forEach var="chefVO" items="${list}">
+												<option value="">
+													<c:forEach var="chefVO" items="${chefSvc1.all}">
 														<option value="${chefVO.chefid}">${chefVO.chefName}
 													</c:forEach>
 												</select> 
-<!-- 												<input type="hidden" name="action" -->
-<!-- 													value="getOne_For_Display"> <input type="submit" -->
-<!-- 													value="送出"> -->
-<!-- 											</FORM> -->
-         
-              <hr>
+												
+												<input type="hidden" name="action"
+													value="getOne_For_Display"> <input type="submit"
+													value="送出" class="content_3"  style="width: 100px;">
+											</FORM>
+            <FORM METHOD="post" ACTION="frontEndChef.do">
+												<b>選擇私廚暱稱:</b> <select size="1" name="chefid">
+												<option value="">
+													<c:forEach var="chefVO" items="${chefSvc1.all}">
+														<option value="${chefVO.chefid}">${chefVO.chefNickname}
+													</c:forEach>
+												</select> 
+												<input type="hidden" name="action"
+													value="getOne_For_Display"> <input type="submit"
+													value="送出"class="content_3"  style="width: 100px;">
+											</FORM>
+            
+            
+            
+            
+            
+		<form method="post" action="frontEndChef.do" >
+            <div>
+              <div class="price_div">
               
+                <span class="little_title">價格</span>
+                <hr>
+                <label data-v-60c2b4db="" role="checkbox" class="el-checkbox">
+                <span aria-checked="mixed" class="el-checkbox__input">
+                <span class="el-checkbox__inner"></span>
+                <input type="checkbox" aria-hidden="true" name="option" class="el-checkbox__original" value="1"></span>
+                <span class="el-checkbox__label">$10000 以下<!----></span>
+                </label>
+                <label data-v-60c2b4db="" role="checkbox" class="el-checkbox">
+                <span aria-checked="mixed" class="el-checkbox__input">
+                <span class="el-checkbox__inner"></span>
+                <input type="checkbox" aria-hidden="true" name="option" class="el-checkbox__original" value="2"></span>
+                <span class="el-checkbox__label">$10000 ~ $20000<!----></span>
+                </label>
+                <label data-v-60c2b4db="" role="checkbox" class="el-checkbox">
+                <span aria-checked="mixed" class="el-checkbox__input">
+                <span class="el-checkbox__inner"></span>
+                <input type="checkbox" aria-hidden="true" name="option" class="el-checkbox__original" value="3"></span>
+                <span class="el-checkbox__label">$20000 以上<!----></span>
+                </label>
+                <br>
+     
+ 
+                
+<!--                 <div class="keyword_div"> -->
+<!--                 	<span>關鍵字查詢 :</span> -->
+<%--                 	<input type="text" name="cla_keyword" value="${param.cla_keyword}" > --%>
+<!--                 </div> -->
+              </div>
+
             </div>
             <input type="hidden" name="action" value="browse">
             <input type="submit" value="篩選條件" id="onload_submit">
@@ -235,12 +255,112 @@ pageContext.setAttribute("list", list);
     </aside>
 <!-- =================main========================================================================-->
       	<main class="main">
+
+
+
+
+      	        <%
+                if (request.getParameterValues("option") == null) {
+                	session.setAttribute("test", 0);
+                	session.setAttribute("test1", 0);
+                } else {
+                String[] values = request.getParameterValues("option"); 
+
+                if (values.length == 1){
+                	session.setAttribute("test", values[0]);
+                	session.setAttribute("test1", 0);
+                };
+                if (values.length == 2){
+                	session.setAttribute("test", values[0]);
+                	session.setAttribute("test1", values[1]);
+                };	
+                if (values.length == 3){
+                	session.setAttribute("test", 0);
+                	session.setAttribute("test1", 0);
+                };	
+                };
+               %>
+
+ <c:choose>
+		<c:when test="${test == 0 && test1 == 0}">
 <%@ include file="page1.file" %> 
-	<ul class="item_list">
-<!--       <div class="right-side"> -->
-      <c:forEach var="chefVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	<ul class="item_list">				
+
+       <c:forEach var="chefVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+
         <li>
-          <a href="#">
+        <a href="#">
+            <div class="img_block">
+              <img src="<%=request.getContextPath()%>/showLicensePicture?chefid=${chefVO.chefid}" 
+              width="200px" height="200px">
+
+           	   <span class="item_text">${chefVO.chefName} ${chefVO.chefNickname}</span>
+               <span class="item_text">價格 :  ${chefVO.chefPrice}</span>
+               <span class="item_text">簡介 :  ${chefVO.chefIntroduction}</span>
+               <span class="item_text">評價人數 :  ${chefVO.com}</span>
+               <span class="item_text">評價總分 :  ${chefVO.gomg}</span>
+            </div>
+          </a>
+<%
+session.setAttribute("sstion", 1);
+%>
+<c:forEach var="chefSubscriptionVO" items="${listSubscription}">
+<c:choose>
+<c:when test="${chefSubscriptionVO.chefid == chefVO.chefid && chefSubscriptionVO.memid == id}">
+<%
+session.setAttribute("sstion", 0);
+%>
+</c:when>
+<c:otherwise>
+
+</c:otherwise>
+</c:choose>
+</c:forEach>
+
+
+<c:choose>
+<c:when test="${sstion == 1}">
+          <FORM METHOD="post" ACTION="ChefFrontEndSubscription.do">
+        <input type="hidden" name="action" value="insert"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="hidden" name="memid" value="${id}"> 
+        <input type="submit" value="訂閱" class="content_3" style="width: 100%;">
+        </FORM>
+</c:when>
+<c:otherwise>
+          <FORM METHOD="post" ACTION="ChefFrontEndSubscription.do">
+        <input type="hidden" name="action" value="delete"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="hidden" name="memid" value="${id}"> 
+        <input type="submit" value="取消訂閱" class="content_3" style="width: 100%;">
+        </FORM>
+</c:otherwise>
+</c:choose>
+          <FORM METHOD="post" ACTION="frontEndChef.do">
+        <input type="hidden" name="action" value="getOne_For_Display"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="submit" value="了解更多" class="content_3" style="width: 100%;">
+        </FORM>
+		 </li>
+ 
+		        </c:forEach>
+       </ul>
+<%@ include file="page2.file" %>
+     </c:when>
+        <c:otherwise>
+		</c:otherwise>
+		</c:choose>
+<!-- =============================================================================================	 -->
+        <c:choose>
+		<c:when test="${test == 1 && test1 == 0}">
+<%-- <%@ include file="page1.file" %>  --%>
+	<ul class="item_list">				
+       <c:forEach var="chefVO" items="${list}">
+<%--        <c:forEach var="chefVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
+		<c:choose>
+		<c:when test="${chefVO.chefPrice <= 10000}">
+        <li>
+        <a href="#">
             <div class="img_block">
               <img src="<%=request.getContextPath()%>/showLicensePicture?chefid=${chefVO.chefid}" 
               width="200px" height="200px">
@@ -251,62 +371,415 @@ pageContext.setAttribute("list", list);
                <span class="item_text">評價總分 :  ${chefVO.gomg}</span>
             </div>
           </a>
-        <div class="content_3">了解更多</div>
-        </li>
-        </c:forEach>
-<!--         </div> -->
+          
+<%
+session.setAttribute("sstion", 1);
+%>
+<c:forEach var="chefSubscriptionVO" items="${listSubscription}">
+<c:choose>
+<c:when test="${chefSubscriptionVO.chefid == chefVO.chefid && chefSubscriptionVO.memid == id}">
+<%
+session.setAttribute("sstion", 0);
+%>
+</c:when>
+<c:otherwise>
+
+</c:otherwise>
+</c:choose>
+</c:forEach>
+          <c:choose>
+<c:when test="${sstion == 1}">
+          <FORM METHOD="post" ACTION="ChefFrontEndSubscription.do">
+        <input type="hidden" name="action" value="insert"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="hidden" name="memid" value="${id}"> 
+        <input type="submit" value="訂閱" class="content_3" style="width: 100%;">
+        </FORM>
+</c:when>
+<c:otherwise>
+          <FORM METHOD="post" ACTION="ChefFrontEndSubscription.do">
+        <input type="hidden" name="action" value="delete"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="hidden" name="memid" value="${id}"> 
+        <input type="submit" value="取消訂閱" class="content_3" style="width: 100%;">
+        </FORM>
+</c:otherwise>
+</c:choose>
+          <FORM METHOD="post" ACTION="frontEndChef.do">
+        <input type="hidden" name="action" value="getOne_For_Display"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="submit" value="了解更多" class="content_3" style="width: 100%;">
+        </FORM>
+		 </li>
+        </c:when>
+        <c:otherwise>
+		</c:otherwise>
+		</c:choose>
+		        </c:forEach>
        </ul>
-<%@ include file="page2.file" %>
+<%-- <%@ include file="page2.file" %> --%>
+        </c:when>
+		<c:otherwise>
+		</c:otherwise>
+		</c:choose>
+<!-- =============================================================================================	 -->
+ <c:choose>
+		<c:when test="${test == 2 && test1 == 0}">
+<%-- 		<%@ include file="page1.file" %>  --%>
+	<ul class="item_list">				
+       <c:forEach var="chefVO" items="${list}">
+		<c:choose>
+		<c:when test="${chefVO.chefPrice <= 20000 && chefVO.chefPrice > 10000}">
+ <li>
+        <a href="#">
+            <div class="img_block">
+              <img src="<%=request.getContextPath()%>/showLicensePicture?chefid=${chefVO.chefid}" 
+              width="200px" height="200px">
+           	   <span class="item_text">${chefVO.chefName} ${chefVO.chefNickname}</span>
+               <span class="item_text">價格 :  ${chefVO.chefPrice}</span>
+               <span class="item_text">簡介 :  ${chefVO.chefIntroduction}</span>
+               <span class="item_text">評價人數 :  ${chefVO.com}</span>
+               <span class="item_text">評價總分 :  ${chefVO.gomg}</span>
+            </div>
+          </a>
+          
+<%
+session.setAttribute("sstion", 1);
+%>
+<c:forEach var="chefSubscriptionVO" items="${listSubscription}">
+<c:choose>
+<c:when test="${chefSubscriptionVO.chefid == chefVO.chefid && chefSubscriptionVO.memid == id}">
+<%
+session.setAttribute("sstion", 0);
+%>
+</c:when>
+<c:otherwise>
+
+</c:otherwise>
+</c:choose>
+</c:forEach>
+          <c:choose>
+<c:when test="${sstion == 1}">
+          <FORM METHOD="post" ACTION="ChefFrontEndSubscription.do">
+        <input type="hidden" name="action" value="insert"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="hidden" name="memid" value="${id}"> 
+        <input type="submit" value="訂閱" class="content_3" style="width: 100%;">
+        </FORM>
+</c:when>
+<c:otherwise>
+          <FORM METHOD="post" ACTION="ChefFrontEndSubscription.do">
+        <input type="hidden" name="action" value="delete"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="hidden" name="memid" value="${id}"> 
+        <input type="submit" value="取消訂閱" class="content_3" style="width: 100%;">
+        </FORM>
+</c:otherwise>
+</c:choose>
+          <FORM METHOD="post" ACTION="frontEndChef.do">
+        <input type="hidden" name="action" value="getOne_For_Display"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="submit" value="了解更多" class="content_3" style="width: 100%;">
+        </FORM>
+        </li>
+        </c:when>
+        <c:otherwise>
+		</c:otherwise>
+		</c:choose>
+				        </c:forEach>
+       </ul>
+<%-- <%@ include file="page2.file" %> --%>
+        </c:when>
+		<c:otherwise>
+		</c:otherwise>
+		</c:choose>
+<!-- =============================================================================================	 -->		
+ <c:choose>
+		<c:when test="${test == 3 && test1 == 0}">
+<%-- 		<%@ include file="page1.file" %>  --%>
+	<ul class="item_list">				
+       <c:forEach var="chefVO" items="${list}">
+		<c:choose>
+		<c:when test="${chefVO.chefPrice > 20000}">
+ <li>
+        <a href="#">
+            <div class="img_block">
+              <img src="<%=request.getContextPath()%>/showLicensePicture?chefid=${chefVO.chefid}" 
+              width="200px" height="200px">
+           	   <span class="item_text">${chefVO.chefName} ${chefVO.chefNickname}</span>
+               <span class="item_text">價格 :  ${chefVO.chefPrice}</span>
+               <span class="item_text">簡介 :  ${chefVO.chefIntroduction}</span>
+               <span class="item_text">評價人數 :  ${chefVO.com}</span>
+               <span class="item_text">評價總分 :  ${chefVO.gomg}</span>
+            </div>
+          </a>
+          
+<%
+session.setAttribute("sstion", 1);
+%>
+<c:forEach var="chefSubscriptionVO" items="${listSubscription}">
+<c:choose>
+<c:when test="${chefSubscriptionVO.chefid == chefVO.chefid && chefSubscriptionVO.memid == id}">
+<%
+session.setAttribute("sstion", 0);
+%>
+</c:when>
+<c:otherwise>
+
+</c:otherwise>
+</c:choose>
+</c:forEach>
+          <c:choose>
+<c:when test="${sstion == 1}">
+          <FORM METHOD="post" ACTION="ChefFrontEndSubscription.do">
+        <input type="hidden" name="action" value="insert"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="hidden" name="memid" value="${id}"> 
+        <input type="submit" value="訂閱" class="content_3" style="width: 100%;">
+        </FORM>
+</c:when>
+<c:otherwise>
+          <FORM METHOD="post" ACTION="ChefFrontEndSubscription.do">
+        <input type="hidden" name="action" value="delete"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="hidden" name="memid" value="${id}"> 
+        <input type="submit" value="取消訂閱" class="content_3" style="width: 100%;">
+        </FORM>
+</c:otherwise>
+</c:choose>
+          <FORM METHOD="post" ACTION="frontEndChef.do">
+        <input type="hidden" name="action" value="getOne_For_Display"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="submit" value="了解更多" class="content_3" style="width: 100%;">
+        </FORM>
+        </li>
+        </c:when>
+        <c:otherwise>
+		</c:otherwise>
+		</c:choose>
+				        </c:forEach>
+       </ul>
+<%-- <%@ include file="page2.file" %> --%>
+        </c:when>
+		<c:otherwise>
+		</c:otherwise>
+		</c:choose>
+<!-- =============================================================================================	 -->		
+ <c:choose>
+		<c:when test="${test == 1 && test1 == 2}">
+<%-- 		<%@ include file="page1.file" %>  --%>
+	<ul class="item_list">				
+       <c:forEach var="chefVO" items="${list}">
+		<c:choose>
+		<c:when test="${chefVO.chefPrice <= 20000}">
+ <li>
+        <a href="#">
+            <div class="img_block">
+              <img src="<%=request.getContextPath()%>/showLicensePicture?chefid=${chefVO.chefid}" 
+              width="200px" height="200px">
+           	   <span class="item_text">${chefVO.chefName} ${chefVO.chefNickname}</span>
+               <span class="item_text">價格 :  ${chefVO.chefPrice}</span>
+               <span class="item_text">簡介 :  ${chefVO.chefIntroduction}</span>
+               <span class="item_text">評價人數 :  ${chefVO.com}</span>
+               <span class="item_text">評價總分 :  ${chefVO.gomg}</span>
+            </div>
+          </a>
+          
+<%
+session.setAttribute("sstion", 1);
+%>
+<c:forEach var="chefSubscriptionVO" items="${listSubscription}">
+<c:choose>
+<c:when test="${chefSubscriptionVO.chefid == chefVO.chefid && chefSubscriptionVO.memid == id}">
+<%
+session.setAttribute("sstion", 0);
+%>
+</c:when>
+<c:otherwise>
+
+</c:otherwise>
+</c:choose>
+</c:forEach>
+          <c:choose>
+<c:when test="${sstion == 1}">
+          <FORM METHOD="post" ACTION="ChefFrontEndSubscription.do">
+        <input type="hidden" name="action" value="insert"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="hidden" name="memid" value="${id}"> 
+        <input type="submit" value="訂閱" class="content_3" style="width: 100%;">
+        </FORM>
+</c:when>
+<c:otherwise>
+          <FORM METHOD="post" ACTION="ChefFrontEndSubscription.do">
+        <input type="hidden" name="action" value="delete"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="hidden" name="memid" value="${id}"> 
+        <input type="submit" value="取消訂閱" class="content_3" style="width: 100%;">
+        </FORM>
+</c:otherwise>
+</c:choose>
+          <FORM METHOD="post" ACTION="frontEndChef.do">
+        <input type="hidden" name="action" value="getOne_For_Display"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="submit" value="了解更多" class="content_3" style="width: 100%;">
+        </FORM>
+        </li>
+        </c:when>
+        <c:otherwise>
+		</c:otherwise>
+		</c:choose>
+				        </c:forEach>
+       </ul>
+<%-- <%@ include file="page2.file" %> --%>
+        </c:when>
+		<c:otherwise>
+		</c:otherwise>
+		</c:choose>
+<!-- =============================================================================================	 -->		
+ <c:choose>
+		<c:when test="${test == 2 && test1 == 3}">
+<%-- 		<%@ include file="page1.file" %>  --%>
+	<ul class="item_list">				
+       <c:forEach var="chefVO" items="${list}">
+		<c:choose>
+		<c:when test="${chefVO.chefPrice > 10000}">
+ <li>
+        <a href="#">
+            <div class="img_block">
+              <img src="<%=request.getContextPath()%>/showLicensePicture?chefid=${chefVO.chefid}" 
+              width="200px" height="200px">
+           	   <span class="item_text">${chefVO.chefName} ${chefVO.chefNickname}</span>
+               <span class="item_text">價格 :  ${chefVO.chefPrice}</span>
+               <span class="item_text">簡介 :  ${chefVO.chefIntroduction}</span>
+               <span class="item_text">評價人數 :  ${chefVO.com}</span>
+               <span class="item_text">評價總分 :  ${chefVO.gomg}</span>
+            </div>
+          </a>
+          
+<%
+session.setAttribute("sstion", 1);
+%>
+<c:forEach var="chefSubscriptionVO" items="${listSubscription}">
+<c:choose>
+<c:when test="${chefSubscriptionVO.chefid == chefVO.chefid && chefSubscriptionVO.memid == id}">
+<%
+session.setAttribute("sstion", 0);
+%>
+</c:when>
+<c:otherwise>
+
+</c:otherwise>
+</c:choose>
+</c:forEach>
+          <c:choose>
+<c:when test="${sstion == 1}">
+          <FORM METHOD="post" ACTION="ChefFrontEndSubscription.do">
+        <input type="hidden" name="action" value="insert"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="hidden" name="memid" value="${id}"> 
+        <input type="submit" value="訂閱" class="content_3" style="width: 100%;">
+        </FORM>
+</c:when>
+<c:otherwise>
+          <FORM METHOD="post" ACTION="ChefFrontEndSubscription.do">
+        <input type="hidden" name="action" value="delete"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="hidden" name="memid" value="${id}"> 
+        <input type="submit" value="取消訂閱" class="content_3" style="width: 100%;">
+        </FORM>
+</c:otherwise>
+</c:choose>
+          <FORM METHOD="post" ACTION="frontEndChef.do">
+        <input type="hidden" name="action" value="getOne_For_Display"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="submit" value="了解更多" class="content_3" style="width: 100%;">
+        </FORM>
+        </li>
+        </c:when>
+        <c:otherwise>
+		</c:otherwise>
+		</c:choose>
+				        </c:forEach>
+       </ul>
+<%-- <%@ include file="page2.file" %> --%>
+        </c:when>
+		<c:otherwise>
+		</c:otherwise>
+		</c:choose>
+<!-- =============================================================================================	 -->		
+ <c:choose>
+		<c:when test="${test == 1 && test1 == 3}">
+<%-- 		<%@ include file="page1.file" %>  --%>
+	<ul class="item_list">				
+       <c:forEach var="chefVO" items="${list}">
+		<c:choose>
+		<c:when test="${chefVO.chefPrice <= 10000 || chefVO.chefPrice > 20000}">
+ <li>
+        <a href="#">
+            <div class="img_block">
+              <img src="<%=request.getContextPath()%>/showLicensePicture?chefid=${chefVO.chefid}" 
+              width="200px" height="200px">
+           	   <span class="item_text">${chefVO.chefName} ${chefVO.chefNickname}</span>
+               <span class="item_text">價格 :  ${chefVO.chefPrice}</span>
+               <span class="item_text">簡介 :  ${chefVO.chefIntroduction}</span>
+               <span class="item_text">評價人數 :  ${chefVO.com}</span>
+               <span class="item_text">評價總分 :  ${chefVO.gomg}</span>
+            </div>
+          </a>
+<%
+session.setAttribute("sstion", 1);
+%>
+<c:forEach var="chefSubscriptionVO" items="${listSubscription}">
+<c:choose>
+<c:when test="${chefSubscriptionVO.chefid == chefVO.chefid && chefSubscriptionVO.memid == id}">
+<%
+session.setAttribute("sstion", 0);
+%>
+</c:when>
+<c:otherwise>
+
+</c:otherwise>
+</c:choose>
+</c:forEach>
+          <c:choose>
+<c:when test="${sstion == 1}">
+          <FORM METHOD="post" ACTION="ChefFrontEndSubscription.do">
+        <input type="hidden" name="action" value="insert"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="hidden" name="memid" value="${id}"> 
+        <input type="submit" value="訂閱" class="content_3" style="width: 100%;">
+        </FORM>
+</c:when>
+<c:otherwise>
+          <FORM METHOD="post" ACTION="ChefFrontEndSubscription.do">
+        <input type="hidden" name="action" value="delete"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="hidden" name="memid" value="${id}"> 
+        <input type="submit" value="取消訂閱" class="content_3" style="width: 100%;">
+        </FORM>
+</c:otherwise>
+</c:choose>
+          <FORM METHOD="post" ACTION="frontEndChef.do">
+        <input type="hidden" name="action" value="getOne_For_Display"> 
+        <input type="hidden" name="chefid" value="${chefVO.chefid}"> 
+        <input type="submit" value="了解更多" class="content_3" style="width: 100%;">
+        </FORM>
+        </li>
+        </c:when>
+        <c:otherwise>
+		</c:otherwise>
+		</c:choose>
+				        </c:forEach>
+       </ul>
+<%-- <%@ include file="page2.file" %> --%>
+        </c:when>
+		<c:otherwise>
+		</c:otherwise>
+		</c:choose>
+<!-- =============================================================================================	 -->		
+
        	</main>
-<%--       	<c:forEach var="classifmall" items="${(cangetall==null)?(classifmall):(cangetall)}"> --%>
-<%--         <a href="<%=request.getContextPath()%>/ClassIfmServlet?claid=${classifmall.claid}&action=second_page" id="right_a"> --%>
-<!--           <div class="pic"> -->
-<%--               <span class="clatag">${classifmall.classTagVO.claTagName}</span> --%>
-<%--               <img class="img1" src="<%=request.getContextPath()%>/ClassIfmPic?id=${classifmall.claid}&page=0" alt=""> --%>
-<!--               <div class="clafintime_div">課程報名截止時間 :  -->
-<%--                   <span class="clafintime">${fn:replace((classifmall.claFinTime), "T", " ")}</span> --%>
-<!--               </div> -->
-<!--           </div> -->
-<!--           <div class="content"> -->
-<!--               <div class="clapeople"> -->
-<%--                   <span class="cla_people_now">${classifmall.claPeople}</span><span>/</span><span class="cla_people_max">${classifmall.claPeopleMax}</span> --%>
-<!--                   <span class="peopleimg"> -->
-<%--                       <img class="img2" src="<%=request.getContextPath()%>/front-end/classifm/classifm_image/user.svg" alt=""> --%>
-<!--                   </span> -->
-<!--               </div> -->
-  
-<!--               <div class="content_1"> -->
-<%--                   <h3 class="cla_title">${classifmall.claTitle}</h3> --%>
-<%--                   <span class="teacher_name">${classifmall.teacherVO.thrName}</span> --%>
-<%--                   <p class="cla_text">${classifmall.claIntroduction}</p> --%>
-<!--               </div> -->
-<!--               <br> -->
-<!--               <hr> -->
-  
-<!--               <div class="content_2"> -->
-<!--                   <div class="price"> -->
-<!--                       <h5 class="cla_price1">課程價格</h5> -->
-<!--                       <div class="cla_price2">定價:</div> -->
-<!--                       <span class="cla_price3">$</span> -->
-<%--                       <span class="cla_price4">${classifmall.claPrice}</span> --%>
-<!--                   </div> -->
-<!--                   <div class="class_time"> -->
-<!--                       <h5 class="clatime1">課程時間</h5> -->
-<%--                       <span class="clatime2">${fn:replace((classifmall.claTime), "T", " ")}</span> --%>
-<!--                   </div> -->
-<!--               </div> -->
-  
-<!--               <div class="content_3">了解更多</div> -->
-<!--           </div> -->
-<!--         </a> -->
-<%--         </c:forEach> --%>
 
-
-		
-
-<!--       <div class="clear"></div> -->
-<!--     </div> -->
-<!--   </div> -->
   
 <%@ include file="../tools/footer.jsp"%>
 	<script src="../assets/js/jquery.min.js"></script>

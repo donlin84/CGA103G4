@@ -150,8 +150,7 @@ main.main {
 									</c:if>
 
 									<ul>
-										<li><a href='listAllChefSkillsType.jsp'>List</a> all
-											Chefs. <br>
+										<li><a href='listAllChefSkillsType.jsp'>所有專長種類列表</a>  <br>
 										<br></li>
 
 
@@ -179,15 +178,22 @@ main.main {
 													value="送出">
 											</FORM>
 										</li>
+										<li>
+											<FORM METHOD="post" ACTION="ChefSkillsType.do">
+												<b>選擇專長種類:</b> <select size="1" name="skillid">
+													<c:forEach var="chefSkillsTypeVO"
+														items="${chefSkillsTypeSvc.all}">
+														<option value="${chefSkillsTypeVO.skillid}">${chefSkillsTypeVO.skill}
+													</c:forEach>
+												</select> <input type="hidden" name="action"
+													value="getOne_For_Display"> <input type="submit"
+													value="送出">
+											</FORM>
+										</li>
 
 
 									</ul>
-									<h3>專長管理</h3>
-
-									<ul>
-										<li><a href='addChefSkillsType.jsp'>Add</a> a new
-											ChefSkillsType.</li>
-									</ul>
+								
 								</main>
 							</div>
 						</div>

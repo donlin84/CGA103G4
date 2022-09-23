@@ -16,9 +16,9 @@ public class MemberService {
 	public MemberVO addMember(String memName, String memAccount, String memPassword, String memGender,
 			String memPhone, String memEmail, String memAddres, Date memBirthday,
 			String memNation) {
-
+		
 		MemberVO memberVO = new MemberVO();
-
+//		System.out.println("action");
 		memberVO.setMemName(memName);
 		memberVO.setMemAccount(memAccount);
 		memberVO.setMemPassword(memPassword);

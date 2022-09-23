@@ -146,7 +146,7 @@ public class ChefServlet extends HttpServlet {
 		}
 //============================================================================
 		if ("update".equals(action)) { // 來自update_chef_input.jsp的請求
-			System.out.println("aaa");
+//			System.out.println("aaa");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.

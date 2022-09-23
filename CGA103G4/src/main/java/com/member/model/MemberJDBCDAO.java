@@ -41,15 +41,14 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 			pstmt.setString(1, memberVO.getMemName());
 			pstmt.setString(2, memberVO.getMemAccount());
 			pstmt.setString(3, memberVO.getMemPassword());
-			System.out.println(memberVO.getMemGender());
 			pstmt.setString(4, memberVO.getMemGender());
 			pstmt.setString(5, memberVO.getMemPhone());
 			pstmt.setString(6, memberVO.getMemEmail());
 			pstmt.setString(7, memberVO.getMemAddres());
 			pstmt.setDate(8, memberVO.getMemBirthday());
 			pstmt.setString(9, memberVO.getMemNation());
+//			System.out.println("action");
 			pstmt.executeUpdate();
-
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
@@ -306,7 +305,7 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 		          + jdbcUtil_CompositeQuery_Member.get_WhereCondition(map)
 		          + "order by memid";
 			pstmt = conn.prepareStatement(finalSQL);
-			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+//			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
 			rs = pstmt.executeQuery();
 	
 			while (rs.next()) {

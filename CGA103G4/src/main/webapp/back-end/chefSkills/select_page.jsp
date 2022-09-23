@@ -149,8 +149,7 @@ main.main {
 									</c:if>
 
 									<ul>
-										<li><a href='listAllChefSkills.jsp'>List</a> all
-											ChefSkills. <br> <br></li>
+										<li><a href='listAllChefSkills.jsp'>所有私廚專長列表</a> <br> <br></li>
 
 
 										<li>
@@ -190,7 +189,7 @@ main.main {
 									<ul>
 										<li>
 											<FORM METHOD="post" ACTION="ChefSkills.do" name="form1">
-												<b><font color=blue>萬用複合查詢:</font></b> <br>
+												<b><font color=blue>查詢條件:</font></b> <br>
 
 											
 												<b>輸入私廚編號:</b> <input type="text" name="chefid" value=""><br>
@@ -243,5 +242,10 @@ main.main {
 	<script src="../assets/plugins/raphael/raphael-min.js"></script>
 	<script src="../assets/plugins/morris/morris.min.js"></script>
 	<script src="../assets/js/app.js"></script>
+	<script>
+		$('select option').each(function() {
+			$(this).prevAll('option[value="' + this.value + '"]').remove();
+		});
+	</script>
 </body>
 </html>

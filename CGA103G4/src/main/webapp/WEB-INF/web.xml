@@ -248,8 +248,8 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>loginFilterhung</filter-name>
-		<url-pattern>/front-end/member/select_page.jsp</url-pattern>
 		<url-pattern>/back-end/index-back.jsp</url-pattern>
+		<url-pattern>/front-end/chefAppointment/Appointment.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>

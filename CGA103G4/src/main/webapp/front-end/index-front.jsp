@@ -1,17 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.announcement.model.*"%>
-<%@ page import="com.emp.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
 
-<%
-AnnouncementService annSvc = new AnnouncementService();
-List<AnnouncementVO> list = annSvc.getAll();
-pageContext.setAttribute("list", list);
-%>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="zh-Hant" dir="ltr">
@@ -28,14 +22,14 @@ pageContext.setAttribute("list", list);
 <link rel="stylesheet" href="./css/common/footer.css">
 <link rel="stylesheet" href="./css/common/main.css">
 <link rel="stylesheet" href="./css/index.css">
-
+<link href="./member/assets/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css">
+<link href="./member/assets/css/style.css" rel="stylesheet"
+	type="text/css">
 
 <script src="./js/image.js"></script>
 <script src="./js/nav.js"></script>
-<style>
-</style>
 </head>
-
 <body>
 
 	<header class="header">
@@ -61,47 +55,118 @@ pageContext.setAttribute("list", list);
 				</ul>
 
 				<div class="sign_block">
-					<input class="input" placeholder="找食譜"><input class="input" placeholder="找食材"><button class="button"><img src="./images/icon.png"></button>
-					<a href="../sign_register.html">登入</a>
-				</div>
-				
-	       <ul class="navbar_list">
-          <div class="navbar">
-            <li class="announcebar">
-              <div><a href="./announce/newannounce.jsp">最新消息</a></div>
-              <div><a href="#">廣告瀏覽</a></div>
-              <div><a href="#">關於我們</a></div>
-            </li>
-            <li class="shopbar">
-              <div><a href="#">熱門推薦</a></div>
-              <div><a href="#">商品分類</a></div>
-              <div><a href="#">購物車</a></div>
-              <div><a href="./shop/promotions.jsp">優惠活動</a></div>
-            </li>
-            <li class="coursebar">
-              <div><a href="#">課程內容資訊</a></div>
-              <div><a href="#">報名</a></div>
-            </li>
-            <li class="chefbar">
-              <div><a href="#">私廚介紹</a></div>
-              <div><a href="#">預約系統</a></div>
-            </li>
-            <li class="forumbar">
-              <div><a href="#">食譜</a></div>
-              <div><a href="#">上傳食譜</a></div>
-              <div><a href="#">飲食交流</a></div>
-              <div><a href="#">廚藝烹飪</a></div>
-              <div><a href="#">廚具交流</a></div>
-              <div><a href="#">收藏文章</a></div>
-            </li>
-            <li class="socialbar">
-              <div><a href="http://www.facebook.com">幫助中心</a></div>
-              <div><a href="http://instagram.com">聯絡客服</a></div>
-            </li>
-          </div>
-        </ul>
+					<input class="input" placeholder="找食譜"><input
+						class="input" placeholder="找食材">
+					<button class="button">
+						<img src="./images/icon.png">
+					</button>
 
-      </nav>
+
+					<c:choose>
+
+						<c:when test="${empty account}">
+							<a href="./member/frontEndLogin.jsp">登入</a>
+						</c:when>
+						<c:otherwise>
+							<div class="btn-group mo-mb-2"
+								style="height: 40px; right: 5px; top: 8px;">
+								<button type="button" class="btn btn-warning dropdown-toggle"
+									data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">會員</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item"
+										href="./member/update.jsp">修改資料</a> <a
+										class="dropdown-item" href="./creditCardInformation/CreditCardInformation.jsp">信用卡</a> <a
+										class="dropdown-item" href="#">查看訂單</a> <a
+										class="dropdown-item" href="#">查看商品</a> <a
+										class="dropdown-item" href="#">查看優惠卷</a> <a
+										class="dropdown-item" href="#">查看課程</a> <a
+										class="dropdown-item" href="../chefAppointment/memberListAll.jsp">查看預約</a> <a
+										class="dropdown-item" href="#">查看食譜</a> <a
+										class="dropdown-item" href="#">查看通知</a> <a
+										class="dropdown-item" href="./member/frontEndLogout.jsp">登出</a>
+
+								</div>
+							</div>
+
+						</c:otherwise>
+					</c:choose>
+
+				</div>
+				<ul class="navbar_list">
+					<div class="navbar">
+						<li class="announcebar">
+							<div>
+								<a href="#">最新消息</a>
+							</div>
+							<div>
+								<a href="#">廣告瀏覽</a>
+							</div>
+							<div>
+								<a href="#">關於我們</a>
+							</div>
+						</li>
+						<li class="shopbar">
+							<div>
+								<a href="#">熱門推薦</a>
+							</div>
+							<div>
+								<a href="#">商品分類</a>
+							</div>
+							<div>
+								<a href="#">購物車</a>
+							</div>
+							<div>
+								<a href="#">優惠方案</a>
+							</div>
+						</li>
+						<li class="coursebar">
+							<div>
+								<a href="#">課程內容資訊</a>
+							</div>
+							<div>
+								<a href="#">報名</a>
+							</div>
+						</li>
+						<li class="chefbar">
+							<div>
+								<a href="#">私廚介紹</a>
+							</div>
+							<div>
+								<a href="#">預約系統</a>
+							</div>
+						</li>
+						<li class="forumbar">
+							<div>
+								<a href="#">食譜</a>
+							</div>
+							<div>
+								<a href="#">上傳食譜</a>
+							</div>
+							<div>
+								<a href="#">飲食交流</a>
+							</div>
+							<div>
+								<a href="#">廚藝烹飪</a>
+							</div>
+							<div>
+								<a href="#">廚具交流</a>
+							</div>
+							<div>
+								<a href="#">收藏文章</a>
+							</div>
+						</li>
+						<li class="socialbar">
+							<div>
+								<a href="http://www.facebook.com">幫助中心</a>
+							</div>
+							<div>
+								<a href="http://instagram.com">聯絡客服</a>
+							</div>
+						</li>
+					</div>
+				</ul>
+			</nav>
 		</div>
 
 		<li class="showbar"></li>
@@ -133,104 +198,30 @@ pageContext.setAttribute("list", list);
 
 			<div id="indexPageContent">
 
-				<main class="main">
+				<div class="title">這裡是首頁</div>
 
-					<div class="news_box">
-						<div class="news">
-							<div class="news_content">最新公告</div>
-						</div>
-					</div>
+				<div class="sectionOne">分區一</div>
 
-					<ul class="item_list">
-						<c:set var="count" value="0"></c:set>
-						
-						
-						<c:forEach begin="1" end="${fn:length(list)}" varStatus="stat">
-							<c:if test="${count < 3}" var="con" scope="page">
-								<li><a href="#">
-										<div class="img_block">
-											<img
-												src="<%=request.getContextPath()%>/AnnouncementPic?annid=${list[fn:length(list)-stat.index].annid}">
-										</div> <span class="item_text"><br>
-										<b>${list[fn:length(list)-stat.index].annTitle}</b></span> <span
-										class="item_text content">${list[fn:length(list)-stat.index].annContent}</span><br>
-										<span class="item_text content">發布日期
-											${list[fn:length(list)-stat.index].annUpdate}</span>
-								</a></li>
-								<c:set var="count" value="${count+1}" />
-							</c:if>
-						</c:forEach>
-					</ul>
+				<div class="horizen"></div>
 
+				<div class="sectionTwo">分區二</div>
 
-<!-- ====================================================================================================================================== -->
+				<div class="horizen"></div>
 
-<!-- 					<div class="news_box"> -->
-<!-- 						<div class="news"> -->
-<!-- 							<div class="news_content">最新課程</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<ul class="item_list"> -->
-
-<%-- 						<c:set var="ann_count" value="0"></c:set> --%>
-
-<%-- 						<c:forEach var="announcementVO" items="${list}"> --%>
-
-<%-- 							<c:if test="${ann_count < 3}" var="condition" scope="page"> --%>
-<%-- 								<c:if test="${announcementVO.annStatus == 1}" var="condition2" --%>
-<%-- 									scope="page"> --%>
-
-<!-- 									<li><a href="#"> -->
-<!-- 											<div class="img_block"> -->
-<!-- 												<img -->
-<%-- 													src="<%=request.getContextPath()%>/AnnouncementPic?annid=${announcementVO.annid}"> --%>
-<!-- 											</div> <span class="item_text"><br> -->
-<%-- 											<b>${announcementVO.annTitle}</b></span> <span --%>
-<%-- 											class="item_text content">${announcementVO.annContent}</span><br> --%>
-<!-- 											<span class="item_text content">發布日期 -->
-<%-- 												${announcementVO.annUpdate}</span> --%>
-<!-- 									</a></li> -->
-<%-- 									<c:set var="ann_count" value="${ann_count+1}" /> --%>
-
-<%-- 								</c:if> --%>
-<%-- 							</c:if> --%>
-
-<%-- 						</c:forEach> --%>
-
-<!-- 					</ul> -->
-					
-<!-- ====================================================================================================================================== -->
-				</main>
+				<div class="sectionThree">分區三</div>
 
 			</div>
 
 		</div>
 
-		<footer class="footer">
-			<div class="us">
-				<a href="#" class="pic"><img src="./images/SeeFoodLogo.png"></a><br>
-				<li><a href="#" class="pic"><img src="./images/fb.png"></a></li>
-				<li><a href="#" class="pic"><img src="./images/ig.png"></a></li>
-				<li><a href="#" class="pic"><img src="./images/tw.png"></a></li>
-				<li><a href="#" class="pic"><img src="./images/yt.png"></a></li>
-				<div class="about_us">
-					<li><a href="#" class="footer_contain">關於SeeFood</a></li>
-					<li><a href="#" class="footer_contain">公司資訊</a></li>
-					<li><a href="#" class="footer_contain">徵才資訊</a></li>
-					<li><a href="#" class="footer_contain">廣告合作</a></li>
-				</div>
-			</div>
+	</div>
 
-			<div class="copyright">
-				<li>copyright&copy;2022 seefood</li>
-			</div>
+	<%@ include file="tools/footer.jsp"%>
 
-			<div class="another">
-				<li><a href="#" class="footer_contain">客服資訊</a></li>
-				<li><a href="#" class="footer_contain">信箱:SeeFood@gmail.com</a></li>
-			</div>
+	<script src="./member/assets/js/jquery.min.js"></script>
+	<script src="./member/assets/js/popper.min.js"></script>
+	<script src="./member/assets/js/bootstrap.min.js"></script>
 
-		</footer>
 </body>
 
 </html>
