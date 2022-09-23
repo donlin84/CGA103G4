@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.promotionsdetail.model.*"%>
+<%@ page import="com.promotions.model.*"%>
+<%@ page import="com.product.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
@@ -14,7 +16,7 @@ PromotionsDetailVO promotionsDetailVO = (PromotionsDetailVO) request.getAttribut
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 
-<title>優惠券查詢首頁</title>
+<title>優惠明細單筆查詢</title>
 
 <meta content="Admin Dashboard" name="description" />
 <meta content="Mannatthemes" name="author" />
@@ -57,7 +59,6 @@ PromotionsDetailVO promotionsDetailVO = (PromotionsDetailVO) request.getAttribut
 				</div>
 			</div>
 
-
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -70,7 +71,6 @@ PromotionsDetailVO promotionsDetailVO = (PromotionsDetailVO) request.getAttribut
 										<th>產品名稱</th>
 										<th>折扣後金額</th>
 										<th>修改</th>
-										<th>刪除</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -82,7 +82,7 @@ PromotionsDetailVO promotionsDetailVO = (PromotionsDetailVO) request.getAttribut
 								</tbody>
 							</table>
 							<div class="continueToAdd" style="width: 100%; text-align: center;">
-								<a href="<%=request.getContextPath()%>/back-end/promotionsdetail/addPromotionsDetail.jsp"><input type="submit"
+								<a href="<%=request.getContextPath()%>/back-end/promotionsdetail/batchAddPromotionsDetail.jsp"><input type="submit"
 									value="繼續新增"></a>
 							</div>
 						</div>

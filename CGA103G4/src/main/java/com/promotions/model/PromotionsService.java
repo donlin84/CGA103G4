@@ -2,6 +2,7 @@ package com.promotions.model;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 public class PromotionsService {
 	
@@ -53,6 +54,9 @@ public class PromotionsService {
 
 	public List<PromotionsVO> getAll() {
 		return dao.getAll();
+	}
+	public List<PromotionsVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
 	}
 	
 }

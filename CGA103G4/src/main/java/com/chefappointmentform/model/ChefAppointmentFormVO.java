@@ -85,5 +85,16 @@ public class ChefAppointmentFormVO implements java.io.Serializable{
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	
+	//取得會員VO
+	public com.member.model.MemberVO getMemberVO(){
+		com.member.model.MemberService memsvc = new com.member.model.MemberService();
+		com.member.model.MemberVO memVO = memsvc.getOneMember(memid);
+		return memVO;
+	}
+	//取得私廚VO
+	public com.chef.model.ChefVO getChefVO(){
+		com.chef.model.ChefService chefsvc = new com.chef.model.ChefService();
+		com.chef.model.ChefVO chefVO = chefsvc.getOneChef(chefid);
+		return chefVO;
+	}
 }

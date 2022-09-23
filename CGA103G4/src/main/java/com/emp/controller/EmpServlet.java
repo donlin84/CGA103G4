@@ -23,6 +23,9 @@ import javax.servlet.http.Part;
 import com.emp.model.EmpDAO;
 import com.emp.model.EmpService;
 import com.emp.model.EmpVO;
+import org.json.*;
+
+import netscape.javascript.JSObject;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class EmpServlet extends HttpServlet {
@@ -35,7 +38,8 @@ public class EmpServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-
+		
+	
 		/* 查詢全部 */
 		if ("getAll".equals(action)) {
 			/*************************** 開始查詢資料 ****************************************/
@@ -187,7 +191,7 @@ public class EmpServlet extends HttpServlet {
 			empVO = empSvc.addEmp(ename, phone, picture, account, password, level, hiredate); // alt+/ call方法
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = "/back-end/emp/listAllEmp.jsp";
+			String url = "/back-end/emp/select_page.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 			successView.forward(req, res);
 		}

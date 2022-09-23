@@ -4,7 +4,12 @@
 <%@ page import="com.emp.model.*"%>
 
 <!--    以下等同第9行 -->
-   <jsp:useBean id="list" scope="session" type="java.util.List<EmpVO>" />
+<%--    <jsp:useBean id="list" scope="session" type="java.util.List<EmpVO>" /> --%>
+<%
+	EmpDAO dao = new EmpDAO();
+    List<EmpVO> list = dao.getAll();       // 此行的list變數(物件)將提供page1.file的第11行取得查詢到的總筆數，再由page1.file進行分頁的需要
+    pageContext.setAttribute("list",list); // 將上一行的list變數(物件)存入當前頁面pageContext，再由底下的第83行由JSTL的forEach列印出結果
+%>
 
 <html>
 <head>
@@ -47,12 +52,6 @@
 <body bgcolor='white'>
 
 
-<table id="table-1">
-	<tr><td>
-		 <h3>所有管理員</h3>
-		 <h4><a href="select_page.jsp">回首頁</a></h4>
-	</td></tr>
-</table>
 
 <table>
 	<tr>

@@ -3,7 +3,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.promotionsdetail.model.*"%>
-<%@ page import="com.coupontype.model.*" %>
+<%@ page import="com.promotions.model.*"%>
+<%@ page import="com.product.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
@@ -19,7 +20,7 @@ PromotionsDetailVO promotionsDetailVO = (PromotionsDetailVO) request.getAttribut
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 
-<title>優惠券修改</title>
+<title>優惠明細單筆修改</title>
 
 <meta content="Admin Dashboard" name="description" />
 <meta content="Mannatthemes" name="author" />
@@ -81,13 +82,13 @@ PromotionsDetailVO promotionsDetailVO = (PromotionsDetailVO) request.getAttribut
 					<div class="page-title-box">
 						<div class="btn-group pull-right">
 							<ol class="breadcrumb hide-phone p-0 m-0">
-								<li class="breadcrumb-item active">優惠券修改</li>
+								<li class="breadcrumb-item active">優惠明細單筆修改</li>
 								<li class="breadcrumb-item"><a
 									href="../discount-management/discount-management.jsp">優惠方案管理</a></li>
 								<li class="breadcrumb-item"><a href="../index-back.jsp">後台首頁</a></li>
 							</ol>
 						</div>
-						<h4 class="page-title">優惠券修改</h4>
+						<h4 class="page-title">優惠明細單筆修改</h4>
 					</div>
 				</div>
 			</div>
@@ -96,7 +97,7 @@ PromotionsDetailVO promotionsDetailVO = (PromotionsDetailVO) request.getAttribut
 				<div class="col-12">
 					<div class="card">
 						<div class="card-body">
-							<h4 class="mt-0 header-title">優惠券修改</h4>
+							<h4 class="mt-0 header-title">優惠明細單筆修改</h4>
 							<c:if test="${not empty errorMsgs}">
 								<font style="color: red">請修正以下錯誤:</font>
 								<ul>
@@ -106,65 +107,28 @@ PromotionsDetailVO promotionsDetailVO = (PromotionsDetailVO) request.getAttribut
 								</ul>
 							</c:if>
 
-							<FORM METHOD="post" ACTION="CouponTypeServlet" name="form1"
-								enctype="multipart/form-data">
+							<FORM METHOD="post" ACTION="PromotionsDetailServlet" name="form1">
 								<table class="table" id="my-table">
 									<tr>
-										<td>優惠券種類編號:</td>
-										<td><%=couponTypeVO.getCpTpid()%></td>
+										<td>優惠活動名稱:</td>
+										<td><input type="hidden" name="pmid" size="45"
+											value="<%=(promotionsDetailVO == null) ? "" : promotionsDetailVO.getPmid()%>" placeholder="請輸入優惠活動名稱" /><%=promotionsDetailVO.getPmtVO().getPmName()%></td>
 									</tr>
 									<tr>
-										<td>優惠券名稱:</td>
-										<td><input type="TEXT" name="cpName" size="45"
-											value="<%=(couponTypeVO == null) ? "" : couponTypeVO.getCpName()%>" placeholder="請輸入優惠券名稱" /></td>
+										<td>產品名稱:</td>
+										<td><input type="hidden" name="pdid" size="45"
+											value="<%=(promotionsDetailVO == null) ? "" : promotionsDetailVO.getPdid()%>" placeholder="請輸入產品名稱" /><%=promotionsDetailVO.getPdVO().getPdName()%></td>
 									</tr>
 									<tr>
-										<td>優惠券折扣價格:</td>
-										<td><input type="TEXT" name="cpDiscount"
-											value="<%=(couponTypeVO == null) ? "" : couponTypeVO.getCpDiscount()%>" placeholder="請輸入折扣金額"/></td>
+										<td>折扣後金額:</td>
+										<td><input type="TEXT" name="pmPdDiscountPrice"
+											value="<%=(promotionsDetailVO == null) ? "" : promotionsDetailVO.getPmPdDiscountPrice()%>" placeholder="請輸入折扣金額"/></td>
 									</tr>
-									<tr>
-										<td>起始時間:</td>
-										<td><input name="cpStart" id="f_date1" type="text"
-											value="<%=(couponTypeVO == null) ? "1970-01-01" : couponTypeVO.getCpStart()%>"
-											autocomplete="off"></td>
-									</tr>
-									<tr>
-										<td>截止時間:</td>
-										<td><input name="cpEnd" id="f_date2" type="text"
-											value="<%=(couponTypeVO == null) ? "2038-12-30" : couponTypeVO.getCpEnd()%>"
-											autocomplete="off"></td>
-									</tr>
-									<tr>
-										<td>活動狀態:</td>
-										<td><select name="cpStatus">
-												<option value="1">上架</option>
-												<option value="0">下架</option>
-										</select></td>
-									</tr>
-									<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
-									<tr>
-										<td>優惠券圖片:</td>
-										<td><input type="file" name="cpPic" accept="image/*"
-											id="file0"></td>
-									</tr>
-									<tr>
-										<td>優惠券圖片預覽:</td>
-										<td>
-											<div id="preview">
-												<img
-													src="<%=request.getContextPath()%>/CouponTypePic?cpTpid=${couponTypeVO.cpTpid}"
-													class="img" id="img0" width="150px;"> <span
-													class="text">預覽圖</span>
-											</div>
-										</td>
-									</tr>
-
 								</table>
 								<br> <input type="hidden" name="action" value="update">
-								<input type="hidden" name="cpTpid"
-									value="<%=couponTypeVO.getCpTpid()%>"> <input
-									type="submit" value="送出修改">
+								<input type="hidden" name="pmid" value="<%=promotionsDetailVO.getPmid()%>">
+								<input type="hidden" name="pdid" value="<%=promotionsDetailVO.getPdid()%>">
+								<input type="submit" value="送出修改">
 							</FORM>
 						</div>
 					</div>
@@ -182,124 +146,6 @@ PromotionsDetailVO promotionsDetailVO = (PromotionsDetailVO) request.getAttribut
 	<!-- End Footer -->
 
 </body>
-
-<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
-
-<%
-java.sql.Date cpStart = null;
-java.sql.Date cpEnd = null;
-try {
-	cpStart = couponTypeVO.getCpStart();
-	cpEnd = couponTypeVO.getCpEnd();
-} catch (Exception e) {
-	cpStart = new java.sql.Date(System.currentTimeMillis());
-	cpEnd = new java.sql.Date(System.currentTimeMillis());
-}
-%>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.datetimepicker.css" />
-<script
-	src="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.js"></script>
-<script
-	src="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.datetimepicker.full.js"></script>
-
-<style>
-.xdsoft_datetimepicker .xdsoft_datepicker {
-	width: 300px; /* width:  300px; */
-}
-
-.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-	height: 151px; /* height:  151px; */
-}
-</style>
-
-<script>
-  
-function addimage() {
-		let img = $("#img0");
-		img.attr('src', URL.createObjectURL(this.files[0]));
-		console.log(img);
-};
-$("#file0").change(addimage);
-
-<!-- ============================  pmStartDate  ============================ -->
-
-	 $('#f_date1').datetimepicker({
-		 format:'Y-m-d',
-		 minDate: '1' ,
-		 value: 'cpStart' ,
-	  onShow:function( ct ){
-	   this.setOptions({
-	    maxDate:jQuery('#f_date2').val()?$('#f_date2').val():false
-	   })
-	  },
-	  timepicker:false
-	 });
-	 
-<!-- ============================  pmEndDate  ============================ -->
-
-$('#f_date2').datetimepicker({
-	 format:'Y-m-d',
- onShow:function( ct ){
-  this.setOptions({
-   minDate:$('#f_date1').val()?$('#f_date1').val():false
-  })
- },
- timepicker:false
-});
-
-// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
-// 	     1.以下為某一天之前的日期無法選擇
-<%-- 	     var somedate1 = new Date('<%=pmStart%>'); --%>
-// 	     $('#f_date1').datetimepicker({
-// 	         beforeShowDay: function(date) {
-// 	       	  if (  date.getYear() <  somedate1.getYear() || 
-// 			           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-// 			           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-// 	             ) {
-// 	                  return [false, ""]
-// 	             }
-// 	             return [true, ""];
-// 	     }});
-	     
-// 	     $.datetimepicker.setLocale('zh');
-// 	     $('#f_date1').datetimepicker({
-// 	    	timepicker:false,
-// 	        format:'Y-m-d',
-<%-- 	        value: '<%=pmStart%>', --%>
-// 	     });
-
-	//      2.以下為某一天之後的日期無法選擇
-	//      var somedate2 = new Date('2017-06-15');
-	//      $('#f_date1').datetimepicker({
-	//          beforeShowDay: function(date) {
-	//        	  if (  date.getYear() >  somedate2.getYear() || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-	//              ) {
-	//                   return [false, ""]
-	//              }
-	//              return [true, ""];
-	//      }});
-
-	//      3.以下為兩個日期之外的日期無法選擇 (也可按需要換成其他日期)
-	//      var somedate1 = new Date('2017-06-15');
-	//      var somedate2 = new Date('2017-06-25');
-	//      $('#f_date1').datetimepicker({
-	//          beforeShowDay: function(date) {
-	//        	  if (  date.getYear() <  somedate1.getYear() || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-	//		             ||
-	//		            date.getYear() >  somedate2.getYear() || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-	//              ) {
-	//                   return [false, ""]
-	//              }
-	//              return [true, ""];
-	//      }});
-</script>
 <!-- jQuery -->
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/popper.min.js"></script>

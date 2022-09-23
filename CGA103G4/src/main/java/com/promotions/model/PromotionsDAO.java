@@ -6,11 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_PromotionsDetail;
 
 public class PromotionsDAO implements PromotionsDAO_interface {
 
@@ -18,7 +22,7 @@ public class PromotionsDAO implements PromotionsDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/cga103g4");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Cga103G4");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -281,6 +285,67 @@ public class PromotionsDAO implements PromotionsDAO_interface {
 			}
 		}
 		return promotionsVO;
+	}
+
+	@Override
+	public List<PromotionsVO> getAll(Map<String, String[]> map) {
+		List<PromotionsVO> list = new ArrayList<PromotionsVO>();
+		PromotionsVO promotionsVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			
+			con = ds.getConnection();
+			String finalSQL = "select * from Promotions "
+		          + jdbcUtil_CompositeQuery_PromotionsDetail.get_WhereCondition(map)
+		          + "order by pmDiscount";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				promotionsVO = new PromotionsVO();
+				promotionsVO.setPmid(rs.getInt("pmid"));
+				promotionsVO.setPmName(rs.getString("pmName"));
+				promotionsVO.setPmDescription(rs.getString("pmDescription"));
+				promotionsVO.setPmDiscount(rs.getDouble("pmDiscount"));
+				promotionsVO.setPmStart(rs.getDate("pmStart"));
+				promotionsVO.setPmEnd(rs.getDate("pmEnd"));
+				promotionsVO.setPmStatus(rs.getInt("pmStatus"));
+				list.add(promotionsVO); // Store the row in the List
+			}
+	
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 
 }

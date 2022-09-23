@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.membercoupon.model.MemberCouponVO" table="membercoupon">
+
+		<id name="memCpid" column="memCpid">
+			<generator class="identity" />
+		</id>
+
+		<many-to-one name="memberVO" class="com.member.model.MemberVO" lazy="false">
+			<column name="memid" />
+		</many-to-one>
+		
+		<many-to-one name="couponTypeVO" class="com.coupontype.model.CouponTypeVO" lazy="false">
+			<column name="cpTpid" />
+		</many-to-one>
+		
+		<property name="memCpDate" column="memCpDate" />
+		<property name="memCpStatus" column="memCpStatus" />
+		<property name="memCpRecord" column="memCpRecord" />
+
+	</class>
+</hibernate-mapping>
+

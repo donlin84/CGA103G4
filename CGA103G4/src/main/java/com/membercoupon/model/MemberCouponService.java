@@ -1,20 +1,23 @@
 package com.membercoupon.model;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 public class MemberCouponService {
 	
 	private MemberCouponDAO_interface dao;
 	
+	public MemberCouponService() {
+		dao = new MemberCouponDAO();
+	}
 	
-	public MemberCouponVO addMemberCoupon(Integer memid, Integer cpTpid, LocalDateTime memCpDate, Integer memCpStatus,
-			LocalDateTime memCpRecord) {
+	public MemberCouponVO addMemberCoupon(Integer memid, Integer cpTpid, Date memCpDate, Integer memCpStatus, Date memCpRecord) {
 		
 		MemberCouponVO memberCouponVO = new MemberCouponVO();
 		
 		memberCouponVO.setMemid(memid);
-		memberCouponVO.setCpTpid(cpTpid);
+		memberCouponVO.setCpTpid(cpTpid);	
 		memberCouponVO.setMemCpDate(memCpDate);
 		memberCouponVO.setMemCpStatus(memCpStatus);
 		memberCouponVO.setMemCpRecord(memCpRecord);
@@ -23,14 +26,14 @@ public class MemberCouponService {
 		return memberCouponVO;
 	}
 	
-	public MemberCouponVO updateMemberCoupon(Integer memCpid, Integer memid, Integer cpTpid, LocalDateTime memCpDate,
-			Integer memCpStatus, LocalDateTime memCpRecord) {
+	public MemberCouponVO updateMemberCoupon(Integer memCpid, Integer memid, Integer cpTpid, Date memCpDate,
+			Integer memCpStatus, Date memCpRecord) {
 		
 		MemberCouponVO memberCouponVO = new MemberCouponVO();
 		
-		memberCouponVO.setCpTpid(memCpid);
+		memberCouponVO.setMemCpid(memCpid);
 		memberCouponVO.setMemid(memid);
-		memberCouponVO.setCpTpid(cpTpid);
+		memberCouponVO.setCpTpid(cpTpid);	
 		memberCouponVO.setMemCpDate(memCpDate);
 		memberCouponVO.setMemCpStatus(memCpStatus);
 		memberCouponVO.setMemCpRecord(memCpRecord);
@@ -50,5 +53,7 @@ public class MemberCouponService {
 	public List<MemberCouponVO> getAll() {
 		return dao.getAll();
 	}
-	
+	public List<MemberCouponVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
+	}
 }

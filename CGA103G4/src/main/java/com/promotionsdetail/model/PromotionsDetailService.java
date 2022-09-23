@@ -1,6 +1,7 @@
 package com.promotionsdetail.model;
 
 import java.util.List;
+import java.util.Map;
 
 public class PromotionsDetailService {
 	
@@ -48,6 +49,17 @@ public class PromotionsDetailService {
 
 	public List<PromotionsDetailVO> getAll() {
 		return dao.getAll();
+	}
+	public List<JoinAllVO> getAllGetNotPromationsProducts() {
+		return dao.getAllGetNotPromationsProducts();
+	}
+	public List<PromotionsDetailVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
+	}
+	
+//	========冠銓新增
+	public PromotionsDetailVO getOnePmByPdid(Integer pdid) {
+		return dao.getOnePmidByPdid(pdid);
 	}
 	
 }

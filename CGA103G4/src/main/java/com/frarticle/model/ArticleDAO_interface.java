@@ -8,6 +8,8 @@ public interface ArticleDAO_interface {
 	public void update(ArticleVO articleVO);
 
 	public ArticleVO findByPrimaryKey(Integer atcid);
-
+	
+	public void updateStatus(ArticleVO articleVO);
+	
 	public List<ArticleVO> getAll();
 }

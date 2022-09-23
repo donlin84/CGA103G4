@@ -14,6 +14,7 @@ import java.util.List;
 public class ArticleJDBCDAO implements ArticleDAO_interface {
 	private static final String INSERT_SQL = "INSERT INTO Article(frid,memid,atcTitle,atcContent) VALUES (?,?,?,?);";
 	private static final String UPDATE_SQL = "UPDATE Article set atcContent=? where atcid = ?;";
+	private static final String UPDATE_EMP = "UPDATE Article set atcStatus=? where atcid = ?;";
 	private static final String GET_ONE_SQL = "SELECT * FROM Article where atcid=?;";
 	private static final String GET_ALL_SQL = "SELECT * FROM Article order by atcid;";
 
@@ -94,4 +95,19 @@ public class ArticleJDBCDAO implements ArticleDAO_interface {
 		}
 		return list;
 	}
+
+	@Override
+	public void updateStatus(ArticleVO articleVO) {
+		try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+				PreparedStatement ps = connection.prepareStatement(UPDATE_EMP)) {
+			ps.setInt(1, articleVO.getAtcStatus());
+			ps.setInt(2, articleVO.getAtcid());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 }

@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_PromotionsDetail;
 
 public class PromotionsJDBCDAO implements PromotionsDAO_interface {
 
@@ -43,12 +46,12 @@ public class PromotionsJDBCDAO implements PromotionsDAO_interface {
 			pstmt.setString(1, promotionsVO.getPmName());
 			pstmt.setString(2, promotionsVO.getPmDescription());
 			pstmt.setDouble(3, promotionsVO.getPmDiscount());
-			
+
 			pstmt.setDate(4, promotionsVO.getPmStart());
 			pstmt.setDate(5, promotionsVO.getPmEnd());
 //			pstmt.setObject(4, promotionsVO.getPmStart());
 //			pstmt.setObject(5, promotionsVO.getPmEnd());
-			
+
 			pstmt.setInt(6, promotionsVO.getPmStatus());
 
 			pstmt.executeUpdate();
@@ -91,12 +94,12 @@ public class PromotionsJDBCDAO implements PromotionsDAO_interface {
 			pstmt.setString(1, promotionsVO.getPmName());
 			pstmt.setString(2, promotionsVO.getPmDescription());
 			pstmt.setDouble(3, promotionsVO.getPmDiscount());
-			
+
 			pstmt.setDate(4, promotionsVO.getPmStart());
 			pstmt.setDate(5, promotionsVO.getPmEnd());
 //			pstmt.setObject(4, promotionsVO.getPmStart());
 //			pstmt.setObject(5, promotionsVO.getPmEnd());
-			
+
 			pstmt.setInt(6, promotionsVO.getPmStatus());
 			pstmt.setInt(7, promotionsVO.getPmid());
 
@@ -187,14 +190,14 @@ public class PromotionsJDBCDAO implements PromotionsDAO_interface {
 				promotionsVO.setPmName(rs.getString("pmName"));
 				promotionsVO.setPmDescription(rs.getString("pmDescription"));
 				promotionsVO.setPmDiscount(rs.getDouble("pmDiscount"));
-				
+
 				promotionsVO.setPmStart(rs.getDate("pmStart"));
 				promotionsVO.setPmEnd(rs.getDate("pmEnd"));
 //				promotionsVO.setPmStart(rs.getObject("pmStart",LocalDateTime.class));
 //				promotionsVO.setPmEnd(rs.getObject("pmEnd",LocalDateTime.class));
-				
+
 				promotionsVO.setPmStatus(rs.getInt("pmStatus"));
-				
+
 				list.add(promotionsVO);
 
 			}
@@ -254,12 +257,12 @@ public class PromotionsJDBCDAO implements PromotionsDAO_interface {
 				promotionsVO.setPmName(rs.getString("pmName"));
 				promotionsVO.setPmDescription(rs.getString("pmDescription"));
 				promotionsVO.setPmDiscount(rs.getDouble("pmDiscount"));
-				
+
 				promotionsVO.setPmStart(rs.getDate("pmStart"));
 				promotionsVO.setPmEnd(rs.getDate("pmEnd"));
 //				promotionsVO.setPmStart(rs.getObject("pmStart",LocalDateTime.class));
 //				promotionsVO.setPmEnd(rs.getObject("pmEnd",LocalDateTime.class));
-				
+
 				promotionsVO.setPmStatus(rs.getInt("pmStatus"));
 			}
 
@@ -294,6 +297,68 @@ public class PromotionsJDBCDAO implements PromotionsDAO_interface {
 		return promotionsVO;
 	}
 
+	@Override
+	public List<PromotionsVO> getAll(Map<String, String[]> map) {
+		List<PromotionsVO> list = new ArrayList<PromotionsVO>();
+		PromotionsVO promotionsVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			String finalSQL = "select * from Promotions "
+					+ jdbcUtil_CompositeQuery_PromotionsDetail.get_WhereCondition(map) + "order by pmDiscount";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = " + finalSQL);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				promotionsVO = new PromotionsVO();
+				promotionsVO.setPmid(rs.getInt("pmid"));
+				promotionsVO.setPmName(rs.getString("pmName"));
+				promotionsVO.setPmDescription(rs.getString("pmDescription"));
+				promotionsVO.setPmDiscount(rs.getDouble("pmDiscount"));
+				promotionsVO.setPmStart(rs.getDate("pmStart"));
+				promotionsVO.setPmEnd(rs.getDate("pmEnd"));
+				promotionsVO.setPmStatus(rs.getInt("pmStatus"));
+				list.add(promotionsVO); // Store the row in the List
+			}
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
 	public static void main(String[] args) {
 		PromotionsJDBCDAO dao = new PromotionsJDBCDAO();
 
@@ -308,7 +373,7 @@ public class PromotionsJDBCDAO implements PromotionsDAO_interface {
 //		promotionsVO1.setPmStart(LocalDateTime.parse("2022-08-10T00:00:00"));
 //		promotionsVO1.setPmEnd(LocalDateTime.parse("2022-08-16T00:00:00"));
 		promotionsVO1.setPmStatus(1);
-		
+
 		dao.insert(promotionsVO1);
 
 		// 修改

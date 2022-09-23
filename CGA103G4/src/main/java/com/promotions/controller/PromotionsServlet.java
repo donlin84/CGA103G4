@@ -116,7 +116,7 @@ public class PromotionsServlet extends HttpServlet {
 			if (pmDescription == null || pmDescription.trim().length() == 0) {
 				errorMsgs.add("活動描述尚未填寫");
 			} else if (!pmDescription.trim().matches(pmNameReg2)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("活動描述名稱需介於2~255字之間");
+//				errorMsgs.add("活動描述名稱需介於2~255字之間");
 			}
 
 			Double pmDiscount = null;
@@ -198,7 +198,7 @@ public class PromotionsServlet extends HttpServlet {
 			if (pmDescription == null || pmDescription.trim().length() == 0) {
 				errorMsgs.add("活動描述尚未填寫");
 			} else if (!pmDescription.trim().matches(pmNameReg2)) { // 以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("活動描述名稱需介於2~255字之間");
+//				errorMsgs.add("活動描述名稱需介於2~255字之間");
 			}
 
 			Double pmDiscount = null;

@@ -1,6 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page import="java.util.*"%>
+<%@ page import="com.promotionsdetail.model.*"%>
+<%@ page import="com.productSort.model.*"%>
+<%@ page import="com.promotions.model.*"%>
+<%@ page import="com.product.model.*"%>
+<%@ page import="com.member.model.*"%>
 
 <!DOCTYPE html>
 <html>
@@ -29,6 +34,52 @@
 <link href="../css/discount-management/discount-management.css"
 	rel="stylesheet" type="text/css">
 
+<style>
+.mybtn {
+	border-radius: 5px;
+	background-color: #242c6d;
+	border: 1px solid #242c6d;
+	color: #fff;
+	border-radius: 3px;
+	font-size: 14px;
+	cursor: pointer;
+	vertical-align: middle;
+	padding: 5px 12px;
+}
+
+.box-left {
+	float: left;
+	margin-left: 50px;
+	margin-top: 7px;
+}
+
+.box-right {
+	float: right;
+	margin-right: 50px;
+}
+
+.dis-select {
+	display: inline;
+	height: 25px;
+	line-height: 20px;
+	font-size: 14px;
+	width: 172px;
+	margin: 0 auto;
+}
+
+.select {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	-khtml-appearance: none;
+}
+
+.select::-ms-expand {
+	display: none;
+}
+</style>
 </head>
 
 <body>
@@ -165,7 +216,8 @@
 								class="mdi mdi-shopping"></i>商城管理</a>
 
 							<ul class="submenu">
-								<li><a href="discount-management.jsp" data-target="nav0" class="nav">優惠方案管理</a>
+								<li><a href="discount-management.jsp" data-target="nav0"
+									class="nav">優惠方案管理</a>
 								<li><a href="#">商品管理</a></li>
 								<li><a href="#">訂單管理</a></li>
 							</ul>
@@ -175,8 +227,8 @@
 							<ul class="submenu">
 								<li><a href="#">課程</a></li>
 								<li><a href="#">課程標籤</a></li>
-								<li><a href="#">教師管理</a></li>
-								<li><a href="#">查看報名表</a></li>
+								<li><a href="../teacher/select_page.jsp">教師管理</a></li>
+								<li><a href="../registtrationform/select_page.jsp">查看報名表</a></li>
 								<li><a href="#">課程紀錄</a></li>
 							</ul>
 						<li class="has-submenu "><a href="#"><i
@@ -189,8 +241,8 @@
 						<li class="has-submenu"><a href="#"><i
 								class="mdi dripicons-device-desktop"></i>前台管理</a>
 							<ul class="submenu">
-								<li><a href="#">客服管理</a></li>
-								<li><a href="#">公告管理</a></li>
+								<li><a href="../service-management/service-management.jsp">客服管理</a></li>
+								<li><a href="../announcement/announce-management.jsp">公告管理</a></li>
 								<li><a href="#">公司資料管理</a></li>
 								<li><a href="#">食譜管理</a></li>
 								<li><a href="#">討論區管理</a>
@@ -244,25 +296,13 @@
 			<aside class="col-sm-2">
 
 				<div class="section">
-					<a href="#" data-target="nav1" class="nav">行銷紀錄</a>
+					<a href="#" data-target="nav1" class="nav">促銷安排</a>
 				</div>
 
 				<div class="horizen"></div>
 
 				<div class="section">
-					<a href="#" data-target="nav2" class="nav">促銷安排</a>
-				</div>
-
-				<div class="horizen"></div>
-
-				<div class="section">
-					<a href="#" data-target="nav3" class="nav">發放優惠券</a>
-				</div>
-
-				<div class="horizen"></div>
-
-				<div class="section">
-					<a href="#" data-target="nav4" class="nav">修改/取消活動</a>
+					<a href="#" data-target="nav2" class="nav">發放優惠券</a>
 				</div>
 
 			</aside>
@@ -291,33 +331,46 @@
 											</ul>
 										</c:if>
 										<ul class="list-group list-group-flush">
-
 											<li class="list-group-item">
+
 												<FORM METHOD="post" ACTION="../coupontype/CouponTypeServlet">
-													<b>輸入編號搜尋:</b> <input type="text" name="cpTpid"
-														placeholder="請輸入編號搜尋"> <input type="hidden"
-														name="action" value="getOne_For_Display"> <input
-														type="submit" value="搜尋">
+													<div class="box-left">
+														<b>輸入編號搜尋:</b>
+													</div>
+													<div class="box-right">
+														<input type="text" name="cpTpid" placeholder="請輸入編號搜尋">
+														<input type="hidden" name="action"
+															value="getOne_For_Display"> <input type="submit"
+															class="mybtn" value="搜尋">
+													</div>
 												</FORM>
+
 											</li>
 											<jsp:useBean id="cpTpSvc" scope="page"
 												class="com.coupontype.model.CouponTypeService" />
 											<li class="list-group-item">
+
 												<FORM METHOD="post" ACTION="../coupontype/CouponTypeServlet">
-													<b>優惠券名稱搜尋:</b> <select size="1" name="cpTpid">
-														<c:forEach var="couponTypeVO" items="${cpTpSvc.all}">
-															<option value="${couponTypeVO.cpTpid}">${couponTypeVO.cpName}
-														</c:forEach>
-													</select> <input type="hidden" name="action"
-														value="getOne_For_Display"> <input type="submit"
-														value="搜尋">
+													<div class="box-left">
+														<b>優惠券名稱搜尋:</b>
+													</div>
+													<div class="box-right">
+														<select size="1" name="cpTpid" class="dis-select">
+															<c:forEach var="couponTypeVO" items="${cpTpSvc.all}">
+																<option value="${couponTypeVO.cpTpid}">${couponTypeVO.cpName}
+															</c:forEach>
+														</select> <input type="hidden" name="action"
+															value="getOne_For_Display"> <input type="submit"
+															class="mybtn" value="搜尋">
+													</div>
 												</FORM>
+
 											</li>
 											<li class="list-group-item"><a
 												href='../coupontype/listAllCouponType.jsp'
 												class="btn btn-primary waves-effect waves-light">查看優惠券清單</a>
 												<a href="../coupontype/addCouponType.jsp"
-												class="btn btn-primary waves-effect waves-light">新增優惠券</a></li>
+												class="btn btn-primary waves-effect waves-light">新增優惠券種類</a></li>
 										</ul>
 									</div>
 								</div>
@@ -342,30 +395,40 @@
 
 											<li class="list-group-item">
 												<FORM METHOD="post" ACTION="../promotions/PromotionsServlet">
-													<b>輸入編號搜尋:</b> <input type="text" name="pmid"
-														placeholder="請輸入編號搜尋"> <input type="hidden"
-														name="action" value="getOne_For_Display"> <input
-														type="submit" value="搜尋">
+													<div class="box-left">
+														<b>輸入編號搜尋:</b>
+													</div>
+													<div class="box-right">
+														<input type="text" name="pmid" placeholder="請輸入編號搜尋">
+														<input type="hidden" name="action"
+															value="getOne_For_Display"> <input type="submit"
+															class="mybtn" value="搜尋">
+													</div>
 												</FORM>
 											</li>
 											<jsp:useBean id="pmtSvc" scope="page"
 												class="com.promotions.model.PromotionsService" />
 											<li class="list-group-item">
 												<FORM METHOD="post" ACTION="../promotions/PromotionsServlet">
-													<b>優惠活動名稱搜尋:</b> <select size="1" name="pmid">
-														<c:forEach var="promotionsVO" items="${pmtSvc.all}">
-															<option value="${promotionsVO.pmid}">${promotionsVO.pmName}
-														</c:forEach>
-													</select> <input type="hidden" name="action"
-														value="getOne_For_Display"> <input type="submit"
-														value="搜尋">
+													<div class="box-left">
+														<b>優惠活動名稱搜尋:</b>
+													</div>
+													<div class="box-right">
+														<select size="1" name="pmid" class="dis-select">
+															<c:forEach var="promotionsVO" items="${pmtSvc.all}">
+																<option value="${promotionsVO.pmid}">${promotionsVO.pmName}
+															</c:forEach>
+														</select> <input type="hidden" name="action"
+															value="getOne_For_Display"> <input type="submit"
+															class="mybtn" value="搜尋">
+													</div>
 												</FORM>
 											</li>
 											<li class="list-group-item"><a
 												href='../promotions/listAllPromotions.jsp'
 												class="btn btn-primary waves-effect waves-light">查看優惠活動清單</a>
 												<a href="../promotions/addPromotions.jsp"
-												class="btn btn-primary waves-effect waves-light">新增優惠券</a></li>
+												class="btn btn-primary waves-effect waves-light">新增優惠活動</a></li>
 										</ul>
 									</div>
 								</div>
@@ -378,70 +441,180 @@
 
 				</div>
 
-				<div class="container nav1" id="announcePage">
-
-					<div id="announcePageContent">
-
-						<div class="title">行銷紀錄</div>
-
-						<div class="section x">分區一</div>
-
-						<div class="horizen"></div>
-
-						<div class="section y">分區二</div>
-
-					</div>
-
-				</div>
-
-				<div class="container nav2" id="shopPage">
+				<div class="container nav1">
 
 					<div id="shopPageContent">
 
-						<div class="title">促銷安排</div>
+						<div class="row">
+							<div class="col-md-4 col-lg-4 col-xl-4">
+								<div class="card">
+									<div class="card-body">
+										<h4 class="card-title font-20 mt-0">促銷安排</h4>
+									</div>
+									<FORM METHOD="post"
+										ACTION="<%=request.getContextPath()%>/back-end/promotionsdetail/PromotionsDetailServlet"
+										name="form1">
+										<ul class="list-group list-group-flush">
+											<li class="list-group-item"><b>選擇優惠名稱</b></li>
+											<li class="list-group-item"><select size="1" name="pmid">
+													<c:forEach var="PromotionsVO" items="${pmtSvc.all}">
+														<option value="${PromotionsVO.pmid}">${PromotionsVO.pmName}
+													</c:forEach>
+											</select></li>
+											<li class="list-group-item"><input type="submit"
+												value="確認優惠活動" class="mybtn"> <input type="hidden"
+												name="action" value="batchAddPromotionsDetail"></li>
+										</ul>
+									</FORM>
+								</div>
+							</div>
 
-						<div class="section x">分區一</div>
+							<div class="col-md-8 col-lg-8 col-xl-8">
+								<!-- Simple card -->
+								<div class="card" style="height: 225px;">
+									<div class="card-body">
+										<h4 class="card-title font-20 mt-0">促銷商品搜尋</h4>
+									</div>
+									<%-- 錯誤表列 --%>
+									<c:if test="${not empty errorMsgs}">
+										<font style="color: red">請修正以下錯誤:</font>
+										<ul>
+											<c:forEach var="message" items="${errorMsgs}">
+												<li style="color: red">${message}</li>
+											</c:forEach>
+										</ul>
+									</c:if>
+									<ul class="list-group list-group-flush">
 
-						<div class="horizen"></div>
+										<jsp:useBean id="pdSvc" scope="page"
+											class="com.product.model.ProductService" />
 
-						<div class="section y">分區二</div>
+										<li class="list-group-item">
+											<FORM METHOD="post"
+												ACTION="<%=request.getContextPath()%>/back-end/promotionsdetail/PromotionsDetailServlet"
+												name="form1">
+												<b style="margin: 0 10px;">優惠活動名稱查詢:</b> <select size="1"
+													name="pmid">
+													<option value="">
+														<c:forEach var="PromotionsVO" items="${pmtSvc.all}">
+															<option value="${PromotionsVO.pmid}">${PromotionsVO.pmName}
+														</c:forEach>
+												</select> <b style="margin: 0 10px;">產品名稱查詢:</b> <select size="1"
+													name="pdid">
+													<option value="">
+														<c:forEach var="ProductVO" items="${pdSvc.all}">
+															<option value="${ProductVO.pdid}">${ProductVO.pdName}
+														</c:forEach>
+												</select> <input type="submit" value="依條件查詢" class="mybtn"
+													style="margin-left: 20px;"> <input type="hidden"
+													name="action" value="listPromotionsDetail_ByCompositeQuery">
+											</FORM>
+										</li>
+										<li class="list-group-item"><a
+											href='../promotionsdetail/listAllAndQueryPromotionsDetail.jsp'
+											class="btn btn-primary waves-effect waves-light">查看商品促銷清單</a></li>
 
+									</ul>
+								</div>
+							</div>
+						</div>
 					</div>
 
 				</div>
 
-				<div class="container nav3" id="coursePage">
+				<div class="container nav2">
 
 					<div id="coursePageContent">
 
+						<div class="row">
+							<div class="col-md-4 col-lg-4 col-xl-4">
+								<div class="card" style="height: 238px;">
+									<div class="card-body">
+										<h4 class="card-title font-20 mt-0">發放優惠券</h4>
+									</div>
+									<FORM METHOD="post"
+										ACTION="<%=request.getContextPath()%>/back-end/membercoupon/MemberCouponServlet"
+										name="form1">
+										<ul class="list-group list-group-flush">
 
-						<div class="title">發放優惠券</div>
+											<li class="list-group-item"><b>選擇優惠券種類</b></li>
+											<li class="list-group-item"><select size="1"
+												name="cpTpid">
+													<c:forEach var="couponTypeVO" items="${cpTpSvc.all}">
+														<option value="${couponTypeVO.cpTpid}">${couponTypeVO.cpName}
+													</c:forEach>
+											</select></li>
+											<li class="list-group-item"><input type="submit"
+												value="確認優惠券種類" class="mybtn"> <input type="hidden"
+												name="action" value="batchAddMemberCoupon"></li>
+										</ul>
+									</FORM>
+								</div>
+							</div>
+							<div class="col-md-8 col-lg-8 col-xl-8">
+								<!-- Simple card -->
+								<div class="card">
+									<div class="card-body">
+										<h4 class="card-title font-20 mt-0">已發放優惠券搜尋</h4>
+									</div>
+									<%-- 錯誤表列 --%>
+									<c:if test="${not empty errorMsgs}">
+										<font style="color: red">請修正以下錯誤:</font>
+										<ul>
+											<c:forEach var="message" items="${errorMsgs}">
+												<li style="color: red">${message}</li>
+											</c:forEach>
+										</ul>
+									</c:if>
+									<ul class="list-group list-group-flush">
 
-						<div class="section x">分區一</div>
+										<jsp:useBean id="memCpSvc" scope="page"
+											class="com.membercoupon.model.MemberCouponService" />
 
-						<div class="horizen"></div>
-
-						<div class="section y">分區二</div>
-
-
+										<li class="list-group-item">
+											<FORM METHOD="post"
+												ACTION="../membercoupon/MemberCouponServlet">
+												<div class="box-left" style="margin-left: 150px;">
+													<b>選擇會員:</b>
+												</div>
+												<div class="box-right" style="margin-right: 150px;">
+													<select size="1" name="memCpid" class="dis-select">
+														<c:forEach var="memberCouponVO" items="${memCpSvc.all}">
+															<option value="${memberCouponVO.memCpid}">${memberCouponVO.memVO.memName}
+														</c:forEach>
+													</select> <input type="hidden" name="action"
+														value="getOne_For_Display"> <input type="submit"
+														class="mybtn" style="margin-left: 20px;" value="搜尋">
+												</div>
+											</FORM>
+										</li>
+										<li class="list-group-item">
+											<FORM METHOD="post"
+												ACTION="../membercoupon/MemberCouponServlet">
+												<div class="box-left" style="margin-left: 150px;">
+													<b>選擇優惠券:</b>
+												</div>
+												<div class="box-right" style="margin-right: 150px;">
+													<select size="1" name="memCpid" class="dis-select">
+														<c:forEach var="memberCouponVO" items="${memCpSvc.all}">
+															<option value="${memberCouponVO.memCpid}">${memberCouponVO.cpTpVO.cpName}
+														</c:forEach>
+													</select> <input type="hidden" name="action"
+														value="getOne_For_Display"> <input type="submit"
+														class="mybtn" style="margin-left: 20px;" value="搜尋">
+												</div>
+											</FORM>
+										</li>
+										<li class="list-group-item"><a
+											href='../membercoupon/listAllMemberCoupons.jsp'
+											class="btn btn-primary waves-effect waves-light">查看已發放優惠券清單</a>
+											<a href="../membercoupon/addMemberCoupons.jsp"
+											class="btn btn-primary waves-effect waves-light">發放優惠券</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
 					</div>
-
-				</div>
-
-				<div class="container nav4" id="chefPage">
-
-					<div id="chefPageContent">
-
-						<div class="title">修改/取消活動</div>
-
-						<div class="section x">分區一</div>
-
-						<div class="horizen"></div>
-
-						<div class="section y">分區二</div>
-
-					</div>
-
 				</div>
 			</div>
 		</div>

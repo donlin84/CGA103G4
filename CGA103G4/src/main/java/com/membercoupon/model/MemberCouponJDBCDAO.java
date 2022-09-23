@@ -5,16 +5,18 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_MemberCoupon;
 
 public class MemberCouponJDBCDAO implements MemberCouponDAO_interface {
 
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei";
 	String userid = "root";
-	String passwd = "sa4850869";
+	String passwd = "cga103g4";
 
 	private static final String INSERT_STMT = "INSERT INTO cga103g4.MemberCoupon (memid,CpTpid,memCpDate,memCpStatus,memCpRecord) VALUES (?, ?, ?, ?, ?)";
 	
@@ -188,13 +190,13 @@ public class MemberCouponJDBCDAO implements MemberCouponDAO_interface {
 				memberCouponVO.setMemid(rs.getInt("memid"));
 				memberCouponVO.setCpTpid(rs.getInt("cpTpid"));
 				
-//				memberCouponVO.setMemCpDate(rs.getDate("memCpDate"));
-				memberCouponVO.setMemCpDate(rs.getObject("memCpDate",LocalDateTime.class));
+				memberCouponVO.setMemCpDate(rs.getDate("memCpDate"));
+//				memberCouponVO.setMemCpDate(rs.getObject("memCpDate",LocalDateTime.class));
 				
 				memberCouponVO.setMemCpStatus(rs.getInt("memCpStatus"));
 				
-//				memberCouponVO.setMemCpRecord(rs.getDate("memCpRecord"));
-				memberCouponVO.setMemCpRecord(rs.getObject("memCpRecord",LocalDateTime.class));
+				memberCouponVO.setMemCpRecord(rs.getDate("memCpRecord"));
+//				memberCouponVO.setMemCpRecord(rs.getObject("memCpRecord",LocalDateTime.class));
 				
 				list.add(memberCouponVO);
 
@@ -257,13 +259,13 @@ public class MemberCouponJDBCDAO implements MemberCouponDAO_interface {
 				memberCouponVO.setMemid(rs.getInt("memid"));
 				memberCouponVO.setCpTpid(rs.getInt("cpTpid"));
 				
-//				memberCouponVO.setMemCpDate(rs.getDate("memCpDate"));
-				memberCouponVO.setMemCpDate(rs.getObject("memCpDate",LocalDateTime.class));
+				memberCouponVO.setMemCpDate(rs.getDate("memCpDate"));
+//				memberCouponVO.setMemCpDate(rs.getObject("memCpDate",LocalDateTime.class));
 				
 				memberCouponVO.setMemCpStatus(rs.getInt("memCpStatus"));
 				
-//				memberCouponVO.setMemCpRecord(rs.getDate("memCpRecord"));
-				memberCouponVO.setMemCpRecord(rs.getObject("memCpRecord",LocalDateTime.class));
+				memberCouponVO.setMemCpRecord(rs.getDate("memCpRecord"));
+//				memberCouponVO.setMemCpRecord(rs.getObject("memCpRecord",LocalDateTime.class));
 
 			}
 			
@@ -297,6 +299,73 @@ public class MemberCouponJDBCDAO implements MemberCouponDAO_interface {
 		}
 		return memberCouponVO;
 	}
+	@Override
+	public List<MemberCouponVO> getAll(Map<String, String[]> map) {
+		List<MemberCouponVO> list = new ArrayList<MemberCouponVO>();
+
+		MemberCouponVO memberCouponVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,userid,passwd);
+			String finalSQL = "select * from memberCoupon "
+		          + jdbcUtil_CompositeQuery_MemberCoupon.get_WhereCondition(map)
+		          + "order by memcpid";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				memberCouponVO = new MemberCouponVO();
+				memberCouponVO.setMemCpid(rs.getInt("memCpid"));
+				memberCouponVO.setMemid(rs.getInt("memid"));
+				memberCouponVO.setCpTpid(rs.getInt("cpTpid"));
+
+				memberCouponVO.setMemCpDate(rs.getDate("memCpDate"));
+//				memberCouponVO.setMemCpDate(rs.getObject("memCpDate",LocalDateTime.class));
+
+				memberCouponVO.setMemCpStatus(rs.getInt("memCpStatus"));
+
+				memberCouponVO.setMemCpRecord(rs.getDate("memCpRecord"));
+//				memberCouponVO.setMemCpRecord(rs.getObject("memCpRecord",LocalDateTime.class));
+
+				list.add(memberCouponVO);
+			}
+	
+		} catch(ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 	
 	public static void main(String[] args) {
 		
@@ -307,9 +376,11 @@ public class MemberCouponJDBCDAO implements MemberCouponDAO_interface {
 		
 		memberCouponVO1.setMemid(204);
 		memberCouponVO1.setCpTpid(2);
-		memberCouponVO1.setMemCpDate(LocalDateTime.parse("2022-08-01T00:00:00"));
+		memberCouponVO1.setMemCpDate(java.sql.Date.valueOf("2022-08-10"));
+//		memberCouponVO1.setMemCpDate(LocalDateTime.parse("2022-08-01T00:00:00"));
 		memberCouponVO1.setMemCpStatus(1);
-		memberCouponVO1.setMemCpRecord(LocalDateTime.parse("2022-08-10T00:00:00"));
+		memberCouponVO1.setMemCpRecord(java.sql.Date.valueOf("2022-08-16"));
+//		memberCouponVO1.setMemCpRecord(LocalDateTime.parse("2022-08-10T00:00:00"));
 		
 		dao.insert(memberCouponVO1);
 
@@ -318,9 +389,11 @@ public class MemberCouponJDBCDAO implements MemberCouponDAO_interface {
 		memberCouponVO2.setMemCpid(2);
 		memberCouponVO2.setMemid(204);
 		memberCouponVO2.setCpTpid(2);
-		memberCouponVO2.setMemCpDate(LocalDateTime.parse("2022-08-15T00:00:00"));
+		memberCouponVO1.setMemCpDate(java.sql.Date.valueOf("2022-08-10"));
+//		memberCouponVO2.setMemCpDate(LocalDateTime.parse("2022-08-15T00:00:00"));
 		memberCouponVO2.setMemCpStatus(1);
-		memberCouponVO2.setMemCpRecord(LocalDateTime.parse("2022-08-16T00:00:00"));
+		memberCouponVO1.setMemCpRecord(java.sql.Date.valueOf("2022-08-16"));
+//		memberCouponVO2.setMemCpRecord(LocalDateTime.parse("2022-08-16T00:00:00"));
 		
 		dao.update(memberCouponVO2);
 
@@ -353,5 +426,7 @@ public class MemberCouponJDBCDAO implements MemberCouponDAO_interface {
 	}
 		
 	}
+
+
 
 }
