@@ -156,7 +156,8 @@ protected String getname(String email) {
 				session.setAttribute("email", email); // *工作1: 才在session內做已經登入過的標識
 
 //				System.out.println(getpass(email));
-			      String to = "sosohung20@gmail.com";
+//			      String to = "sosohung20@gmail.com";
+			      String to = email;
 			      
 			      String subject = "密碼通知";
 			      
