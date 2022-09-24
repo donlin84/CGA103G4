@@ -67,4 +67,9 @@ public class ChefService {
 	public List<ChefVO> getAll(Map<String, String[]> map) {
 		return dao.getAll(map);
 	}
+	
+	//後台登入
+	public ChefVO getoneaccount(String chefAccount) {
+		return dao.get_one_account(chefAccount);
+	}
 }

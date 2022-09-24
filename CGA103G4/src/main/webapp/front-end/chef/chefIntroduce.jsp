@@ -170,6 +170,7 @@ background: linear-gradient(to bottom, #faf1e3, #f0e3cc 7%);
 </style>
 </head>
 
+
 <body>
 
 <%@ include file="./tools/header.jsp"%>
@@ -220,6 +221,7 @@ background: linear-gradient(to bottom, #faf1e3, #f0e3cc 7%);
                      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/chefAppointment/chefapp.do">  
             <input type="hidden" name="action" value="getchefid">
             <input type="hidden" name="chefid" value="${chefVO.chefid}">
+            <input type="hidden" name="chefName" value="${chefVO.chefName}">
             <input type="submit" value="預約" id="onload_submit">
            </FORM>
         </div>
@@ -277,13 +279,16 @@ background: linear-gradient(to bottom, #faf1e3, #f0e3cc 7%);
       </div>
   </div>
   </div>
-
+		
+			  
+			
 
        	</main>
 <script>
 window.onload=function(){
 localStorage.setItem('chefid',${chefVO.chefid});
 }
+
 </script>
   
 <%@ include file="../tools/footer.jsp"%>

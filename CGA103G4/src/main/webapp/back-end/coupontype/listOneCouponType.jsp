@@ -19,14 +19,26 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 <meta content="Admin Dashboard" name="description" />
 <meta content="Mannatthemes" name="author" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<link rel="shortcut icon" href="../assets/images/favicon.ico">
-<link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
-<link href="../assets/plugins/fullcalendar/vanillaCalendar.css" rel="stylesheet" type="text/css" />
-<link href="../assets/plugins/morris/morris.css" rel="stylesheet">
-<link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
-<link href="../assets/css/style.css" rel="stylesheet" type="text/css">
-
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/back-end/assets/images/favicon.ico">
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/fullcalendar/vanillaCalendar.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/morris/morris.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/icons.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/style.css" rel="stylesheet" type="text/css">
+<style>
+.mybtn {
+	border-radius: 5px;
+	background-color: #242c6d;
+	border: 1px solid #242c6d;
+	color: #fff;
+	border-radius: 3px;
+	font-size: 14px;
+	cursor: pointer;
+	vertical-align: middle;
+	padding: 5px 12px;
+}
+</style>
 </head>
 
 <body>
@@ -69,8 +81,8 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 										<th>優惠券種類編號</th>
 										<th>優惠券名稱</th>
 										<th>優惠券折扣價格</th>
-										<th>起始時間</th>
-										<th>截止時間</th>
+										<th>上次修改時間</th>
+										<th>發布時間</th>
 										<th>優惠券狀態</th>
 										<th>優惠券圖片</th>
 									</tr>
@@ -89,7 +101,7 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 							</table>
 							<div class="continueToAdd" style="width: 100%; text-align: center;">
 								<a href="<%=request.getContextPath()%>/back-end/coupontype/addCouponType.jsp"><input type="submit"
-									value="繼續新增"></a>
+									class="mybtn" value="繼續新增"></a>
 							</div>
 						</div>
 					</div>
@@ -107,20 +119,20 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 	<%@ include file="../tools/footer.jsp"%>
 	<!-- End Footer -->
 	<!-- jQuery -->
-	<script src="../assets/js/jquery.min.js"></script>
-	<script src="../assets/js/popper.min.js"></script>
-	<script src="../assets/js/bootstrap.min.js"></script>
-	<script src="../assets/js/modernizr.min.js"></script>
-	<script src="../assets/js/waves.js"></script>
-	<script src="../assets/js/jquery.nicescroll.js"></script>
-	<script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-	<script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-	<script src="../assets/plugins/skycons/skycons.min.js"></script>
-	<script src="../assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
-	<script src="../assets/plugins/tiny-editable/numeric-input-example.js"></script>
-	<script src="../assets/plugins/fullcalendar/vanillaCalendar.js"></script>
-	<script src="../assets/plugins/raphael/raphael-min.js"></script>
-	<script src="../assets/plugins/morris/morris.min.js"></script>
-	<script src="../assets/js/app.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/jquery.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/popper.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/modernizr.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/waves.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/jquery.nicescroll.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/skycons/skycons.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/tiny-editable/numeric-input-example.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/fullcalendar/vanillaCalendar.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/raphael/raphael-min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/morris/morris.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/app.js"></script>
 </body>
 </html>

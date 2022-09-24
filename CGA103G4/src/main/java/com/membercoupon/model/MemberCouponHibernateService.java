@@ -7,6 +7,9 @@ import java.util.Map;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.coupontype.model.CouponTypeVO;
+import com.member.model.MemberVO;
+
 public class MemberCouponHibernateService {
 	
 	private static MemberCouponDAO_interface dao;
@@ -64,4 +67,5 @@ public class MemberCouponHibernateService {
 	public List<MemberCouponVO> getAll(Map<String, String[]> map) {
 		return dao.getAll(map);
 	}
+	
 }

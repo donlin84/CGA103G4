@@ -9,6 +9,7 @@ public class AnnouncementVO implements java.io.Serializable{
 	
 	private Integer annid;
 	private EmpVO empVO;
+	private String annTitle;
 	private String annContent;
 	private byte[] annPic;
 	private Integer annStatus;
@@ -26,6 +27,12 @@ public class AnnouncementVO implements java.io.Serializable{
 	}
 	public void setEmpVO(EmpVO empVO) {
 		this.empVO = empVO;
+	}
+	public String getAnnTitle() {
+		return annTitle;
+	}
+	public void setAnnTitle(String annTitle) {
+		this.annTitle = annTitle;
 	}
 	public String getAnnContent() {
 		return annContent;

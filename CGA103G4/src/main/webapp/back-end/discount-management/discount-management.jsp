@@ -21,17 +21,26 @@
 <meta content="Admin Dashboard" name="description" />
 <meta content="Mannatthemes" name="author" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<link rel="shortcut icon" href="../assets/images/favicon.ico">
-<link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css"
+<link rel="shortcut icon"
+	href="<%=request.getContextPath()%>/back-end/assets/images/favicon.ico">
+<link
+	href="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css"
 	rel="stylesheet">
-<link href="../assets/plugins/fullcalendar/vanillaCalendar.css"
+<link
+	href="<%=request.getContextPath()%>/back-end/assets/plugins/fullcalendar/vanillaCalendar.css"
 	rel="stylesheet" type="text/css" />
-<link href="../assets/plugins/morris/morris.css" rel="stylesheet">
-<link href="../assets/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css">
-<link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
-<link href="../assets/css/style.css" rel="stylesheet" type="text/css">
-<link href="../css/discount-management/discount-management.css"
+<link
+	href="<%=request.getContextPath()%>/back-end/assets/plugins/morris/morris.css"
+	rel="stylesheet">
+<link
+	href="<%=request.getContextPath()%>/back-end/assets/css/bootstrap.min.css"
+	rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/icons.css"
+	rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/style.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="<%=request.getContextPath()%>/back-end/css/discount-management/discount-management.css"
 	rel="stylesheet" type="text/css">
 
 <style>
@@ -571,33 +580,37 @@
 										<jsp:useBean id="memCpSvc" scope="page"
 											class="com.membercoupon.model.MemberCouponService" />
 
-										<li class="list-group-item">
+										<li class="list-group-item"><jsp:useBean id="memSvc"
+												scope="page" class="com.member.model.MemberService" />
+
 											<FORM METHOD="post"
-												ACTION="../membercoupon/MemberCouponServlet">
-												<div class="box-left" style="margin-left: 150px;">
-													<b>選擇會員:</b>
-												</div>
-												<div class="box-right" style="margin-right: 150px;">
-													<select size="1" name="memCpid" class="dis-select">
-														<c:forEach var="memberCouponVO" items="${memCpSvc.all}">
-															<option value="${memberCouponVO.memCpid}">${memberCouponVO.memVO.memName}
+												ACTION="<%=request.getContextPath()%>/back-end/membercoupon/MemberCouponServlet"
+												name="form1">
+												<b>會員名稱:</b> <select size="1" name="memid">
+													<option value="">
+														<c:forEach var="memberVO" items="${memSvc.all}">
+															<option value="${memberVO.memid}">${memberVO.memName}
 														</c:forEach>
-													</select> <input type="hidden" name="action"
-														value="getOne_For_Display"> <input type="submit"
-														class="mybtn" style="margin-left: 20px;" value="搜尋">
-												</div>
-											</FORM>
-										</li>
+												</select> <b>優惠券名稱:</b> <select size="1" name="cpTpid">
+													<option value="">
+														<c:forEach var="couponTypeVO" items="${cpTpSvc.all}">
+															<option value="${couponTypeVO.cpTpid}">${couponTypeVO.cpName}
+														</c:forEach>
+												</select>
+												<input type="submit" class="mybtn" value="查詢">
+												<input type="hidden" name="action" value="listMemberCoupon_ByCompositeQuery">
+
+											</FORM></li>
 										<li class="list-group-item">
 											<FORM METHOD="post"
 												ACTION="../membercoupon/MemberCouponServlet">
 												<div class="box-left" style="margin-left: 150px;">
-													<b>選擇優惠券:</b>
+													<b>已發放優惠券ID查詢:</b>
 												</div>
 												<div class="box-right" style="margin-right: 150px;">
 													<select size="1" name="memCpid" class="dis-select">
 														<c:forEach var="memberCouponVO" items="${memCpSvc.all}">
-															<option value="${memberCouponVO.memCpid}">${memberCouponVO.cpTpVO.cpName}
+															<option value="${memberCouponVO.memCpid}">${memberCouponVO.memCpid}
 														</c:forEach>
 													</select> <input type="hidden" name="action"
 														value="getOne_For_Display"> <input type="submit"
@@ -627,24 +640,37 @@
 	<%@ include file="../tools/footer.jsp"%>
 	<!-- End Footer -->
 	<!-- jQuery -->
-	<script src="../assets/js/jquery.min.js"></script>
-	<script src="../assets/js/popper.min.js"></script>
-	<script src="../assets/js/bootstrap.min.js"></script>
-	<script src="../assets/js/modernizr.min.js"></script>
-	<script src="../assets/js/waves.js"></script>
-	<script src="../assets/js/jquery.nicescroll.js"></script>
+	<!-- jQuery -->
 	<script
-		src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+		src="<%=request.getContextPath()%>/back-end/assets/js/jquery.min.js"></script>
 	<script
-		src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-	<script src="../assets/plugins/skycons/skycons.min.js"></script>
-	<script src="../assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
-	<script src="../assets/plugins/tiny-editable/numeric-input-example.js"></script>
-	<script src="../assets/plugins/fullcalendar/vanillaCalendar.js"></script>
-	<script src="../assets/plugins/raphael/raphael-min.js"></script>
-	<script src="../assets/plugins/morris/morris.min.js"></script>
-	<script src="../assets/js/app.js"></script>
-	<script src="../js/discount-management/discount-management.js"></script>
+		src="<%=request.getContextPath()%>/back-end/assets/js/popper.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/back-end/assets/js/bootstrap.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/back-end/assets/js/modernizr.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/waves.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/back-end/assets/js/jquery.nicescroll.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/back-end/assets/plugins/skycons/skycons.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/back-end/assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/back-end/assets/plugins/tiny-editable/numeric-input-example.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/back-end/assets/plugins/fullcalendar/vanillaCalendar.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/back-end/assets/plugins/raphael/raphael-min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/back-end/assets/plugins/morris/morris.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/app.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/back-end/js/discount-management/discount-management.js"></script>
 
 
 </body>

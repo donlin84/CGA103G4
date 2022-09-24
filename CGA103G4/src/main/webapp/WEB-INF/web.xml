@@ -222,12 +222,15 @@
 
 		<url-pattern>/back-end/index-back.jsp</url-pattern>
 		<url-pattern>/back-end/discount-management/discount-management.jsp</url-pattern>
-
+		
 		<url-pattern>/back-end/promotions/addPromotions.jsp</url-pattern>
 		<url-pattern>/back-end/promotions/listAllPromotions.jsp</url-pattern>
 		<url-pattern>/back-end/promotions/listOnePromotion.jsp</url-pattern>
 		<url-pattern>/back-end/promotions/select_page.jsp</url-pattern>
 		<url-pattern>/back-end/promotions/updatePromotion.jsp</url-pattern>
+		<url-pattern>/back-end/chefAppointment/select_page.jsp</url-pattern>
+		<url-pattern>/back-end/chefAppointment/listAll.jsp</url-pattern>
+		<url-pattern>/back-end/chefAppointment/update.jsp</url-pattern>
 
 		<url-pattern>/back-end/coupontype/addCouponType.jsp</url-pattern>
 		<url-pattern>/back-end/coupontype/listAllCouponType.jsp</url-pattern>
@@ -248,7 +251,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>loginFilterhung</filter-name>
-		<url-pattern>/back-end/index-back.jsp</url-pattern>
+<!-- 		<url-pattern>/back-end/index-back.jsp</url-pattern> -->
 		<url-pattern>/front-end/chefAppointment/Appointment.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>

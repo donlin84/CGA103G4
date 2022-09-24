@@ -58,6 +58,10 @@ public class MemberService {
 //		System.out.println("testOne");
 		return dao.findByPrimaryKey(memid);
 	}
+	public MemberVO getOneMemberAcc(String memAccount) {
+//		System.out.println("testOne");
+		return dao.findByAccount(memAccount);
+	}
 
 	public List<MemberVO> getAll() {
 //		System.out.println("testAll");

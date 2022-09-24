@@ -24,17 +24,26 @@ MemberCouponVO memberCouponVO = (MemberCouponVO) request.getAttribute("memberCou
 <meta content="Admin Dashboard" name="description" />
 <meta content="Mannatthemes" name="author" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<link rel="shortcut icon" href="../assets/images/favicon.ico">
-<link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css"
-	rel="stylesheet">
-<link href="../assets/plugins/fullcalendar/vanillaCalendar.css"
-	rel="stylesheet" type="text/css" />
-<link href="../assets/plugins/morris/morris.css" rel="stylesheet">
-<link href="../assets/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css">
-<link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
-<link href="../assets/css/style.css" rel="stylesheet" type="text/css">
-
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/back-end/assets/images/favicon.ico">
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/fullcalendar/vanillaCalendar.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/morris/morris.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/icons.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/style.css" rel="stylesheet" type="text/css">
+<style>
+.mybtn {
+	border-radius: 5px;
+	background-color: #242c6d;
+	border: 1px solid #242c6d;
+	color: #fff;
+	border-radius: 3px;
+	font-size: 14px;
+	cursor: pointer;
+	vertical-align: middle;
+	padding: 5px 12px;
+}
+</style>
 </head>
 
 <body>
@@ -66,7 +75,8 @@ MemberCouponVO memberCouponVO = (MemberCouponVO) request.getAttribute("memberCou
 			</div>
 			<!-- end page title end breadcrumb -->
 			<div class="row">
-				<div class="col-12">
+				<div class="col-2"></div>
+				<div class="col-8">
 					<div class="card">
 						<div class="card-body">
 							<h4 class="mt-0 header-title">會員優惠券修改</h4>
@@ -88,7 +98,7 @@ MemberCouponVO memberCouponVO = (MemberCouponVO) request.getAttribute("memberCou
 									<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
 									<tr>
 										<td>會員名稱:</td>
-										<td><select size="1" name="memid">
+										<td><select size="1" name="memid" style="width: 200px;">
 											<c:forEach var="memberVO" items="${memSvc.all}">
 												<option value="${memberVO.memid}"
 														${(memberCouponVO.memid==memberVO.memid)? 'selected':'' }>${memberVO.memName}
@@ -98,7 +108,7 @@ MemberCouponVO memberCouponVO = (MemberCouponVO) request.getAttribute("memberCou
 									<jsp:useBean id="cpTpSvc" scope="page" class="com.coupontype.model.CouponTypeService" /> 
 									<tr>
 										<td>優惠券名稱:</td>
-										<td><select size="1" name="cpTpid">
+										<td><select size="1" name="cpTpid" style="width: 200px;">
 											<c:forEach var="couponTypeVO" items="${cpTpSvc.all}">
 												<option value="${couponTypeVO.cpTpid}">${couponTypeVO.cpName}
 											</c:forEach>
@@ -107,11 +117,11 @@ MemberCouponVO memberCouponVO = (MemberCouponVO) request.getAttribute("memberCou
 									<tr>
 										<td>有效日期:</td>
 										<td><input name="memCpDate" id="f_date1" type="text"
-											autocomplete="off"></td>
+											style="width: 200px;" autocomplete="off"></td>
 									</tr>
 									<tr>
 										<td>使用狀態:</td>
-										<td><select name="memCpStatus">
+										<td><select name="memCpStatus" style="width: 200px;">
 												<option value="1">可使用</option>
 												<option value="0">已使用</option>
 										</select></td>
@@ -119,13 +129,15 @@ MemberCouponVO memberCouponVO = (MemberCouponVO) request.getAttribute("memberCou
 									<tr>
 										<td>使用紀錄:</td>
 										<td><input name="memCpRecord" id="f_date2" type="text"
-											autocomplete="off" readonly></td>
+											style="width: 200px;" autocomplete="off" readonly></td>
 									</tr>
 								</table>
-								<br> <input type="hidden" name="action" value="update">
-								<input type="hidden" name="memCpid"
-									value="<%=memberCouponVO.getMemCpid()%>"> <input
-									type="submit" value="送出修改">
+								<br>
+								<div style="text-align:center;">
+								<input type="hidden" name="action" value="update">
+								<input type="hidden" name="memCpid" value="<%=memberCouponVO.getMemCpid()%>">
+								<input type="submit" class="mybtn" value="送出修改">
+								</div>
 							</FORM>
 
 						</div>
@@ -143,22 +155,78 @@ MemberCouponVO memberCouponVO = (MemberCouponVO) request.getAttribute("memberCou
 	<%@ include file="../tools/footer.jsp"%>
 	<!-- End Footer -->
 </body>
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.datetimepicker.css" />
+<script
+	src="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.js"></script>
+<script
+	src="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.datetimepicker.full.js"></script>
 
-<script src="../assets/js/jquery.min.js"></script>
-<script src="../assets/js/popper.min.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
-<script src="../assets/js/modernizr.min.js"></script>
-<script src="../assets/js/waves.js"></script>
-<script src="../assets/js/jquery.nicescroll.js"></script>
-<script
-	src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-<script
-	src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<script src="../assets/plugins/skycons/skycons.min.js"></script>
-<script src="../assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
-<script src="../assets/plugins/tiny-editable/numeric-input-example.js"></script>
-<script src="../assets/plugins/fullcalendar/vanillaCalendar.js"></script>
-<script src="../assets/plugins/raphael/raphael-min.js"></script>
-<script src="../assets/plugins/morris/morris.min.js"></script>
-<script src="../assets/js/app.js"></script>
+<style>
+.xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
+</style>
+<script type="text/javascript">
+
+function check_all(obj,cName){
+	var checkboxs = document.getElementsByName(cName);
+	for(var i=0;i<checkboxs.length;i++){checkboxs[i].checked = obj.checked;}
+	}
+</script>
+<script>
+
+var memCpDate = new Date();
+function getNextDate(date,day) {  
+	  var dd = new Date(date);
+	  dd.setDate(dd.getDate() + day);
+	  var y = dd.getFullYear();
+	  var m = dd.getMonth() + 1 < 10 ? "0" + (dd.getMonth() + 1) : dd.getMonth() + 1;
+	  var d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();
+	  return y + "-" + m + "-" + d;
+	};
+
+$('#f_date1').datetimepicker({
+	 format:'Y-m-d',
+	 minDate: '1' ,
+	 value: getNextDate(memCpDate,14) ,
+ onShow:function( ct ){
+  this.setOptions({
+   maxDate:jQuery('#f_date2').val()?$('#f_date2').val():false
+  })
+ },
+ timepicker:false
+});
+
+<!-- ============================  pmEndDate  ============================ -->
+
+$('#f_date2').datetimepicker({
+format:'Y-m-d',
+onShow:function( ct ){
+this.setOptions({
+minDate:$('#f_date1').val()?$('#f_date1').val():false
+})
+},
+timepicker:false
+});
+</script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/jquery.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/popper.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/modernizr.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/waves.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/jquery.nicescroll.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/skycons/skycons.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/tiny-editable/numeric-input-example.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/fullcalendar/vanillaCalendar.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/raphael/raphael-min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/morris/morris.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/app.js"></script>
 </html>

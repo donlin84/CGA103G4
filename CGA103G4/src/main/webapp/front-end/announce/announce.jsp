@@ -22,13 +22,20 @@ pageContext.setAttribute("list", list);
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>《See Food》官方網站</title>
-<link rel="stylesheet" href="../css/common/all.css">
-<link rel="stylesheet" href="../css/common/header.css">
-<link rel="stylesheet" href="../css/common/footer.css">
-<link rel="stylesheet" href="../css/common/main.css">
-<link rel="stylesheet" href="../css/announce.css">
-<script src="../js/announce.js"></script>
-<script src="../js/nav.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/common/all.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/common/header.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/common/footer.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/common/main.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/announce.css">
+<link href="<%=request.getContextPath()%>/front-end/member/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/front-end/member/assets/css/icons.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/front-end/member/assets/css/style.css" rel="stylesheet" type="text/css">
+<script src="<%=request.getContextPath()%>/front-end/assets/js/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/assets/js/popper.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/assets/js/bootstrap.min.js"></script>
+
+<script src="<%=request.getContextPath()%>/front-end/js/announce.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/js/nav.js"></script>
 </head>
 
 <body>

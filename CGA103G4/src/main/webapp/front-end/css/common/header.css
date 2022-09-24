@@ -211,7 +211,7 @@ header.header li.black_block {
 }
 
 
-/* ===================  ¹Ï¤ù  ===================*/
+/* ===================  ï¿½Ï¤ï¿½  ===================*/
 #image01 {
   width: 1535px;
   position: absolute;
@@ -287,7 +287,7 @@ header.header li.black_block {
 
 /* ============================================== */
 
-/* =================  ¥ª¥kbuttom  ================= */
+/* =================  ï¿½ï¿½ï¿½kbuttom  ================= */
 header.header div.picture div.leftright {
   width: 100%;
   height: 614px;
@@ -343,7 +343,7 @@ header.header div.picture>div.leftright div#left {
 
 /* ============================================== */
 
-/* ¾î±ø ÅÜ¦â*/
+/* ï¿½ï¿½ï¿½ ï¿½Ü¦ï¿½*/
 header.header div.block nav.nav ul.navbar_list {
   margin: 0;
   padding: 0;
@@ -353,7 +353,7 @@ header.header div.block nav.nav ul.navbar_list {
 }
 
 
-/* ¤U©Ôbar hover*/
+/* ï¿½Uï¿½ï¿½bar hover*/
 
 header.header div.block nav.nav ul.navbar_list:hover div.navbar {
   visibility: visible;
@@ -510,7 +510,7 @@ header.header li.showbar{
 } */
 
 /* opacity:0.6; */
-/* position:fixed; ©T©w¥Î*/
+/* position:fixed; ï¿½Tï¿½wï¿½ï¿½*/
 /* .button {
   background-color: #4CAF50; 
   border: none;
@@ -530,7 +530,7 @@ header.header li.showbar{
   color: white;
 } */
 
-/*¾ÉÄý¦Cªº¥k°¼*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½kï¿½ï¿½*/
 /* header.header div.block nav.nav div.share_block{
   font-size: 1.8rem;
   float:right;
@@ -549,7 +549,7 @@ header.header li.showbar{
   cursor: default;
 } */
 
-/*µê½u*/
+/*ï¿½ï¿½u*/
 /* header.header div.block nav.nav div.share_block ul.share_list > li > a::after{
   content: "";
   display:inline-block;
@@ -576,7 +576,7 @@ header.header li.showbar{
     border-left: 5px solid transparent;
     position: relative;
     top: -1px;
-    margin-left: 5px; ¤p½bÀY
+    margin-left: 5px; ï¿½pï¿½bï¿½Y
 } */
 
 

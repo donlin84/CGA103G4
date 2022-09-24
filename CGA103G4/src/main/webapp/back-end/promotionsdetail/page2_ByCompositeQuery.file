@@ -25,3 +25,4 @@
        <input type="hidden" name="action" value="listPromotionsDetail_ByCompositeQuery">  
     </FORM>
   <%}%>
+  

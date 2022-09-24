@@ -1,0 +1,105 @@
+		/* ====================任何專案都有的=================== */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color:rgb(240, 239, 227);
+        }
+
+        img {
+            max-height: 100%;
+        }
+
+        html {
+            font-size: 62.5%;
+/*             --header-height: 60px; */
+/*             --aside-width: 240px; */
+        }
+        
+        div#promotionsPageContent{
+        width:100%;
+ 		min-height: 500px;
+        }
+        
+        /* ====================  main 區域  ==================== */
+
+        main.main {
+/*             border: 1px solid green; */
+/*             width: calc(100% - var(--aside-width)); */
+/*             margin-left: var(--aside-width); */
+        	text-align:center;
+            min-height: calc(100vh - var(--header-height));
+            font-size: 1.6rem;
+            padding: 30px 150px;
+        }
+
+        @media (max-width:767.98px) {
+            main.main {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+        main.main ul.item_list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        main.main ul.item_list>li {
+            width: calc(100% - 100px);
+            margin-right: 50px;
+            margin-bottom: 50px;
+        }
+
+        @media (max-width:767.98px) {
+        
+            main.main ul.item_list>li {
+            margin-right: 50px;
+            width: calc(100% - 50px);
+            }
+        }
+
+        main.main ul.item_list>li>a {
+            display: block;
+            text-decoration: none;
+            overflow:hidden;
+        }
+
+        main.main ul.item_list>li>a div.img_block {
+            font-size: 0;
+            height:80px;
+            vertical-align:middle;
+            text-align:center;
+            display: inline-block;
+    		position: relative;
+    		left: 50%;
+     		margin-left: -100%;
+        }
+
+        main.main ul.item_list>li>a span.item_text {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #000;
+            font-weight: 900;
+            font-size: 20px;
+        }
+        
+        main.main ul.item_list>li>a span.content{
+			margin-bottom: 0.2rem;
+			line-height: 1.4;
+			color: grey;
+			overflow: hidden;
+			margin: 0;
+			padding: 0;
+			text-overflow: ellipsis;
+			font-weight: 600;
+			font-size: 12px;
+        }
+        /* ====================  main   ==================== */

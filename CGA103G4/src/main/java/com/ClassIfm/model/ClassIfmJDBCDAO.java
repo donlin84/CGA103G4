@@ -20,7 +20,7 @@ public class ClassIfmJDBCDAO implements ClassIfmDAO_interface{
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei";
 	String userid = "root";
-	String passwd = "Alan0622";
+	String passwd = "cga103g4";
 
 	private static final String INSERT_STMT = 
 		"INSERT INTO ClassIfm (thrid,claTagid,claTitle,claIntroduction,claTime,claPrice,claPeopleMax,claPeopleMin,claPeople,claStatus,claStrTime,claFinTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -34,8 +34,17 @@ public class ClassIfmJDBCDAO implements ClassIfmDAO_interface{
 		"UPDATE ClassIfm set thrid=?, claTagid=?, claTitle=?, claIntroduction=?, claTime=? ,claPrice=?,claPeopleMax=?,claPeopleMin=?,claPeople=?,claStatus=?,claStrTime=?,claFinTime=? where claid = ?";
 	private static final String JOINTEACHER =
 		"select thrName from classifm c join teacher t on c.thrid = t.thrid where t.thrid=? limit 1";
-			
-			
+	//只更改報名人數
+	private static final String UPDATE_CLAPEOPLE="UPDATE classIfm set claPeople = ? where claid = ?";
+	//給前台getall上架客程
+	private static final String FRONT_GETALL = 
+	"SELECT claid,thrid,claTagid,claTitle,claIntroduction,claTime,claPrice,claPeopleMax,claPeopleMin,claPeople,claStatus,claStrTime,claFinTime FROM ClassIfm where claStatus = 1 order by claid";		
+	private static final String TIMER_GETCANCEL = 
+			"SELECT claid,thrid,claTagid,claTitle,claIntroduction,claTime,claPrice,claPeopleMax,claPeopleMin,claPeople,claStatus,claStrTime,claFinTime FROM ClassIfm where claStatus = 3 order by claid";		
+	//單純修改課程狀態
+	private static final String UPDATE_CLASTATUS="UPDATE classifm SET claStatus = 4 WHERE claid = ?";
+	//抓出課程完成的會員
+	private static final String CLA_FINISH="SELECT claid,thrid,claTagid,claTitle,claIntroduction,claTime,claPrice,claPeopleMax,claPeopleMin,claPeople,claStatus,claStrTime,claFinTime FROM ClassIfm where claStatus = 2  and claid = ? order by claid";
 	@Override
 	public void insert(ClassIfmVO classIfmVO) {
 		Connection con = null;
@@ -381,6 +390,384 @@ Statement stmt=	con.createStatement();
 			}
 		}
 	}
+	//單一更新報名人數
+	@Override
+	public void update_clapeople(ClassIfmVO classIfmVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid,passwd);
+			pstmt = con.prepareStatement(UPDATE_CLAPEOPLE);
+			
+			pstmt.setInt(1, classIfmVO.getClaPeople());
+			pstmt.setInt(2, classIfmVO.getClaid());
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+	//萬用查詢
+	@Override
+	public List<ClassIfmVO> cangetall(String xxx) {
+		List<ClassIfmVO> list = new ArrayList<ClassIfmVO>();
+		ClassIfmVO classIfmVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid,passwd);
+			pstmt = con.prepareStatement(xxx);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				classIfmVO = new ClassIfmVO();
+				classIfmVO.setClaid(rs.getInt("claid"));
+				classIfmVO.setThrid(rs.getInt("thrid"));
+				classIfmVO.setClaTagid(rs.getInt("clatagid"));
+				classIfmVO.setClaTitle(rs.getString("clatitle"));
+				classIfmVO.setClaIntroduction(rs.getString("claintroduction"));
+				classIfmVO.setClaTime(rs.getObject("clatime",LocalDateTime.class));
+				classIfmVO.setClaPrice(rs.getInt("claprice"));
+				classIfmVO.setClaPeopleMax(rs.getInt("clapeoplemax"));
+				classIfmVO.setClaPeopleMin(rs.getInt("clapeoplemin"));
+				classIfmVO.setClaPeople(rs.getInt("clapeople"));
+				classIfmVO.setClaStatus(rs.getInt("clastatus"));
+				classIfmVO.setClaStrTime(rs.getObject("clastrtime",LocalDateTime.class));
+				classIfmVO.setClaFinTime(rs.getObject("clafintime",LocalDateTime.class));
+
+				
+				list.add(classIfmVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<ClassIfmVO> front_getall() {
+		List<ClassIfmVO> list = new ArrayList<ClassIfmVO>();
+		ClassIfmVO classIfmVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid,passwd);
+			pstmt = con.prepareStatement(FRONT_GETALL);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				classIfmVO = new ClassIfmVO();
+				classIfmVO.setClaid(rs.getInt("claid"));
+				classIfmVO.setThrid(rs.getInt("thrid"));
+				classIfmVO.setClaTagid(rs.getInt("clatagid"));
+				classIfmVO.setClaTitle(rs.getString("clatitle"));
+				classIfmVO.setClaIntroduction(rs.getString("claintroduction"));
+				classIfmVO.setClaTime(rs.getObject("clatime",LocalDateTime.class));
+				classIfmVO.setClaPrice(rs.getInt("claprice"));
+				classIfmVO.setClaPeopleMax(rs.getInt("clapeoplemax"));
+				classIfmVO.setClaPeopleMin(rs.getInt("clapeoplemin"));
+				classIfmVO.setClaPeople(rs.getInt("clapeople"));
+				classIfmVO.setClaStatus(rs.getInt("clastatus"));
+				classIfmVO.setClaStrTime(rs.getObject("clastrtime",LocalDateTime.class));
+				classIfmVO.setClaFinTime(rs.getObject("clafintime",LocalDateTime.class));
+
+				
+				list.add(classIfmVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	//給TIMER用的
+	@Override
+	public List<ClassIfmVO> timer_getcancel() {
+		List<ClassIfmVO> list = new ArrayList<ClassIfmVO>();
+		ClassIfmVO classIfmVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid,passwd);
+			pstmt = con.prepareStatement(TIMER_GETCANCEL);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				classIfmVO = new ClassIfmVO();
+				classIfmVO.setClaid(rs.getInt("claid"));
+				classIfmVO.setThrid(rs.getInt("thrid"));
+				classIfmVO.setClaTagid(rs.getInt("clatagid"));
+				classIfmVO.setClaTitle(rs.getString("clatitle"));
+				classIfmVO.setClaIntroduction(rs.getString("claintroduction"));
+				classIfmVO.setClaTime(rs.getObject("clatime",LocalDateTime.class));
+				classIfmVO.setClaPrice(rs.getInt("claprice"));
+				classIfmVO.setClaPeopleMax(rs.getInt("clapeoplemax"));
+				classIfmVO.setClaPeopleMin(rs.getInt("clapeoplemin"));
+				classIfmVO.setClaPeople(rs.getInt("clapeople"));
+				classIfmVO.setClaStatus(rs.getInt("clastatus"));
+				classIfmVO.setClaStrTime(rs.getObject("clastrtime",LocalDateTime.class));
+				classIfmVO.setClaFinTime(rs.getObject("clafintime",LocalDateTime.class));
+
+				
+				list.add(classIfmVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	//單一修改課程狀態
+	@Override
+	public void update_clastatus(ClassIfmVO classIfmVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid,passwd);
+			pstmt = con.prepareStatement(UPDATE_CLASTATUS);
+			
+			pstmt.setInt(1,classIfmVO.getClaid());
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+	
+	//抓課程完成的會員
+	@Override
+	public List<ClassIfmVO> cla_finish(Integer claid) {
+		List<ClassIfmVO> list = new ArrayList<ClassIfmVO>();
+		ClassIfmVO classIfmVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid,passwd);
+			pstmt = con.prepareStatement(CLA_FINISH);
+			pstmt.setInt(1, claid);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				classIfmVO = new ClassIfmVO();
+				classIfmVO.setClaid(rs.getInt("claid"));
+				classIfmVO.setThrid(rs.getInt("thrid"));
+				classIfmVO.setClaTagid(rs.getInt("clatagid"));
+				classIfmVO.setClaTitle(rs.getString("clatitle"));
+				classIfmVO.setClaIntroduction(rs.getString("claintroduction"));
+				classIfmVO.setClaTime(rs.getObject("clatime",LocalDateTime.class));
+				classIfmVO.setClaPrice(rs.getInt("claprice"));
+				classIfmVO.setClaPeopleMax(rs.getInt("clapeoplemax"));
+				classIfmVO.setClaPeopleMin(rs.getInt("clapeoplemin"));
+				classIfmVO.setClaPeople(rs.getInt("clapeople"));
+				classIfmVO.setClaStatus(rs.getInt("clastatus"));
+				classIfmVO.setClaStrTime(rs.getObject("clastrtime",LocalDateTime.class));
+				classIfmVO.setClaFinTime(rs.getObject("clafintime",LocalDateTime.class));
+
+				
+				list.add(classIfmVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	
+	
 
 
 /*---------------------------------------------------------------------------------------*/
@@ -439,24 +826,59 @@ Statement stmt=	con.createStatement();
 //		System.out.print(vo3.getClaFinTime()+ ",");
 //		System.out.println();
 //	查詢全部
-	List<ClassIfmVO> list = dao.getAll();
-	for (ClassIfmVO aEmp : list) {
-		System.out.print(aEmp.getClaid() + ",");
-		System.out.print(aEmp.getThrid() + ",");
-		System.out.print(aEmp.getClaTagid() + ",");
-		System.out.print(aEmp.getClaTitle() + ",");
-		System.out.print(aEmp.getClaIntroduction() + ",");
-		System.out.print(aEmp.getClaTime() + ",");
-		System.out.print(aEmp.getClaPrice()+ ",");
-		System.out.print(aEmp.getClaPeopleMax()+ ",");
-		System.out.print(aEmp.getClaPeopleMin()+ ",");
-		System.out.print(aEmp.getClaPeople()+ ",");
-		System.out.print(aEmp.getClaStatus()+ ",");
-		System.out.print(aEmp.getClaStrTime()+ ",");
-		System.out.print(aEmp.getClaFinTime()+ ",");
-		System.out.println();
+//	List<ClassIfmVO> list = dao.getAll();
+//	for (ClassIfmVO aEmp : list) {
+//		System.out.print(aEmp.getClaid() + ",");
+//		System.out.print(aEmp.getThrid() + ",");
+//		System.out.print(aEmp.getClaTagid() + ",");
+//		System.out.print(aEmp.getClaTitle() + ",");
+//		System.out.print(aEmp.getClaIntroduction() + ",");
+//		System.out.print(aEmp.getClaTime() + ",");
+//		System.out.print(aEmp.getClaPrice()+ ",");
+//		System.out.print(aEmp.getClaPeopleMax()+ ",");
+//		System.out.print(aEmp.getClaPeopleMin()+ ",");
+//		System.out.print(aEmp.getClaPeople()+ ",");
+//		System.out.print(aEmp.getClaStatus()+ ",");
+//		System.out.print(aEmp.getClaStrTime()+ ",");
+//		System.out.print(aEmp.getClaFinTime()+ ",");
+//		System.out.println();
+//		
+//		}
+		//單一更新報名人數
+//		ClassIfmVO vo2 = new ClassIfmVO();
+//		
+//		vo2.setClaPeople(10);
+//		vo2.setClaid(2);
+//		
+//		dao.update_clapeople(vo2);	
 		
-		}
+		//單一修改課程狀態
+//		ClassIfmVO vo2 = new ClassIfmVO();
+////		
+//		vo2.setClaid(1);
+//		
+//		dao.update_clastatus(vo2);	
+		List<ClassIfmVO> list = dao.cla_finish(1);
+		for (ClassIfmVO aEmp : list) {
+			System.out.print(aEmp.getClaid() + ",");
+			System.out.print(aEmp.getThrid() + ",");
+			System.out.print(aEmp.getClaTagid() + ",");
+			System.out.print(aEmp.getClaTitle() + ",");
+			System.out.print(aEmp.getClaIntroduction() + ",");
+			System.out.print(aEmp.getClaTime() + ",");
+			System.out.print(aEmp.getClaPrice()+ ",");
+			System.out.print(aEmp.getClaPeopleMax()+ ",");
+			System.out.print(aEmp.getClaPeopleMin()+ ",");
+			System.out.print(aEmp.getClaPeople()+ ",");
+			System.out.print(aEmp.getClaStatus()+ ",");
+			System.out.print(aEmp.getClaStrTime()+ ",");
+			System.out.print(aEmp.getClaFinTime()+ ",");
+			System.out.println();
+			
+			}
 
 	}
+
+
+	
 }

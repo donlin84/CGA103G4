@@ -2,12 +2,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.chefappointmentform.model.*"%>
+<%@ page import="com.chef.model.*"%>
+
 
 <!--    以下等同第9行 -->
 <%--    <jsp:useBean id="list" scope="session" type="java.util.List<EmpVO>" /> --%>
 <%
+ChefVO chefVO =(ChefVO) session.getAttribute("chefVO");
+Integer chefid = chefVO.getChefid();
+%>
+<%
     ChefAppointmentFormJDBCDAO dao = new ChefAppointmentFormJDBCDAO();
-    List<ChefAppointmentFormVO> list = dao.getAllByChef(302);       // 此行的list變數(物件)將提供page1.file的第11行取得查詢到的總筆數，再由page1.file進行分頁的需要
+    List<ChefAppointmentFormVO> list = dao.getAllByChef(chefid);       // 此行的list變數(物件)將提供page1.file的第11行取得查詢到的總筆數，再由page1.file進行分頁的需要
     pageContext.setAttribute("list",list); // 將上一行的list變數(物件)存入當前頁面pageContext，再由底下的第83行由JSTL的forEach列印出結果
 %>
 

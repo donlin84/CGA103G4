@@ -7,6 +7,9 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.coupontype.model.CouponTypeVO;
+import com.member.model.MemberVO;
+
 @Transactional(readOnly = true)
 public class MemberCouponHibernateDAO implements MemberCouponDAO_interface{
 	

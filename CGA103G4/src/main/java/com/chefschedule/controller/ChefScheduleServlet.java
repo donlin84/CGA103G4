@@ -36,20 +36,20 @@ public class ChefScheduleServlet extends HttpServlet {
 
 		// Fetch 查詢該私廚全部班次
 		if ("getAllById".equals(action)) {
-			Integer chef = null;
-			HttpSession session = req.getSession();
-			session.setAttribute("chefid", "302");
-			try {
-				chef = Integer.valueOf((String) session.getAttribute("chefid"));
-			} catch (Exception e) {
-				res.getWriter().print("noInfo");
-				return;
-			}
+			Integer chefid = Integer.valueOf(req.getParameter("chefid"));
+//			HttpSession session = req.getSession();
+//			session.setAttribute("chefid", "302");
+//			try {
+//				chef = Integer.valueOf((String) session.getAttribute("chefid"));
+//			} catch (Exception e) {
+//				res.getWriter().print("noInfo");
+//				return;
+//			}
 			JSONArray jsons = new JSONArray();
 
 			ChefScheduleService chefschSvc = new ChefScheduleService();
 
-			List<ChefScheduleVO> list = chefschSvc.getAllById(chef);
+			List<ChefScheduleVO> list = chefschSvc.getAllById(chefid);
 
 			for (ChefScheduleVO cs : list) {
 				JSONObject json = new JSONObject();

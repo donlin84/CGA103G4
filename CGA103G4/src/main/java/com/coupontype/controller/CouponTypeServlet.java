@@ -127,7 +127,7 @@ public class CouponTypeServlet extends HttpServlet {
 				cpStart = java.sql.Date.valueOf(req.getParameter("cpStart").trim());
 			} catch (Exception e) {
 				cpStart = new java.sql.Date(System.currentTimeMillis());
-				errorMsgs.add("請輸入起始時間");
+				errorMsgs.add("請輸入上次修改時間");
 			}
 
 			java.sql.Date cpEnd = null;
@@ -135,11 +135,11 @@ public class CouponTypeServlet extends HttpServlet {
 				cpEnd = java.sql.Date.valueOf(req.getParameter("cpEnd").trim());
 			} catch (Exception e) {
 				cpEnd = new java.sql.Date(System.currentTimeMillis());
-				errorMsgs.add("請輸入截止時間");
+				errorMsgs.add("請輸入發布時間");
 			}
 
-			if ((cpEnd.getTime() - cpStart.getTime()) < 0) {
-				errorMsgs.add("截止時間必須在開始時間之後");
+			if ((cpStart.getTime() - cpEnd.getTime()) < 0) {
+				errorMsgs.add("上次修改時間必須在發布時間之後");
 			}
 
 			Integer cpStatus = Integer.valueOf(req.getParameter("cpStatus").trim());
@@ -196,7 +196,7 @@ public class CouponTypeServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-
+			
 			String cpName = req.getParameter("cpName");
 			String cpNameReg = "^[(\\u4e00-\\u9fa5)(a-zA-Z0-9_)]{2,45}$";
 
@@ -219,7 +219,7 @@ public class CouponTypeServlet extends HttpServlet {
 				cpStart = java.sql.Date.valueOf(req.getParameter("cpStart").trim());
 			} catch (Exception e) {
 				cpStart = new java.sql.Date(System.currentTimeMillis());
-				errorMsgs.add("請輸入起始時間");
+				errorMsgs.add("請輸入上次修改時間");
 			}
 
 			java.sql.Date cpEnd = null;
@@ -227,11 +227,11 @@ public class CouponTypeServlet extends HttpServlet {
 				cpEnd = java.sql.Date.valueOf(req.getParameter("cpEnd").trim());
 			} catch (Exception e) {
 				cpEnd = new java.sql.Date(System.currentTimeMillis());
-				errorMsgs.add("請輸入截止時間");
+				errorMsgs.add("請輸入發布時間");
 			}
 
-			if ((cpEnd.getTime() - cpStart.getTime()) < 0) {
-				errorMsgs.add("截止時間必須在開始時間之後");
+			if ((cpStart.getTime() - cpEnd.getTime()) < 0) {
+				errorMsgs.add("上次修改時間必須在發布時間之後");
 			}
 
 			Integer cpStatus = Integer.valueOf(req.getParameter("cpStatus").trim());

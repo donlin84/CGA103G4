@@ -1,6 +1,8 @@
 package com.member.model;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class MemberVO {
 	private Integer memid;
@@ -15,6 +17,34 @@ public class MemberVO {
 	private Integer memStatus;
 	private String memNation;
 	
+	private Integer people;
+	private Integer regstatus;
+	private LocalDateTime regtime;
+	private Integer regpayment;
+	public Integer getRegstatus() {
+		return regstatus;
+	}
+	public void setRegstatus(Integer regstatus) {
+		this.regstatus = regstatus;
+	}
+	public LocalDateTime getRegtime() {
+		return regtime;
+	}
+	public void setRegtime(LocalDateTime regtime) {
+		this.regtime = regtime;
+	}
+	public Integer getRegpayment() {
+		return regpayment;
+	}
+	public void setRegpayment(Integer regpayment) {
+		this.regpayment = regpayment;
+	}
+	public Integer getPeople() {
+		return people;
+	}
+	public void setPeople(Integer people) {
+		this.people = people;
+	}
 //	public MemberVO() {
 //		
 //	}
@@ -101,4 +131,5 @@ public class MemberVO {
 	public void setMemNation(String memNation) {
 		this.memNation = memNation;
 	}
+	
 }

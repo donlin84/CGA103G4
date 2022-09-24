@@ -24,14 +24,14 @@
 						<li class="list-inline-item dropdown notification-list"><a
 							class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
 							aria-haspopup="false" aria-expanded="true"><i class="ti-bell noti-icon"></i><span
-								class="badge badge-danger noti-icon-badge">5</span></a>
+								class="badge badge-danger noti-icon-badge"></span></a>
 							<div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg"
 								style="position: absolute; transform: translate3d(-222px, 70px, 0px); top: 0px; left: 0px; will-change: transform;">
 								<!-- item-->
 
 								<div class="dropdown-item noti-title">
 									<h5>
-										<span class="badge badge-danger float-right">5</span>通知
+										<span class="badge badge-danger float-right"></span>通知
 									</h5>
 								</div>
 
@@ -137,7 +137,7 @@
 						<li class="has-submenu"><a href="#"><i class="mdi dripicons-device-desktop"></i>前台管理</a>
 							<ul class="submenu">
 								<li><a href="#">客服管理</a></li>
-								<li><a href="#">公告管理</a></li>
+								<li><a href="../announcement/announce-management.jsp">公告管理</a></li>
 								<li><a href="#">公司資料管理</a></li>
 								<li><a href="#">食譜管理</a></li>
 								<li><a href="#">討論區管理</a>

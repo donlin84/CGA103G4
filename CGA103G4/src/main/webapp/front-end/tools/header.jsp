@@ -18,15 +18,41 @@
         <div class="sign_block">
           <input class="input" placeholder="找食譜"><input class="input" placeholder="找食材"><button class="button"><img
               src="../images/icon.png"></button>
-          <a href="../sign_register.html">登入</a>
+          <c:choose>
+
+						<c:when test="${empty account}">
+							<a href="../member/frontEndLogin.jsp">登入</a>
+						</c:when>
+						<c:otherwise>
+							<div class="btn-group mo-mb-2"
+								style="height: 40px; right: 5px; top: 8px;">
+								<button type="button" class="btn btn-warning dropdown-toggle"
+									data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">會員</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="../member/update.jsp">修改資料</a>
+									<a class="dropdown-item" href="../creditCardInformation/CreditCardInformation.jsp">信用卡</a> <a
+										class="dropdown-item" href="#">查看訂單</a> <a
+										class="dropdown-item" href="#">查看商品</a> <a
+										class="dropdown-item" href="../membercoupon/membercoupon.jsp">查看優惠卷</a> <a
+										class="dropdown-item" href="#">查看課程</a> <a
+										class="dropdown-item" href="../chef/addChefSubscription.jsp">查看訂閱</a> <a
+										class="dropdown-item" href="../chefAppointment/memberListAll.jsp">查看預約</a> <a
+										class="dropdown-item" href="#">查看食譜</a> <a
+										class="dropdown-item" href="#">查看通知</a> <a
+										class="dropdown-item" href="../member/frontEndLogout.jsp">登出</a>
+
+								</div>
+							</div>
+
+						</c:otherwise>
+					</c:choose>
         </div>
 
         <ul class="navbar_list">
           <div class="navbar">
             <li class="announcebar">
               <div><a href="../announce/newannounce.jsp">最新消息</a></div>
-              <div><a href="#">廣告瀏覽</a></div>
-              <div><a href="#">關於我們</a></div>
             </li>
             <li class="shopbar">
               <div><a href="#">熱門推薦</a></div>
@@ -43,12 +69,12 @@
               <div><a href="#">預約系統</a></div>
             </li>
             <li class="forumbar">
-              <div><a href="#">食譜</a></div>
-              <div><a href="#">上傳食譜</a></div>
-              <div><a href="#">飲食交流</a></div>
-              <div><a href="#">廚藝烹飪</a></div>
-              <div><a href="#">廚具交流</a></div>
-              <div><a href="#">收藏文章</a></div>
+<!--               <div><a href="#">食譜</a></div> -->
+<!--               <div><a href="#">上傳食譜</a></div> -->
+<!--               <div><a href="#">飲食交流</a></div> -->
+<!--               <div><a href="#">廚藝烹飪</a></div> -->
+<!--               <div><a href="#">廚具交流</a></div> -->
+<!--               <div><a href="#">收藏文章</a></div> -->
             </li>
             <li class="socialbar">
               <div><a href="http://www.facebook.com">幫助中心</a></div>

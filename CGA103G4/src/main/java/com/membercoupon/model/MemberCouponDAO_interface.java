@@ -3,6 +3,8 @@ package com.membercoupon.model;
 import java.util.List;
 import java.util.Map;
 
+import com.coupontype.model.CouponTypeVO;
+import com.member.model.MemberVO;
 import com.promotionsdetail.model.PromotionsDetailVO;
 
 public interface MemberCouponDAO_interface {

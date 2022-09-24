@@ -26,7 +26,8 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 	private static final String UPDATE = "UPDATE Chef set chefName=?, chefNickname=?, chefAccount=?, chefPassword=?,  chefStatus=?, "
 			+ "chefPrice=?, license=?, idCard=?, idCardBack=?, chefPhoto=?,  chefIntroduction=? " 
 			+ "where chefid = ?";
-
+	//後台登入
+	private static final String GET_ONE_ACCOUNT ="select * from chef where BINARY chefAccount = ?";
 
 	@Override
 	public void insert(ChefVO chefVO) {
@@ -317,6 +318,72 @@ public class ChefJDBCDAO implements ChefDAO_interface {
 		}
 		return list;
 	}
+	
+	//後台登入
+		@Override
+		public ChefVO get_one_account(String chefAccount) {
+			ChefVO chefVO = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				Class.forName(DRIVER);
+				Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+				pstmt = conn.prepareStatement(GET_ONE_ACCOUNT);
+				pstmt.setString(1, chefAccount);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					chefVO = new ChefVO();
+					chefVO.setChefid(rs.getInt("chefid"));
+					chefVO.setChefName(rs.getString("chefName"));
+					chefVO.setChefNickname(rs.getString("chefNickname"));
+					chefVO.setChefAccount(rs.getString("chefAccount"));
+					chefVO.setChefPassword(rs.getString("chefPassword"));
+					chefVO.setChefStatus(rs.getInt("chefStatus"));
+					chefVO.setChefPrice(rs.getInt("chefPrice"));
+					chefVO.setSchDate(rs.getString("schDate"));
+					chefVO.setReserve(rs.getInt("reserve"));
+					chefVO.setCom(rs.getInt("com"));
+					chefVO.setGomg(rs.getInt("gomg"));
+					chefVO.setLicense(rs.getBytes("license"));
+					chefVO.setIdCard(rs.getBytes("idCard"));
+					chefVO.setIdCardBack(rs.getBytes("idCardBack"));
+					chefVO.setChefPhoto(rs.getBytes("chefPhoto"));
+					chefVO.setChefIntroduction(rs.getString("chefIntroduction"));
+				}
+
+				// Handle any driver errors
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. " + se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return chefVO;
+		}
 
 	public static byte[] getPictureByteArray(String path) throws IOException {
 		FileInputStream fis = new FileInputStream(path);

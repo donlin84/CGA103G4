@@ -8,4 +8,7 @@ public interface ChefDAO_interface {
      public ChefVO findByPrimaryKey(Integer chefid);
      public List<ChefVO> getAll();
      public List<ChefVO> getAll(Map<String, String[]> map); 
+     
+     //後台登入
+     public ChefVO get_one_account(String chefAccount);
 }

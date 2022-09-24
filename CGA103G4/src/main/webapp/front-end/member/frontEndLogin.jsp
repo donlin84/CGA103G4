@@ -103,10 +103,14 @@ String rand = (String)session.getAttribute("rand");
 <li>
 						
 						
-			
-							
-						
-							
+<%
+if(rand == null){
+	rand = "5928";
+// 	out.print(rand); 
+} else {
+// 	out.print(rand); 
+}
+%>							
 							<input type="text"size="45" class="form-control"
 							value="" id="checkmemPassword" required="required" oninput="setCustomValidity('');" 
 							onchange="if(document.getElementById('memPassword').value != document.getElementById('checkmemPassword').value) 
@@ -114,17 +118,13 @@ String rand = (String)session.getAttribute("rand");
 						<p class="rightStyle">
 								<input class="form-control" type="text"
 									name="memPassword" size="45"
-									value="<%=rand %>"
+									value="<%=rand%>"
 									id="memPassword" style="width:60px;" disabled/>
 							
 
 
-<%-- 		<%@ include file="newImage.jsp" %> --%>
-<%-- 		<%@ include file="/front-end/member/newImage.jsp" %> --%>
-<!-- 		<img src="./newImage.jsp"/><br> -->
-		<br><img src="newImage.jsp" />
-<!-- 		<img src="ig.png" style="width:20px;"/><br> -->
-<%-- <%=rand %> --%>
+<br>
+		<img src="../../vcode">
 									</li>
 						</ul>
 		

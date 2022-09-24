@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.chef.model.*"%>
+<%@ page import="com.member.model.*" %>
+<%
+String chefName = (String) session.getAttribute("chefName");
+System.out.print("JSP:"+ chefName);
+%>
 <!DOCTYPE html>
 <html lang="zh-tw">
 
@@ -144,6 +149,7 @@ body, div, li {
     document.addEventListener('DOMContentLoaded', function() {
     	var calendarEl = document.getElementById('calendar');
 		let chefid = localStorage.getItem("chefid");
+		localStorage.setItem('chefName','${chefName}');
     	let MyPoint = "/front-end/chefAppointment/chefapp.do?action=getAllById&chefid="+chefid;
     	let host = window.location.host;
     	let path = window.location.pathname;
@@ -164,7 +170,6 @@ body, div, li {
     	//送請求拿班表
     	fetch(URL).then(response => response.json("jsons"))
     		.then(jsons => {
-    			console.log(jsons);
     			let calendar = new FullCalendar.Calendar(calendarEl, {
     				headerToolbar: {
     					left: 'prev,next,today',
@@ -177,7 +182,6 @@ body, div, li {
     				selectMirror: true,
     				eventClick: function(arg) {
 						//取得標題時段
-						console.log(arg);
 						let title = arg.event._def.title;
                         //轉換成指定日期格式
     					let schDate = new Date(arg.event._instance.range.start);

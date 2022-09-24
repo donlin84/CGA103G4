@@ -61,4 +61,9 @@ public class EmpService {
 	public Set<AnnouncementVO> getAnnouncementByEmpid(Integer annid) {
 		return dao.getAnnouncementByEmpid(annid);
 	}
+	
+	//後台登入
+		public EmpVO getoneaccount(String empAccount) {
+			return dao.get_one_account(empAccount);
+		}
 }

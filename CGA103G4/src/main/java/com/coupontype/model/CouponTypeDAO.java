@@ -10,13 +10,15 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.membercoupon.model.MemberCouponVO;
+
 public class CouponTypeDAO implements CouponTypeDAO_interface {
 
 	private static DataSource ds = null;
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/cga103g4");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Cga103G4");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -283,6 +285,12 @@ public class CouponTypeDAO implements CouponTypeDAO_interface {
 			}
 		}
 		return couponTypeVO;
+	}
+
+	@Override
+	public Set<MemberCouponVO> getMemberCouponByCpTpid(Integer memCpid) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

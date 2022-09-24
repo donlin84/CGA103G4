@@ -1,6 +1,57 @@
+<%@page import="com.chef.model.ChefVO"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.orderdetail.model.*"%>
+<%@page import="com.orders.model.OrdersVO"%>
+<%@page import="com.orders.model.OrdersService"%>
+<%@page import="com.member.model.MemberVO"%>
+<%@page import="com.member.model.MemberService"%>
+<%@page import="java.util.List"%>
+<%@page import="com.registtrationform.model.RegisttrationFormService"%>
+<%@page import="com.ClassIfm.model.ClassIfmVO"%>
+<%@page import="com.ClassIfm.model.ClassIfmService"%>
+<%@page import="com.registtrationform.model.RegisttrationFormVO"%>
+<%@page import="java.util.ArrayList"%>
+<%
+ClassIfmService classifmSvc = new ClassIfmService();
+List<ClassIfmVO> list = classifmSvc.getAll();
+pageContext.setAttribute("alllist", list);
+for (ClassIfmVO C : list) {
 
+	List<MemberVO> list3 = new ArrayList<MemberVO>();
+
+	RegisttrationFormService regSrv = new RegisttrationFormService();
+	List<RegisttrationFormVO> list_click = regSrv.click_people(C.getClaid());//看第幾個課程回傳報名的會員list*********
+
+	for (RegisttrationFormVO reg : list_click) {//用會員list迭代			<再拿出報名表狀態塞進去>
+		MemberService memSrv = new MemberService();
+		MemberVO membervo = memSrv.getOneMember(reg.getMemid());//透過會員id拿取那個會員整筆資料回傳vo
+
+		RegisttrationFormService refVO = new RegisttrationFormService();
+		RegisttrationFormVO regvo = refVO.getOneRegisttrationForm(C.getClaid(), reg.getMemid());
+
+		membervo.setPeople(regvo.getRegPeople());//找人數 塞進去
+		membervo.setRegstatus(regvo.getRegStatus());//找狀態
+		list3.add(membervo);//把vo加進 上面宣告的list裡 
+	}
+	pageContext.setAttribute("regall", list3);
+}
+%>
+<%
+OrderDetailVO orderDetailVO = (OrderDetailVO) request.getAttribute("orderDetailVO");
+%>
+<%
+OrdersVO ordersVO = (OrdersVO) request.getAttribute("ordersVO");
+%>
+<%
+OrdersService ordSvc = new OrdersService();
+List<OrdersVO> ordlist = ordSvc.getAll();
+pageContext.setAttribute("ordlist", ordlist);
+%>
+<%
+ChefVO chefVO =(ChefVO) session.getAttribute("chefVO");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -16,20 +67,33 @@
 <meta content="Admin Dashboard" name="description" />
 <meta content="Mannatthemes" name="author" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<link rel="shortcut icon" href="assets/images/favicon.ico">
-<link href="assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css"
-	rel="stylesheet">
-<link href="assets/plugins/fullcalendar/vanillaCalendar.css"
-	rel="stylesheet" type="text/css" />
-<link href="assets/plugins/morris/morris.css" rel="stylesheet">
-<link href="assets/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css">
-<link href="assets/css/icons.css" rel="stylesheet" type="text/css">
-<link href="assets/css/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/back-end/assets/images/favicon.ico">
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/fullcalendar/vanillaCalendar.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/morris/morris.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/icons.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/style.css" rel="stylesheet" type="text/css">
+<link href='<%=request.getContextPath()%>/back-end/chefAppointment/lib/main.css' rel='stylesheet' />
+<script src='<%=request.getContextPath()%>/back-end/chefAppointment/lib/main.js'></script>
+<script src="<%=request.getContextPath()%>/back-end/chefAppointment/lib/locales-all.js"></script>
+<style>
+body {
+	margin: 40px 10px;
+	padding: 0;
+	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	font-size: 14px;
+}
 
+#calendar {
+	max-width: 1100px;
+	margin: 0 auto;
+}
+</style>
 </head>
 
 <body>
+
 
 	<div id="preloader">
 		<div id="status">
@@ -66,7 +130,7 @@
 							data-toggle="dropdown" href="#" role="button"
 							aria-haspopup="false" aria-expanded="true"><i
 								class="ti-bell noti-icon"></i><span
-								class="badge badge-danger noti-icon-badge">5</span></a>
+								class="badge badge-danger noti-icon-badge"></span></a>
 							<div
 								class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg"
 								style="position: absolute; transform: translate3d(-222px, 70px, 0px); top: 0px; left: 0px; will-change: transform;">
@@ -74,7 +138,7 @@
 
 								<div class="dropdown-item noti-title">
 									<h5>
-										<span class="badge badge-danger float-right">5</span>通知
+										<span class="badge badge-danger float-right"></span>通知
 									</h5>
 								</div>
 
@@ -161,6 +225,7 @@
 
 						<li class="has-submenu "><a href="#"><i
 								class="mdi mdi-shopping"></i>商城管理</a>
+
 							<ul class="submenu">
 								<li><a href="discount-management/discount-management.jsp">優惠方案管理</a></li>
 								<li><a href="#">商品管理</a></li>
@@ -172,25 +237,25 @@
 							<ul class="submenu">
 								<li><a href="#">課程</a></li>
 								<li><a href="#">課程標籤</a></li>
-								<li><a href="#">教師管理</a></li>
-								<li><a href="#">查看報名表</a></li>
+								<li><a href="teacher/select_page.jsp">教師管理</a></li>
+								<li><a href="registtrationform/select_page.jsp">查看報名表</a></li>
 								<li><a href="#">課程紀錄</a></li>
 							</ul>
 						<li class="has-submenu "><a href="#"><i
 								class="mdi ion-spoon"></i>私廚管理</a>
 
 							<ul class="submenu">
-								<li><a href="#">預約管理</a></li>
+								<li><a href="./chefAppointment/select_page.jsp">預約管理</a></li>
 								<li><a href="#">個人資料管理</a></li>
 							</ul>
 						<li class="has-submenu"><a href="#"><i
 								class="mdi dripicons-device-desktop"></i>前台管理</a>
 							<ul class="submenu">
-								<li><a href="#">客服管理</a></li>
-								<li><a href="#">公告管理</a></li>
+								<li><a href="service-management/service-management.jsp">客服管理</a></li>
+								<li><a href="announcement/announce-management.jsp">公告管理</a></li>
 								<li><a href="#">公司資料管理</a></li>
-								<li><a href="#">食譜管理</a></li>
-								<li><a href="#">討論區管理</a>
+<!-- 								<li><a href="#">食譜管理</a></li> -->
+<!-- 								<li><a href="#">討論區管理</a> -->
 							</ul>
 						<li class="has-submenu "><a href="#"><i
 								class="mdi mdi-layers"></i>後台管理</a>
@@ -223,6 +288,223 @@
 						<h4 class="page-title">後台首頁</h4>
 					</div>
 				</div>
+
+
+				<div class="col-md-6 col-lg-6 col-xl-12"
+					style="margin: 0 auto; padding: 10px 20px">
+					<div class="col-md-12 col-lg-12 col-xl-12"
+						style="display: inline-block;">
+
+						<div class="row">
+							<div class="col-md-6 col-lg-6 col-xl-6" style="margin: 0 0">
+								<div class="card">
+									<div class="card-body">
+										<h5>
+											<span class="round "><i class="mdi mdi-cart"></i></span>商品訂單概況
+										</h5>
+										<hr>
+
+										<div class="card">
+											<div class="card-body">
+												<div class="search-type-arrow"></div>
+												<div class="d-flex flex-row">
+													<div class="col-12 align-self-center text-right">
+														<div class="m-l-10 ">
+															<h5 class="mt-0">
+																<c:set var="count" value="0"></c:set>
+																<c:forEach var="ordersVO" items="${ordlist}">
+																	<c:set var="count" value="${count+1}" />
+																</c:forEach>
+																${count}
+															</h5>
+															<p class="mb-0 text-muted">累積訂單數</p>
+														</div>
+													</div>
+												</div>
+												<div class="progress mt-3" style="height: 3px;">
+													<div class="progress-bar bg-danger" role="progressbar"
+														style="width: ${count}%;" aria-valuenow="${count}"
+														aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+											<!--end card-body-->
+										</div>
+										<!--end card-->
+									</div>
+								</div>
+							</div>
+
+
+							<div class="col-md-6 col-lg-6 col-xl-6" style="margin: 0 0">
+								<div class="card">
+									<div class="card-body">
+										<h5>
+											<span class="round "><i class="mdi mdi-library"></i></span>課程訂單概況
+										</h5>
+										<hr>
+
+										<div class="card">
+											<div class="card-body">
+												<div class="search-type-arrow"></div>
+												<div class="d-flex flex-row">
+													<div class="col-12 align-self-center text-right">
+														<div class="m-l-10 ">
+															<h5 class="mt-0">
+																<c:set var="count" value="0"></c:set>
+																<c:forEach var="alllist"
+																	items="${(getallstatus==null)?(alllist):(getallstatus)}"
+																	varStatus="abc">
+																	<c:set var="count" value="${count+1}" />
+																</c:forEach>
+																${count}
+															</h5>
+															<p class="mb-0 text-muted">累積訂單數</p>
+														</div>
+													</div>
+												</div>
+												<div class="progress mt-3" style="height: 3px;">
+													<div class="progress-bar bg-danger" role="progressbar"
+														style="width:${count}%;" aria-valuenow="${count}"
+														aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+											<!--end card-body-->
+										</div>
+										<!--end card-->
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="card">
+							<div class="card-body">
+								<h5>
+									<span class="round "><i class="mdi mdi-calendar"></i></span>行程表
+								</h5>
+
+								<hr>
+								<div class="row">
+									<div class="col-md-12 col-lg-12 col-xl-12"
+										style="margin: 0 0 100px">
+										<!-- Simple card -->
+										<div id='calendar'></div>
+										<div id='data' type="hidden" value="${chefscheduleVO.schDate}"></div>
+										<script>
+        								document.addEventListener('DOMContentLoaded', function () {
+            								var calendarEl = document.getElementById('calendar');
+											
+            								let chefid = <%=chefVO.getChefid() %>
+            								
+            								var MyPoint = "/back-end/chefSchedule/chefsch.do?action=getAllById&chefid="+chefid;
+            								var host = window.location.host;
+            								var path = window.location.pathname;
+            								var webCtx = path.substring(0, path.indexOf('/', 1));
+            								var URL = "http://" + host + webCtx + MyPoint;
+            								fetch(URL).then(response => response.json("jsons"))
+                								.then(jsons => {
+                    								console.log(jsons)
+                    								console.log(jsons[0].schDate)
+
+                    								var calendar = new FullCalendar.Calendar(calendarEl, {
+                        							headerToolbar: {
+                            							left: 'prev,next today',
+                            							center: 'title',
+                            							right: 'dayGridMonth,timeGridWeek'
+                        							},
+                        							locale: 'zh-tw',
+                        							navLinks: true, // can click day/week names to navigate views
+                        							selectable: true,
+                      								selectMirror: true,
+//                         							select: function (arg) {  //新增一筆班次
+//                            			 				let addPoint = "/back-end/chefSchedule/chefsch.do?action=addOne";
+//                            			 				let deleteUrl = "http://" + host + webCtx + addPoint;
+//                           			  				var title = prompt("新增預約時段(請輸入 '午餐' OR '晚餐')");
+//                            			 				console.log(arg.startStr);
+//                           			  			if (title === '午餐') {
+//                                			 			calendar.addEvent({
+//                                  			  		title: title,
+//                                  			   		start: arg.start,
+//                                  			   		end: arg.end,
+//                                  			   		allDay: arg.allDay
+//                                			 		})
+//                                			 		connect('302', arg.startStr, 1);
+//                           			  			} else if (title === '晚餐') {
+//                                 						calendar.addEvent({
+//                                     					title: title,
+//                                     					start: arg.start,
+//                                     					end: arg.end,
+//                                     					allDay: arg.allDay
+//                                 					})
+//                                 					connect('302', arg.startStr, 2);
+//                             						} else {
+//                                			 		alert("無新增資料")
+//                             						}
+//                             						function connect(chefid, date, time) {
+//                                 						fetch(deleteUrl, {
+//                                     					method: 'POST',
+//                                     					headers: {
+//                                         				'Content-Type': 'application/json'
+//                                     				},
+//                                     					body: JSON.stringify({
+//                                      				chefid: chefid,
+//                                        				schDate: date,
+//                                        				schTime: time
+//                                     				})
+//                                 				})
+//                             				}
+//                             					calendar.unselect()
+//                         					},
+//                         					eventClick: function (arg) {  //刪除一筆班次
+//                             					if (confirm('確定要移除此時段嗎?')) {
+//                                 					let deletePoint = "/back-end/chefSchedule/chefsch.do?action=deleteOne";
+//                                 					let deleteUrl = "http://" + host + webCtx + deletePoint;
+//                                 					//轉換成指定日期格式
+//                                 					let schDate = new Date(arg.event._instance.range.start);
+//                                 					const options = {
+//                                     					year: 'numeric',    // 年: 使用4位數
+//                                     					month: '2-digit',   // 月: 使用2數位
+//                                    					day: '2-digit',     // 日: 使用2數位
+//                                 						};
+//                                					let dateStr = schDate.toLocaleDateString('zh-tw', options).replaceAll('/', '-');
+
+//                              					//傳遞資料
+//                              						fetch(deleteUrl, {
+//                                  					method: 'POST',
+//                                  					headers: {
+//                                 						'Content-Type': 'application/json'
+//                              					},
+//                               						body: JSON.stringify({
+//                                   					chefid: "302",
+//                                  					schDate: dateStr
+//                                 					})
+//                             						})
+//                             						arg.event.remove()
+//                            						}
+//                         							},
+                     								editable: false,
+                    								dayMaxEvents: true,
+                     								events: jsons,
+													dayCellContent: function (arg) {
+                        							return arg.date.getDate();
+                        							},
+                   								 });
+                  								  calendar.render();
+              								  });
+            								console.log(calendar.event)
+      									  });
+
+										</script>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
 			</div>
 
 		</div>
@@ -234,22 +516,21 @@
 	<%@ include file="tools/footer.jsp"%>
 	<!-- End Footer -->
 	<!-- jQuery -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/popper.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/modernizr.min.js"></script>
-	<script src="assets/js/waves.js"></script>
-	<script src="assets/js/jquery.nicescroll.js"></script>
-	<script src="assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-	<script
-		src="assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-	<script src="assets/plugins/skycons/skycons.min.js"></script>
-	<script src="assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
-	<script src="assets/plugins/tiny-editable/numeric-input-example.js"></script>
-	<script src="assets/plugins/fullcalendar/vanillaCalendar.js"></script>
-	<script src="assets/plugins/raphael/raphael-min.js"></script>
-	<script src="assets/plugins/morris/morris.min.js"></script>
-	<script src="assets/js/app.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/jquery.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/popper.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/modernizr.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/waves.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/jquery.nicescroll.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/skycons/skycons.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/tiny-editable/numeric-input-example.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/fullcalendar/vanillaCalendar.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/raphael/raphael-min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/morris/morris.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/app.js"></script>
 
 
 </body>

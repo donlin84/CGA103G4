@@ -2,7 +2,8 @@
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
 
-            let MyPoint = "/back-end/chefSchedule/chefsch.do?action=getAllById";
+			let chefid = xxx;
+            let MyPoint = "/back-end/chefSchedule/chefsch.do?action=getAllById&chefid="+chefid;
             let host = window.location.host;
             let path = window.location.pathname;
             let webCtx = path.substring(0, path.indexOf('/', 1));
@@ -31,7 +32,7 @@
                                     end: arg.end,
                                     allDay: arg.allDay
                                 })
-                                connect('302', arg.startStr, 1);
+                                connect(chefid, arg.startStr, 1);
                             } else if (title === '晚餐') {
                                 calendar.addEvent({
                                     title: title,
@@ -39,7 +40,7 @@
                                     end: arg.end,
                                     allDay: arg.allDay
                                 })
-                                connect('302', arg.startStr, 2);
+                                connect(chefid, arg.startStr, 2);
                             } else {
                                 alert("無新增資料")
                             }
@@ -79,7 +80,7 @@
                                         'Content-Type': 'application/json'
                                     },
                                     body: JSON.stringify({
-                                        chefid: "302",
+                                        chefid: chefid,
                                         schDate: dateStr
                                     })
                                 })

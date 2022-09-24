@@ -23,24 +23,21 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 <meta content="Admin Dashboard" name="description" />
 <meta content="Mannatthemes" name="author" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<link rel="shortcut icon" href="../assets/images/favicon.ico">
-<link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css"
-	rel="stylesheet">
-<link href="../assets/plugins/fullcalendar/vanillaCalendar.css"
-	rel="stylesheet" type="text/css" />
-<link href="../assets/plugins/morris/morris.css" rel="stylesheet">
-<link href="../assets/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css">
-<link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
-<link href="../assets/css/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/back-end/assets/images/favicon.ico">
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/fullcalendar/vanillaCalendar.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath()%>/back-end/assets/plugins/morris/morris.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/icons.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/back-end/assets/css/style.css" rel="stylesheet" type="text/css">
 
 <style>
 #img0 {
-	min-width: 100px;
+	min-width: 140px;
 	border: 1px solid lightgray;
 	display: inline-block;
-	min-height: 80px;
-	max-width: 150px;
+	min-height: 100px;
+	max-width: 200px;
 	position: relative;
 	z-index: 1;
 }
@@ -57,6 +54,17 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 	top: 50%;
 	transform: translate(-50%, -50%);
 	color: lightgray;
+}
+.mybtn {
+	border-radius: 5px;
+	background-color: #242c6d;
+	border: 1px solid #242c6d;
+	color: #fff;
+	border-radius: 3px;
+	font-size: 14px;
+	cursor: pointer;
+	vertical-align: middle;
+	padding: 5px 12px;
 }
 </style>
 
@@ -92,7 +100,8 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 			</div>
 			<!-- end page title end breadcrumb -->
 			<div class="row">
-				<div class="col-12">
+				<div class="col-2"></div>
+				<div class="col-8">
 					<div class="card">
 						<div class="card-body">
 							<h4 class="mt-0 header-title">優惠券修改</h4>
@@ -114,31 +123,31 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 									</tr>
 									<tr>
 										<td>優惠券名稱:</td>
-										<td><input type="TEXT" name="cpName" size="45"
+										<td><input type="TEXT" name="cpName" size="45" style="width: 200px;"
 											value="<%=(couponTypeVO == null) ? "" : couponTypeVO.getCpName()%>" placeholder="請輸入優惠券名稱" /></td>
 									</tr>
 									<tr>
 										<td>優惠券折扣價格:</td>
-										<td><input type="TEXT" name="cpDiscount"
+										<td><input type="TEXT" name="cpDiscount" style="width: 200px;"
 											value="<%=(couponTypeVO == null) ? "" : couponTypeVO.getCpDiscount()%>" placeholder="請輸入折扣金額"/></td>
 									</tr>
 									<tr>
-										<td>起始時間:</td>
-										<td><input name="cpStart" id="f_date1" type="text"
+										<td>上次修改時間:</td>
+										<td><input name="cpStart" id="f_date1" type="text" style="width: 200px;"
 											value="<%=(couponTypeVO == null) ? "1970-01-01" : couponTypeVO.getCpStart()%>"
 											autocomplete="off"></td>
 									</tr>
 									<tr>
-										<td>截止時間:</td>
-										<td><input name="cpEnd" id="f_date2" type="text"
+										<td>發布時間:</td>
+										<td><input name="cpEnd" id="f_date2" type="text" style="width: 200px;"
 											value="<%=(couponTypeVO == null) ? "2038-12-30" : couponTypeVO.getCpEnd()%>"
 											autocomplete="off"></td>
 									</tr>
 									<tr>
 										<td>活動狀態:</td>
-										<td><select name="cpStatus">
-												<option value="1">上架</option>
-												<option value="0">下架</option>
+										<td><select name="cpStatus" style="width: 200px;">
+												<option value="1" style="width: 200px;">上架</option>
+												<option value="0" style="width: 200px;">下架</option>
 										</select></td>
 									</tr>
 									<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -153,17 +162,20 @@ CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
 											<div id="preview">
 												<img
 													src="<%=request.getContextPath()%>/CouponTypePic?cpTpid=${couponTypeVO.cpTpid}"
-													class="img" id="img0" width="150px;"> <span
-													class="text">預覽圖</span>
+													class="img" id="img0" >
+													<span class="text">預覽圖</span>
 											</div>
 										</td>
 									</tr>
 
 								</table>
-								<br> <input type="hidden" name="action" value="update">
+								<br>
+								<div style="text-align:center;">
+								<input type="hidden" name="action" value="update">
 								<input type="hidden" name="cpTpid"
 									value="<%=couponTypeVO.getCpTpid()%>"> <input
-									type="submit" value="送出修改">
+									type="submit" class="mybtn" value="送出修改">
+									</div>
 							</FORM>
 						</div>
 					</div>
@@ -246,76 +258,22 @@ $('#f_date2').datetimepicker({
  },
  timepicker:false
 });
-
-// ----------------------------------------------------------以下用來排定無法選擇的日期-----------------------------------------------------------
-// 	     1.以下為某一天之前的日期無法選擇
-<%-- 	     var somedate1 = new Date('<%=pmStart%>'); --%>
-// 	     $('#f_date1').datetimepicker({
-// 	         beforeShowDay: function(date) {
-// 	       	  if (  date.getYear() <  somedate1.getYear() || 
-// 			           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-// 			           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-// 	             ) {
-// 	                  return [false, ""]
-// 	             }
-// 	             return [true, ""];
-// 	     }});
-	     
-// 	     $.datetimepicker.setLocale('zh');
-// 	     $('#f_date1').datetimepicker({
-// 	    	timepicker:false,
-// 	        format:'Y-m-d',
-<%-- 	        value: '<%=pmStart%>', --%>
-// 	     });
-
-	//      2.以下為某一天之後的日期無法選擇
-	//      var somedate2 = new Date('2017-06-15');
-	//      $('#f_date1').datetimepicker({
-	//          beforeShowDay: function(date) {
-	//        	  if (  date.getYear() >  somedate2.getYear() || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-	//              ) {
-	//                   return [false, ""]
-	//              }
-	//              return [true, ""];
-	//      }});
-
-	//      3.以下為兩個日期之外的日期無法選擇 (也可按需要換成其他日期)
-	//      var somedate1 = new Date('2017-06-15');
-	//      var somedate2 = new Date('2017-06-25');
-	//      $('#f_date1').datetimepicker({
-	//          beforeShowDay: function(date) {
-	//        	  if (  date.getYear() <  somedate1.getYear() || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() <  somedate1.getMonth()) || 
-	//		           (date.getYear() == somedate1.getYear() && date.getMonth() == somedate1.getMonth() && date.getDate() < somedate1.getDate())
-	//		             ||
-	//		            date.getYear() >  somedate2.getYear() || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() >  somedate2.getMonth()) || 
-	//		           (date.getYear() == somedate2.getYear() && date.getMonth() == somedate2.getMonth() && date.getDate() > somedate2.getDate())
-	//              ) {
-	//                   return [false, ""]
-	//              }
-	//              return [true, ""];
-	//      }});
 </script>
-<!-- jQuery -->
-<script src="../assets/js/jquery.min.js"></script>
-<script src="../assets/js/popper.min.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
-<script src="../assets/js/modernizr.min.js"></script>
-<script src="../assets/js/waves.js"></script>
-<script src="../assets/js/jquery.nicescroll.js"></script>
-<script
-	src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-<script
-	src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<script src="../assets/plugins/skycons/skycons.min.js"></script>
-<script src="../assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
-<script src="../assets/plugins/tiny-editable/numeric-input-example.js"></script>
-<script src="../assets/plugins/fullcalendar/vanillaCalendar.js"></script>
-<script src="../assets/plugins/raphael/raphael-min.js"></script>
-<script src="../assets/plugins/morris/morris.min.js"></script>
-<script src="../assets/js/app.js"></script>
+	<!-- jQuery -->
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/jquery.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/popper.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/modernizr.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/waves.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/jquery.nicescroll.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/skycons/skycons.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/tiny-editable/numeric-input-example.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/fullcalendar/vanillaCalendar.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/raphael/raphael-min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/morris/morris.min.js"></script>
+	<script src="<%=request.getContextPath()%>/back-end/assets/js/app.js"></script>
 
 </html>

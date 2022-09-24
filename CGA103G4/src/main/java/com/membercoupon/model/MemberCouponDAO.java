@@ -13,6 +13,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.member.model.MemberVO;
+
 import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_MemberCoupon;
 
 public class MemberCouponDAO implements MemberCouponDAO_interface {

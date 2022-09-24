@@ -24,6 +24,10 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 			+ "memPassword, memGender, memPhone, memEmail, memAddres, memBirthday, "
 			+ "memStatus, memNation " 
 			+ "FROM Member where memid = ?";
+	private static final String GET_ONE_ACC = "SELECT memid, memName, memAccount, "
+			+ "memPassword, memGender, memPhone, memEmail, memAddres, memBirthday, "
+			+ "memStatus, memNation " 
+			+ "FROM Member where memAccount = ?";
 	private static final String UPDATE = "UPDATE Member set memName=?, memAccount=?,  "
 			+ "memPassword=?, memGender=?, memPhone=?, memEmail=?, memAddres=?, "
 			+ "memBirthday=?, memStatus=?, memNation=? " 
@@ -147,6 +151,65 @@ public class MemberJDBCDAO implements MemberDAO_interface{
 				memberVO.setMemNation(rs.getString("memNation"));
 			}
 
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memberVO;
+	}
+	@Override
+	public MemberVO findByAccount(String memAccount) {
+		MemberVO memberVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = conn.prepareStatement(GET_ONE_ACC);
+			pstmt.setString(1, memAccount);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				memberVO = new MemberVO();
+				memberVO.setMemid(rs.getInt("memid"));
+				memberVO.setMemName(rs.getString("memName"));
+				memberVO.setMemAccount(rs.getString("memAccount"));
+				memberVO.setMemPassword(rs.getString("memPassword"));
+				memberVO.setMemGender(rs.getString("memGender"));
+				memberVO.setMemPhone(rs.getString("memPhone"));
+				memberVO.setMemEmail(rs.getString("memEmail"));
+				memberVO.setMemAddres(rs.getString("memAddres"));
+				memberVO.setMemBirthday(rs.getDate("memBirthday"));
+				memberVO.setMemStatus(rs.getInt("memStatus"));
+				memberVO.setMemNation(rs.getString("memNation"));
+			}
+			
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());

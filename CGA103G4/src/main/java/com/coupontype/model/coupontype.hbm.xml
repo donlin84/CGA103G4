@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.coupontype.model.CouponTypeVO" table="coupontype">
+
+		<id name="cpTpid" column="cpTpid">
+			<generator class="identity" />
+		</id>
+		
+		<property name="cpName" column="cpName" />
+		<property name="cpDiscount" column="cpDiscount" />
+		<property name="cpStart" column="cpStart" />
+		<property name="cpEnd" column="cpEnd" />
+		<property name="cpStatus" column="cpStatus" />
+		<property name="cpPic" column="cpPic" />
+
+	</class>
+</hibernate-mapping>
+

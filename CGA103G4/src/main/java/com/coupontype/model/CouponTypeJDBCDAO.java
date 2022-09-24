@@ -2,6 +2,8 @@ package com.coupontype.model;
 
 import java.util.*;
 
+import com.membercoupon.model.MemberCouponVO;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -11,7 +13,7 @@ public class CouponTypeJDBCDAO implements CouponTypeDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei";
 	String userid = "root";
-	String passwd = "sa4850869";
+	String passwd = "cga103g4";
 
 	private static final String INSERT_STMT = "insert into cga103g4.CouponType(cpname,cpdiscount,cpstart,cpend,cpstatus,cppic)"
 			+ " VALUES (?, ?, ?, ?, ?, ?)";
@@ -306,6 +308,11 @@ public class CouponTypeJDBCDAO implements CouponTypeDAO_interface {
 		}
 		return couponTypeVO;
 	}
+	@Override
+	public Set<MemberCouponVO> getMemberCouponByCpTpid(Integer memCpid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	public static byte[] getPictureByteArray(String path) throws IOException {
@@ -399,5 +406,7 @@ public class CouponTypeJDBCDAO implements CouponTypeDAO_interface {
 		}
 		
 	}
+
+
 
 }

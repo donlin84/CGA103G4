@@ -1,3 +1,4 @@
+<%@page import="com.chef.model.ChefService"%>
 <%@page import="com.chef.model.ChefVO"%>
 <%@page import="com.member.model.MemberVO"%>
 <%@page import="javassist.compiler.ast.Member"%>
@@ -6,12 +7,14 @@
 
 
 <%
-MemberVO memVO = (MemberVO) request.getAttribute("memVO");
+MemberVO memVO =(MemberVO) session.getAttribute("memVO");
+Integer memid = memVO.getMemid();
+Integer chefid = (Integer) session.getAttribute("chefid");
+System.out.print(chefid);
 %>
 <%
-ChefVO chefVO = (ChefVO) request.getAttribute("chefVO");
+ChefService chefsvc = new ChefService();
 %>
-
 
 <html>
 <head>
@@ -40,7 +43,6 @@ h4 {
 }
 
 .readonly {
-	background-color: rgb(197, 195, 195);
 	cursor: not-allowed;
 }
 
@@ -107,12 +109,12 @@ img {
 				<tr>
 					<td>私廚:</td>
 					<td><input type="TEXT" name="chefName" class="readonly"
-						readonly value="小當家" /></td>
+						readonly id="cName"/></td>
 				</tr>
 				<tr>
 					<td>會員姓名:</td>
 					<td><input type="TEXT" name="memName" size="45"
-						class="readonly" readonly value="林俊宏" /></td>
+						class="readonly" readonly value="${memVO.memName}" /></td>
 				</tr>
 				<tr>
 					<td>連絡電話:</td>
@@ -130,24 +132,28 @@ img {
 
 			</table>
 			<br> <input type="hidden" name="action" value="insert">
-				 <input type="hidden" name="chefid" value="302">
+				 <input type="hidden" id="chef" name="chefid" value="<%=chefid %>">
 				 <input type="hidden" name="apmTime" id="Time">				 
-				 <input type="hidden" name="memid" value="201">
+				 <input type="hidden" name="memid" value="<%=memid %>">
 				 
-			<input type="submit" value="確定">
+			<input type="submit" value="確定"> 
 		</FORM>
 	</div>
 </body>
 
 <script>
+
 		//監聽會員所選日期、時段
 		window.addEventListener('storage',(e)=>{
 				let date = localStorage.getItem('date');
-				let time = localStorage.getItem('time');				
+				let time = localStorage.getItem('time');	
+			
 			$("#Date").attr("value",date);
 			$("#Time").attr("value",time);
+			let name = localStorage.getItem('chefName');
+			$("#cName").attr("value",name);
 		})
-		
+
 
 </script>
 

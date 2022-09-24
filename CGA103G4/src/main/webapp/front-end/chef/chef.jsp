@@ -779,7 +779,11 @@ session.setAttribute("sstion", 0);
 <!-- =============================================================================================	 -->		
 
        	</main>
-
+<script>
+	window.onload=function(){
+localStorage.setItem('chefName',"123");
+}
+<!-- </script> -->
   
 <%@ include file="../tools/footer.jsp"%>
 	<script src="../assets/js/jquery.min.js"></script>

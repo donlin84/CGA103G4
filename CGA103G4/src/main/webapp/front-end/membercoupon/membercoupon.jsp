@@ -26,12 +26,18 @@ pageContext.setAttribute("list", list);
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>《See Food》官方網站</title>
-<link rel="stylesheet" href="../css/common/all.css">
-<link rel="stylesheet" href="../css/common/header.css">
-<link rel="stylesheet" href="../css/common/footer.css">
-<link rel="stylesheet" href="../css/common/main.css">
-<link rel="stylesheet" href="../css/membercoupon.css">
-<script src="../js/nav.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/common/all.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/common/header.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/common/footer.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/common/main.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/membercoupon.css">
+<link href="<%=request.getContextPath()%>/front-end/member/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/front-end/member/assets/css/icons.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/front-end/member/assets/css/style.css" rel="stylesheet" type="text/css">
+<script src="<%=request.getContextPath()%>/front-end/assets/js/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/assets/js/popper.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/assets/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/js/nav.js"></script>
 </head>
 
 <body>
@@ -54,7 +60,7 @@ pageContext.setAttribute("list", list);
 						<%-- 							${memberVO.memAccount} --%>
 					</c:if>
 				</c:forEach>
-				<!-- ==================================== 以帳戶找出能使用的優惠券 ==================================== -->
+
 				<c:choose>
 					<c:when test="${empty account}">
 						<div class="gotologinbox">
@@ -62,7 +68,6 @@ pageContext.setAttribute("list", list);
 								無法顯示擁有的優惠券喔!</a>
 						</div>
 					</c:when>
-
 					<c:otherwise>
 						<div class="gotologinbox">
 							<a href="#" class="gotologin">以下為您擁有的優惠券</a>
@@ -87,8 +92,8 @@ pageContext.setAttribute("list", list);
 							</c:forEach>
 						</ul>
 					</c:otherwise>
-				</c:choose>
 
+				</c:choose>
 			</main>
 
 		</div>

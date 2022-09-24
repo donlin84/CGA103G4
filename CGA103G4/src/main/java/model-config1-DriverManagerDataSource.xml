@@ -15,7 +15,7 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/> 
         <property name="url" value="jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei"/> 
         <property name="username" value="root"/> 
-        <property name="password" value="sa4850869"/> 
+        <property name="password" value="cga103g4"/> 
     </bean> 
     
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" destroy-method="destroy"> 
@@ -26,6 +26,15 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
                 <value>com/emp/model/emp.hbm.xml</value> 
             </list> 
         </property> 
+        
+        <property name="mappingResources">
+          <list> 
+                <value>com/membercoupon/model/membercoupon.hbm.xml</value> 
+                <value>com/member/model/member.hbm.xml</value>
+                <value>com/coupontype/model/coupontype.hbm.xml</value>
+            </list>
+        </property> 
+        
         <property name="hibernateProperties"> 
             <props> 
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop> 
@@ -40,12 +49,24 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
     <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
         <property name="sessionFactory" ref="sessionFactory"/> 
     </bean>    
-         
+<!-- =================================================================================================================== -->     
     <bean id="announcementDAO" class="com.announcement.model.AnnouncementDAO">
         <property name="hibernateTemplate" ref="hibernateTemplate"/> 
     </bean>
 
     <bean id="empHibernateDAO" class="com.emp.model.EmpHibernateDAO">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/> 
+    </bean>
+<!-- =================================================================================================================== -->
+    <bean id="MemberCouponHibernateDAO" class="com.membercoupon.model.MemberCouponHibernateDAO">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>
+    
+    <bean id="coupontypeHibernateDAO" class="com.coupontype.model.coupontypeHibernateDAO">
+        <property name="hibernateTemplate" ref="hibernateTemplate"/> 
+    </bean>
+    
+    <bean id="memberHibernateDAO" class="com.member.model.MemberHibernateDAO">
         <property name="hibernateTemplate" ref="hibernateTemplate"/> 
     </bean>
 <!-- =================================================================================================================== -->

@@ -22,6 +22,12 @@
  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/front-end/member/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/front-end/member/assets/css/icons.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/front-end/member/assets/css/style.css" rel="stylesheet" type="text/css">
+<script src="<%=request.getContextPath()%>/front-end/assets/js/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/assets/js/popper.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/assets/js/bootstrap.min.js"></script>
 <style>
   h4 {
     color: blue;

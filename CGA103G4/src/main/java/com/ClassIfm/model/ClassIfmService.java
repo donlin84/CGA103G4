@@ -68,10 +68,40 @@ public ClassIfmVO updateClassIfm(Integer claid,Integer thrid,Integer claTagid,St
 	public List<ClassIfmVO> getAll(){
 		return dao.getAll();
 	}
+	//單一更新報名人數
+	public ClassIfmVO update_clapeople(Integer claPeople,Integer claid) {
+		
+		ClassIfmVO classIfmVO = new ClassIfmVO();
+		classIfmVO.setClaPeople(claPeople);
+		classIfmVO.setClaid(claid);
+		dao.update_clapeople(classIfmVO);
+		return classIfmVO;
+	}
+	//萬用查詢
+	public List<ClassIfmVO> cangetall(String xxx){
+		return dao.cangetall(xxx);
+	}
+	//給前台getall上架客程
+	public List<ClassIfmVO> front_getall(){
+		return dao.front_getall();
+	}
+	//給TIMER用的
+	public List<ClassIfmVO> timer_getcancel(){
+		return dao.timer_getcancel();
+	}
+	//單一修改課程狀態
+	public ClassIfmVO update_clastatus(Integer claid) {
 
-	
+		ClassIfmVO classIfmVO = new ClassIfmVO();
+		classIfmVO.setClaid(claid);
+		dao.update_clastatus(classIfmVO);
+		return classIfmVO;
+	}
 
-	
+	//抓出課程以完成的會員
+	public List<ClassIfmVO> cla_finish(Integer claid){
+		return dao.cla_finish(claid);
+	}
 	
 	
 	

@@ -1,6 +1,10 @@
 package com.coupontype.model;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.membercoupon.model.MemberCouponVO;
 
 public class CouponTypeVO implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
@@ -12,7 +16,7 @@ public class CouponTypeVO implements java.io.Serializable{
 	private Date cpEnd;
 	private Integer cpStatus;
 	private byte[] cpPic;
-	
+	private Set<MemberCouponVO> memberCoupons = new HashSet<MemberCouponVO>();
 	
 	public Integer getCpTpid() {
 		return cpTpid;
@@ -69,5 +73,14 @@ public class CouponTypeVO implements java.io.Serializable{
 	public void setCpPic(byte[] cpPic) {
 		this.cpPic = cpPic;
 	}
+
+	public Set<MemberCouponVO> getMemberCoupons() {
+		return memberCoupons;
+	}
+
+	public void setMemberCoupons(Set<MemberCouponVO> memberCoupons) {
+		this.memberCoupons = memberCoupons;
+	}
 	
+
 }

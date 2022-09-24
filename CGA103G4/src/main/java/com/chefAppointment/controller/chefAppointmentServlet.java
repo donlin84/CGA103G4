@@ -18,17 +18,17 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import static com.util.JSONTrans.*;
 
+import com.chef.model.ChefService;
+import com.chef.model.ChefVO;
 import com.chefappointmentform.model.ChefAppointmentFormService;
 import com.chefappointmentform.model.ChefAppointmentFormVO;
 import com.chefschedule.model.ChefScheduleService;
 import com.chefschedule.model.ChefScheduleVO;
-import com.emp.model.EmpService;
-import com.emp.model.EmpVO;
+import com.member.model.MemberService;
+import com.member.model.MemberVO;
 import com.util.MailService2;
 
-
-
-@WebServlet("/front-end/chefAppointment/chefapp.do") 
+@WebServlet("/front-end/chefAppointment/chefapp.do")
 public class chefAppointmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -62,11 +62,11 @@ public class chefAppointmentServlet extends HttpServlet {
 
 			for (ChefScheduleVO cs : list) {
 				JSONObject json = new JSONObject();
-				if(cs.getSchTime()==1) {
-					json.put("title", "午餐");				
-				}else if(cs.getSchTime()==2) {
+				if (cs.getSchTime() == 1) {
+					json.put("title", "午餐");
+				} else if (cs.getSchTime() == 2) {
 					json.put("title", "晚餐");
-				}else if(cs.getSchTime()==3){
+				} else if (cs.getSchTime() == 3) {
 					json.put("title", "預約已額滿");
 				}
 				json.put("start", cs.getSchDate());
@@ -75,8 +75,8 @@ public class chefAppointmentServlet extends HttpServlet {
 			res.getWriter().print(jsons);
 
 		}
-		
-		if("insert".equals(action)) {
+
+		if ("insert".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -114,11 +114,12 @@ public class chefAppointmentServlet extends HttpServlet {
 			chefAppointmentFormVO.setApmDate(apmDate);
 			chefAppointmentFormVO.setApmTime(apmTime);
 			chefAppointmentFormVO.setApmPrice(apmPrice);
-			
-			//Send the use back to the form, if there were errors
+
+			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("chefAppointmentFormVO", chefAppointmentFormVO); // 含有輸入格式錯誤的empVO物件,也存入req(保存輸入過的資料)
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/chefAppointment/make_appointment.jsp");
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-end/chefAppointment/make_appointment.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -126,20 +127,23 @@ public class chefAppointmentServlet extends HttpServlet {
 			/*************************** 2.開始新增資料 ***************************************/
 
 			ChefAppointmentFormService chefappSvc = new ChefAppointmentFormService();
-			chefAppointmentFormVO = chefappSvc.addAppointment(memid,chefid,apmDate,apmTime,apmPrice); // alt+/ call方法
+			chefAppointmentFormVO = chefappSvc.addAppointment(memid, chefid, apmDate, apmTime, apmPrice); // alt+/
+			MemberService memsvc = new MemberService();
+			MemberVO memVO = memsvc.getOneMember(memid);
 			
-			//寄送預約成功信件
-			String to = "ericdon57@gmail.com"; //會員信箱
+			// 寄送預約成功信件
+			String to = "ericdon57@gmail.com"; // 會員信箱
 
 			String subject = "預約成功";
 
-			String ch_name = "林俊宏";//會員名稱
+			String ch_name = memVO.getMemName();// 會員名稱
 
-			String messageText = "Hello! " + ch_name + "恭喜你預約私廚服務，日期:"+ apmDate +"成功!"+ "\n"+"請三天內轉帳訂金$1000至本司銀行，讓私廚能盡速與您聯絡!"+"\n"+"帳戶代碼:822"+"\n"+"帳號:123123213123";
+			String messageText = "Hello! " + ch_name + "恭喜你預約私廚服務，日期:" + apmDate + "成功!" + "\n"
+					+ "請三天內轉帳訂金$1000至本司銀行，讓私廚能盡速與您聯絡!" + "\n" + "帳戶代碼:822" + "\n" + "帳號:123123213123";
 
 			MailService2 mailService = new MailService2();
 			mailService.sendMail(to, subject, messageText);
-			
+
 			ChefScheduleService chefschsvc = new ChefScheduleService();
 			chefschsvc.updateChefSchedule(3, chefid, apmDate);
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
@@ -148,8 +152,8 @@ public class chefAppointmentServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交
 			successView.forward(req, res);
 		}
-		
-		//私廚查詢修改
+
+		// 私廚查詢修改
 		if ("ChefgetOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -170,8 +174,7 @@ public class chefAppointmentServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 			successView.forward(req, res);
 		}
-		
-		
+
 		/* 私廚修改 */
 		if ("updateChef".equals(action)) {
 
@@ -189,11 +192,11 @@ public class chefAppointmentServlet extends HttpServlet {
 			// 預約狀態
 			Integer apmStatus = Integer.valueOf(req.getParameter("apmStatus"));
 
-			//預約價格
+			// 預約價格
 			Integer ampPrice = Integer.valueOf(req.getParameter("ampPrice"));
-			if (ampPrice == null || ampPrice== 0) {
+			if (ampPrice == null || ampPrice == 0) {
 				errorMsgs.add("金額請勿空白或為0");
-			} else if (ampPrice <1000 ) { // 以下練習正則(規)表示式(regular-expression)
+			} else if (ampPrice < 1000) { // 以下練習正則(規)表示式(regular-expression)
 				errorMsgs.add("不能低於起始金額:1000");
 			}
 			// 驗證預約日期
@@ -204,7 +207,7 @@ public class chefAppointmentServlet extends HttpServlet {
 				apmDate = new java.sql.Date(System.currentTimeMillis());
 				errorMsgs.add("請輸入日期!");
 			}
-			
+
 			ChefAppointmentFormVO chefAppVO = new ChefAppointmentFormVO();
 			chefAppVO.setApmid(apmid);
 			chefAppVO.setApmDate(apmDate);
@@ -221,86 +224,113 @@ public class chefAppointmentServlet extends HttpServlet {
 
 			/*************************** 2.開始修改資料 *****************************************/
 			ChefAppointmentFormService chefAppsvc = new ChefAppointmentFormService();
-			chefAppVO = chefAppsvc.updteAppointmentByChef(apmid,apmDate, apmTime, ampPrice, apmStatus);
+			chefAppVO = chefAppsvc.updteAppointmentByChef(apmid, apmDate, apmTime, ampPrice, apmStatus);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("chefAppVO", chefAppVO); // 
+			req.setAttribute("chefAppVO", chefAppVO); //
 			String url = "/back-end/chefAppointment/select_page.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交
 			successView.forward(req, res);
 		}
+
+		// 會員查詢修改
+		if ("MemgetOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*************************** 1.接收請求參數 ****************************************/
+			Integer apmid = Integer.valueOf(req.getParameter("apmid"));
+
+			/*************************** 2.開始查詢資料 ****************************************/
+			ChefAppointmentFormService chefAppsvc = new ChefAppointmentFormService();
+			ChefAppointmentFormVO chefAppVO = chefAppsvc.getOneChefApp(apmid);
+
+			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+			req.setAttribute("chefAppVO", chefAppVO); // 資料庫取出的empVO物件,存入req
+			String url = "/front-end/chefAppointment/memberUpdate.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+			successView.forward(req, res);
+		}
+
+		/* 會員修改 */
+		if ("updateMem".equals(action)) {
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+			Integer apmid = Integer.valueOf(req.getParameter("apmid"));
+			Integer star = Integer.valueOf(req.getParameter("star"));
+			String comments = req.getParameter("comments");
+
+			ChefAppointmentFormVO chefAppVO = new ChefAppointmentFormVO();
+			chefAppVO.setApmid(apmid);
+			chefAppVO.setStar(star);
+			chefAppVO.setComments(comments);
+
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				req.setAttribute("chefAppVO", chefAppVO); // 含有輸入格式錯誤的empVO物件,也存入req
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/emp/update_emp_input.jsp");
+				failureView.forward(req, res);
+				return; // 程式中斷
+			}
+
+			/*************************** 2.開始修改資料 *****************************************/
+			ChefAppointmentFormService chefAppsvc = new ChefAppointmentFormService();
+			chefAppVO = chefAppsvc.updteAppointmentByMem(apmid, star, comments);
+
+			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+			req.setAttribute("chefAppVO", chefAppVO); // 資料庫update成功後,正確的的empVO物件,存入req
+			String url = "/front-end/chefAppointment/memberListAll.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+			successView.forward(req, res);
+		}
+
+		/* 接收chefid */
+		if ("getchefid".equals(action)) {
+
+			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+			Integer chefid = Integer.valueOf(req.getParameter("chefid"));
+			String chefName = req.getParameter("chefName");
 		
-		        //會員查詢修改
-				if ("MemgetOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
+			HttpSession session = req.getSession();
+			session.setAttribute("chefName", chefName);
+			session.setAttribute("chefid", chefid);
+			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+//			req.setAttribute("chefid", chefid); 
+			String url = "../chefAppointment/Appointment.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+			successView.forward(req, res);
+		}
 
-					List<String> errorMsgs = new LinkedList<String>();
-					// Store this set in the request scope, in case we need to
-					// send the ErrorPage view.
-					req.setAttribute("errorMsgs", errorMsgs);
+		// Fetch 取得私廚名字
+		if ("getNameByChefId".equals(action)) {
+			Integer chefid = Integer.valueOf(req.getParameter("chefid"));
+			System.out.println("接收資料");
+			System.out.println(chefid);
+//					Integer chef = null;
+//					HttpSession session = req.getSession();
+//					session.setAttribute("chefid", "302");
+//					try {
+//						chef = Integer.valueOf((String) session.getAttribute("chefid"));
+//					} catch (Exception e) {
+//						res.getWriter().print("noInfo");
+//						return;
+//					}
+			JSONObject json = new JSONObject();
 
-					/*************************** 1.接收請求參數 ****************************************/
-					Integer apmid = Integer.valueOf(req.getParameter("apmid"));
+			ChefService chefsvc = new ChefService();
+			ChefVO chefVO = chefsvc.getOneChef(chefid);
+			json.put("chefName", chefVO.getChefName());
+			res.getWriter().print(json);
 
-					/*************************** 2.開始查詢資料 ****************************************/
-					ChefAppointmentFormService chefAppsvc = new ChefAppointmentFormService();
-					ChefAppointmentFormVO chefAppVO = chefAppsvc.getOneChefApp(apmid);
-
-					/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-					req.setAttribute("chefAppVO", chefAppVO); // 資料庫取出的empVO物件,存入req
-					String url = "/front-end/chefAppointment/memberUpdate.jsp";
-					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
-					successView.forward(req, res);
-				}
-				
-				/*會員修改 */
-				if ("updateMem".equals(action)) {
-
-					List<String> errorMsgs = new LinkedList<String>();
-					// Store this set in the request scope, in case we need to
-					// send the ErrorPage view.
-					req.setAttribute("errorMsgs", errorMsgs);
-
-					/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-					Integer apmid = Integer.valueOf(req.getParameter("apmid"));
-					Integer star = Integer.valueOf(req.getParameter("star"));			
-                    String comments = req.getParameter("comments");
-                    
-					ChefAppointmentFormVO chefAppVO = new ChefAppointmentFormVO();
-					chefAppVO.setApmid(apmid);
-					chefAppVO.setStar(star);
-					chefAppVO.setComments(comments);
-					
-					// Send the use back to the form, if there were errors
-					if (!errorMsgs.isEmpty()) {
-						req.setAttribute("chefAppVO", chefAppVO); // 含有輸入格式錯誤的empVO物件,也存入req
-						RequestDispatcher failureView = req.getRequestDispatcher("/back-end/emp/update_emp_input.jsp");
-						failureView.forward(req, res);
-						return; // 程式中斷
-					}
-
-					/*************************** 2.開始修改資料 *****************************************/
-					ChefAppointmentFormService chefAppsvc = new ChefAppointmentFormService();
-					chefAppVO = chefAppsvc.updteAppointmentByMem(apmid, star, comments);
-
-					/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-					req.setAttribute("chefAppVO", chefAppVO); // 資料庫update成功後,正確的的empVO物件,存入req
-					String url = "/front-end/chefAppointment/memberListAll.jsp";
-					RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
-					successView.forward(req, res);
-				}
-				
-				/*接收chefid */
-				if ("getchefid".equals(action)) {
-
-					/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-					Integer chefid = Integer.valueOf(req.getParameter("chefid"));
-					/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-					req.setAttribute("chefid", chefid); // 資料庫update成功後,正確的的empVO物件,存入req
-					String url = "../chefAppointment/Appointment.jsp";
-					RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
-					successView.forward(req, res);
-				}
-				
+		}
 	}
-	
+
 }
