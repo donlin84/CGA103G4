@@ -92,6 +92,7 @@ header.header div.block nav.nav ul.nav_list>li>a {
   <link rel="stylesheet" href="css/common/footer.css">
   <link rel="stylesheet" href="css/common/main.css">
   <link rel="stylesheet" href="css/shop.css">
+  
 <!--   <link rel="shortcut icon" href="assets/images/favicon.ico"> -->
 
 </head>
