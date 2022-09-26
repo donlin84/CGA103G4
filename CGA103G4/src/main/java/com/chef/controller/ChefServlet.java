@@ -362,50 +362,85 @@ public class ChefServlet extends HttpServlet {
 
 			Collection<Part> parts = req.getParts(); // Servlet3.0新增了Part介面，讓我們方便的進行檔案上傳處理 //上傳三要素之三
 
+			int i =1;
+			String s1 ="";
+			String s2 ="";
+			String s3 ="";
+			String s4 ="";
 			for (Part part : parts) {
 				String filename = part.getSubmittedFileName();
 //				System.out.println("filename="+filename);
 				if (filename != null && filename.length() != 0 && part.getContentType() != null) {
 					File f = new File(fsaveDirectory, filename);
+					String s = f.getAbsolutePath();
+					
+//					System.out.println(f.getAbsolutePath());
+					if(i == 1) {
+						s1 = s;
+//						System.out.println("s1 = "+s1);
+					}
+					if(i == 2) {
+						s2 = s;
+//						System.out.println("s2 = "+s2);
+					}
+					if(i == 3) {
+						s3 = s;
+//						System.out.println("s3 = "+s3);
+					}
+					if(i == 4) {
+						s4 = s;
+//						System.out.println("s4 = "+s4);
+					}
+					i++;
+
 					// 利用File物件,寫入目地目錄,上傳成功
 					part.write(f.toString());
 				}
 			}
 
+//			System.out.println("s1 = "+s1);
+//			System.out.println("s2 = "+s2);
+//			System.out.println("s3 = "+s3);
+//			System.out.println("s4 = "+s4);
+
 			byte[] license = null;
 			if (req.getPart("license").getSubmittedFileName().isEmpty()) {
 				errorMsgs.add("請上傳廚師執照");
 			} else {
-				license = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
-						+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
-						+ req.getPart("license").getSubmittedFileName());
+				license = getPictureByteArray(s1);
+//				license = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace11\\.metadata\\."
+//						+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
+//						+ req.getPart("license").getSubmittedFileName());
 			}
 
 			byte[] idCard = null;
 			if (req.getPart("idCard").getSubmittedFileName().isEmpty()) {
 				errorMsgs.add("請上傳身分證(正)");
 			} else {
-				idCard = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
-						+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
-						+ req.getPart("idCard").getSubmittedFileName());
+				idCard = getPictureByteArray(s2);
+//				idCard = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace11\\.metadata\\."
+//						+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
+//						+ req.getPart("idCard").getSubmittedFileName());
 			}
 
 			byte[] idCardBack = null;
 			if (req.getPart("idCardBack").getSubmittedFileName().isEmpty()) {
 				errorMsgs.add("請上傳身分證(反)");
 			} else {
-				idCardBack = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
-						+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
-						+ req.getPart("idCardBack").getSubmittedFileName());
+				idCardBack = getPictureByteArray(s3);
+//				idCardBack = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace11\\.metadata\\."
+//						+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
+//						+ req.getPart("idCardBack").getSubmittedFileName());
 			}
 
 			byte[] chefPhoto = null;
 			if (req.getPart("chefPhoto").getSubmittedFileName().isEmpty()) {
 				errorMsgs.add("請上傳個人照");
 			} else {
-				chefPhoto = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace1\\.metadata\\."
-						+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
-						+ req.getPart("chefPhoto").getSubmittedFileName());
+				chefPhoto = getPictureByteArray(s4);
+//				chefPhoto = getPictureByteArray("C:\\CGA103_WebApp\\eclipse_WTP_workspace11\\.metadata\\."
+//						+ "plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\CGA103G4\\images_uploaded\\"
+//						+ req.getPart("chefPhoto").getSubmittedFileName());
 			}
 
 			ChefVO chefVO = new ChefVO();
