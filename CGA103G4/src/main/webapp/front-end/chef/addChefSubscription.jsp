@@ -137,7 +137,7 @@ background: linear-gradient(to bottom, #faf1e3, #f0e3cc 7%);
 				<li>
 				<a href="#">
             <div class="img_block">
-              <img src="<%=request.getContextPath()%>/showLicensePicture?chefid=${chefVO.chefid}" 
+              <img src="<%=request.getContextPath()%>/showChefPhotoPicture?chefid=${chefVO.chefid}" 
               width="200px" height="200px">
            	   <span class="item_text">${chefVO.chefName} ${chefVO.chefNickname}</span>
                <span class="item_text">價格 :  ${chefVO.chefPrice}</span>
