@@ -2,6 +2,7 @@ package com.coupontype.model;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -63,6 +64,11 @@ public class CouponTypeHibernateService {
 	public List<CouponTypeVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public List<CouponTypeVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
+	}
+	
 	
 }
 

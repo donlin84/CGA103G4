@@ -47,18 +47,17 @@ public class jdbcUtil_CompositeQuery_MemberCoupon {
 
 		// 配合 req.getParameterMap()方法 回傳 java.util.Map<java.lang.String,java.lang.String[]> 之測試
 		Map<String, String[]> map = new TreeMap<String, String[]>();
-		map.put("empno", new String[] { "7001" });
-		map.put("ename", new String[] { "KING" });
-		map.put("job", new String[] { "PRESIDENT" });
-		map.put("hiredate", new String[] { "1981-11-17" });
-		map.put("sal", new String[] { "5000.5" });
-		map.put("comm", new String[] { "0.0" });
-		map.put("deptno", new String[] { "10" });
-		map.put("action", new String[] { "getXXX" }); // 注意Map裡面會含有action的key
+		map.put("memCpid", new String[] { "4" });
+		map.put("memid", new String[] { "202" });
+		map.put("cpTpid", new String[] { "2" });
+		map.put("memCpDate", new String[] { "2022-11-30" });
+		map.put("memCpStatus", new String[] { "1" });
+		map.put("memCpRecord", new String[] { "null" });
+		// 注意Map裡面會含有action的key
 
-		String finalSQL = "select * from promotionsdetail "
+		String finalSQL = "select * from membercoupon "
 				          + jdbcUtil_CompositeQuery_MemberCoupon.get_WhereCondition(map)
-				          + "order by pmid and pdid";
+				          + "order by memCpid";
 		System.out.println("●●finalSQL = " + finalSQL);
 
 	}

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.coupontype.model.CouponTypeService;
+import com.coupontype.model.CouponTypeVO;
 import com.membercoupon.model.MemberCouponService;
 import com.membercoupon.model.MemberCouponVO;
 import com.promotionsdetail.model.PromotionsDetailService;
@@ -272,8 +274,8 @@ public class MemberCouponServlet extends HttpServlet {
 				/***************************2.開始複合查詢***************************************/
 //				PromotionsDetailService pmtDetailSvc = new PromotionsDetailService();
 //				List<PromotionsDetailVO> list  = pmtDetailSvc.getAll(map);	
-				MemberCouponService memCpSvc = new MemberCouponService();
-				List<MemberCouponVO> list  = memCpSvc.getAll(map);
+				CouponTypeService cpTpSvc = new CouponTypeService();
+				List<CouponTypeVO> list  = cpTpSvc.getAll(map);
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("batchAddMemberCoupon", list); // 資料庫取出的list物件,存入request
 				RequestDispatcher successView = req.getRequestDispatcher("batchAddMemberCoupon.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp

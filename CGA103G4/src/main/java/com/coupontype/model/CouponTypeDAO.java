@@ -11,6 +11,11 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.membercoupon.model.MemberCouponVO;
+import com.promotions.model.PromotionsVO;
+import com.promotionsdetail.model.PromotionsDetailVO;
+
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_MemberCoupon;
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_PromotionsDetail;
 
 public class CouponTypeDAO implements CouponTypeDAO_interface {
 
@@ -18,7 +23,7 @@ public class CouponTypeDAO implements CouponTypeDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Cga103G4");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/cga103g4");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -293,4 +298,70 @@ public class CouponTypeDAO implements CouponTypeDAO_interface {
 		return null;
 	}
 
-}
+	@Override
+	public List<CouponTypeVO> getAll(Map<String, String[]> map) {
+			List<CouponTypeVO> list = new ArrayList<CouponTypeVO>();
+			CouponTypeVO couponTypeVO = null;
+		
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+		
+			try {
+				
+				con = ds.getConnection();
+				String finalSQL = "select * from coupontype "
+			          + jdbcUtil_CompositeQuery_MemberCoupon.get_WhereCondition(map)
+			          + "order by cpTpid";
+				pstmt = con.prepareStatement(finalSQL);
+				System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+				rs = pstmt.executeQuery();
+		
+				while (rs.next()) {				
+					
+					couponTypeVO = new CouponTypeVO();
+					couponTypeVO.setCpTpid(rs.getInt("cpTpid"));
+					couponTypeVO.setCpName(rs.getString("cpName"));
+					couponTypeVO.setCpDiscount(rs.getInt("cpDiscount"));
+					couponTypeVO.setCpStart(rs.getDate("cpStart"));
+					couponTypeVO.setCpEnd(rs.getDate("cpEnd"));
+//					couponTypeVO.setCpStart(rs.getObject("cpStart",LocalDateTime.class));
+//					couponTypeVO.setCpEnd(rs.getObject("cpEnd",LocalDateTime.class));
+					
+					couponTypeVO.setCpStatus(rs.getInt("cpStatus"));
+					couponTypeVO.setCpPic(rs.getBytes("cpPic"));
+					
+					list.add(couponTypeVO); // Store the row in the List
+				}
+		
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return list;
+		}
+	
+	}

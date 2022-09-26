@@ -66,7 +66,7 @@ public class AnnouncementPic extends HttpServlet {
 
 		try {
 			Context ctx = new javax.naming.InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Cga103G4");
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/cga103g4");
 			con = ds.getConnection();
 		} catch (NamingException e) {
 

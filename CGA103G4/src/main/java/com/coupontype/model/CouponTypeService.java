@@ -2,6 +2,10 @@ package com.coupontype.model;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
+
+import com.membercoupon.model.MemberCouponVO;
+import com.promotions.model.PromotionsVO;
 
 public class CouponTypeService {
 	
@@ -54,6 +58,9 @@ public class CouponTypeService {
 
 	public List<CouponTypeVO> getAll() {
 		return dao.getAll();
+	}
+	public List<CouponTypeVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
 	}
 	
 }

@@ -236,7 +236,7 @@ body {
 
 							<ul class="submenu">
 								<li><a href="discount-management/discount-management.jsp">優惠方案管理</a></li>
-								<li><a href="<%=request.getContextPath()%>/back-end/product/productShowAll.jsp  ">商品管理</a></li>
+								<li><a href="<%=request.getContextPath()%>/back-end/product/productShowAll.jsp">商品管理</a></li>
 								<li><a href="<%=request.getContextPath()%>/back-end/product/orderShowAll.jsp">訂單管理</a></li>
 							</ul>
 						<li class="has-submenu "><a href="#"><i
@@ -253,7 +253,7 @@ body {
 										<li><a href="<%=request.getContextPath()%>/back-end/classtag/listAllClassTag.jsp">查看全部標籤</a></li>
 										<li><a href="<%=request.getContextPath()%>/back-end/classtag/addClassTag.jsp">新增標籤</a></li>
 									</ul></li>
-								<li><a href="#">教師管理</a></li>
+								<li><a href="<%=request.getContextPath()%>/back-end/teacher/select_page.jsp">教師管理</a></li>
 								<li class="has-submenu"><a href="<%=request.getContextPath()%>/back-end/registtrationform/listAllRegisttrationForm.jsp">查看報名表</a>
 								<ul class="submenu">
 										<li><a href="<%=request.getContextPath()%>/back-end/registtrationform/listAllRegisttrationForm.jsp">查看全部報名表</a></li>
@@ -264,20 +264,16 @@ body {
 								class="mdi ion-spoon"></i>私廚管理</a>
 
 							<ul class="submenu">
-								<li><a href="<%=request.getContextPath()%>/back-end/chefAppointment/select_page.jsp">預約管理</a></li>
+								<li><a href=${(chefVO==null)? "#" : "./chefAppointment/select_page.jsp" }>預約管理</a></li>
 								<li><a href="<%=request.getContextPath()%>/back-end/chef/select_page.jsp">個人資料管理</a></li>
 							</ul>
 						<li class="has-submenu"><a href="#"><i
 								class="mdi dripicons-device-desktop"></i>前台管理</a>
 							<ul class="submenu">
-								<li class="has-submenu"><a href="service-management/service-management.jsp">客服</a>
-								<ul class="submenu">
-										<li><a href="<%=request.getContextPath()%>/back-end/memberservice/chat.jsp">客服管理</a></li>
-										<li><a href="<%=request.getContextPath()%>/back-end/memberservice/keyword.jsp">關鍵字管理</a></li>
-									</ul>
-									</li>
+								<li><a href="<%=request.getContextPath()%>/back-end/memberservice/chat.jsp">客服管理</a></li>
+								<li><a href="<%=request.getContextPath()%>/back-end/memberservice/keyword.jsp">關鍵字管理</a></li>
 								<li><a href="announcement/announce-management.jsp">公告管理</a></li>
-								<li><a href="#">公司資料管理</a></li>
+								
 <!-- 								<li><a href="#">食譜管理</a></li> -->
 <!-- 								<li><a href="#">討論區管理</a> -->
 							</ul>
@@ -285,11 +281,9 @@ body {
 								class="mdi mdi-layers"></i>後台管理</a>
 							<ul class="submenu">
 								<li class="has-submenu"><a href="<%=request.getContextPath()%>/back-end/emp/select_page.jsp">管理員系統</a>
-								
 								<ul class="submenu">
 										<li><a href="<%=request.getContextPath()%>/back-end/emp/addEmp.jsp">新增管理員</a></li>
 									</ul>
-								
 								</li>
 								<li><a href="<%=request.getContextPath()%>/back-end/member/select_page.jsp">會員</a></li>
 							</ul>

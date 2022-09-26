@@ -212,7 +212,8 @@ td {
 										src="<%= request.getContextPath() %>/EmpShowPic?empid=${empVO.empid}"
 										style="width: 300px; hegiht: 300px">
 								</div>
-								<div style="margin-left: 700px">
+								<div >
+								<div style="margin-left:700px">
 									<%-- 錯誤表列 --%>
 									<c:if test="${not empty errorMsgs}">
 										<font style="color: red">請修正以下錯誤:</font>
@@ -222,7 +223,7 @@ td {
 											</c:forEach>
 										</ul>
 									</c:if>
-									div
+									</div>
 									<div style="margin: auto; width: 470px">
 										<FORM METHOD="post" ACTION="emp.do" name="form1"
 											enctype="multipart/form-data">
@@ -282,8 +283,9 @@ td {
 												name="empAccount" value="<%=empVO.getEmpAccount()%>">
 											<input type="hidden" name="empPicture"
 												value="<%=empVO.getEmpPicture()%>">
+												<input type="submit" value="送出修改">
 										</FORM>
-										<input type="submit" value="送出修改"><input name="Submit"
+										<input name="Submit"
 											type="button" id="Submit"
 											onClick="javascript:history.back(1)" value="上一頁" />
 									</div>
@@ -364,8 +366,7 @@ try {
 	});
         
       //不能選擇當天之後的日期
-        var somedate2 = new Date('<%=now%>
-	');
+        var somedate2 = new Date('<%=now%>');
 	$('#f_date1')
 			.datetimepicker(
 					{

@@ -407,6 +407,12 @@ public class CouponTypeJDBCDAO implements CouponTypeDAO_interface {
 		
 	}
 
+	@Override
+	public List<CouponTypeVO> getAll(Map<String, String[]> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 }

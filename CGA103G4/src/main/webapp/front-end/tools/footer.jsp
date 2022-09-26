@@ -3,7 +3,7 @@
   <div style="width:100%;height:200px;" >
  </div>
 
- <footer class="footer" style="margin-top:300px">
+ <footer class="footer">
     <div class="us">
       <a href="#" class="pic"><img src="../images/SeeFoodLogo.png"></a><br>
       <li><a href="#" class="pic"><img src="../images/fb.png"></a></li>

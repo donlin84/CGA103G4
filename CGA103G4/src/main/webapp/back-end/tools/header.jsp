@@ -116,8 +116,8 @@
 
 							<ul class="submenu">
 								<li><a href="/CGA103G4/back-end/discount-management/discount-management.jsp">優惠方案管理</a></li>
-								<li><a href="#">商品管理</a></li>
-								<li><a href="#">訂單管理</a></li>
+								<li><a href="<%=request.getContextPath()%>/back-end/product/productShowAll.jsp">商品管理</a></li>
+								<li><a href="<%=request.getContextPath()%>/back-end/product/orderShowAll.jsp ">訂單管理</a></li>
 							</ul>
 						<li class="has-submenu "><a href="#"><i class="mdi ion-ios7-people"></i>課程管理</a>
 
@@ -132,7 +132,7 @@
 										<li><a href="/CGA103G4/back-end/classtag/listAllClassTag.jsp">查看全部標籤</a></li>
 										<li><a href="/CGA103G4/back-end/classtag/addClassTag.jsp">新增標籤</a></li>
 									</ul></li>
-								<li><a href="/CGA103G4/back-end/teacher/listAllTeacher.jsp">教師管理</a></li>
+								<li><a href="<%=request.getContextPath()%>/back-end/teacher/select_page.jsp">教師管理</a></li>
 								<li class="has-submenu"><a href="/CGA103G4/back-end/registtrationform/listAllRegisttrationForm.jsp">查看報名表</a>
 								<ul class="submenu">
 										<li><a href="/CGA103G4/back-end/registtrationform/listAllRegisttrationForm.jsp">查看全部報名表</a></li>
@@ -142,7 +142,7 @@
 						<li class="has-submenu "><a href="#"><i class="mdi ion-spoon"></i>私廚管理</a>
 
 							<ul class="submenu">
-								<li><a href="/CGA103G4/back-end/chefAppointment/select_page.jsp">預約管理</a></li>
+								<li><a href=${(chefVO==null)? "#" : "./chefAppointment/select_page.jsp" }>預約管理</a></li>
 								<li><a href="<%=request.getContextPath()%>/back-end/chef/select_page.jsp">個人資料管理</a></li>
 							</ul>
 						<li class="has-submenu"><a href="#"><i class="mdi dripicons-device-desktop"></i>前台管理</a>

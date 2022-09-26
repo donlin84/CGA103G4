@@ -61,7 +61,6 @@ public class MemberCouponHibernateDAO implements MemberCouponDAO_interface{
 	@Override
 	public void transUpdate(Integer memCpStatus, Integer memCpid, Connection con) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

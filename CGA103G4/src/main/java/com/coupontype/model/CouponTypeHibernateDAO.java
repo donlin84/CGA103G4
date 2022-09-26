@@ -1,6 +1,7 @@
 package com.coupontype.model;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.orm.hibernate5.HibernateTemplate;
@@ -53,6 +54,12 @@ public class CouponTypeHibernateDAO implements CouponTypeDAO_interface{
 	public Set<MemberCouponVO> getMemberCouponByCpTpid(Integer memCpid) {
 		Set<MemberCouponVO> set = findByPrimaryKey(memCpid).getMemberCoupons();
 		return set;
+	}
+
+	@Override
+	public List<CouponTypeVO> getAll(Map<String, String[]> map) {
+		List<CouponTypeVO> list = (List<CouponTypeVO>)hibernateTemplate.loadAll(CouponTypeVO.class);
+		return list;
 	}
 
 }

@@ -119,9 +119,7 @@ text-overflow: ellipsis;
 					<div class="page-title-box">
 						<div class="btn-group pull-left">
 							<ol class="breadcrumb hide-phone p-0 m-0">
-								<li class="breadcrumb-item"><a href="#">後台首頁</a></li>
-								<li class="breadcrumb-item active"><a href="#">某頁面</a></li>
-								<li class="breadcrumb-item active">當前頁面</li>
+								<li class="breadcrumb-item"><a href="index-back.jsp">後台首頁</a></li>
 							</ol>
 						</div>
 					</div>

@@ -23,20 +23,32 @@ pageContext.setAttribute("list", list);
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <title>《See Food》官方網站</title>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/common/all.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/common/header.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/common/footer.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/common/main.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/front-end/css/index.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front-end/css/common/all.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front-end/css/common/header.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front-end/css/common/footer.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front-end/css/common/main.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/front-end/css/index.css">
 <script src="<%=request.getContextPath()%>/front-end/js/image.js"></script>
 <script src="<%=request.getContextPath()%>/front-end/js/nav.js"></script>
 
-<link href="<%=request.getContextPath()%>/front-end/member/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/front-end/member/assets/css/icons.css" rel="stylesheet" type="text/css">
+<link
+	href="<%=request.getContextPath()%>/front-end/member/assets/css/bootstrap.min.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="<%=request.getContextPath()%>/front-end/member/assets/css/icons.css"
+	rel="stylesheet" type="text/css">
 <%-- <link href="<%=request.getContextPath()%>/front-end/member/assets/css/style.css" rel="stylesheet" type="text/css"> --%>
-<script src="<%=request.getContextPath()%>/front-end/assets/js/jquery.min.js"></script>
-<script src="<%=request.getContextPath()%>/front-end/assets/js/popper.min.js"></script>
-<script src="<%=request.getContextPath()%>/front-end/assets/js/bootstrap.min.js"></script>
+<script
+	src="<%=request.getContextPath()%>/front-end/assets/js/jquery.min.js"></script>
+<script
+	src="<%=request.getContextPath()%>/front-end/assets/js/popper.min.js"></script>
+<script
+	src="<%=request.getContextPath()%>/front-end/assets/js/bootstrap.min.js"></script>
 
 <style>
 </style>
@@ -55,20 +67,25 @@ pageContext.setAttribute("list", list);
 						id="announce" class="nav">公告</a></li>
 					<li><a href="./shop/shop.jsp" data-target="nav2" id="shop"
 						class="nav">商城</a></li>
-					<li><a href="./course/course.jsp" data-target="nav3"
-						id="course" class="nav">料理課程</a></li>
+					<li><a
+						href="<%=request.getContextPath()%>/front-end/classifm/classifm_browse.jsp"
+						data-target="nav3" id="course" class="nav">料理課程</a></li>
 					<li><a href="./chef/chef.jsp" data-target="nav4" id="chef"
 						class="nav">私廚預約</a></li>
-					<li><a href="./forum/forum.jsp" data-target="nav5" id="forum"
+					<li><a href="#" data-target="nav5" id="forum"
 						class="nav">討論區</a></li>
-					<li><a href="./service/service.jsp" data-target="nav6"
+					<li><a href="<%=request.getContextPath()%>/front-end/memberservice/chat.jsp" data-target="nav6"
 						id="social" class="nav">客服</a></li>
 
 				</ul>
 
 				<div class="sign_block">
-					<input class="input" placeholder="找食譜"><input class="input" placeholder="找食材"><button class="button"><img src="./images/icon.png"></button>
-					   <c:choose>
+					<input class="input" placeholder="找食譜"><input class="input"
+						placeholder="找食材">
+					<button class="button">
+						<img src="./images/icon.png">
+					</button>
+					<c:choose>
 
 						<c:when test="${empty account}">
 							<a href="member/frontEndLogin.jsp">登入</a>
@@ -80,17 +97,21 @@ pageContext.setAttribute("list", list);
 									data-toggle="dropdown" aria-haspopup="true"
 									aria-expanded="false">會員</button>
 								<div class="dropdown-menu">
-									<a class="dropdown-item" href="./member/update.jsp">修改資料</a>
-									<a class="dropdown-item" href="./creditCardInformation/CreditCardInformation.jsp">信用卡</a> <a
-										class="dropdown-item" href="#">查看訂單</a> <a
+									<a class="dropdown-item"
+										href="<%=request.getContextPath()%>/front-end/member/update.jsp">修改資料</a>
+									<a class="dropdown-item"
+										href="<%=request.getContextPath()%>/front-end/creditCardInformation/CreditCardInformation.jsp">信用卡</a>
+									<a class="dropdown-item" href="#">查看訂單</a> <a
 										class="dropdown-item" href="#">查看商品</a> <a
-										class="dropdown-item" href="./membercoupon/membercoupon.jsp">查看優惠卷</a> <a
-										class="dropdown-item" href="#">查看課程</a> <a
-										class="dropdown-item" href="./chef/addChefSubscription.jsp">查看訂閱</a> <a
-										class="dropdown-item" href="./chefAppointment/memberListAll.jsp">查看預約</a> <a
-										class="dropdown-item" href="#">查看食譜</a> <a
-										class="dropdown-item" href="#">查看通知</a> <a
-										class="dropdown-item" href="./member/frontEndLogout.jsp">登出</a>
+										class="dropdown-item"
+										href="<%=request.getContextPath()%>/front-end/membercoupon/membercoupon.jsp">查看優惠卷</a>
+									<a class="dropdown-item"
+										href="<%=request.getContextPath()%>/front-end/classifm/MyClassIfm.jsp">查看課程</a>
+									<a class="dropdown-item"
+										href="<%=request.getContextPath()%>/front-end/chef/addChefSubscription.jsp">查看訂閱</a>
+									<a class="dropdown-item"
+										href="<%=request.getContextPath()%>/front-end/chefAppointment/memberListAll.jsp">查看預約</a>
+									<a class="dropdown-item" href="./member/frontEndLogout.jsp">登出</a>
 
 								</div>
 							</div>
@@ -98,42 +119,60 @@ pageContext.setAttribute("list", list);
 						</c:otherwise>
 					</c:choose>
 				</div>
-				
-	       <ul class="navbar_list">
-          <div class="navbar">
-            <li class="announcebar">
-              <div><a href="./announce/newannounce.jsp">最新消息</a></div>
-            </li>
-            <li class="shopbar">
-              <div><a href="#">熱門推薦</a></div>
-              <div><a href="#">商品分類</a></div>
-              <div><a href="#">購物車</a></div>
-              <div><a href="./shop/promotions.jsp">優惠活動</a></div>
-            </li>
-            <li class="coursebar">
-              <div><a href="#">課程內容資訊</a></div>
-              <div><a href="#">報名</a></div>
-            </li>
-            <li class="chefbar">
-              <div><a href="./chef/chef.jsp">私廚介紹</a></div>
-              <div><a href="./chef/chef.jsp">預約系統</a></div>
-            </li>
-            <li class="forumbar">
-<!--               <div><a href="#">食譜</a></div> -->
-<!--               <div><a href="#">上傳食譜</a></div> -->
-<!--               <div><a href="#">飲食交流</a></div> -->
-<!--               <div><a href="#">廚藝烹飪</a></div> -->
-<!--               <div><a href="#">廚具交流</a></div> -->
-<!--               <div><a href="#">收藏文章</a></div> -->
-            </li>
-            <li class="socialbar">
-              <div><a href="http://www.facebook.com">幫助中心</a></div>
-              <div><a href="http://instagram.com">聯絡客服</a></div>
-            </li>
-          </div>
-        </ul>
 
-      </nav>
+				<ul class="navbar_list">
+					<div class="navbar">
+						<li class="announcebar">
+							<div>
+								<a href="./announce/newannounce.jsp">最新消息</a>
+							</div>
+						</li>
+						<li class="shopbar">
+							<div>
+								<a href="#">熱門推薦</a>
+							</div>
+							<div>
+								<a href="#">商品分類</a>
+							</div>
+							<div>
+								<a href="#">購物車</a>
+							</div>
+							<div>
+								<a href="./shop/promotions.jsp">優惠活動</a>
+							</div>
+						</li>
+						<li class="coursebar">
+							<div>
+								<a
+									href="<%=request.getContextPath()%>/front-end/classifm/classifm_browse.jsp">課程內容資訊</a>
+							</div>
+							<div>
+								<a
+									href="<%=request.getContextPath()%>/front-end/registtrationform/fullcalendar.html">課程日曆</a>
+							</div>
+						</li>
+						<li class="chefbar">
+							<div>
+								<a href="./chef/chef.jsp">私廚介紹</a>
+							</div>
+							<div>
+								<a href="./chef/chef.jsp">預約系統</a>
+							</div>
+						</li>
+						<li class="forumbar">
+							<!--               <div><a href="#">食譜</a></div> --> <!--               <div><a href="#">上傳食譜</a></div> -->
+							<!--               <div><a href="#">飲食交流</a></div> --> <!--               <div><a href="#">廚藝烹飪</a></div> -->
+							<!--               <div><a href="#">廚具交流</a></div> --> <!--               <div><a href="#">收藏文章</a></div> -->
+						</li>
+						<li class="socialbar">
+							<div>
+								<a href="<%=request.getContextPath()%>/front-end/memberservice/chat.jsp">聯絡客服</a>
+							</div>
+						</li>
+					</div>
+				</ul>
+
+			</nav>
 		</div>
 
 		<li class="showbar"></li>
@@ -175,17 +214,16 @@ pageContext.setAttribute("list", list);
 
 					<ul class="item_list">
 						<c:set var="count" value="0"></c:set>
-						
-						
+
+
 						<c:forEach begin="1" end="${fn:length(list)}" varStatus="stat">
 							<c:if test="${count < 3}" var="con" scope="page">
 								<li><a href="#">
 										<div class="img_block">
 											<img
 												src="<%=request.getContextPath()%>/AnnouncementPic?annid=${list[fn:length(list)-stat.index].annid}">
-										</div> <span class="item_text"><br>
-										<b>${list[fn:length(list)-stat.index].annTitle}</b></span> <span
-										class="item_text content">${list[fn:length(list)-stat.index].annContent}</span><br>
+										</div> <span class="item_text"><br> <b>${list[fn:length(list)-stat.index].annTitle}</b></span>
+										<span class="item_text content">${list[fn:length(list)-stat.index].annContent}</span><br>
 										<span class="item_text content">發布日期
 											${list[fn:length(list)-stat.index].annUpdate}</span>
 								</a></li>
@@ -195,51 +233,50 @@ pageContext.setAttribute("list", list);
 					</ul>
 
 
-<!-- ====================================================================================================================================== -->
+					<!-- ====================================================================================================================================== -->
 
-<!-- 					<div class="news_box"> -->
-<!-- 						<div class="news"> -->
-<!-- 							<div class="news_content">最新課程</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<ul class="item_list"> -->
+					<!-- 					<div class="news_box"> -->
+					<!-- 						<div class="news"> -->
+					<!-- 							<div class="news_content">最新課程</div> -->
+					<!-- 						</div> -->
+					<!-- 					</div> -->
+					<!-- 					<ul class="item_list"> -->
 
-<%-- 						<c:set var="ann_count" value="0"></c:set> --%>
+					<%-- 						<c:set var="ann_count" value="0"></c:set> --%>
 
-<%-- 						<c:forEach var="announcementVO" items="${list}"> --%>
+					<%-- 						<c:forEach var="announcementVO" items="${list}"> --%>
 
-<%-- 							<c:if test="${ann_count < 3}" var="condition" scope="page"> --%>
-<%-- 								<c:if test="${announcementVO.annStatus == 1}" var="condition2" --%>
-<%-- 									scope="page"> --%>
+					<%-- 							<c:if test="${ann_count < 3}" var="condition" scope="page"> --%>
+					<%-- 								<c:if test="${announcementVO.annStatus == 1}" var="condition2" --%>
+					<%-- 									scope="page"> --%>
 
-<!-- 									<li><a href="#"> -->
-<!-- 											<div class="img_block"> -->
-<!-- 												<img -->
-<%-- 													src="<%=request.getContextPath()%>/AnnouncementPic?annid=${announcementVO.annid}"> --%>
-<!-- 											</div> <span class="item_text"><br> -->
-<%-- 											<b>${announcementVO.annTitle}</b></span> <span --%>
-<%-- 											class="item_text content">${announcementVO.annContent}</span><br> --%>
-<!-- 											<span class="item_text content">發布日期 -->
-<%-- 												${announcementVO.annUpdate}</span> --%>
-<!-- 									</a></li> -->
-<%-- 									<c:set var="ann_count" value="${ann_count+1}" /> --%>
+					<!-- 									<li><a href="#"> -->
+					<!-- 											<div class="img_block"> -->
+					<!-- 												<img -->
+					<%-- 													src="<%=request.getContextPath()%>/AnnouncementPic?annid=${announcementVO.annid}"> --%>
+					<!-- 											</div> <span class="item_text"><br> -->
+					<%-- 											<b>${announcementVO.annTitle}</b></span> <span --%>
+					<%-- 											class="item_text content">${announcementVO.annContent}</span><br> --%>
+					<!-- 											<span class="item_text content">發布日期 -->
+					<%-- 												${announcementVO.annUpdate}</span> --%>
+					<!-- 									</a></li> -->
+					<%-- 									<c:set var="ann_count" value="${ann_count+1}" /> --%>
 
-<%-- 								</c:if> --%>
-<%-- 							</c:if> --%>
+					<%-- 								</c:if> --%>
+					<%-- 							</c:if> --%>
 
-<%-- 						</c:forEach> --%>
+					<%-- 						</c:forEach> --%>
 
-<!-- 					</ul> -->
-					
-<!-- ====================================================================================================================================== -->
+					<!-- 					</ul> -->
+
+					<!-- ====================================================================================================================================== -->
 				</main>
 
 			</div>
 
 		</div>
-  <div style="width:100%;height:200px;" >
- </div>
-		<footer class="footer" style="margin-top:300px">
+		<div style="width: 100%; height: 200px;"></div>
+		<footer class="footer">
 			<div class="us">
 				<a href="#" class="pic"><img src="./images/SeeFoodLogo.png"></a><br>
 				<li><a href="#" class="pic"><img src="./images/fb.png"></a></li>
@@ -264,7 +301,7 @@ pageContext.setAttribute("list", list);
 			</div>
 
 		</footer>
-		<%@ include file="/front-end/memberservice/includechatbot.html" %>
+		<%@ include file="/front-end/memberservice/includechatbot.html"%>
 </body>
 
 </html>

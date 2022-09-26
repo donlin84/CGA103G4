@@ -1,22 +1,12 @@
+<%@ page import="java.util.*"%>
+<%@ page import="java.sql.Date"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.membercoupon.model.*"%>
-<%@ page import="com.coupontype.model.*"%>
-<%@ page import="com.member.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
+<%@ page import="com.promotions.model.*"%>
 
 <%
-MemberCouponService memCpSvc = new MemberCouponService();
-List<MemberCouponVO> list = memCpSvc.getAll();
-pageContext.setAttribute("list", list);
-
-CouponTypeVO couponTypeVO = (CouponTypeVO) request.getAttribute("couponTypeVO");
-MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
+PromotionsVO promotionsVO = (PromotionsVO) request.getAttribute("promotionsVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
-<jsp:useBean id="batchAddMemberCoupon" scope="request" type="java.util.List<MemberVO>" />
-<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
-<jsp:useBean id="cpTpSvc" scope="page" class="com.coupontype.model.CouponTypeService" />
 
 <!DOCTYPE html>
 <html>
@@ -27,7 +17,7 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 
-<title>批次發放優惠券</title>
+<title>優惠活動新增</title>
 
 <meta content="Admin Dashboard" name="description" />
 <meta content="Mannatthemes" name="author" />
@@ -72,22 +62,23 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
 					<div class="page-title-box">
 						<div class="btn-group pull-right">
 							<ol class="breadcrumb hide-phone p-0 m-0">
-								<li class="breadcrumb-item active">批次發放優惠券</li>
+								<li class="breadcrumb-item active">優惠活動新增</li>
 								<li class="breadcrumb-item"><a
 									href="../discount-management/discount-management.jsp">優惠方案管理</a></li>
 								<li class="breadcrumb-item"><a href="../index-back.jsp">後台首頁</a></li>
 							</ol>
 						</div>
-						<h4 class="page-title">批次發放優惠券</h4>
+						<h4 class="page-title">優惠活動新增</h4>
 					</div>
 				</div>
 			</div>
 			<!-- end page title end breadcrumb -->
 			<div class="row">
-				<div class="col-12">
+				<div class="col-2"></div>
+				<div class="col-8">
 					<div class="card">
 						<div class="card-body">
-							<h4 class="mt-0 header-title">批次發放優惠券</h4>
+							<h4 class="mt-0 header-title">優惠活動新增</h4>
 							<c:if test="${not empty errorMsgs}">
 								<font style="color: red">請修正以下錯誤:</font>
 								<ul>
@@ -96,43 +87,41 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
 									</c:forEach>
 								</ul>
 							</c:if>
-							<FORM METHOD="post" ACTION="MemberCouponServlet" name="form1">
+
+							<FORM METHOD="post" ACTION="PromotionsServlet" name="form1">
 								<table class="table" id="my-table">
 									<tr>
-										<th><input type="checkbox" name="all" onclick="check_all(this,'count')" /> 將優惠券發放給會員</th>
-										<th>會員名稱</th>
-										<th>優惠券種類</th>
-										<th>有效日期</th>
-										<th>使用狀態</th>
-										<th>使用紀錄</th>
+										<td>優惠活動名稱:</td>
+										<td><input type="TEXT" name="pmName" size="45" style="width: 300px;"
+											value="<%=(promotionsVO == null) ? "" : promotionsVO.getPmName()%>" placeholder="請輸入活動名稱"/></td>
 									</tr>
-
-									<c:forEach var="MemberVO" items="${memSvc.all}" varStatus="s">
-									
-									<jsp:useBean id="memberCouponVO" scope="page" class="com.membercoupon.model.MemberCouponVO" />
-									
 									<tr>
-									
-										<td><input type="checkbox" name="count" value="${s.index}"></td>
-										
-										<td><input type="hidden" name="memid" value="${MemberVO.memid}">${MemberVO.memName}</td>
-										
-										<td>
-											<c:forEach var="couponTypeVO" items="${batchAddMemberCoupon}">
-												<input type="hidden" name="cpTpid" value="${couponTypeVO.cpTpid}">${couponTypeVO.cpName}
-											</c:forEach>
-										</td>
-										<td><input name="memCpDate" class="f_date1" type="text" autocomplete="off" style="width: 150px;"></td>
-										<td>
-											<select name="memCpStatus" style="width: 150px;">
-												<option value="1" selected>可使用</option>
-												<option value="0">已使用</option>
-											</select>
-										</td>
-											<td><input name="memCpRecord" class="f_date2" type="text"
-												style="width: 150px;" autocomplete="off" readonly></td>
-										</tr>
-									</c:forEach>
+										<td>活動描述:</td>
+										<td><input type="TEXT" name="pmDescription" size="45" style="width: 300px;"
+											value="<%=(promotionsVO == null) ? "" : promotionsVO.getPmDescription()%>" placeholder="請輸入活動描述"/></td>
+									</tr>
+									<tr>
+										<td>折扣幅度:</td>
+										<td><input type="TEXT" name="pmDiscount" size="45" style="width: 300px;"
+											value="<%=(promotionsVO == null) ? "0.00" : promotionsVO.getPmDiscount()%>" placeholder="請輸入折扣金額" /></td>
+									</tr>
+									<tr>
+										<td>起始時間:</td>
+										<td><input name="pmStart" id="f_date1" type="text"
+											style="width: 300px;" autocomplete="off"></td>
+									</tr>
+									<tr>
+										<td>截止時間:</td>
+										<td><input name="pmEnd" id="f_date2" type="text"
+											style="width: 300px;" autocomplete="off"></td>
+									</tr>
+									<tr>
+										<td>活動狀態:</td>
+										<td><select name="pmStatus" style="width: 300px;">
+												<option value="1">上架</option>
+												<option value="0">下架</option>
+										</select></td>
+									</tr>
 								</table>
 								<br>
 								<div style="text-align:center;">
@@ -155,7 +144,23 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
 	<%@ include file="../tools/footer.jsp"%>
 	<!-- End Footer -->
 	<!-- jQuery -->
+
+
 </body>
+
+<!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
+
+<%
+java.sql.Date pmStart = null;
+java.sql.Date pmEnd = null;
+try {
+	pmStart = promotionsVO.getPmStart();
+	pmEnd = promotionsVO.getPmEnd();
+} catch (Exception e) {
+	pmStart = new java.sql.Date(System.currentTimeMillis());
+	pmEnd = new java.sql.Date(System.currentTimeMillis());
+}
+%>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/back-end/datetimepicker/jquery.datetimepicker.css" />
 <script
@@ -172,50 +177,35 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
 	height: 151px; /* height:  151px; */
 }
 </style>
-<script type="text/javascript">
 
-function check_all(obj,cName){
-	var checkboxs = document.getElementsByName(cName);
-	for(var i=0;i<checkboxs.length;i++){checkboxs[i].checked = obj.checked;}
-	}
-</script>
 <script>
+<!-- ============================  pmStartDate  ============================ -->
 
-var annUpdate = new Date();
-function getNextDate(date,day) {  
-	  var dd = new Date(date);
-	  dd.setDate(dd.getDate() + day);
-	  var y = dd.getFullYear();
-	  var m = dd.getMonth() + 1 < 10 ? "0" + (dd.getMonth() + 1) : dd.getMonth() + 1;
-	  var d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();
-	  return y + "-" + m + "-" + d;
-	};
+	 $('#f_date1').datetimepicker({
+		 format:'Y-m-d',
+		 minDate: '1' ,
+		 value: 'pmStart' ,
+	  onShow:function( ct ){
+	   this.setOptions({
+	    maxDate:jQuery('#f_date2').val()?$('#f_date2').val():false
+	   })
+	  },
+	  timepicker:false
+	 });
+	 
+<!-- ============================  pmEndDate  ============================ -->
 
-$('.f_date1').datetimepicker({
+$('#f_date2').datetimepicker({
 	 format:'Y-m-d',
-	 minDate: '1' ,
-	 value: getNextDate(annUpdate,14) ,
  onShow:function( ct ){
   this.setOptions({
-   maxDate:jQuery('#f_date2').val()?$('#f_date2').val():false
+   minDate:$('#f_date1').val()?$('#f_date1').val():false
   })
  },
  timepicker:false
 });
 
-<!-- ============================  pmEndDate  ============================ -->
-
-$('.f_date2').datetimepicker({
-format:'Y-m-d',
-onShow:function( ct ){
-this.setOptions({
-minDate:$('#f_date1').val()?$('#f_date1').val():false
-})
-},
-timepicker:false
-});
 </script>
-
 	<script src="<%=request.getContextPath()%>/back-end/assets/js/jquery.min.js"></script>
 	<script src="<%=request.getContextPath()%>/back-end/assets/js/popper.min.js"></script>
 	<script src="<%=request.getContextPath()%>/back-end/assets/js/bootstrap.min.js"></script>
@@ -231,7 +221,4 @@ timepicker:false
 	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/raphael/raphael-min.js"></script>
 	<script src="<%=request.getContextPath()%>/back-end/assets/plugins/morris/morris.min.js"></script>
 	<script src="<%=request.getContextPath()%>/back-end/assets/js/app.js"></script>
-
-
-
 </html>
