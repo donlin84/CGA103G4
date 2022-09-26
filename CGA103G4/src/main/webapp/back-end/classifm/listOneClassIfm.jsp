@@ -35,7 +35,7 @@
     line-height: 50px;
     padding: 5px;
     text-align: center;
-    background-color: rgb(248, 184, 110);
+    background-color: rgb(87 102 216);
     color: white;
   }
   td {

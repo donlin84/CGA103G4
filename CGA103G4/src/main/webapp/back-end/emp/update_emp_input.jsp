@@ -283,11 +283,14 @@ td {
 												name="empAccount" value="<%=empVO.getEmpAccount()%>">
 											<input type="hidden" name="empPicture"
 												value="<%=empVO.getEmpPicture()%>">
-												<input type="submit" value="送出修改">
+												<input type="submit" value="送出修改" style="background-color:#283179;border:2px;color:white;">
 										</FORM>
+										<div style="marign-left:500px">
 										<input name="Submit"
 											type="button" id="Submit"
-											onClick="javascript:history.back(1)" value="上一頁" />
+											onClick="javascript:history.back(1)" value="上一頁" style="background-color:#283179;border:2px;color:white;" />
+										</div>
+										
 									</div>
 								</div>
 								<div class="col-sm-12 col-md-6">

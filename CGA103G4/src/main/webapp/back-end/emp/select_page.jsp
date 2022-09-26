@@ -124,17 +124,7 @@ main.main {
 	display: none;
 }
 
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
 
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
 
 h4 {
 	color: blue;
@@ -155,6 +145,8 @@ table, th, td {
 th {
 	padding: 5px;
 	text-align: center;
+	background-color:#283179;
+	color:white;
 }
 
 td {
@@ -241,19 +233,19 @@ td {
 												aria-controls="datatable" rowspan="1" colspan="1"
 												aria-sort="ascending"
 												aria-label="Name: activate to sort column descending"
-												style="width: 174px;">管理員編號</th>
+												style="width: 50px;">編號</th>
+											<th class="sorting" tabindex="0" aria-controls="datatable"
+												rowspan="1" colspan="1"
+												aria-label="Age: activate to sort column ascending"
+												style="width: 300px;">管理員照片</th>
 											<th class="sorting" tabindex="0" aria-controls="datatable"
 												rowspan="1" colspan="1"
 												aria-label="Position: activate to sort column ascending"
-												style="width: 276px;">管理員姓名</th>
+												style="width: 100px;">管理員姓名</th>
 											<th class="sorting" tabindex="0" aria-controls="datatable"
 												rowspan="1" colspan="1"
 												aria-label="Office: activate to sort column ascending"
 												style="width: 131px;">聯絡電話</th>
-											<th class="sorting" tabindex="0" aria-controls="datatable"
-												rowspan="1" colspan="1"
-												aria-label="Age: activate to sort column ascending"
-												style="width: 60px;">管理員照片</th>
 											<th class="sorting" tabindex="0" aria-controls="datatable"
 												rowspan="1" colspan="1"
 												aria-label="Start date: activate to sort column ascending"
@@ -288,11 +280,11 @@ td {
 											end="<%=pageIndex+rowsPerPage-1%>">
 											<tr>
 												<td>${empVO.empid}</td>
-												<td>${empVO.empName}</td>
-												<td>${empVO.empPhone}</td>
 												<td><img
 													src="<%= request.getContextPath() %>/EmpShowPic?empid=${empVO.empid}"
 													width="100" heigh="100"></td>
+												<td>${empVO.empName}</td>
+												<td>${empVO.empPhone}</td>
 												<td>${empVO.empAccount}</td>
 												<td>${empVO.empPassword}</td>
 												<td>${empVO.empLevel}</td>
@@ -302,7 +294,7 @@ td {
 													<FORM METHOD="post"
 														ACTION="<%=request.getContextPath()%>/back-end/emp/emp.do"
 														style="margin-bottom: 0px;">
-														<input type="submit" value="修改"> <input
+														<input type="submit" value="修改" style="background-color:#283179;border:2px;color:white;"> <input
 															type="hidden" name="empid" value="${empVO.empid}">
 														<input type="hidden" name="action"
 															value="getOne_For_Update">

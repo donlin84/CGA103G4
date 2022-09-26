@@ -33,7 +33,7 @@
   	width:110px;
     padding: 5px;
     text-align: center;
-    background-color: rgb(248, 184, 110);
+    background-color: rgb(87 102 216);
     color: white;
     font-size:17px;
    }
@@ -90,7 +90,7 @@
 	top:50px;
 	left:12px;
 	position: relative;
-	background-color: rgb(248, 184, 110);
+	background-color: rgb(87 102 216);
 	border-radius: 10px;
 	width:290px;
 }

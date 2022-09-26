@@ -28,7 +28,7 @@
   }
   th{
   	font-size:20px;
-  	background-color: rgb(248, 184, 110);
+  	background-color: rgb(87 102 216);
     color: white;
   	font-weight: 700;
     padding: 20px;

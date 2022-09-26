@@ -21,7 +21,7 @@
             position: relative;
             top: 200px;
             left: 550px;
-            background-color: rgb(255, 185, 127);
+            background-color: rgb(87 102 216);
             width: 500px;
             height: 330px;
             border-radius: 20px;

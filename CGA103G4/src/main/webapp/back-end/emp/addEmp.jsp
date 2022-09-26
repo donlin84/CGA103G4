@@ -268,9 +268,9 @@ td {
 
 										</table>
 										<br> <input type="hidden" name="action" value="insert">
-										<input type="submit" value="送出新增">
+										<input type="submit" value="送出新增" style="background-color:#283179;border:2px;color:white;">
 									</FORM>
-									<input name="Submit" type="button" id="Submit" onClick="javascript:history.back(1)" value="上一頁"/>
+									<input name="Submit" type="button" id="Submit" onClick="javascript:history.back(1)" value="上一頁" style="background-color:#283179;border:2px;color:white;"/>
 								</div>
 							</div>
 							<div class="col-sm-12 col-md-6">
