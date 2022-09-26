@@ -6,6 +6,7 @@
 <%@ page import="com.promotionsdetail.model.*"%>
 <%@ page import="com.productPicture.model.*"%>
 <%@ page import="com.member.model.*"%>
+<%@ page import="com.cartdetail.model.*"%>
 <%@ page import="com.membercoupon.model.*"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -26,6 +27,18 @@
 %>
 
 <%
+	MemberVO memVO =(MemberVO) session.getAttribute("memVO");
+	Integer memid = 203;
+	CartDetailService cartSvc = new CartDetailService();
+	List<CartDetailVO> cartDetailVOs = cartSvc.getOnes(memid);
+	List<Integer> cartPdids = new ArrayList<Integer>();
+	cartDetailVOs.forEach((e) -> {
+		cartPdids.add(e.getPdid());
+	});
+	request.setAttribute("cartPdids", cartPdids);
+	request.setAttribute("memid", memid);
+	
+	
 	ProductService productSvc = new ProductService();
     List<ProductVO> list = productSvc.listByPdStatus(1);
     pageContext.setAttribute("list",list);
@@ -52,11 +65,7 @@
 	PromotionsService pmSvc = new PromotionsService();
     List<PromotionsVO> promotionsVO = pmSvc.getAll();
     pageContext.setAttribute("listAllPromo",promotionsVO);
-    
-    
 %>
-
-
 
 <style type="text/css" id="alertifyCSS">.alertify-logs>*{padding:12px 24px;color:#fff;box-shadow:0 2px 5px 0 rgba(0,0,0,.2);border-radius:1px}.alertify-logs>*,.alertify-logs>.default{background:rgba(0,0,0,.8)}.alertify-logs>.error{background:rgba(244,67,54,.8)}.alertify-logs>.success{background:rgba(76,175,80,.9)}.alertify{position:fixed;background-color:rgba(0,0,0,.3);left:0;right:0;top:0;bottom:0;width:100%;height:100%;z-index:1}.alertify.hide{opacity:0;pointer-events:none}.alertify,.alertify.show{box-sizing:border-box;transition:all .33s cubic-bezier(.25,.8,.25,1)}.alertify,.alertify *{box-sizing:border-box}.alertify .dialog{padding:12px}.alertify .alert,.alertify .dialog{width:100%;margin:0 auto;position:relative;top:50%;transform:translateY(-50%)}.alertify .alert>*,.alertify .dialog>*{width:400px;max-width:95%;margin:0 auto;text-align:center;padding:12px;background:#fff;box-shadow:0 2px 4px -1px rgba(0,0,0,.14),0 4px 5px 0 rgba(0,0,0,.098),0 1px 10px 0 rgba(0,0,0,.084)}.alertify .alert .msg,.alertify .dialog .msg{padding:12px;margin-bottom:12px;margin:0;text-align:left}.alertify .alert input:not(.form-control),.alertify .dialog input:not(.form-control){margin-bottom:15px;width:100%;font-size:100%;padding:12px}.alertify .alert input:not(.form-control):focus,.alertify .dialog input:not(.form-control):focus{outline-offset:-2px}.alertify .alert nav,.alertify .dialog nav{text-align:right}.alertify .alert nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button),.alertify .dialog nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button){background:transparent;box-sizing:border-box;color:rgba(0,0,0,.87);position:relative;outline:0;border:0;display:inline-block;-ms-flex-align:center;-ms-grid-row-align:center;align-items:center;padding:0 6px;margin:6px 8px;line-height:36px;min-height:36px;white-space:nowrap;min-width:88px;text-align:center;text-transform:uppercase;font-size:14px;text-decoration:none;cursor:pointer;border:1px solid transparent;border-radius:2px}.alertify .alert nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):active,.alertify .alert nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):hover,.alertify .dialog nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):active,.alertify .dialog nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):hover{background-color:rgba(0,0,0,.05)}.alertify .alert nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):focus,.alertify .dialog nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):focus{border:1px solid rgba(0,0,0,.1)}.alertify .alert nav button.btn,.alertify .dialog nav button.btn{margin:6px 4px}.alertify-logs{position:fixed;z-index:1}.alertify-logs.bottom,.alertify-logs:not(.top){bottom:16px}.alertify-logs.left,.alertify-logs:not(.right){left:16px}.alertify-logs.left>*,.alertify-logs:not(.right)>*{float:left;transform:translateZ(0);height:auto}.alertify-logs.left>.show,.alertify-logs:not(.right)>.show{left:0}.alertify-logs.left>*,.alertify-logs.left>.hide,.alertify-logs:not(.right)>*,.alertify-logs:not(.right)>.hide{left:-110%}.alertify-logs.right{right:16px}.alertify-logs.right>*{float:right;transform:translateZ(0)}.alertify-logs.right>.show{right:0;opacity:1}.alertify-logs.right>*,.alertify-logs.right>.hide{right:-110%;opacity:0}.alertify-logs.top{top:0}.alertify-logs>*{box-sizing:border-box;transition:all .4s cubic-bezier(.25,.8,.25,1);position:relative;clear:both;backface-visibility:hidden;perspective:1000;max-height:0;margin:0;padding:0;overflow:hidden;opacity:0;pointer-events:none}.alertify-logs>.show{margin-top:12px;opacity:1;max-height:1000px;padding:12px;pointer-events:auto}</style>
 <style>
@@ -92,7 +101,6 @@ header.header div.block nav.nav ul.nav_list>li>a {
   <link rel="stylesheet" href="css/common/footer.css">
   <link rel="stylesheet" href="css/common/main.css">
   <link rel="stylesheet" href="css/shop.css">
-  
 <!--   <link rel="shortcut icon" href="assets/images/favicon.ico"> -->
 
 </head>
@@ -125,17 +133,7 @@ header.header div.block nav.nav ul.nav_list>li>a {
 	 <script src="../js/shop.js"></script>
   	<script src="../js/nav.js"></script>
   	
-<%@ include file="tools/header.jsp"%>
-
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
+<%@ include file="../tools/header.jsp"%>
 								
 <div class="wrapper">
 <div class="container-fluid" style = "margin-top:-390px; margin-left : 400px"><!-- Page-Title -->
@@ -145,7 +143,7 @@ header.header div.block nav.nav ul.nav_list>li>a {
 <div class="col-lg-6" style = "top:420px ;left: -360px;" >
 	<div class="card" style = "width: 325px">
 		<div class="card-body">
-			<h4 class="mt-0 header-title">商品資訊</h4>
+			<h4 class="mt-0 header-title">商品查詢</h4>
 			<br>
 			<br>
 			
@@ -159,25 +157,16 @@ header.header div.block nav.nav ul.nav_list>li>a {
 						<br>
 					</li>
 					
-<!-- 					<li class="nav-item"> -->
-<!-- 						優惠活動 -->
-<!-- 						<br> -->
-<%-- 						<c:forEach var="promotionsVO" items="${listAllPromo}"> --%>
-<%-- 							<a class="nav-link" href=".do?${promotionsVO.pmid}">${promotionsVO.pmName}</a> --%>
-<%-- 						</c:forEach> --%>
-<!-- 						<br> -->
-<!-- 						<br> -->
-<!-- 						<br> -->
-<!-- 					</li> -->
-					
-					<li>
-					<a href="ListOneUserFavoritePd.do?memid=202">收藏清單</a>
-					<br>
-					<br>
-					<br>
-				
+					<li class="nav-item">
+						優惠活動
+						<br>
+						<c:forEach var="promotionsVO" items="${listAllPromo}">
+							<a class="nav-link" href=".do?${promotionsVO.pmid}">${promotionsVO.pmName}</a>
+						</c:forEach>
+						<br>
+						<br>
+						<br>
 					</li>
-					
 					
 					<li class="nav-item">
 						<a class="nav-link" href="FrontEndListPdOnShelfByPdUpdate.do">最新上架</a>
@@ -186,7 +175,6 @@ header.header div.block nav.nav ul.nav_list>li>a {
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="shop.jsp">回首頁</a>
-						<br>
 						<br>			
 					</li>
 				</ul>
@@ -194,7 +182,7 @@ header.header div.block nav.nav ul.nav_list>li>a {
 		</div>
 	</div>
 
-	<div class="col-sm-12" style = "margin-top:1px ;left: -120px;">
+	<div class="col-sm-12" style = "margin-top:0px ;left: -120px;">
 		<div class="page-title-box" style="width:1000px">
 			<div class="btn-group pull-right">
 
@@ -207,11 +195,10 @@ header.header div.block nav.nav ul.nav_list>li>a {
 			</c:forEach>
 				
 				<ul>
-					
-					<li class="list-inline-item hide-phone app-search" style = "display: inline-block; margin-top:-5px; width:250px" >
-					<form role="search" class="" method = "post" action = "FrontEndListAllPdByName.do" >
-						<input type="text" Name = "pdName" placeholder="Search..." class="form-control" style= "display: inline;">
-						<input class="btn btn-warning" type="submit" value = "查詢" style= "display: inline;">
+					<li class="list-inline-item hide-phone app-search" style = "display: inline-block; margin-top:-5px">
+					<form role="search" class="">
+						<input type="text" placeholder="Search..." class="form-control">
+						<a href=""><i class="fa fa-search"></i></a>
 					</form>
 					</li>
 				
@@ -261,6 +248,7 @@ header.header div.block nav.nav ul.nav_list>li>a {
 					</c:when>
 
 					<c:otherwise>
+					
 					<button type="button" id="${productVO.pdid}000" class="btn btn-outline-success" >加入購物車</button>
 					<button type="button" id="${productVO.pdid}"class="btn btn-warning waves-effect waves-light" >加入收藏清單</button>
 					</c:otherwise>
@@ -285,28 +273,31 @@ header.header div.block nav.nav ul.nav_list>li>a {
 			<input id="collectPd" type = "hidden" value = "${list2}">
 			<input id="collectPd2" type = "hidden" value =  "${list3}">
 			
-			
-			
-<!-- 			<a href="ListOneUserFavoritePd.do?memid=202&GoToMyCollection=GoToMyCollection"><button></button></a> -->
-<!-- 			<a href="ListMemberAllOrd.do?memid=202&GotoMyOrders=GoToMyOrders"><button></button></a> -->
-			
 			<FORM method = "post" action = "ListOneUserFavoritePd.do">
-				<input type = "hidden" name = "memid" value = "202">
+				<input type = "hidden" name = "memid" value = "${memid}">
 				<input type = "hidden" name = "GoToMyCollection" value = "GoToMyCollection">
-				<input type = "hidden">
+				<input type = "submit">
 			
 			</FORM>
 			
 			<FORM method = "post" action = "ListMemberAllOrd.do">
 			
-				<input type = "hidden" name = "memid" value = "202">
+				<input type = "hidden" name = "memid" value = "201">
 				<input type = "hidden" name = "GoToMyOrders" value = "GoToMyOrders">
-				<input type = "hidden">
+				<input type = "submit">
 			
 			</FORM>
 <!-- ==================================================================			 -->
 <div class="alertify-logs">
+
+
 </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
 <%@ include file="../tools/footer.jsp"%>
@@ -329,8 +320,7 @@ var host = window.location.host;
 var path = window.location.pathname;
 var webCtx = path.substring(0, path.indexOf('/', 1));
 var endPointURL = "http://" + host + webCtx + MyPoint;
-let memid = '${memid}';
-console.log(memid);
+
 
 let collectPd = document.getElementById("collectPd");
 let UserPdCollect = JSON.parse(collectPd.value);
@@ -346,8 +336,7 @@ for (let i of UserPdCollect){
 		
 		let searchParams = new URLSearchParams({
 			 pdid: i,
-			 memid:memid
-			 
+			 memid:${memid}
 			});
 		ServletURL.search = searchParams;		
 		request(ServletURL.href,result);
@@ -360,14 +349,16 @@ for (let i of UserPdCollect){
 var MyPoint2 = "/front-end/shop/AddIntoCart.do";
 var host2 = window.location.host;
 var path2 = window.location.pathname;
-var webCtx2 = path.substring(0, path.indexOf('/', 1));
+var webCtx2 = path2.substring(0, path2.indexOf('/', 1));
 var endPointURL2 = "http://" + host2 + webCtx2 + MyPoint2;
+
+console.log(${cartPdids});
 
 
 let collectPd2 = document.getElementById("collectPd2");
 let UserPdCollect2 = JSON.parse(collectPd2.value);
 let ServletURL2 = new URL(endPointURL2);
-console.log(UserPdCollect2);
+// console.log(UserPdCollect2);
 
 function result(){
 
@@ -380,8 +371,10 @@ for (let j of UserPdCollect2){
 		
 		let searchParams2 = new URLSearchParams({
 			 pdid: j/1000,
-			 memid:"202",
-			 pdNumber:"1"
+			 memid:${memid},
+			 pdNumber:"1",
+			 cartPdids:${cartPdids}
+			 
 			});
 		ServletURL2.search = searchParams2;		
 		request(ServletURL2.href,result);

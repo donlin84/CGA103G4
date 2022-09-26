@@ -4,6 +4,8 @@
 <%@ page import="com.productSort.model.*"%>
 <%@ page import="com.promotionsdetail.model.*"%>
 <%@ page import="com.productPicture.model.*"%>
+<%@ page import="com.member.model.*"%>
+<%@ page import="com.cartdetail.model.*"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -15,6 +17,17 @@
 <html lang="zh-Hant" dir="ltr">
 
 <%
+MemberVO memVO =(MemberVO) session.getAttribute("memVO");
+Integer memid = 203;
+CartDetailService cartSvc = new CartDetailService();
+List<CartDetailVO> cartDetailVOs = cartSvc.getOnes(memid);
+List<Integer> cartPdids = new ArrayList<Integer>();
+cartDetailVOs.forEach((e) -> {
+	cartPdids.add(e.getPdid());
+});
+request.setAttribute("cartPdids", cartPdids);
+request.setAttribute("memid", memid);
+
   ProductVO productVO = (ProductVO) request.getAttribute("productVO");
 %>
 
@@ -135,7 +148,7 @@
 							
 							<tr>
 								<td>優惠價格</td>
-								<td><h4><%=productVO.getPdDiscountPrice()%></h4></td>
+								<td><h4>${productVO.promotionsDetailVO.pmPdDiscountPrice}</h4></td>
 							</tr>
 							
 							<tbody>
@@ -211,7 +224,7 @@ var i = document.getElementById("addIntoCollection")
 
 		let searchParams = new URLSearchParams({
 			 pdid: pdid,
-			 memid:"202"
+			 memid:${memid}
 			});
 		ServletURL.search = searchParams;		
 		request(ServletURL.href,result);
@@ -241,7 +254,7 @@ var i2 = document.getElementById("removeFromCollection")
 
 		let searchParams2 = new URLSearchParams({
 			 pdid: pdid2,
-			 memid:"202"
+			 memid:${memid}
 			});
 		ServletURL2.search = searchParams2;		
 		request(ServletURL2.href,result);
@@ -291,8 +304,9 @@ var num = 0;
 
 	let searchParams3 = new URLSearchParams({
 		 pdid: pdid3,
-		 memid:"202",
-		 pdNumber:num
+		 memid:${memid},
+		 pdNumber:num,
+		 cartPdids:${cartPdids}
 		});
 	ServletURL3.search = searchParams3;		
 	request(ServletURL3.href,result);
@@ -325,7 +339,7 @@ i4.addEventListener("click",function(e){
 
 	let searchParams4 = new URLSearchParams({
 		 pdid: pdid4,
-		 memid:"202"
+		 memid:${memid}
 		});
 	ServletURL4.search = searchParams4;		
 	request(ServletURL4.href,result);

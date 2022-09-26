@@ -125,11 +125,11 @@ public class ProductServlet extends HttpServlet {
 		ProductService pdSvcForRepeatPdName = new ProductService();
 		List<ProductVO> pdNameList = pdSvcForRepeatPdName.getAllProductName();
 		
-		String pdNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+		String pdNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,50}$";
 			if (pdName == null || pdName.trim().length() == 0) {
 				errorMsgs.add("商品名稱請勿空白");
 			} else if(!pdName.trim().matches(pdNameReg)) { //以下練習正則(規)表示式(regular-expression)
-				errorMsgs.add("商品名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+				errorMsgs.add("商品名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到50之間");
             } 
 			
 			for (ProductVO aProduct : pdNameList) {

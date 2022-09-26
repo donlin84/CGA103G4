@@ -1,6 +1,9 @@
 package com.product.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,29 +23,36 @@ public class AddIntoCart extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-		Integer pdid = Integer.valueOf(req.getParameter("pdid"));	
-		System.out.println(pdid);
-		Integer memid = Integer.valueOf(req.getParameter("memid"));
-		Integer pdNumber = Integer.valueOf(req.getParameter("pdNumber"));
-		
-		System.out.println(pdid);
-		System.out.println(memid);
-		System.out.println(pdNumber);
-		
-		CartDetailVO cartDetailVO = new CartDetailVO();
-		
-		cartDetailVO.setPdid(memid);
-		cartDetailVO.setPdid(pdid);
-		cartDetailVO.setPdNumber(pdNumber);
-		
-//		addCartDetail
-		
-		CartDetailService CartDeSvc = new CartDetailService();
-		cartDetailVO = CartDeSvc.addCartDetail(memid, pdid, pdNumber);
-		req.setAttribute("cartDetailVO", cartDetailVO);
-		
-		JsonObject json = new JsonObject();
-		res.getWriter().print(json);
+		String pdidstr = req.getParameter("pdid");
+		  Integer pdid = Integer.valueOf(pdidstr); 
+		  Integer memid = Integer.valueOf(req.getParameter("memid"));
+		  Integer pdNumber = Integer.valueOf(req.getParameter("pdNumber"));
+		  String cartStr = req.getParameter("cartPdids");
+		  System.out.println(cartStr);
+		  List<Integer> cartlist = new ArrayList<Integer>();
+		  if(cartStr.contains(pdidstr)) {
+		   CartDetailService cartSvc = new CartDetailService();
+		   cartSvc.plus(memid, pdid);
+		   
+		   JsonObject json = new JsonObject();
+		   try {
+		    res.getWriter().print(json);
+		   } catch (IOException e1) {
+		    e1.printStackTrace();
+		   }
+		   return;
+		  } else {
+		   CartDetailService cartSvc = new CartDetailService();
+		   cartSvc.addCartDetail(memid, pdid, pdNumber);
+		   
+		   JsonObject json = new JsonObject();
+		   try {
+		    res.getWriter().print(json);
+		   } catch (IOException e1) {
+		    e1.printStackTrace();
+		   }
+		   return;
+		  }
 
 }
 		

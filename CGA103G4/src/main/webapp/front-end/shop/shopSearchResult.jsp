@@ -4,6 +4,8 @@
 <%@ page import="com.productSort.model.*"%>
 <%@ page import="com.promotionsdetail.model.*"%>
 <%@ page import="com.productPicture.model.*"%>
+<%@ page import="com.member.model.*"%>
+<%@ page import="com.cartdetail.model.*"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -19,6 +21,16 @@
 %>
 
 <%	
+MemberVO memVO =(MemberVO) session.getAttribute("memVO");
+Integer memid = 203;
+CartDetailService cartSvc = new CartDetailService();
+List<CartDetailVO> cartDetailVOs = cartSvc.getOnes(memid);
+List<Integer> cartPdids = new ArrayList<Integer>();
+cartDetailVOs.forEach((e) -> {
+	cartPdids.add(e.getPdid());
+});
+request.setAttribute("cartPdids", cartPdids);
+request.setAttribute("memid", memid);
 	
 List<ProductVO> list = (List<ProductVO>)(request.getAttribute("list"));
     
@@ -119,7 +131,7 @@ header.header div.block nav.nav ul.nav_list>li>a {
 <div class="row" >
 
 
-<div class="col-lg-6" style = "top:440px ;left: -360px;" >
+<div class="col-lg-6" style = "top:430px ;left: -360px;" >
 	<div class="card" style = "width: 325px">
 		<div class="card-body">
 			<h4 class="mt-0 header-title">商品查詢</h4>
@@ -136,12 +148,15 @@ header.header div.block nav.nav ul.nav_list>li>a {
 						<br>
 					</li>
 					
-					<li>
-					<a href="ListOneUserFavoritePd.do?memid=202&GoToMyCollection=GoToMyCollection">收藏清單</a>
-					<br>
-					<br>
-					<br>
-				
+					<li class="nav-item">
+						優惠活動
+						<br>
+						<c:forEach var="promotionsVO" items="${listAllPromo}">
+							<a class="nav-link" href=".do?${promotionsVO.pmid}">${promotionsVO.pmName}</a>
+						</c:forEach>
+						<br>
+						<br>
+						<br>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="FrontEndListPdOnShelfByPdUpdate.do">最新上架</a>
@@ -154,14 +169,13 @@ header.header div.block nav.nav ul.nav_list>li>a {
 						<a class="nav-link" href="shop.jsp">回首頁</a>
 						<br>
 						<br>
-						<br>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 
-	<div class="col-sm-12" style = "margin-top:5px ;left: -120px;">
+	<div class="col-sm-12" style = "margin-top:0px ;left: -120px;">
 		<div class="page-title-box" style="width:1000px">
 			<div class="btn-group pull-right">
 
@@ -172,11 +186,10 @@ header.header div.block nav.nav ul.nav_list>li>a {
 			</c:forEach>
 				
 				<ul>
-					
-					<li class="list-inline-item hide-phone app-search" style = "display: inline-block; margin-top:-5px; width:250px" >
-					<form role="search" class="" method = "post" action = "FrontEndListAllPdByName.do" >
-						<input type="text" Name = "pdName" placeholder="Search..." class="form-control" style= "display: inline;">
-						<input class="btn btn-warning" type="submit" value = "查詢" style= "display: inline;">
+					<li class="list-inline-item hide-phone app-search" style = "display: inline-block; margin-top:-5px">
+					<form role="search" class="">
+						<input type="text" placeholder="Search..." class="form-control">
+						<a href=""><i class="fa fa-search"></i></a>
 					</form>
 					</li>
 				
@@ -189,8 +202,8 @@ header.header div.block nav.nav ul.nav_list>li>a {
 
 	<div class="row">
          <c:forEach var="productVO" items="${list}">
-       	<div class="col-md-6 col-lg-6 col-xl-3" style = "position: absoloute; top:60px;">
-        	<div class="card" style = "height: 300px; ">      			
+       	<div class="col-md-6 col-lg-6 col-xl-3" style = "position: absoloute; top:63px;">
+        	<div class="card" style = "height: 300px;">      			
         		<a id = "" href="FrontEndPdDetail.do?pdid=${productVO.pdid}"> 
         			<img class="card-img-top img-fluid" src="Productpic.do?pdid=${productVO.pdid}" width="200" height = "160">
         			${productVO.pdName}
@@ -220,7 +233,7 @@ header.header div.block nav.nav ul.nav_list>li>a {
 			<input id="collectPd2" type = "hidden" value =  "${list3}">
 			
 			<FORM method = "post" action = "ListOneUserFavoritePd.do">
-				<input type = "hidden" name = "memid" value = "202">
+				<input type = "hidden" name = "memid" value = "${memid}">
 				<input type = "hidden" name = "GoToMyCollection" value = "GoToMyCollection">
 				<input type = "hidden">
 			
@@ -282,7 +295,7 @@ for (let i of UserPdCollect){
 	
 		let searchParams = new URLSearchParams({
 			 pdid: i,
-			 memid:"202"
+			 memid:${memid}
 			});
 		ServletURL.search = searchParams;		
 		request(ServletURL.href,result);
@@ -315,9 +328,10 @@ for (let j of UserPdCollect2){
 		
 		
 		let searchParams2 = new URLSearchParams({
-			 pdid: j/1000,
-			 memid:"202",
-			 pdNumber:"1"
+			pdid: j/1000,
+			 memid:${memid},
+			 pdNumber:"1",
+			 cartPdids:${cartPdids}
 			});
 		ServletURL2.search = searchParams2;		
 		request(ServletURL2.href,result);

@@ -54,7 +54,7 @@ public class ProductDAO implements ProductDAO_interface {
 	private static final String listByPdSort=
 		"SELECT pdid,pdsid,pdName,pdPrice,pdDiscountPrice,pdDescription,pdStatus,pdUpdate FROM Product where pdsid = ?";
 	private static final String ListByPdStatus=
-			"SELECT pdid,pdsid,pdName,pdPrice,pdDiscountPrice,pdDescription,pdStatus,pdUpdate FROM Product where pdStatus = ?";
+			"SELECT pdid,pdsid,pdName,pdPrice,pdDiscountPrice,pdDescription,pdStatus,pdUpdate FROM Product where pdStatus = ? order by pdid desc";
 
 	
 	private static final String LIST_ALL_PD_BY_NAME=
