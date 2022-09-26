@@ -21,50 +21,50 @@
 
 						<!-- notification-->
 
-						<li class="list-inline-item dropdown notification-list"><a
-							class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
-							aria-haspopup="false" aria-expanded="true"><i class="ti-bell noti-icon"></i><span
-								class="badge badge-danger noti-icon-badge"></span></a>
-							<div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg"
-								style="position: absolute; transform: translate3d(-222px, 70px, 0px); top: 0px; left: 0px; will-change: transform;">
-								<!-- item-->
+<!-- 						<li class="list-inline-item dropdown notification-list"><a -->
+<!-- 							class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button" -->
+<!-- 							aria-haspopup="false" aria-expanded="true"><i class="ti-bell noti-icon"></i><span -->
+<!-- 								class="badge badge-danger noti-icon-badge"></span></a> -->
+<!-- 							<div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg" -->
+<!-- 								style="position: absolute; transform: translate3d(-222px, 70px, 0px); top: 0px; left: 0px; will-change: transform;"> -->
+<!-- 								item -->
 
-								<div class="dropdown-item noti-title">
-									<h5>
-										<span class="badge badge-danger float-right"></span>通知
-									</h5>
-								</div>
+<!-- 								<div class="dropdown-item noti-title"> -->
+<!-- 									<h5> -->
+<!-- 										<span class="badge badge-danger float-right"></span>通知 -->
+<!-- 									</h5> -->
+<!-- 								</div> -->
 
-								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<div class="notify-icon bg-success">
-										<i class="mdi mdi-cart-outline"></i>
-									</div>
-									<p class="notify-details">
-										<b>您的訂單已送出</b> <small class="text-muted">等候服務人員確認訂單</small>
-									</p>
-								</a>
-								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<div class="notify-icon bg-warning">
-										<i class="mdi mdi-message"></i>
-									</div>
-									<p class="notify-details">
-										<b>新訊息</b> <small class="text-muted">你有 2 則訊息未讀</small>
-									</p>
-								</a>
-								<!-- item-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item">
-									<div class="notify-icon bg-info">
-										<i class="mdi mdi-martini"></i>
-									</div>
-									<p class="notify-details">
-										<b>您的商品已發貨</b> <small class="text-muted">約於 x 月 x 日內送達</small>
-									</p>
-								</a>
-								<!-- All-->
-								<a href="javascript:void(0);" class="dropdown-item notify-item">看全部</a>
-							</div></li>
+<!-- 								item -->
+<!-- 								<a href="javascript:void(0);" class="dropdown-item notify-item"> -->
+<!-- 									<div class="notify-icon bg-success"> -->
+<!-- 										<i class="mdi mdi-cart-outline"></i> -->
+<!-- 									</div> -->
+<!-- 									<p class="notify-details"> -->
+<!-- 										<b>您的訂單已送出</b> <small class="text-muted">等候服務人員確認訂單</small> -->
+<!-- 									</p> -->
+<!-- 								</a> -->
+<!-- 								item -->
+<!-- 								<a href="javascript:void(0);" class="dropdown-item notify-item"> -->
+<!-- 									<div class="notify-icon bg-warning"> -->
+<!-- 										<i class="mdi mdi-message"></i> -->
+<!-- 									</div> -->
+<!-- 									<p class="notify-details"> -->
+<!-- 										<b>新訊息</b> <small class="text-muted">你有 2 則訊息未讀</small> -->
+<!-- 									</p> -->
+<!-- 								</a> -->
+<!-- 								item -->
+<!-- 								<a href="javascript:void(0);" class="dropdown-item notify-item"> -->
+<!-- 									<div class="notify-icon bg-info"> -->
+<!-- 										<i class="mdi mdi-martini"></i> -->
+<!-- 									</div> -->
+<!-- 									<p class="notify-details"> -->
+<!-- 										<b>您的商品已發貨</b> <small class="text-muted">約於 x 月 x 日內送達</small> -->
+<!-- 									</p> -->
+<!-- 								</a> -->
+<!-- 								All -->
+<!-- 								<a href="javascript:void(0);" class="dropdown-item notify-item">看全部</a> -->
+<!-- 							</div></li> -->
 
 
 
@@ -143,21 +143,28 @@
 
 							<ul class="submenu">
 								<li><a href="/CGA103G4/back-end/chefAppointment/select_page.jsp">預約管理</a></li>
-								<li><a href="#">個人資料管理</a></li>
+								<li><a href="<%=request.getContextPath()%>/back-end/chef/select_page.jsp">個人資料管理</a></li>
 							</ul>
 						<li class="has-submenu"><a href="#"><i class="mdi dripicons-device-desktop"></i>前台管理</a>
 							<ul class="submenu">
-								<li><a href="#">客服管理</a></li>
+								<li class="has-submenu"><a href="#">客服</a>
+								<ul class="submenu">
+										<li><a href="<%=request.getContextPath()%>/back-end/memberservice/chat.jsp">客服管理</a></li>
+										<li><a href="<%=request.getContextPath()%>/back-end/memberservice/keyword.jsp">關鍵字管理</a></li>
+									</ul>
+								</li>
 								<li><a href="/CGA103G4/back-end/announcement/announce-management.jsp">公告管理</a></li>
 								<li><a href="#">公司資料管理</a></li>
-								<li><a href="#">食譜管理</a></li>
-								<li><a href="#">討論區管理</a>
 							</ul>
 
 						<li class="has-submenu "><a href="#"><i class="mdi mdi-layers"></i>後台管理</a>
 							<ul class="submenu">
-								<li><a href="/CGA103G4/back-end/emp/select_page.jsp">管理員系統</a></li>
-								<li><a href="#">會員</a></li>
+								<li class="has-submenu"><a href="<%=request.getContextPath()%>/back-end/emp/select_page.jsp">管理員系統</a>
+										<ul class="submenu">
+										<li><a href="<%=request.getContextPath()%>/back-end/emp/addEmp.jsp">新增管理員</a></li>
+									</ul>								
+								</li>
+								<li><a href="<%=request.getContextPath()%>/back-end/member/select_page.jsp">會員</a></li>
 							</ul>
 					</ul>
 					<!-- End navigation menu -->

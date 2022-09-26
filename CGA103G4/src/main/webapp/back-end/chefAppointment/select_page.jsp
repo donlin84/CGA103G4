@@ -5,7 +5,7 @@
 <%@ page import="com.chefappointmentform.model.*"%>
 
 <%
-ChefVO chefVO =(ChefVO) session.getAttribute("chefVO");
+ChefVO chefVO = (ChefVO) session.getAttribute("chefVO");
 Integer chefid = chefVO.getChefid();
 ChefAppointmentFormJDBCDAO dao = new ChefAppointmentFormJDBCDAO();
 List<ChefAppointmentFormVO> list = dao.getAllByChef(chefid); // 此行的list變數(物件)將提供page1.file的第11行取得查詢到的總筆數，再由page1.file進行分頁的需要
@@ -106,9 +106,11 @@ th, td {
 </head>
 
 <body>
-<script>
-let xxx = <%=chefVO.getChefid() %>
-</script>
+	<script>
+		let xxx =
+	<%=chefVO.getChefid()%>
+		
+	</script>
 	<div id="preloader">
 		<div id="status">
 			<div class="spinner"></div>
@@ -160,7 +162,7 @@ let xxx = <%=chefVO.getChefid() %>
 								</a>
 
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#"> <i
+								<a class="dropdown-item" href="<%=request.getContextPath()%>/BackendLogin?action=remove_account"> <i
 									class="mdi mdi-logout m-r-5 text-muted"></i>登出
 								</a>
 
@@ -349,7 +351,25 @@ let xxx = <%=chefVO.getChefid() %>
                                 取消
               </c:otherwise>
 													</c:choose></td>
-												<td>${chefapp.star}</td>
+												<td><c:choose>
+														<c:when test="${chefapp.star==1}">   
+								★
+              </c:when>
+														<c:when test="${chefapp.star==2}">   
+                    			★★  
+			  </c:when>
+														<c:when test="${chefapp.star==3}">   
+                    			★★★  
+			  </c:when>
+														<c:when test="${chefapp.star==4}">   
+                    			★★★★ 
+			  </c:when>
+														<c:when test="${chefapp.star==5}">   
+                    			★★★★★ 
+			  </c:when>
+														<c:otherwise>
+														</c:otherwise>
+													</c:choose></td>
 												<td>${chefapp.comments}</td>
 												<td>
 													<FORM METHOD="post"

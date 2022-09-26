@@ -111,7 +111,25 @@ Integer chefid = chefVO.getChefid();
               </c:otherwise> 
       </c:choose> 
 			</td>
-			<td>${chefapp.star}</td>
+			<td><c:choose>
+										<c:when test="${chefapp.star==1}">   
+								★
+              </c:when>
+										<c:when test="${chefapp.star==2}">   
+                    			★★  
+			  </c:when>
+										<c:when test="${chefapp.star==3}">   
+                    			★★★  
+			  </c:when>
+										<c:when test="${chefapp.star==4}">   
+                    			★★★★ 
+			  </c:when>
+										<c:when test="${chefapp.star==5}">   
+                    			★★★★★ 
+			  </c:when>
+										<c:otherwise>
+										</c:otherwise>
+									</c:choose></td>
 			<td>${chefapp.comments}</td>
 			<td>
 			  <FORM METHOD="get" ACTION="<%=request.getContextPath()%>/back-end/chefAppointment/chefappb.do" style="margin-bottom: 0px;">

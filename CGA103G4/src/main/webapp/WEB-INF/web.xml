@@ -254,6 +254,7 @@
 <!-- 		<url-pattern>/back-end/index-back.jsp</url-pattern> -->
 		<url-pattern>/front-end/chefAppointment/Appointment.jsp</url-pattern>
 		<url-pattern>/front-end/cartdetail/NewFile.jsp</url-pattern>
+		<url-pattern>/front-end/chefAppointment/memberLisAll.jsp</url-pattern>
 		
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>

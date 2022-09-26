@@ -134,7 +134,7 @@ body {
 								</a>
 
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#"> <i
+								<a class="dropdown-item" href="<%=request.getContextPath()%>/BackendLogin?action=remove_account"> <i
 									class="mdi mdi-logout m-r-5 text-muted"></i>登出
 								</a>
 
@@ -283,7 +283,7 @@ body {
 	</c:if>
 
 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/chefAppointment/chefappb.do" name="form1">
-		<table>
+		<table style="margin-left:250px">
 			<tr>
 				<td>預約單編號:</td>
 				<td><%=chefAppVO.getApmid()%></td>
