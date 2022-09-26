@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.member.model.*"%>
 
 <%
@@ -97,12 +98,24 @@
 		<td><%=memberVO.getMemName()%></td>
 		<td><%=memberVO.getMemAccount()%></td>
 		<td><%=memberVO.getMemPassword()%></td>
-		<td><%=memberVO.getMemGender()%></td>
+<%-- 		<td><%=memberVO.getMemGender()%></td> --%>
+		<c:if test="${memberVO.getMemGender() == 'm'}">
+				<td>男</td>	
+			</c:if>
+			<c:if test="${memberVO.getMemGender() == 'f'}">
+				<td>女</td>
+			</c:if>
 		<td><%=memberVO.getMemPhone()%></td>
 		<td><%=memberVO.getMemEmail()%></td>
 		<td><%=memberVO.getMemAddres()%></td>
 		<td><%=memberVO.getMemBirthday()%></td>
-		<td><%=memberVO.getMemStatus()%></td>
+<%-- 		<td><%=memberVO.getMemStatus()%></td> --%>
+		<c:if test="${memberVO.getMemStatus() == 0}">
+				<td>啟用</td>	
+			</c:if>
+			<c:if test="${memberVO.getMemStatus() == 1}">
+				<td>停權</td>
+			</c:if>
 		<td><%=memberVO.getMemNation()%></td>
 		<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/member/Member.do" style="margin-bottom: 0px;">

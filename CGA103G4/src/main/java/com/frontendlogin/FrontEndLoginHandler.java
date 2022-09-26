@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
+import javax.swing.JOptionPane;
 
 import com.member.model.MemberJDBCDAO;
 import com.member.model.MemberVO;
@@ -55,6 +56,18 @@ public class FrontEndLoginHandler extends HttpServlet {
 		return null;
 		
 	}
+	protected Integer getmemStatus(String account, String password) {
+		
+		MemberJDBCDAO dao = new MemberJDBCDAO();
+		List<MemberVO> list = dao.getAll();
+		for (MemberVO aMember : list) {
+			
+			if ((aMember.getMemAccount().equals(account) && aMember.getMemPassword().equals(password)))
+				return aMember.getMemStatus();
+		}
+		return null;
+		
+	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -87,7 +100,8 @@ public class FrontEndLoginHandler extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("account", account); // *工作1: 才在session內做已經登入過的標識
 			session.setAttribute("id", getid(account, password)); 
-
+			
+			if(getmemStatus(account, password) == 0) {
 			try {
 				String location = (String) session.getAttribute("location");
 				if (location != null) {
@@ -99,6 +113,13 @@ public class FrontEndLoginHandler extends HttpServlet {
 			}
 
 			res.sendRedirect(req.getContextPath() + "/front-end/index-front.jsp"); // *工作3: (-->如無來源網頁:則重導至login_success.jsp)
+		} else {
+			res.sendRedirect(req.getContextPath() + "/front-end/member/frontEndLogin.jsp");
+			Object[] options = { "確認"}; 
+			JOptionPane.showOptionDialog(null, "您已被停權!故無法登入!有任何疑問請洽客服", "警告",  JOptionPane.DEFAULT_OPTION, 
+					JOptionPane.WARNING_MESSAGE,  null, options, options[0]); 
+		} 
+			
 		}
 	}
 }

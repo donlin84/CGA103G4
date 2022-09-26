@@ -67,7 +67,7 @@ protected String getemail(String name, String phone, String gender) {
 				
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
-				errorMsgs.add("無效的姓名、電話或生日!");
+				errorMsgs.add("無效的姓名、電話或性別!");
 				if (!errorMsgs.isEmpty()) {
 					MemberVO memberVO = new MemberVO();
 					req.setAttribute("memberVO", memberVO);

@@ -120,12 +120,24 @@
 			<td>${memberVO.memName}</td>
 			<td>${memberVO.memAccount}</td>
 			<td>${memberVO.memPassword}</td>
-			<td>${memberVO.memGender}</td>
+<%-- 			<td>${memberVO.memGender}</td> --%>
+			<c:if test="${memberVO.memGender == 'm'}">
+				<td>男</td>	
+			</c:if>
+			<c:if test="${memberVO.memGender == 'f'}">
+				<td>女</td>
+			</c:if>
 			<td>${memberVO.memPhone}</td> 
 			<td>${memberVO.memEmail}</td>
 			<td>${memberVO.memAddres}</td>
 			<td>${memberVO.memBirthday}</td>
-			<td>${memberVO.memStatus}</td>
+<%-- 			<td>${memberVO.memStatus}</td> --%>
+			<c:if test="${memberVO.memStatus == 0}">
+				<td>啟用</td>	
+			</c:if>
+			<c:if test="${memberVO.memStatus == 1}">
+				<td>停權</td>
+			</c:if>
 			<td>${memberVO.memNation}</td>
 						<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/member/Member.do" style="margin-bottom: 0px;">
