@@ -7,7 +7,7 @@ header.header {
 }
 
 header.header div.block div.sign_block::before {
-  margin: 30px;
+  margin: 39px;
   content: "";
 }
 

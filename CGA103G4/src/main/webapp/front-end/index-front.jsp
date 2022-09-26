@@ -101,7 +101,7 @@ pageContext.setAttribute("list", list);
 										href="<%=request.getContextPath()%>/front-end/member/update.jsp">修改資料</a>
 									<a class="dropdown-item"
 										href="<%=request.getContextPath()%>/front-end/creditCardInformation/CreditCardInformation.jsp">信用卡</a>
-									<a class="dropdown-item" href="<%=request.getContextPath()%>/front-end/shop/ListMemberAllOrd.do?memid=203&GotoMyOrders=GoToMyOrders">查看訂單</a> <a
+									<a class="dropdown-item" href="shop/ListMemberAllOrd.do?memid=203&GotoMyOrders=GoToMyOrders">查看訂單</a> <a
 										class="dropdown-item" href="#">查看商品</a> <a
 										class="dropdown-item"
 										href="<%=request.getContextPath()%>/front-end/membercoupon/membercoupon.jsp">查看優惠卷</a>

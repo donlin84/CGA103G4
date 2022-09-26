@@ -199,8 +199,10 @@ request.setAttribute("pdDis", pdDis);
 
         <div id="step4" class="content" role="tabpanel">
           <div class="alert alert-success">
-            已成功報名課程，請確認訂單資訊。
+            感謝你的購買!
+            
           </div>
+          <a href="../index-front.jsp">返回首頁</a>
         </div>
       </div>
     </div>
