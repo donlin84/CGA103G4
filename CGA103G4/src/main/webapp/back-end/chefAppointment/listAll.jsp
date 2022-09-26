@@ -66,6 +66,10 @@ Integer chefid = chefVO.getChefid();
     padding: 5px;
     text-align: center;
   }
+  th{
+  	background-color: #283179;
+	color: white;
+  }
 </style>
 
 </head>
@@ -133,7 +137,7 @@ Integer chefid = chefVO.getChefid();
 			<td>${chefapp.comments}</td>
 			<td>
 			  <FORM METHOD="get" ACTION="<%=request.getContextPath()%>/back-end/chefAppointment/chefappb.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
+			     <input type="submit" value="修改" style="background-color: #283179; border: 2px; color: white;">
 			     <input type="hidden" name="apmid"  value="${chefapp.apmid}">
 			     <input type="hidden" name="action"	value="ChefgetOne_For_Update"></FORM>
 			</td>

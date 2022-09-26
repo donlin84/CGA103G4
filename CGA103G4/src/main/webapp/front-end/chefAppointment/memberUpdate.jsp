@@ -94,7 +94,7 @@ img {
 					</c:if>
 
 					<FORM METHOD="post" ACTION="chefapp.do" name="form1" style="margin-right:40%">
-						<table>
+						<table style="font-size:14px;">
 							<tr>
 								<td>預約單編號:</td>
 								<td><%=chefAppVO.getApmid()%></td>
@@ -118,7 +118,7 @@ img {
 							<tr>
 								<td>評論:</td>
 								<td><textarea rows="15" cols="40" name="comments"
-										style="resize: none">${chefAppVO.comments}</textarea></td>
+										style="resize: none;font-size:14px;">${chefAppVO.comments}</textarea></td>
 							</tr>
 
 
