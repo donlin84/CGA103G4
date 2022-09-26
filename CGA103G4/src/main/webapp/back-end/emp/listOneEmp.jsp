@@ -135,6 +135,8 @@ table, th, td {
 th {
 	padding: 5px;
 	text-align: center;
+	background-color:#283179;
+	color:white;
 }
 
 td {

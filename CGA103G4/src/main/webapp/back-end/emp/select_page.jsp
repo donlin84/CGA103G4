@@ -124,8 +124,6 @@ main.main {
 	display: none;
 }
 
-
-
 h4 {
 	color: blue;
 	display: inline;
@@ -145,8 +143,8 @@ table, th, td {
 th {
 	padding: 5px;
 	text-align: center;
-	background-color:#283179;
-	color:white;
+	background-color: #283179;
+	color: white;
 }
 
 td {
@@ -198,7 +196,7 @@ td {
 				<div class="card-body">
 					<h4 class="mt-0 header-title">Default Datatable</h4>
 					<p class="text-muted mb-4 font-14">
-						
+
 						<code>$().DataTable();</code>
 						.
 					</p>
@@ -206,20 +204,28 @@ td {
 						class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
 						<div class="row">
 							<div class="col-sm-12 col-md-6">
-								<label>搜尋員工編號:
-										<FORM METHOD="post" ACTION="emp.do"
-											enctype="multipart/form-data">
-											<input type="text" name="empid"
-												class="form-control form-control-sm"><input
-												type="hidden" name="action" value="getOne_For_Display">
-											<input type="submit">
-										</FORM>
-									</label>
+
+								<label>搜尋員工編號: <c:if test="${not empty errorMsgs}">
+
+										<c:forEach var="message" items="${errorMsgs}">
+											<p style="color: red">${message}</p>
+										</c:forEach>
+
+									</c:if>
+									<FORM METHOD="post" ACTION="emp.do"
+										enctype="multipart/form-data">
+										<input type="text" name="empid"
+											class="form-control form-control-sm"><input
+											type="hidden" name="action" value="getOne_For_Display">
+										<input type="submit">
+									</FORM>
+								</label>
+
+
+
 							</div>
 							<div class="col-sm-12 col-md-6">
-								<div id="datatable_filter" class="dataTables_filter">
-									
-								</div>
+								<div id="datatable_filter" class="dataTables_filter"></div>
 							</div>
 						</div>
 						<div class="row">
@@ -270,13 +276,13 @@ td {
 												rowspan="1" colspan="1"
 												aria-label="Salary: activate to sort column ascending"
 												style="width: 101px;">管理員管理</th>
-												
-												
+
+
 										</tr>
 									</thead>
 									<tbody>
-									<%@ include file="page1.file"%>
-											<c:forEach var="empVO" items="${list}" begin="<%=pageIndex%>"
+										<%@ include file="page1.file"%>
+										<c:forEach var="empVO" items="${list}" begin="<%=pageIndex%>"
 											end="<%=pageIndex+rowsPerPage-1%>">
 											<tr>
 												<td>${empVO.empid}</td>
@@ -286,7 +292,7 @@ td {
 												<td>${empVO.empName}</td>
 												<td>${empVO.empPhone}</td>
 												<td>${empVO.empAccount}</td>
-												<td>${empVO.empPassword}</td>
+												<td>${(empVO.empPassword!=null)? "*********":"錯誤"}</td>
 												<td>${empVO.empLevel}</td>
 												<td>${empVO.empStatus}</td>
 												<td>${empVO.empHiredate}</td>
@@ -294,8 +300,9 @@ td {
 													<FORM METHOD="post"
 														ACTION="<%=request.getContextPath()%>/back-end/emp/emp.do"
 														style="margin-bottom: 0px;">
-														<input type="submit" value="修改" style="background-color:#283179;border:2px;color:white;"> <input
-															type="hidden" name="empid" value="${empVO.empid}">
+														<input type="submit" value="修改"
+															style="background-color: #283179; border: 2px; color: white;">
+														<input type="hidden" name="empid" value="${empVO.empid}">
 														<input type="hidden" name="action"
 															value="getOne_For_Update">
 													</FORM>
@@ -308,11 +315,8 @@ td {
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-sm-12 col-md-5">
-							</div>
-							<div class="col-sm-12 col-md-7">
-								
-							</div>
+							<div class="col-sm-12 col-md-5"></div>
+							<div class="col-sm-12 col-md-7"></div>
 						</div>
 					</div>
 				</div>

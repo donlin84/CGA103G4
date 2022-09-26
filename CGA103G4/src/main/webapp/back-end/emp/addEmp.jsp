@@ -210,7 +210,7 @@ td {
 								<div class="pic" style="margin: auto; width: 500px">
 									<img id="showPic" src="./images/noImage.jpg" />
 								</div>
-								<div style="margin-left:700px">
+								<div style="margin-left:1000px">
 								<c:if test="${not empty errorMsgs}">
 									<font style="color: red">請修正以下錯誤:</font>
 									<ul>
