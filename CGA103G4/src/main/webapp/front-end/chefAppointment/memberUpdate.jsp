@@ -127,7 +127,7 @@ img {
 						<br> <input type="hidden" name="action" value="updateMem">
 						<input type="hidden" name="apmid"
 							value="<%=chefAppVO.getApmid()%>"> <input type="submit"
-							value="送出修改" style="margin-left:500px">
+							value="給予" style="margin-left:500px">
 					</FORM>
 				</div>
 			</div>

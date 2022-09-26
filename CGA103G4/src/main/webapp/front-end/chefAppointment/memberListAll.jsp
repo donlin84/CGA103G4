@@ -141,7 +141,7 @@ background-color: #FAFAFA;
 									<FORM METHOD="post"
 										ACTION="<%=request.getContextPath()%>/front-end/chefAppointment/chefapp.do"
 										style="margin-bottom: 0px;">
-										<input type="submit" value="修改"
+										<input type="submit" value="給予"
 											style=${(chefapp.apmStatus==2)? "":"display:none"}> <input
 											type="hidden" name="apmid" value="${chefapp.apmid}">
 										<input type="hidden" name="action"
