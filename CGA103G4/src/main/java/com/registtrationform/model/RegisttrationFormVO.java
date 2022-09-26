@@ -3,9 +3,8 @@ package com.registtrationform.model;
 import java.time.LocalDateTime;
 
 import com.ClassIfm.model.ClassIfmService;
-import com.member.model.MemberService;
 
-public class RegisttrationFormVO {
+public class RegisttrationFormVO implements java.io.Serializable{
 	private Integer claid;
 	private Integer memid;
 	private Integer regPayment;
@@ -63,14 +62,17 @@ public class RegisttrationFormVO {
 	public void setRegPeople(Integer regPeople) {
 		this.regPeople = regPeople;
 	}
-	public com.ClassIfm.model.ClassIfmVO getClassTagVO(){
-		ClassIfmService ClassIfmSvc = new ClassIfmService();
-		com.ClassIfm.model.ClassIfmVO classIfmVO = ClassIfmSvc.getOneClassIfm(claid);
-		return classIfmVO;
+	
+	
+	public com.ClassIfm.model.ClassIfmVO getClassIfmVO(){
+		com.ClassIfm.model.ClassIfmService classSrv = new com.ClassIfm.model.ClassIfmService();
+		com.ClassIfm.model.ClassIfmVO classifmVO = classSrv.getOneClassIfm(claid);
+		return classifmVO;
 	}
-	public com.member.model.MemberVO getMemberVO(){
-		MemberService memberSvc = new MemberService();
-		com.member.model.MemberVO memberVO = memberSvc.getOneMember(memid);
+	
+	public com.member.model.MemberVO getmemberVO(){
+		com.member.model.MemberService memberSrv = new com.member.model.MemberService();
+		com.member.model.MemberVO memberVO = memberSrv.getOneMember(memid);
 		return memberVO;
 	}
 	

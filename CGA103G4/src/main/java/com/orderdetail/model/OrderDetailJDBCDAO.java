@@ -112,5 +112,35 @@ public class OrderDetailJDBCDAO implements OrderDetailDAO_interface{
 		}
 		return orderDetailVO;
 	}
+
+	@Override
+	public List<OrderDetailVO> selectAllByOrdid(Integer ordid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public OrderDetailVO getOneOrderDetailByOrdid(Integer ordid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updatePdNumber(OrderDetailVO orderDetailVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insert2(OrderDetailVO orderDetailVO, Connection con) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<OrderDetailVO> findByPrimaryKey(Integer ordid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

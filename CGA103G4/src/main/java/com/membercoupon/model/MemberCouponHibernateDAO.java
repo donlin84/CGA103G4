@@ -1,5 +1,6 @@
 package com.membercoupon.model;
 
+import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
@@ -55,6 +56,12 @@ public class MemberCouponHibernateDAO implements MemberCouponDAO_interface{
 	public List<MemberCouponVO> getAll(Map<String, String[]> map) {
 		List<MemberCouponVO> list = (List<MemberCouponVO>)hibernateTemplate.loadAll(MemberCouponVO.class);
 		return list;
+	}
+
+	@Override
+	public void transUpdate(Integer memCpStatus, Integer memCpid, Connection con) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

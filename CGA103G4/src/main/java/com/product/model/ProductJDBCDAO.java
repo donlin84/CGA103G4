@@ -4,11 +4,15 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
+
+import com.promotions.model.PromotionsVO;
+import com.promotionsdetail.model.PromotionsDetailVO;
+
 public class ProductJDBCDAO implements ProductDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei";
 	String userid = "root";
-	String passwd = "tn00349903";
+	String passwd = "cga103g4";
 	
 	private static final String INSERT_STMT = 
 		"INSERT INTO Product (pdsid,pdName,pdPrice,pdDiscountPrice,pdDescription,pdStatus,pdUpdate) VALUES (?,?,?,?,?,?,?)";
@@ -24,6 +28,9 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		"SELECT pdid,pdsid,pdName,pdPrice,pdDiscountPrice,pdDescription,pdStatus,pdUpdate FROM Product where pdsid = ?";
 	private static final String ListByPdStatus=
 		"SELECT pdid,pdsid,pdName,pdPrice,pdDiscountPrice,pdDescription,pdStatus,pdUpdate FROM Product where pdStatus = ?";
+	
+	private static final String GET_ALL_JOIN_PMID = 
+			"SELECT b.pmid from product a left join promotionsdetail b on a.pdid = b.pdid order by a.pdid"; 
 	@Override
 	public void insert(ProductVO productVO) {
 		Connection con = null;
@@ -427,32 +434,155 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 					return list;
 				}
 			
-	
-
-	public static void main(String[] args) {
-
-		ProductJDBCDAO dao = new ProductJDBCDAO();
-		
-//		List<ProductVO> list = dao.getAllPdName();
-//		for (ProductVO aProduct : list) {
-//
-//			System.out.print(aProduct.getPdName() + ",");
-			
-			List<ProductVO> list2 = dao.listByPdStatus(1);
-			for (ProductVO aProduct : list2) {
-			System.out.print(aProduct.getPdid() + ",");
-			System.out.print(aProduct.getPdsid() + ",");
-			System.out.print(aProduct.getPdName() + ",");
-			System.out.print(aProduct.getPdPrice() + ",");
-			System.out.print(aProduct.getPdDiscountPrice() + ",");
-			System.out.print(aProduct.getPdDescription() + ",");
-			System.out.println(aProduct.getPdStatus());
-			System.out.println(aProduct.getPdUpdate());
-			System.out.println("---------------------");	
-
-		}
+	@Override
+	public List<ProductVO> getAll(Map<String, String[]> map) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+	@Override
+	public List<Object> getTop3pd() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ProductVO getNewestPdid() {
+		// TODO Auto-generated method stub
+		return null;
+	
+	}
+	@Override
+	public PromotionsVO getPromoDiscount(Integer pmid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@SuppressWarnings("null")
+	@Override
+	public List<PromotionsDetailVO> getAllJoinPmid() {
+		List<PromotionsDetailVO> list2 = new ArrayList<PromotionsDetailVO>();
+		
+		PromotionsDetailVO promotionsDetailVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd); 
+			pstmt = con.prepareStatement(GET_ALL_JOIN_PMID);
+			rs = pstmt.executeQuery();
+			
+
+			while (rs.next()) {
+				
+				if(rs.getObject("pmid") == null) {
+					 promotionsDetailVO.setPmid(rs.getInt(0));
+				}
+				else promotionsDetailVO.setPmid(rs.getInt("pmid"));
+				list2.add(promotionsDetailVO); 
+				System.out.println(promotionsDetailVO);
+			}
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list2;
+	}
+
+	@Override
+	public List<ProductVO> listAllOderByPdid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<ProductVO> listAllOdByPdPriceDesc() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<ProductVO> listAllOdByPdPriceAsc() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+public static void main(String[] args) {
+
+	ProductJDBCDAO dao = new ProductJDBCDAO();
+	
+	List<PromotionsDetailVO> list2 = dao.getAllJoinPmid();
+	
+	for (PromotionsDetailVO apromotionDetailVO : list2) {
+		
+	System.out.print(apromotionDetailVO.getPmid() + ",");	
+
+
+	}
+
 }
+@Override
+public void updatePdStatus(ProductVO productVO) {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public List<ProductVO> getPdOnShelfOrderByPrice() {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public List<ProductVO> getPdOnShelfOrderByPriceDesc() {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public List<ProductVO> getPdOnShelfOrderPdUpdate() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public List<ProductVO> NameSearchGetAll(String pdName) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+	}
+
+
+
+
+
 	
 //		List<ProductVO> list2 = dao.getAll();
 //		for (ProductVO aProduct : list2) {

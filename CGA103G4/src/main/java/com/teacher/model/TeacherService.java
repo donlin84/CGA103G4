@@ -1,6 +1,7 @@
 package com.teacher.model;
 
 import java.util.List;
+import java.util.Map;
 
 public class TeacherService {
 	private TeacherDAO_interface dao;
@@ -59,6 +60,9 @@ public class TeacherService {
 
 	public List<TeacherVO> getAll() {
 		return dao.getAll();
+	}
+	public List<TeacherVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
 	}
 
 }

@@ -2,6 +2,13 @@ package com.orders.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
+
+import com.membercoupon.model.MemberCouponService;
+import com.membercoupon.model.MemberCouponVO;
+import com.orderdetail.model.OrderDetailDAO;
+import com.orderdetail.model.OrderDetailDAO_interface;
+import com.orderdetail.model.OrderDetailVO;
 
 public class OrdersVO implements Serializable{
 
@@ -100,4 +107,30 @@ public class OrdersVO implements Serializable{
 //		this.ordHopetime = ordHopetime;
 //	}
 	
+//	========================冠銓新增=====================
+	//根據ordid找order detail
+	
+	public List<OrderDetailVO> getAllDetailByOrdid(Integer ordid){
+		OrderDetailDAO_interface dao = new OrderDetailDAO();	
+		return dao.selectAllByOrdid(ordid);
+	}
+	//查詢一筆order 根據 ordid找order detail
+	public com.orderdetail.model.OrderDetailVO getOrderDetailVO(){
+		com.orderdetail.model.OrderDetailService orderDeSvc = new com.orderdetail.model.OrderDetailService();
+		com.orderdetail.model.OrderDetailVO orderDetailVO = orderDeSvc.getOneUserAllDetailJoin(ordid);
+		return orderDetailVO;
+	}
+//	========================亦翔新增=====================
+	
+	public com.member.model.MemberVO getMemberVO() {
+		com.member.model.MemberService memSvc = new com.member.model.MemberService();
+		com.member.model.MemberVO memberVO = memSvc.getOneMember(memid);
+		return memberVO;
+	}
+	
+	public MemberCouponVO getMemberCouponVO() {
+		MemberCouponService memCpSvc = new MemberCouponService();
+		MemberCouponVO memCpVO = memCpSvc.getOneMemberCoupon(memCpid);
+		return memCpVO;
+	}
 }

@@ -1,19 +1,5 @@
-.errordiv{
-    top: 200px;
-    left: 400px;
-    position: absolute;
-    width: 140px;
-    height: 80px;
-    color:red;
-    border-radius: 20px;
-    border: 1px black solid;
-    display: flex;
-    align-items: center;
-}
-.errorp{
-     text-align: center;
-     font-size: 15px;
-     margin: auto;
+.errormsgs{
+	position:absolute;
 }
 .panel-group{
     position: relative;

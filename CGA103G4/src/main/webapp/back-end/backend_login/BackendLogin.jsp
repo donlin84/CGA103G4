@@ -9,30 +9,24 @@
 </head>
 <body>
 
-<c:if test="${not empty errormsg}">
-	<c:forEach var="message" items="${errormsg}">
-		<div class="errordiv">
-			<p class="errorp">${message}</p>
-		</div>
-	</c:forEach>
-</c:if>
-<c:if test="${not empty errormsg2}">
-	<c:forEach var="message2" items="${errormsg2}">
-		<div class="errordiv">
-			<p class="errorp">${message2}</p>
-		</div>
-	</c:forEach>
+<c:if test="${not empty errorMsgs}">
+<!-- 		<font style="color:red">請修正以下錯誤:</font> -->
+		<ul class="errormsgs">
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color:red">${message}</li>
+			</c:forEach>
+		</ul>
 </c:if>
 
     <div class="panel-group">
         <input type="radio" name="panel-radio" id="radio1" class="panel-control" checked>
-        <input type="radio" name="panel-radio" id="radio2" class="panel-control"  >
+        <input type="radio" name="panel-radio" id="radio2" class="panel-control"  ${(abc==null)?'':'checked'}>
         <div class="tab-group">
           <label id="lab1" for="radio1" class="active">管理員</label>
           <label id="lab2" for="radio2">私廚</label>
         </div>
         <div class="content-group">
-            <Form action="<%=request.getContextPath()%>/MemberServlet" method="post">
+            <form action="<%=request.getContextPath()%>/BackendLogin" method="post">
                 <div class="login_1">
                     <div class="small_title">
                         <div>
@@ -42,13 +36,13 @@
                     </div>
                     <input type="hidden" name="idname" value="employee">
                     <label class="textfont" for="">Account</label><br>
-                    <input type="text" placeholder="請輸入帳號" name="employeename"><br>
+                    <input type="text" placeholder="請輸入帳號" name="employeename" value=""><br>
                     <label  class="textfont" for="">Password</label><br>
                     <input class="pass1" type="password" placeholder="請輸入密碼" name="employeepassword"><img id="eyes1" src="<%=request.getContextPath()%>/back-end/backend_login/images/eye.svg" alt=""><br>
                     <button type="submit" class="btn_sbm">登入</button>
                 </div>
-            </Form>
-            <Form action="<%=request.getContextPath()%>/BackendLogin" method="post">
+            </form>
+            <form action="<%=request.getContextPath()%>/BackendLogin" method="post">
                 <div class="login_2">
                     <div class="small_title">
                         <div>
@@ -64,7 +58,7 @@
                     <button type="submit" class="btn_sbm">登入</button>
                     </div>
                 </div>
-            </Form>
+            </form>
         </div>
     </div>
     <script>

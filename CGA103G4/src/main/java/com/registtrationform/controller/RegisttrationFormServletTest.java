@@ -20,6 +20,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +35,7 @@ import com.ClassIfm.model.*;
 import com.google.gson.JsonArray;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
+@WebServlet("/back-end/registtrationform/RegisttrationFormTest.do")
 public class RegisttrationFormServletTest extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -45,14 +47,24 @@ public class RegisttrationFormServletTest extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		res.setCharacterEncoding("UTF-8");
-		System.out.println("成功接收請求");
+		String action = req.getParameter("action");
+		System.out.println(action);
+	
 
+		
 		RegisttrationFormService registtrationFormSvc = new RegisttrationFormService();
 
 		ClassIfmService classIfmSvc = new ClassIfmService();
 		// 取得陣列
 		List<RegisttrationFormVO> registtrationFormList = registtrationFormSvc.getAll();
-		List<ClassIfmVO> ClassIfmList = classIfmSvc.getAll();
+		
+		List<ClassIfmVO> ClassIfmList = null;
+		if( "Allclass".equals(action) ) {
+			ClassIfmList = classIfmSvc.getAll();
+		}else if("Listedclass".equals(action) ){
+			ClassIfmList =	classIfmSvc.front_getall();
+		}	
+		
 		Integer people = null;
 
 		JSONArray jsonarray = new JSONArray();
@@ -86,10 +98,11 @@ public class RegisttrationFormServletTest extends HttpServlet {
 
 		}
 
-		System.out.println(req.getParameter("action"));
+
 		System.out.println(jsonarray);
 		res.getWriter().print(jsonarray);
 		return;
+		
+		
 	}
-
 }

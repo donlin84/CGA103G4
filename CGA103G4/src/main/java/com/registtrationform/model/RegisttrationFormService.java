@@ -15,8 +15,8 @@ public class RegisttrationFormService {
 		MemberService membersrc = new MemberService();
 	}
 	
-	public RegisttrationFormVO addRegisttrationForm(Integer claid, Integer memid, Integer regPayment, Integer regStatus,
-			Integer regPeople,Integer regReview, String regReviewContent
+	public RegisttrationFormVO addRegisttrationForm(Integer claid, Integer memid, Integer regPayment, Integer regStatus,Integer regPeople,
+			Integer regReview, String regReviewContent
 
 	) {
 
@@ -33,16 +33,13 @@ public class RegisttrationFormService {
 		return registtrationFormVO;
 	}
 
-	public RegisttrationFormVO updateRegisttrationForm(Integer regPayment, Integer regStatus, Integer regPeople,
-			Integer regReview,String regReviewContent, Integer claid, Integer memid) {
+	public RegisttrationFormVO updateRegisttrationForm(Integer regPayment, Integer regStatus,Integer regPeople, Integer claid, Integer memid) {
 
 		RegisttrationFormVO registtrationFormVO = new RegisttrationFormVO();
 
 		registtrationFormVO.setRegPayment(regPayment);
 		registtrationFormVO.setRegStatus(regStatus);
 		registtrationFormVO.setRegPeople(regPeople);
-		registtrationFormVO.setRegReview(regReview);
-		registtrationFormVO.setRegReviewContent(regReviewContent);
 		registtrationFormVO.setClaid(claid);
 		registtrationFormVO.setMemid(memid);
 		dao.update(registtrationFormVO);

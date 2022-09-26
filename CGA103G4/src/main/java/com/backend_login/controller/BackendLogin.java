@@ -35,6 +35,7 @@ public class BackendLogin extends HttpServlet {
 		
 		// 員工登入
 		if ("employee".equals(req.getParameter("idname"))) {
+			
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -58,7 +59,6 @@ public class BackendLogin extends HttpServlet {
 				errorMsgs.add("管理員您輸入的帳號並未與系統連結");
 			}
 //			System.out.println(empVO.getEmpLevel());
-			
 			
 			//有錯誤訊息
 			if (!errorMsgs.isEmpty()) {

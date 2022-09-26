@@ -7,8 +7,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%
-ProductVO productVO = (ProductVO) request.getAttribute("productVO");
+ProductVO productVO2 = (ProductVO) request.getAttribute("productVO2");
 %>
+
+
 
 <STYLE>
 .table{
@@ -115,7 +117,7 @@ ProductVO productVO = (ProductVO) request.getAttribute("productVO");
 		<div class="col-12">
 			<div class="card"  style="margin:0 150px">
 				<div class="card-body">
-					<h4 class="mt-0 header-title">商品資訊</h4>
+					<h2 class="mt-0 header-title">更新成功</h2>
 					<c:if test="${not empty errorMsgs}">
 						<font style="color: red">請修正以下錯誤:</font>
 						<ul>
@@ -128,56 +130,70 @@ ProductVO productVO = (ProductVO) request.getAttribute("productVO");
 
 					<table id="mainTable" class="table table-striped m-b-0">
 						<tbody>
+						
 							<tr>
 								<td>商品編號</td>
-								<td><%=productVO.getPdid()%></td>
+								<td><%=productVO2.getPdid()%></td>
 							</tr>
+							
 							<tr>
 								<td>商品類別</td>
-								<td><%=productVO.getPdsid()%></td>
+									<c:set var = "str1" value = "${productVO2.productSortVO.pdsName}(${productVO2.pdsid})"/>
+                				<td>${str1}</td>  
 							</tr>
+							
 							<tr>
 								<td>商品名稱</td>
-								<td><%=productVO.getPdName()%></td>
+								<td><%=productVO2.getPdName()%></td>
 							</tr>
+							
 							<tr>
 								<td>商品價格</td>
-								<td><%=productVO.getPdPrice()%></td>
+								<td><%=productVO2.getPdPrice()%></td>
 							</tr>
+							
 							<tr>
 								<td>優惠價格</td>
-								<td><%=productVO.getPdDiscountPrice()%></td>
+								<td><%=productVO2.getPdDiscountPrice()%></td>
 							</tr>
+							
 							<tr>
 								<td>商品描述</td>
-								<td class="productdescription" width = 70%><%=productVO.getPdDescription()%></td>
+								<td class="productdescription" width = 70%><%=productVO2.getPdDescription()%></td>
 							</tr>
+							
 							<tr>
 								<td>商品狀態</td>
 								<td>
-									<c:if test="${productVO.pdStatus == 1}" var="上架中" scope="page">
+									<c:if test="${productVO2.pdStatus == 1}" var="上架中" scope="page">
 									上架中</c:if>
-									<c:if test="${productVO.pdStatus == 0}" var="上架中" scope="page">
+									<c:if test="${productVO2.pdStatus == 0}" var="上架中" scope="page">
 									未上架</c:if>
-				</td>
+								</td>
 							</tr>
+							
 							<tr>
-								<c:set var="string1" value="${productVO.getPdUpdate()}" />
+								<c:set var="string1" value="${productVO2.getPdUpdate()}" />
 								<c:set var="string2" value="${fn:replace(string1, 'T', ' ')}" />
 								<td>上次修改</td>
 								<td>${string2}</td>
 							</tr>
+							
 							<tr>
 								<td>商品圖:</td>
-								<td><img
-									src="Productpic.do?pdid=<%=productVO.getPdid()%>"
-									width="200"></td>
+								<td>
+									<c:forEach var="productpicVO" items="${productVO2.getPicsNo()}">
+									<img alt="" src="showPicsByPicNo.do?pdPicid=${productpicVO.pdPicid}" width="200">
+									</c:forEach>
+								</td>		
 							</tr>
 						</tbody>
 					</table>
+					
 					<h2>
 						<a href="productShowAll.jsp">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;繼續查詢</a>
 					</h2>
+					
 				</div>
 			</div>
 		</div>

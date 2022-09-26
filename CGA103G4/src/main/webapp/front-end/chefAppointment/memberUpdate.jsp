@@ -76,12 +76,13 @@ img {
 </head>
 <body bgcolor='white'>
 	<%@ include file="./tools/header.jsp"%>
+	
 	<div class="main">
 		<div class="container -on" id="chefPage">
 			<div id="chefPageContent">
 				<div class="sectionOne">
 
-					<h3>資料修改:</h3>
+					<h3 style="margin-left:100px">給予評價:</h3>
 					<%-- 錯誤表列 --%>
 					<c:if test="${not empty errorMsgs}">
 						<font style="color: red">請修正以下錯誤:</font>
@@ -106,17 +107,17 @@ img {
 							<tr>
 								<td>評價(星):</td>
 								<td><select size="1" name="star">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
+										<option value="1">★</option>
+										<option value="2">★★</option>
+										<option value="3">★★★</option>
+										<option value="4">★★★★</option>
+										<option value="5">★★★★★</option>
 								</select></td>
 							</tr>
 
 							<tr>
 								<td>評論:</td>
-								<td><textarea rows="25" cols="25" name="comments"
+								<td><textarea rows="15" cols="40" name="comments"
 										style="resize: none">${chefAppVO.comments}</textarea></td>
 							</tr>
 
@@ -126,7 +127,7 @@ img {
 						<br> <input type="hidden" name="action" value="updateMem">
 						<input type="hidden" name="apmid"
 							value="<%=chefAppVO.getApmid()%>"> <input type="submit"
-							value="送出修改">
+							value="送出修改" style="margin-left:500px">
 					</FORM>
 				</div>
 			</div>

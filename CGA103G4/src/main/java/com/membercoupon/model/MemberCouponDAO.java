@@ -38,7 +38,8 @@ public class MemberCouponDAO implements MemberCouponDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT memCpid,memid,cpTpid,memCpDate,memCpStatus,memCpRecord FROM cga103g4.MemberCoupon order by memCpid";
 
 	private static final String GET_ONE_STMT = "SELECT memCpid,memid,cpTpid,memCpDate,memCpStatus,memCpRecord FROM cga103g4.MemberCoupon where memCpid = ?";
-
+//======================================亦翔新增=======================================	
+	private static final String TRANS_UPDATE = "UPDATE cga103g4.MemberCoupon set memCpStatus = ? where memCpid = ?";
 	@Override
 	public void insert(MemberCouponVO memberCouponVO) {
 
@@ -352,6 +353,41 @@ public class MemberCouponDAO implements MemberCouponDAO_interface {
 			}
 		}
 		return list;
+	}
+	
+//	=========================================亦翔新增==============================================
+	@Override
+	public void transUpdate(Integer memCpStatus, Integer memCpid, Connection con) {
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement(TRANS_UPDATE);
+			
+			ps.setInt(1, memCpStatus);
+			ps.setInt(2, memCpid);
+			
+			ps.executeUpdate();
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-會員優惠券");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. " + excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
 	}
 
 }

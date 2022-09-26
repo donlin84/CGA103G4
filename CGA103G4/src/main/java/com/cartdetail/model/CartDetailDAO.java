@@ -26,8 +26,12 @@ public class CartDetailDAO implements CartDetailDAO_interface {
 	private static final String INSERT = "insert into cartdetail (memid, pdid, pdnumber) values (?, ?, ?)";
 	private static final String UPDATE = "update cartdetail set pdnumber = ? where memid = ? && pdid = ?";
 	private static final String SELECT_ALL = "select memid, pdid, pdnumber from cartdetail order by memid";
+	private static final String SELECT_ONES = "select memid, pdid, pdnumber from cartdetail where memid = ?";
 	private static final String SELECT_ONE = "select memid, pdid, pdnumber from cartdetail where memid = ? && pdid = ?";
 	private static final String DELETE = "delete from cartdetail where memid = ? && pdid = ?";
+	private static final String DELETES = "delete from cartdetail where memid = ?";
+	private static final String MINUS = "update cartdetail set pdnumber = pdnumber-1 where memid = ? && pdid = ?";
+	private static final String PLUS = "update cartdetail set pdnumber = pdnumber+1 where memid = ? && pdid = ?";
 
 	@Override
 	public void insert(CartDetailVO cartDetailVO) {
@@ -109,5 +113,86 @@ public class CartDetailDAO implements CartDetailDAO_interface {
 			e.printStackTrace();
 		}
 	}
+	
+//	==================================================亦翔新增=========================================================
+	
+	@Override
+	public List<CartDetailVO> findByPrimaryKey(Integer memid) {
+		List<CartDetailVO> list = new ArrayList<CartDetailVO>();
+		CartDetailVO cartDetailVO = null;
+		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(SELECT_ONES);) {
+			ps.setInt(1, memid);
 
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				cartDetailVO = new CartDetailVO();
+				cartDetailVO.setMemid(rs.getInt(1));
+				cartDetailVO.setPdid(rs.getInt(2));
+				cartDetailVO.setPdNumber(rs.getInt(3));
+				
+				list.add(cartDetailVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	@Override
+	public void delete2(Integer memid, Connection con) {
+		PreparedStatement ps = null;
+		
+		try {
+			ps = con.prepareStatement(DELETES);
+			ps.setInt(1, memid);
+			
+			ps.executeUpdate();
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-購物車明細");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. " + excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void minus(CartDetailVO cartDetailVO) {
+		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(MINUS);){
+			ps.setInt(1, cartDetailVO.getMemid());
+			ps.setInt(2, cartDetailVO.getPdid());
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void plus(CartDetailVO cartDetailVO) {
+		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(PLUS);){
+			ps.setInt(1, cartDetailVO.getMemid());
+			ps.setInt(2, cartDetailVO.getPdid());
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

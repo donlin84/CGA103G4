@@ -1,0 +1,13 @@
+*{
+  box-sizing: border-box;
+}
+html{
+  font-size: 62.5%;  /*10px*/
+  /*�ܼƪ��g�k*/
+  --page-width:1500px;
+  --bg-color:rgb(199, 199, 199);
+}
+body{
+  margin: 0;
+  overflow-x: hidden;
+}

@@ -16,4 +16,5 @@ public interface PromotionsDetailDAO_interface {
     
 //	===================================冠銓新增
 	public PromotionsDetailVO getOnePmidByPdid(Integer pdid);
+	public PromotionsDetailVO deleteOnePromoDetailVO(Integer pdid);
 }

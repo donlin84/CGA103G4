@@ -1,0 +1,19 @@
+
+div.main div.container{
+  display: none;
+}
+
+div.main div.container.-on{
+  display: block;
+}
+
+div.main div.container {
+  text-align: center;
+}
+
+div.horizen {
+  width: 100%;
+  height: 0.01rem;
+  margin: 0.2rem 0;
+  background: #c1c1c1;
+}

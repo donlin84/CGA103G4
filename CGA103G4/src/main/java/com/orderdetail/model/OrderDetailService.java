@@ -46,4 +46,34 @@ public class OrderDetailService {
 	public List<OrderDetailVO> getAll() {
 		return dao.selectAll();
 	}
+	
+//	========================冠銓新增=====================
+	public List<OrderDetailVO> getAllByOrdid(Integer ordid){
+		return dao.selectAllByOrdid(ordid);
+	}
+	
+	public OrderDetailVO UpdatePdNumber(Integer detailNumber, Integer ordid, Integer pdid) {
+		OrderDetailVO orderDetailVO = new OrderDetailVO();
+		
+		orderDetailVO.setDetailNumber(detailNumber);
+		orderDetailVO.setOrdid(ordid);
+		orderDetailVO.setPdid(pdid);
+		
+		dao.updatePdNumber(orderDetailVO);
+		
+		return orderDetailVO;
+	}
+	
+	public OrderDetailVO getOneUserAllDetailJoin(Integer ordid) {
+		return dao.getOneOrderDetailByOrdid(ordid);
+	}
+	
+	
+//	========================亦翔新增=====================
+	
+	public List<OrderDetailVO> getOnes(Integer ordid) {
+		return dao.findByPrimaryKey(ordid);
+	}
 }
+
+

@@ -60,7 +60,6 @@
 		<th>聯絡電話</th>
 		<th>管理員照片</th>
 		<th>帳號</th>
-		<th>密碼</th>
 		<th>管理員等級</th>
 		<th>管理員狀態</th>
 		<th>雇用日期</th>
@@ -74,7 +73,6 @@
 			<td>${empVO.empPhone}</td>
 			<td><img src="<%= request.getContextPath() %>/EmpShowPic?empid=${empVO.empid}" width="100" heigh="100"></td>
 			<td>${empVO.empAccount}</td>
-			<td>${empVO.empPassword}</td>
 			<td>${empVO.empLevel}</td>			
 			<td>${empVO.empStatus}</td>
 			<td>${empVO.empHiredate}</td>

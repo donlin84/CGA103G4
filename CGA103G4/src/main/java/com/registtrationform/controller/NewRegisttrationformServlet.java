@@ -45,6 +45,8 @@ public class NewRegisttrationformServlet extends HttpServlet {
 			
 			ClassIfmService claSrv = new ClassIfmService();
 			ClassIfmVO classifmvo=claSrv.getOneClassIfm(claid);
+			System.out.println(classifmvo.getClaPeopleMax());
+			System.out.println(classifmvo.getClaPeople());
 			
 			RegisttrationFormService regSrv = new RegisttrationFormService();
 			RegisttrationFormVO registtrationFormVO=regSrv.getOneRegisttrationForm(claid, memid);
@@ -71,8 +73,10 @@ public class NewRegisttrationformServlet extends HttpServlet {
 			
 			claSrv.update_clapeople(classIfmVO.getClaPeople() - regPeople, claid);
 			
-			RequestDispatcher myclass = req.getRequestDispatcher("/front-end/classifm/MyClassIfm.jsp");
-			myclass.forward(req, resp);
+//			RequestDispatcher myclass = req.getRequestDispatcher("/front-end/classifm/MyClassIfm.jsp");
+//			myclass.forward(req, resp);
+			
+			resp.sendRedirect("/CGA103G4/front-end/classifm/MyClassIfm.jsp");
 			
 		}
 		
@@ -117,7 +121,7 @@ public class NewRegisttrationformServlet extends HttpServlet {
 			}
 			
 			
-			regSrv.updateRegisttrationForm(regPayment, regStatus, regPeople, claid, action, memid, regPeople);
+			regSrv.updateRegisttrationForm(regPayment, regStatus, regPeople, claid, memid);
 			
 			RegisttrationFormVO regvo=regSrv.getOneRegisttrationForm(claid, memid);
 			
@@ -215,8 +219,7 @@ public class NewRegisttrationformServlet extends HttpServlet {
 //			succse.forward(req, resp);
 //			
 //		}
-		
-		//後臺小複合查詢
+		//後臺回饋表單
 		if("review_form".equals(action)) {
 			
 //			String memname=req.getParameter("memname").trim();//用客人名字抓出會員id

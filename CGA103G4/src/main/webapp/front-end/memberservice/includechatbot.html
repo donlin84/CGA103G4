@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<div class="button_sticky"><div style="margin:6px 20px">聊天機器人</div></div>
+
+<style>
+.button_sticky {
+border-radius:15px 15px 0 0;
+    width: 350px;
+    height: 30px;
+    background: #eeeeda;
+    position: sticky;
+    float:right;
+    bottom: 0;
+}
+.box_sticky {
+    background: gray;
+    position: sticky;
+    float:right;
+    bottom: 0;
+}	
+</style>	
+
+<script>
+let button = document.querySelector(".button_sticky");
+button.addEventListener("click",ifrmae);
+function ifrmae(){
+	iframe = document.getElementById("iframe")
+    if (iframe != null){
+    	button.style.display="none"
+    	iframediv.style.display="";
+    }else{
+    	
+		button.style.display="none"
+	    iframe = document.createElement('iframe');
+	    iframediv = document.createElement('div');
+	    iframe.src="http://localhost:8081/CGA103G4_0921/front-end/memberservice/chatbot.html";  
+	    iframe.id="iframe"; 
+	    iframe.style=" width: 350px;height: 350px;";    
+	    iframediv.setAttribute('class',"box_sticky");
+	    iframediv.append(iframe);
+	    document.body.append(iframediv);
+	
+	    setTimeout(function(){
+	        Riframe = document.getElementById("iframe").contentWindow;
+	   	
+	        let hidden = Riframe.document.getElementById('hidden');
+	        hidden.addEventListener("click",function(){	
+	        	iframediv.style.display="none";
+	        	button.style.display="";
+	        })
+	    },1000)
+	}
+}
+</script>

@@ -606,4 +606,10 @@ public class PromotionsDetailJDBCDAO implements PromotionsDetailDAO_interface {
 		}
 	}
 
+	@Override
+	public PromotionsDetailVO deleteOnePromoDetailVO(Integer pdid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

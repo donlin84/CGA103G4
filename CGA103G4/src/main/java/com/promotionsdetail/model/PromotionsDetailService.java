@@ -61,5 +61,8 @@ public class PromotionsDetailService {
 	public PromotionsDetailVO getOnePmByPdid(Integer pdid) {
 		return dao.getOnePmidByPdid(pdid);
 	}
+	public PromotionsDetailVO DeleteOneDetailByPdid(Integer pdid) {
+		return dao.deleteOnePromoDetailVO(pdid);
+	}
 	
 }

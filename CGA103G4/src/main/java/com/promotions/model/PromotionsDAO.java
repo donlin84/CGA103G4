@@ -22,7 +22,7 @@ public class PromotionsDAO implements PromotionsDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Cga103G4");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/cga103g4");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

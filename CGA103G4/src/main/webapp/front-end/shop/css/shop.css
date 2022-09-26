@@ -1,0 +1,35 @@
+#shopPageContent{
+  height: 500px;
+  background-color:gray;
+}
+
+
+.col-md-6 col-lg-6 col-xl-3 {
+  background-color: lightcyan;
+  white-space: nowrap;
+}
+.nextpage{
+	position: relative;
+   
+    left: 650px;
+    width: 200px;
+    height: 100px;
+}
+.pagecount{
+    height: 30px;
+}
+.wrapper{
+	
+	width: 1000px;
+
+  
+}
+.card-text{
+  margin-top: 0;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+ -webkit-line-clamp: 2;
+ -webkit-box-orient: vertical
+}

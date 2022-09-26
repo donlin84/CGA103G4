@@ -44,4 +44,32 @@ public class CartDetailService {
 	public void deleteCartDeatil(Integer memid, Integer pdid) {
 		dao.delete(memid, pdid);
 	}
+	
+//	=============================================亦翔新增==================================================
+	
+	public CartDetailVO minus(Integer memid, Integer pdid) {
+		CartDetailVO cartDetailVO = new CartDetailVO();
+		
+		cartDetailVO.setMemid(memid);
+		cartDetailVO.setPdid(pdid);
+		
+		dao.minus(cartDetailVO);
+		
+		return cartDetailVO;
+	}
+	
+	public CartDetailVO plus(Integer memid, Integer pdid) {
+		CartDetailVO cartDetailVO = new CartDetailVO();
+		
+		cartDetailVO.setMemid(memid);
+		cartDetailVO.setPdid(pdid);
+		
+		dao.plus(cartDetailVO);
+		
+		return cartDetailVO;
+	}
+	
+	public List<CartDetailVO> getOnes(Integer memid) {
+		return dao.findByPrimaryKey(memid);
+	}
 }

@@ -7,7 +7,9 @@ public interface FavoriteProductDAO_interface {
 	public void update(FavoriteProductVO favoriteProductVO);
 	public FavoriteProductVO findbyPrimaryKey(Integer pdid);
 	public List<FavoriteProductVO> getAll();
-	public void delete(Integer pdid);
+	public void delete(Integer memid, Integer pdid);
+	public List<FavoriteProductVO> getAllFavoriteOneUser(Integer memid);
+	
 	
 	
 

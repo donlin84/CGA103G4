@@ -25,14 +25,14 @@
 	<!-- =======================林俊宏========================== -->
 
 	<!-- =======================鄭亦翔========================== -->
-	<servlet>
-		<servlet-name>OrdersServlet</servlet-name>
-		<servlet-class>com.orders.controller.OrdersServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>OrdersServlet</servlet-name>
-		<url-pattern>/orders/orders.do</url-pattern>
-	</servlet-mapping>
+<!-- 	<servlet> -->
+<!-- 		<servlet-name>OrdersServlet</servlet-name> -->
+<!-- 		<servlet-class>com.orders.controller.OrdersServlet</servlet-class> -->
+<!-- 	</servlet> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>OrdersServlet</servlet-name> -->
+<!-- 		<url-pattern>/orders/orders.do</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 	<servlet>
 		<servlet-name>RecipePictureServlet</servlet-name>
 		<servlet-class>com.recipepicture.controller.RecipePictureServlet</servlet-class>
@@ -85,10 +85,10 @@
 		<servlet-name>PdSearchBackend</servlet-name>
 		<servlet-class>com.product.controller.PdSearchBackend</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>PdSearchBackend</servlet-name>
-		<url-pattern>/back-end/product/PdSearchBackend.do</url-pattern>
-	</servlet-mapping>
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>PdSearchBackend</servlet-name> -->
+<!-- 		<url-pattern>/back-end/product/PdSearchBackend.do</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 
 	<servlet>
 		<servlet-name>ProductpicServlet</servlet-name>
@@ -253,10 +253,29 @@
 		<filter-name>loginFilterhung</filter-name>
 <!-- 		<url-pattern>/back-end/index-back.jsp</url-pattern> -->
 		<url-pattern>/front-end/chefAppointment/Appointment.jsp</url-pattern>
+		<url-pattern>/front-end/cartdetail/NewFile.jsp</url-pattern>
+		
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
 		<dispatcher>ERROR</dispatcher>
 		<dispatcher>ASYNC</dispatcher>
 	</filter-mapping>
+	
+	<filter>
+		<filter-name>loginFilterReg</filter-name>
+		<filter-class>filters.FrontEndLoginFilterReg</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilterReg</filter-name>
+		<url-pattern>/front-end/registtrationform/RegisttrationForm.jsp</url-pattern>
+		
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+	
+	
 </web-app>

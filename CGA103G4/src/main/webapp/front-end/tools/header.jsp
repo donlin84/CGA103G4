@@ -5,19 +5,19 @@
     <div class="block">
 
       <nav class="nav">
-        <a href="../index-front.jsp"><img src="../images/SeeFoodLogo.png"></a>
+        <a href="/CGA103G4/front-end/index-front.jsp"><img src="/CGA103G4/front-end/images/SeeFoodLogo.png"></a>
         <ul class="nav_list">
-          <li><a href="../announce/announce.jsp" data-target="nav1" id="announce" class="nav">公告</a></li>
-          <li><a href="../shop/shop.jsp" data-target="nav2" id="shop" class="nav">商城</a></li>
-          <li><a href="../course/course.jsp" data-target="nav3" id="course" class="nav">料理課程</a></li>
-          <li><a href="../chef/chef.jsp" data-target="nav4" id="chef" class="nav">私廚預約</a></li>
-          <li><a href="../forum/forum.jsp" data-target="nav5" id="forum" class="nav">討論區</a></li>
-          <li><a href="../service/service.jsp" data-target="nav6" id="social" class="nav">客服</a></li>
+          <li><a href="/CGA103G4/front-end/announce/announce.jsp" data-target="nav1" id="announce" class="nav">公告</a></li>
+          <li><a href="/CGA103G4/front-end/shop/shop.jsp" data-target="nav2" id="shop" class="nav">商城</a></li>
+          <li><a href="/CGA103G4/front-end/classifm/classifm_browse.jsp" data-target="nav3" id="course" class="nav">料理課程</a></li>
+          <li><a href="/CGA103G4/front-end/chef/chef.jsp" data-target="nav4" id="chef" class="nav">私廚預約</a></li>
+          <li><a href="/CGA103G4/front-end/forum/forum.jsp" data-target="nav5" id="forum" class="nav">討論區</a></li>
+          <li><a href="/CGA103G4/front-end/service/service.jsp" data-target="nav6" id="social" class="nav">客服</a></li>
         </ul>
 
         <div class="sign_block">
           <input class="input" placeholder="找食譜"><input class="input" placeholder="找食材"><button class="button"><img
-              src="../images/icon.png"></button>
+              src="/CGA103G4/front-end/images/icon.png"></button>
           <c:choose>
 
 						<c:when test="${empty account}">
@@ -30,17 +30,17 @@
 									data-toggle="dropdown" aria-haspopup="true"
 									aria-expanded="false">會員</button>
 								<div class="dropdown-menu">
-									<a class="dropdown-item" href="../member/update.jsp">修改資料</a>
-									<a class="dropdown-item" href="../creditCardInformation/CreditCardInformation.jsp">信用卡</a> <a
+									<a class="dropdown-item" href="/CGA103G4/front-end/member/update.jsp">修改資料</a>
+									<a class="dropdown-item" href="/CGA103G4/front-end/creditCardInformation/CreditCardInformation.jsp">信用卡</a> <a
 										class="dropdown-item" href="#">查看訂單</a> <a
 										class="dropdown-item" href="#">查看商品</a> <a
-										class="dropdown-item" href="../membercoupon/membercoupon.jsp">查看優惠卷</a> <a
-										class="dropdown-item" href="#">查看課程</a> <a
-										class="dropdown-item" href="../chef/addChefSubscription.jsp">查看訂閱</a> <a
-										class="dropdown-item" href="../chefAppointment/memberListAll.jsp">查看預約</a> <a
+										class="dropdown-item" href="/CGA103G4/front-end/membercoupon/membercoupon.jsp">查看優惠卷</a> <a
+										class="dropdown-item" href="/CGA103G4/front-end/classifm/MyClassIfm.jsp">查看課程</a> <a
+										class="dropdown-item" href="/CGA103G4/front-end/chef/addChefSubscription.jsp">查看訂閱</a> <a
+										class="dropdown-item" href="/CGA103G4/front-end/chefAppointment/memberListAll.jsp">查看預約</a> <a
 										class="dropdown-item" href="#">查看食譜</a> <a
 										class="dropdown-item" href="#">查看通知</a> <a
-										class="dropdown-item" href="../member/frontEndLogout.jsp">登出</a>
+										class="dropdown-item" href="/CGA103G4/front-end/member/frontEndLogout.jsp">登出</a>
 
 								</div>
 							</div>
@@ -52,21 +52,21 @@
         <ul class="navbar_list">
           <div class="navbar">
             <li class="announcebar">
-              <div><a href="../announce/newannounce.jsp">最新消息</a></div>
+              <div><a href="/CGA103G4/front-end/announce/newannounce.jsp">最新消息</a></div>
             </li>
             <li class="shopbar">
               <div><a href="#">熱門推薦</a></div>
               <div><a href="#">商品分類</a></div>
               <div><a href="#">購物車</a></div>
-              <div><a href="../shop/promotions.jsp">優惠活動</a></div>
+              <div><a href="/CGA103G4/front-end/shop/promotions.jsp">優惠活動</a></div>
             </li>
             <li class="coursebar">
-              <div><a href="#">課程內容資訊</a></div>
-              <div><a href="#">報名</a></div>
+              <div><a href="/CGA103G4/front-end/classifm/classifm_browse.jsp">課程內容資訊</a></div>
+              <div><a href="/CGA103G4/front-end/registtrationform/fullcalendar.html">課程日曆</a></div>
             </li>
             <li class="chefbar">
-              <div><a href="#">私廚介紹</a></div>
-              <div><a href="#">預約系統</a></div>
+              <div><a href="./chef/chef.jsp">私廚介紹</a></div>
+              <div><a href="./chef/chef.jsp">預約系統</a></div>
             </li>
             <li class="forumbar">
 <!--               <div><a href="#">食譜</a></div> -->

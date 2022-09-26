@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,14 +26,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.member.model.MemberVO;
 import com.registtrationform.model.*;
-
-import oracle.net.aso.g;
 
 import com.ClassIfm.model.*;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024
 * 1024)
+@WebServlet("/front-end/registtrationform/CheckoutServlet.do")
 public class CheckoutServlet extends HttpServlet{
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -43,8 +44,11 @@ public class CheckoutServlet extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		res.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
-		session.setAttribute("member","201");
-		Integer memid =  Integer.valueOf( (String) session.getAttribute("member") );		
+		MemberVO memVO = (MemberVO)session.getAttribute("memVO");
+		Integer memid = memVO.getMemid();
+		
+//		session.setAttribute("member","201");
+//		Integer memid =  Integer.valueOf( (String) session.getAttribute("member") );		
 		String action = req.getParameter("action");
 		System.out.println(action);
 		//取得資訊

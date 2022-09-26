@@ -1,3 +1,4 @@
+<%@page import="com.chef.model.ChefService"%>
 <%@page import="com.chef.model.ChefVO"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -50,7 +51,14 @@ List<OrdersVO> ordlist = ordSvc.getAll();
 pageContext.setAttribute("ordlist", ordlist);
 %>
 <%
-ChefVO chefVO =(ChefVO) session.getAttribute("chefVO");
+ChefService chefsvc = new ChefService();
+ChefVO chefVO = new ChefVO();
+if((ChefVO) session.getAttribute("chefVO")==null){
+	chefVO = chefsvc.getOneChef(301);
+}else{
+    chefVO =(ChefVO) session.getAttribute("chefVO");
+}
+	
 %>
 
 <!DOCTYPE html>
@@ -197,7 +205,7 @@ body {
 								</a>
 
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#"> <i
+								<a class="dropdown-item" href="<%=request.getContextPath()%>/BackendLogin?action=remove_account"> <i
 									class="mdi mdi-logout m-r-5 text-muted"></i>登出
 								</a>
 
@@ -235,11 +243,22 @@ body {
 								class="mdi ion-ios7-people"></i>課程管理</a>
 
 							<ul class="submenu">
-								<li><a href="#">課程</a></li>
-								<li><a href="#">課程標籤</a></li>
-								<li><a href="teacher/select_page.jsp">教師管理</a></li>
-								<li><a href="registtrationform/select_page.jsp">查看報名表</a></li>
-								<li><a href="#">課程紀錄</a></li>
+								<li class="has-submenu"><a href="<%=request.getContextPath()%>/back-end/classifm/listAllClassIfm.jsp">課程</a>
+								<ul class="submenu">
+										<li><a href="<%=request.getContextPath()%>/back-end/classifm/listAllClassIfm.jsp">查看全部課程</a></li>
+										<li><a href="<%=request.getContextPath()%>/back-end/classifm/addClassIfm.jsp">新增課程</a></li>
+									</ul></li>
+								<li class="has-submenu"><a href="<%=request.getContextPath()%>/back-end/classtag/listAllClassTag.jsp">課程標籤</a>
+								<ul class="submenu">
+										<li><a href="<%=request.getContextPath()%>/back-end/classtag/listAllClassTag.jsp">查看全部標籤</a></li>
+										<li><a href="<%=request.getContextPath()%>/back-end/classtag/addClassTag.jsp">新增標籤</a></li>
+									</ul></li>
+								<li><a href="#">教師管理</a></li>
+								<li class="has-submenu"><a href="<%=request.getContextPath()%>/back-end/registtrationform/listAllRegisttrationForm.jsp">查看報名表</a>
+								<ul class="submenu">
+										<li><a href="<%=request.getContextPath()%>/back-end/registtrationform/listAllRegisttrationForm.jsp">查看全部報名表</a></li>
+										<li><a href="<%=request.getContextPath()%>/back-end/registtrationform/getclaid_allmemid.jsp">列印報名表</a></li>
+									</ul></li>
 							</ul>
 						<li class="has-submenu "><a href="#"><i
 								class="mdi ion-spoon"></i>私廚管理</a>
@@ -394,6 +413,7 @@ body {
 										<div id='data' type="hidden" value="${chefscheduleVO.schDate}"></div>
 										<script>
         								document.addEventListener('DOMContentLoaded', function () {
+											
             								var calendarEl = document.getElementById('calendar');
 											
             								let chefid = <%=chefVO.getChefid() %>
@@ -403,6 +423,7 @@ body {
             								var path = window.location.pathname;
             								var webCtx = path.substring(0, path.indexOf('/', 1));
             								var URL = "http://" + host + webCtx + MyPoint;
+											if(chefid!==null){
             								fetch(URL).then(response => response.json("jsons"))
                 								.then(jsons => {
                     								console.log(jsons)
@@ -418,72 +439,6 @@ body {
                         							navLinks: true, // can click day/week names to navigate views
                         							selectable: true,
                       								selectMirror: true,
-//                         							select: function (arg) {  //新增一筆班次
-//                            			 				let addPoint = "/back-end/chefSchedule/chefsch.do?action=addOne";
-//                            			 				let deleteUrl = "http://" + host + webCtx + addPoint;
-//                           			  				var title = prompt("新增預約時段(請輸入 '午餐' OR '晚餐')");
-//                            			 				console.log(arg.startStr);
-//                           			  			if (title === '午餐') {
-//                                			 			calendar.addEvent({
-//                                  			  		title: title,
-//                                  			   		start: arg.start,
-//                                  			   		end: arg.end,
-//                                  			   		allDay: arg.allDay
-//                                			 		})
-//                                			 		connect('302', arg.startStr, 1);
-//                           			  			} else if (title === '晚餐') {
-//                                 						calendar.addEvent({
-//                                     					title: title,
-//                                     					start: arg.start,
-//                                     					end: arg.end,
-//                                     					allDay: arg.allDay
-//                                 					})
-//                                 					connect('302', arg.startStr, 2);
-//                             						} else {
-//                                			 		alert("無新增資料")
-//                             						}
-//                             						function connect(chefid, date, time) {
-//                                 						fetch(deleteUrl, {
-//                                     					method: 'POST',
-//                                     					headers: {
-//                                         				'Content-Type': 'application/json'
-//                                     				},
-//                                     					body: JSON.stringify({
-//                                      				chefid: chefid,
-//                                        				schDate: date,
-//                                        				schTime: time
-//                                     				})
-//                                 				})
-//                             				}
-//                             					calendar.unselect()
-//                         					},
-//                         					eventClick: function (arg) {  //刪除一筆班次
-//                             					if (confirm('確定要移除此時段嗎?')) {
-//                                 					let deletePoint = "/back-end/chefSchedule/chefsch.do?action=deleteOne";
-//                                 					let deleteUrl = "http://" + host + webCtx + deletePoint;
-//                                 					//轉換成指定日期格式
-//                                 					let schDate = new Date(arg.event._instance.range.start);
-//                                 					const options = {
-//                                     					year: 'numeric',    // 年: 使用4位數
-//                                     					month: '2-digit',   // 月: 使用2數位
-//                                    					day: '2-digit',     // 日: 使用2數位
-//                                 						};
-//                                					let dateStr = schDate.toLocaleDateString('zh-tw', options).replaceAll('/', '-');
-
-//                              					//傳遞資料
-//                              						fetch(deleteUrl, {
-//                                  					method: 'POST',
-//                                  					headers: {
-//                                 						'Content-Type': 'application/json'
-//                              					},
-//                               						body: JSON.stringify({
-//                                   					chefid: "302",
-//                                  					schDate: dateStr
-//                                 					})
-//                             						})
-//                             						arg.event.remove()
-//                            						}
-//                         							},
                      								editable: false,
                     								dayMaxEvents: true,
                      								events: jsons,
@@ -493,9 +448,11 @@ body {
                    								 });
                   								  calendar.render();
               								  });
-            								console.log(calendar.event)
+            								console.log(calendar.event)}else{
+												
+											}
       									  });
-
+									
 										</script>
 									</div>
 								</div>

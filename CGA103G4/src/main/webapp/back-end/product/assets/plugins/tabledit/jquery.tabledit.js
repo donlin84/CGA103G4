@@ -18,9 +18,9 @@ if (typeof jQuery === 'undefined') {
     'use strict';
 
     $.fn.Tabledit = function(options) {
-        if (!this.is('table')) {
-            throw new Error('Tabledit only works when applied to a table.');
-        }
+        // if (!this.is('table')) {
+        //     throw new Error('Tabledit only works when applied to a table.');
+        // }
 
         var $table = this;
 

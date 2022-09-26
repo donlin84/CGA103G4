@@ -46,5 +46,15 @@ public class OrderDetailVO implements Serializable{
 	public void setDetailGoodPrice(Integer detailGoodPrice) {
 		this.detailGoodPrice = detailGoodPrice;
 	}
+	//=========================================冠銓新增==========================================	
+		//join商品名稱到訂單明細
+		public com.product.model.ProductVO getProductVO() {
+			com.product.model.ProductService productService = new com.product.model.ProductService();
+			com.product.model.ProductVO productVO = productService.getOneproduct(pdid);
+//			System.out.println(productService.GetOne(productNo).getProductName());
+			return productVO;
+		}
+	
+	
 	
 }

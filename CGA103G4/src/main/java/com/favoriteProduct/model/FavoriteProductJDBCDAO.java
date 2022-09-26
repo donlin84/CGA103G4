@@ -11,9 +11,9 @@ import java.util.List;
 public class FavoriteProductJDBCDAO implements FavoriteProductDAO_interface {
 	
 	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei";
+	String url = "jdbc:mysql://localhost:3306/Cga103G4?serverTimezone=Asia/Taipei";
 	String userid = "root";
-	String passwd = "tn00349903";
+	String passwd = "cga103g4";
 	
 	private static final String INSERT_STMT =
 			"INSERT INTO productfavorite (pdid, memid) VALUES (?,?)";
@@ -223,48 +223,15 @@ public FavoriteProductVO findbyPrimaryKey(Integer pdid) {
 		}
 		return list;
 	}
+	
+	public List<FavoriteProductVO> getAllFavoriteOneUser(Integer memid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	@Override
-	public void delete(Integer pdid) {
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(DELETE);
-
-			pstmt.setInt(1, pdid);
-
-			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
+	public void delete(Integer pmid, Integer pdid) {
+		// TODO Auto-generated method stub
+		
 	}	
 }
 

@@ -7,11 +7,12 @@ public class ProductpicService {
 	private ProductpicDAO_interface dao;
 	
 	public ProductpicService() {
-		dao = new ProductpicJDBCDAO();
+		dao = new ProductpicDAO();
 		
 	}
 	//新增圖片
 	public ProductpicVO insert(byte[] pdpic) {
+		
 		ProductpicVO productpicVO = new ProductpicVO();
 		productpicVO.setPdPic(pdpic);
 		dao.insert(productpicVO);	
@@ -25,12 +26,28 @@ public class ProductpicService {
 		dao.existedInsert(productpicVO);
 		return productpicVO;
 	}
+	
+	public void deletePicture(Integer pdPicid) {
+		
+		
+			dao.delete(pdPicid);
+	}
+
+	
 	public ProductpicVO getOneproductpic(Integer pdPicid) {
 		return dao.findByPrimaryKey(pdPicid);
 	}
 
 	public List<ProductpicVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public List<ProductpicVO> productAllPics(Integer pdid){
+		return dao.getOneProductPics(pdid);
+	}
+	
+	public ProductpicVO onePicByPicNo(Integer pdPicid) {
+		return dao.GetOnePicBypdPicid(pdPicid);
 	}
 
 	

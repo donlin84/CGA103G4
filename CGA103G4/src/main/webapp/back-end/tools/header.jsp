@@ -8,7 +8,7 @@
 					<!-- Text Logo -->
 					<!--<a href="index.html" class="logo">-->
 					<!-- Image Logo -->
-					<a href="../index-back.jsp" class="logo"><img src="../assets/images/logo.png" alt="" class="logo-large"> </a>
+					<a href="../index-back.jsp" class="logo"><img src="/CGA103G4/back-end/assets/images/logo.png" alt="" class="logo-large"> </a>
 				</div>
 				<!-- End Logo container-->
 				<div class="menu-extras topbar-custom">
@@ -71,7 +71,7 @@
 						<!-- User-->
 						<li class="list-inline-item dropdown notification-list"><a
 							class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
-							aria-haspopup="false" aria-expanded="false"> <img src="../assets/images/users/avatar-1.jpg" alt="user"
+							aria-haspopup="false" aria-expanded="false"> <img src="/CGA103G4/back-end/assets/images/users/avatar-1.jpg" alt="user"
 								class="rounded-circle">
 						</a>
 
@@ -115,29 +115,40 @@
 						<li class="has-submenu "><a href="#"><i class="mdi mdi-shopping"></i>商城管理</a>
 
 							<ul class="submenu">
-								<li><a href="../discount-management/discount-management.jsp">優惠方案管理</a></li>
+								<li><a href="/CGA103G4/back-end/discount-management/discount-management.jsp">優惠方案管理</a></li>
 								<li><a href="#">商品管理</a></li>
 								<li><a href="#">訂單管理</a></li>
 							</ul>
 						<li class="has-submenu "><a href="#"><i class="mdi ion-ios7-people"></i>課程管理</a>
 
 							<ul class="submenu">
-								<li><a href="#">課程</a></li>
-								<li><a href="#">課程標籤</a></li>
-								<li><a href="#">教師管理</a></li>
-								<li><a href="#">查看報名表</a></li>
-								<li><a href="#">課程紀錄</a></li>
+								<li class="has-submenu"><a href="/CGA103G4/back-end/classifm/listAllClassIfm.jsp">課程</a>
+								<ul class="submenu">
+										<li><a href="/CGA103G4/back-end/classifm/listAllClassIfm.jsp">查看全部課程</a></li>
+										<li><a href="/CGA103G4/back-end/classifm/addClassIfm.jsp">新增課程</a></li>
+									</ul></li>
+								<li class="has-submenu"><a href="<%=request.getContextPath()%>/back-end/classtag/listAllClassTag.jsp">課程標籤</a>
+								<ul class="submenu">
+										<li><a href="/CGA103G4/back-end/classtag/listAllClassTag.jsp">查看全部標籤</a></li>
+										<li><a href="/CGA103G4/back-end/classtag/addClassTag.jsp">新增標籤</a></li>
+									</ul></li>
+								<li><a href="/CGA103G4/back-end/teacher/listAllTeacher.jsp">教師管理</a></li>
+								<li class="has-submenu"><a href="/CGA103G4/back-end/registtrationform/listAllRegisttrationForm.jsp">查看報名表</a>
+								<ul class="submenu">
+										<li><a href="/CGA103G4/back-end/registtrationform/listAllRegisttrationForm.jsp">查看全部報名表</a></li>
+										<li><a href="/CGA103G4/back-end/registtrationform/getclaid_allmemid.jsp">列印報名表</a></li>
+									</ul></li>
 							</ul>
 						<li class="has-submenu "><a href="#"><i class="mdi ion-spoon"></i>私廚管理</a>
 
 							<ul class="submenu">
-								<li><a href="#">預約管理</a></li>
+								<li><a href="/CGA103G4/back-end/chefAppointment/select_page.jsp">預約管理</a></li>
 								<li><a href="#">個人資料管理</a></li>
 							</ul>
 						<li class="has-submenu"><a href="#"><i class="mdi dripicons-device-desktop"></i>前台管理</a>
 							<ul class="submenu">
 								<li><a href="#">客服管理</a></li>
-								<li><a href="../announcement/announce-management.jsp">公告管理</a></li>
+								<li><a href="/CGA103G4/back-end/announcement/announce-management.jsp">公告管理</a></li>
 								<li><a href="#">公司資料管理</a></li>
 								<li><a href="#">食譜管理</a></li>
 								<li><a href="#">討論區管理</a>
@@ -145,7 +156,7 @@
 
 						<li class="has-submenu "><a href="#"><i class="mdi mdi-layers"></i>後台管理</a>
 							<ul class="submenu">
-								<li><a href="#">管理員系統</a></li>
+								<li><a href="/CGA103G4/back-end/emp/select_page.jsp">管理員系統</a></li>
 								<li><a href="#">會員</a></li>
 							</ul>
 					</ul>

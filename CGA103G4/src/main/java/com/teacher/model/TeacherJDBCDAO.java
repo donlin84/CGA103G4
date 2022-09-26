@@ -1,7 +1,9 @@
 package com.teacher.model;
 import java.util.*;
 
-import static com.util.Common.*;
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Chef;
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Teacher;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,6 +13,9 @@ import java.sql.*;
 
 public class TeacherJDBCDAO implements TeacherDAO_interface {
 	String driver = "com.mysql.cj.jdbc.Driver";
+	String url = "jdbc:mysql://localhost:3306/cga103g4?serverTimezone=Asia/Taipei";
+	String userid = "root";
+	String passwd = "cga103g4";
 	
 	private static final String INSERT_STMT = 
 		"INSERT INTO Teacher (thrName,thrGender,thrPhone,thrEmail,thrStatus,thrIntroduction,thrComment,thrCmnumber,thrPic) VALUES (?, ?, ?, ?, ?, ?,?,?,?)";
@@ -32,7 +37,7 @@ public class TeacherJDBCDAO implements TeacherDAO_interface {
 		try {
 
 			Class.forName(driver);
-			con = DriverManager.getConnection(URL, USER,PASSWORD);
+			con = DriverManager.getConnection(url, userid,passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 			pstmt.setString(1, teacherVO.getThrName());
@@ -106,7 +111,7 @@ public class TeacherJDBCDAO implements TeacherDAO_interface {
 		try {
 
 			Class.forName(driver);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = DriverManager.getConnection(url, userid,passwd);
 			pstmt = con.prepareStatement(UPDATE);
 			pstmt.setString(1, teacherVO.getThrName());
 			pstmt.setString(2, teacherVO.getThrGender());
@@ -184,7 +189,7 @@ public class TeacherJDBCDAO implements TeacherDAO_interface {
 		try {
 
 			Class.forName(driver);
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			con = DriverManager.getConnection(url, userid,passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setInt(1, thrid);
@@ -275,7 +280,7 @@ public class TeacherJDBCDAO implements TeacherDAO_interface {
 	try {
 
 		Class.forName(driver);
-		con = DriverManager.getConnection(URL, USER, PASSWORD);
+		con = DriverManager.getConnection(url, userid,passwd);
 		pstmt = con.prepareStatement(GET_ALL_STMT);
 		rs = pstmt.executeQuery();
 
@@ -350,6 +355,98 @@ public class TeacherJDBCDAO implements TeacherDAO_interface {
 		}
 	}
 	return list;
+	}
+	@Override
+	public List<TeacherVO> getAll(Map<String, String[]> map) {
+		List<TeacherVO> list = new ArrayList<TeacherVO>();
+		TeacherVO teacherVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid,passwd);
+			String finalSQL = "select * from teacher "
+			          + jdbcUtil_CompositeQuery_Teacher.get_WhereCondition(map)
+			          + "order by thrid";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+			
+			
+//		FileInputStream fis = new FileInputStream("picture/nopicture.jpg");
+//		byte[] nopicture = new byte[fis.available()];
+//		fis.read(nopicture);
+//		fis.close();
+			
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				teacherVO = new TeacherVO();
+				teacherVO.setThrid(rs.getInt("thrid"));
+				teacherVO.setThrName(rs.getString("thrname"));
+				teacherVO.setThrGender(rs.getString("thrgender"));
+				teacherVO.setThrPhone(rs.getString("thrphone"));
+				teacherVO.setThrEmail(rs.getString("thremail"));
+				teacherVO.setThrStatus(rs.getInt("thrstatus"));
+				teacherVO.setThrIntroduction(rs.getString("thrintroduction"));
+				teacherVO.setThrComment(rs.getInt("thrcomment"));
+//			null相關
+				if (rs.wasNull()) {
+					teacherVO.setThrComment(null);
+				}						
+				teacherVO.setThrCmnumber(rs.getInt("thrcmnumber"));
+				if (rs.wasNull()) {
+					teacherVO.setThrCmnumber(null);
+				}	
+//			if (!(rs.getBytes("thrPic")==null)) {
+//				teacherVO.setThrPic(rs.getBytes("thrPic"));
+//			}else {
+//				teacherVO.setThrPic(nopicture);
+//			}
+				teacherVO.setThrPic(rs.getBytes("thrPic"));
+				list.add(teacherVO); // Store the row in the list
+				
+			}
+			
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+//		 Clean up JDBC resources
+//	} catch (IOException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 //	@Override
 //	public List<TeacherVO> getAll(Map<String, String[]> map) {

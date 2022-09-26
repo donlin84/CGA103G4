@@ -26,10 +26,9 @@ public class ProductpicJDBCDAO implements ProductpicDAO_interface {
 		"UPDATE Productpic SET pdPic = ?, pdid = ? WHERE pdPicid = ?";
 	private static final String DELETE = 
 		"DELETE FROM pdPic where pdPicid = ?";
-	private static final String getPicid = " select pdPicid FROM productpic where pdid= ?";
-	
-	private static final String GetoneInByte = "select pdpic from productpic where pdpicid=?";
-    //OK
+    private static final String GET_PICTURES_BY_PDID =
+	    	"SELECT pdPicid, pdid, pdPic from productpic where pdid = ?";
+
 	
 	
 	@Override
@@ -155,6 +154,66 @@ public class ProductpicJDBCDAO implements ProductpicDAO_interface {
 		return list;
 	}
 	
+	@Override
+	public List<ProductpicVO> getOneProductPics(Integer pdid) {
+	
+		List<ProductpicVO> list = new ArrayList<>();
+		ProductpicVO productpicVO = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Connection con = null;
+		
+	try {
+		
+		con = DriverManager.getConnection(URL, USER, PASSWORD); 
+			pstmt = con.prepareStatement(GET_PICTURES_BY_PDID, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			pstmt.setInt(1, pdid);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				
+				productpicVO = new ProductpicVO();
+				productpicVO.setPdPicid(rs.getInt("pdPicid"));
+
+				list.add(productpicVO);
+			}
+
+			// Handle any driver errors
+		
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			
+		}
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	public static byte[] getPictureByteArray(String path) throws IOException {
 		FileInputStream fis = new FileInputStream(path);
 		byte[] buffer = new byte[fis.available()];
@@ -213,6 +272,11 @@ public class ProductpicJDBCDAO implements ProductpicDAO_interface {
 //		
 
 
+	}
+	@Override
+	public ProductpicVO GetOnePicBypdPicid(Integer pdPicid) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

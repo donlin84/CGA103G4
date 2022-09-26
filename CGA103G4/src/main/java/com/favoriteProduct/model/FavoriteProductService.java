@@ -1,12 +1,13 @@
 package com.favoriteProduct.model;
 
+import java.util.List;
 
 public class FavoriteProductService {
 
 	private FavoriteProductDAO_interface dao;
 	
 	public FavoriteProductService() {
-		dao = new FavoriteProductJDBCDAO();
+		dao = new FavoriteProductDAO();
 	}
 	
 	public FavoriteProductVO addFavoriteProduct(Integer pdid, Integer memid) {
@@ -28,8 +29,12 @@ public class FavoriteProductService {
 		
 		return favoriteProductVO;
 	}
-	public void deleteFavoriteProduct(Integer pdid) {
-		dao.delete(pdid);
+	public void deleteFavoriteProduct(Integer memid, Integer pdid) {
+		dao.delete(memid,pdid);
+	}
+	public List<FavoriteProductVO> getAllFavoriteOneUser(Integer memid){
+		
+		return dao.getAllFavoriteOneUser(memid);	
 	}
 }
 	

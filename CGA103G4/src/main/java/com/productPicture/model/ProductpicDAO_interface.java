@@ -10,6 +10,7 @@ public interface ProductpicDAO_interface {
 	public void delete(Integer pdPicid);
 	public ProductpicVO findByPrimaryKey(Integer pdPicid);
 	public List <ProductpicVO> getAll();
-
+	public List<ProductpicVO> getOneProductPics(Integer pdid);
+	public ProductpicVO GetOnePicBypdPicid(Integer pdPicid);
 	
 }

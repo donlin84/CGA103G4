@@ -16,6 +16,7 @@ System.out.print("JSP:"+ chefName);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Appointment</title>
 <link href='./lib/main.css' rel='stylesheet' />
+
 <link rel="stylesheet" href="../css/common/all.css">
   <link rel="stylesheet" href="../css/common/header.css">
   <link rel="stylesheet" href="../css/common/footer.css">
@@ -26,6 +27,7 @@ System.out.print("JSP:"+ chefName);
 <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
   <script src="../js/chef.js"></script>
   <script src="../js/nav.js"></script>
+<!-- Calendar -->
 <script src='./lib/main.js'></script>
 <script src="./lib/locales-all.js"></script>
 <!--     <script src="./js/fullcalendar.js"></script> -->
@@ -219,7 +221,9 @@ body, div, li {
     		});
    });
     </script>
-
+	<script src="../assets/js/jquery.min.js"></script>
+	<script src="../assets/js/popper.min.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
 </body>
 
 </html>

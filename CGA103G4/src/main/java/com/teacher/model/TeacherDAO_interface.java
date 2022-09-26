@@ -8,5 +8,6 @@ public interface TeacherDAO_interface {
 ////          public void delete(Integer thrid);
           public TeacherVO findByPrimaryKey(Integer thrid);
           public List<TeacherVO> getAll();
+          public List<TeacherVO> getAll(Map<String, String[]> map);
 //          public List<TeacherVO> getAll(Map<String, String[]> map); 
 }

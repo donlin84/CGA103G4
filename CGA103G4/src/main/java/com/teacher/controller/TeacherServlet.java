@@ -8,11 +8,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -21,9 +23,10 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
+import com.emp.model.*;
 
 //import org.json.JSONArray;
 //import org.json.JSONException;
@@ -40,7 +43,10 @@ public class TeacherServlet extends HttpServlet {
 	}
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		EmpVO empVO =  (EmpVO)session.getAttribute("empVO");
 
+		
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");		
 
@@ -102,7 +108,7 @@ public class TeacherServlet extends HttpServlet {
 				} catch (NullPointerException e) {
 					try {
 						ServletContext servletContext = req.getServletContext();
-						String filepath = servletContext.getRealPath("/picture/nopicture.jpg");
+						String filepath = servletContext.getRealPath("/images/picture_15/nopicture.jpg");
 						File file=new File(filepath);
 						
 						FileInputStream fis = new FileInputStream(file);
@@ -139,7 +145,7 @@ public class TeacherServlet extends HttpServlet {
 				} catch (NullPointerException e) {
 					try {
 						ServletContext servletContext = req.getServletContext();
-						String filepath = servletContext.getRealPath("/picture/nopicture.jpg");
+						String filepath = servletContext.getRealPath("/images/picture_15/nopicture.jpg");
 						File file=new File(filepath);
 						
 						FileInputStream fis = new FileInputStream(file);
@@ -398,7 +404,79 @@ public class TeacherServlet extends HttpServlet {
         
         /***********************************************************************************/
 		
-		
+		if ("getsome_For_condiction".equals(action)) {
+			String thrid = req.getParameter("thrid");
+			String thrName = req.getParameter("thrName");
+			String thrGender = req.getParameter("thrGender");
+			String thrPhone = "";
+			String thrEmail = "";
+			String thrStatus = req.getParameter("thrStatus");
+			String thrIntroduction = req.getParameter("thrIntroduction");
+			String thrComment = req.getParameter("thrComment");
+			String thrCmnumber = req.getParameter("thrCmnumber");
+	
+			System.out.println("接收資料");
+			System.out.println(thrid);
+			System.out.println(thrName);
+			System.out.println(thrGender);
+			System.out.println(thrStatus);
+			System.out.println(thrIntroduction);
+			System.out.println(thrComment);
+			System.out.println(thrCmnumber);
+
+			
+			Map<String, String[]> map = new TreeMap<String, String[]>();
+			
+			map.put("thrid", new String[] {thrid});
+			map.put("thrName", new String[] {thrName});
+			map.put("thrGender", new String[] {thrGender});
+			map.put("thrPhone", new String[] {thrPhone });
+			map.put("thrEmail", new String[] { thrEmail});
+			map.put("thrStatus", new String[] {thrStatus});
+			map.put("thrIntroduction", new String[] { thrIntroduction });
+			map.put("thrComment", new String[] { thrComment });
+			map.put("thrCmnumber", new String[] {thrCmnumber });
+			map.put("action", new String[] { action }); // 注意Map裡面會含有action的key
+			
+			TeacherService teacherSvc = new TeacherService();
+			List<TeacherVO> list = teacherSvc.getAll(map);
+			
+			req.setAttribute("list", list);
+			
+//			System.out.println(req.getAttribute("list"));
+			String thrpic = null;
+			Map<Integer, String> thrPicMap = new HashMap<Integer, String>()  ;
+			for (TeacherVO VO: list) {
+				Integer picthrid = VO.getThrid(); 
+				try {
+				thrpic = Base64.getEncoder().encodeToString(VO.getThrPic());	
+				
+				} catch (NullPointerException e) {
+					try {
+						ServletContext servletContext = req.getServletContext();
+						String filepath = servletContext.getRealPath("/images/picture_15/nopicture.jpg");
+						File file=new File(filepath);
+						
+						FileInputStream fis = new FileInputStream(file);
+						byte[] b = new byte[fis.available()];
+						fis.read(b);
+						fis.close();
+						thrpic = Base64.getEncoder().encodeToString(b);
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}	
+				}
+				thrPicMap.put(picthrid, thrpic);
+			}
+			req.setAttribute("thrPicMap",thrPicMap);
+			String url = "/back-end/teacher/mutilistAllTeacher.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 listAll.jsp
+			successView.forward(req, res);				
+			
+			
+		}
 		
 		
 		

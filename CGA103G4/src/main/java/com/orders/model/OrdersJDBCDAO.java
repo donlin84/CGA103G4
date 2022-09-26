@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.orderdetail.model.OrderDetailVO;
+
 public class OrdersJDBCDAO implements OrdersDAO_interface{
 	private static final String INSERT = 
 			"insert into orders (memid, memcpid, ordsubtotal, ordtotal, ordrecipient, "
@@ -239,6 +241,30 @@ public class OrdersJDBCDAO implements OrdersDAO_interface{
 //		vo4.setOrdid(4);
 //		
 //		dao.update(vo4);
+	}
+
+	@Override
+	public List<OrdersVO> selectOneMemAll(Integer ordid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void modifyOrderInfo(OrdersVO ordersVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void cancelOrder(OrdersVO ordersVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insert2(OrdersVO ordersVO, List<OrderDetailVO> list) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

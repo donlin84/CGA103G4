@@ -56,6 +56,7 @@
 </head>
 <body bgcolor='white'>
 <%@ include file="./tools/header.jsp"%>
+
   <div class="main">
   <div class="container -on" id="chefPage">
   <div id="chefPageContent">
@@ -70,6 +71,7 @@
 		<th>預約狀態</th>
 		<th>預約評價</th>
 		<th>評論</th>
+		<th>評價</th>
 
 	</tr>
 	<%@ include file="page1.file" %> 
@@ -96,13 +98,33 @@
               </c:otherwise> 
       </c:choose> 
 			</td>
-			<td>${chefapp.star}</td>
+			<td>
+			 <c:choose> 
+              <c:when test="${chefapp.star==1}">   
+								★
+              </c:when> 
+              <c:when test="${chefapp.star==2}">   
+                    			★★  
+			  </c:when> 
+              <c:when test="${chefapp.star==3}">   
+                    			★★★  
+			  </c:when> 
+              <c:when test="${chefapp.star==4}">   
+                    			★★★★ 
+			  </c:when> 
+              <c:when test="${chefapp.star==5}">   
+                    			★★★★★ 
+			  </c:when> 
+              <c:otherwise> </c:otherwise> 
+      </c:choose> 	
+			</td>
 			<td>${chefapp.comments}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-end/chefAppointment/chefapp.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="給予評價">
+			     <input type="submit" value="修改" style=${(chefapp.apmStatus==2)? "":"display:none"}>
 			     <input type="hidden" name="apmid"  value="${chefapp.apmid}">
-			     <input type="hidden" name="action"	value="MemgetOne_For_Update"></FORM>
+			     <input type="hidden" name="action"	value="MemgetOne_For_Update">
+			     </FORM>
 			</td>
 		</tr>
 	</c:forEach>
@@ -112,6 +134,8 @@
   </div>
   </div>
   </div>
+  <script>
+  </script>
 </body>
 </html>
 <%@ include file="../tools/footer.jsp"%>

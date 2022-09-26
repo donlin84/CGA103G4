@@ -1,0 +1,173 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.top_div{
+    width: 100%;
+    height: 560px;
+}
+
+.top_image{
+    width: 100%;
+    height: 100%;
+}
+
+.float_content{
+    position: relative;
+    top: -40px;
+    margin: auto;
+    text-align: center;
+    background-color: rgb(248, 246, 244);
+    width: 1200px;
+    height: 170px;
+    border: 1px black solid;
+    box-shadow: 1px 1px 3px;
+}
+
+.clatag{
+    border: white 2px solid;
+    position: absolute;
+    top: -20px;
+    left: 530px;
+    color: white;
+    letter-spacing: 5px;
+    font-size: 17px;
+    padding: 10px 30px;
+    background-color: black;
+    font-weight: bolder;
+}
+
+.clatitle{
+    letter-spacing: 5px;
+    margin: 50px 0px 30px 0px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.bottom_div{
+    display:flex;
+    
+}
+
+.clatime{
+    margin: 0px 30px 0px 300px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.clapeople{
+    margin: 0px 30px 0px 30px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.user_span{
+    position: relative;
+    top: -33px;
+    left: 130px;
+    display: block;
+    width: 30px;
+    height: 30px;
+}
+
+.user{
+    width: 100%;
+    height: 100%;
+}
+
+.claprice{
+    margin: 0px 30px 0px 80px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.big_content{
+    margin: auto;
+    width: 1100px;
+    
+}
+
+.left-side{
+    background-color: rgb(248, 246, 244);
+    width: 650px;
+    float: left;
+    margin-bottom: 100px;
+}
+
+.right-side{
+    background-color: rgb(248, 246, 244);
+    height: 450px;
+    width: 400px;
+    float: right;
+    padding: 30px;
+    box-shadow: 1px 1px 5px;
+}
+
+
+
+.pic_title{
+    margin: 0px;
+    letter-spacing: 5px;
+}
+
+.form_title{
+    margin: 0px;
+    letter-spacing: 5px;
+    color: #60492d;
+    font-weight: 700;
+}
+
+.form_time{
+    font-size: 20px;
+    margin-top: 50px;
+    letter-spacing: 2px;
+    color: #60492d;
+    font-weight: 700;
+}
+
+.form_people{
+    font-size: 20px;
+    margin-left: 44px;
+    margin-top: 30px;
+    letter-spacing: 2px;
+    color: #60492d;
+    font-weight: 700;
+}
+
+.form_select{
+    width: 190px;
+}
+
+.form_price{
+    font-size: 20px;
+    margin-top: 30px;
+    letter-spacing: 2px;
+    color: #60492d;
+    font-weight: 700;
+}
+
+.zzz{
+    text-align: center;
+}
+
+.form_btn{
+    margin-top: 50px;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: white;
+    width: 300px;
+    font-weight: 500;
+    background-color:  #60492d;
+    padding: 3px 0px;
+}
+
+.form_btn:hover{
+    background-color: rgb(248, 191, 120);
+}
+
+.claIntroduction{
+	letter-spacing: 1px;
+	font-size: 20px;
+}

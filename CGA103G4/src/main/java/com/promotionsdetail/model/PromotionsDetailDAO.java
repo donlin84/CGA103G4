@@ -22,7 +22,7 @@ public class PromotionsDetailDAO implements PromotionsDetailDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Cga103G4");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/cga103g4");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -47,9 +47,10 @@ public class PromotionsDetailDAO implements PromotionsDetailDAO_interface {
 			+ "		on t.pmid = pd.pmid and t.pdid = pd.pdid "
 			+ "where "
 			+ "	pd.pmid is null";
+//	===============冠銓新增
+private static final String GET_ONE_PROMO_BY_PDID = "SELECT pmid,pdid,pmPdDiscountPrice FROM Cga103G4.PromotionsDetail where pdid = ?";
 	
-	//=============冠銓新增	
-		private static final String GET_ONE_PROMO_BY_PDID = "SELECT pmid,pdid,pmPdDiscountPrice FROM Cga103G4.PromotionsDetail where pdid = ?";
+	private static final String DELETE_ONE_DETAIL_BY_PDID = "DELETE FROM cga103g4.PromotionsDetail where pdid = ?";
 		
 		
 		
@@ -490,7 +491,7 @@ public class PromotionsDetailDAO implements PromotionsDetailDAO_interface {
 		}
 		return list;
 	}
-	//====冠銓新增
+	//====================================================================冠銓新增
 		@Override
 		public PromotionsDetailVO getOnePmidByPdid(Integer pdid) {
 			 
@@ -545,5 +546,43 @@ public class PromotionsDetailDAO implements PromotionsDetailDAO_interface {
 					}
 				}
 				return promotionsDetailVO;
-			}
-}
+		}
+
+
+		@Override
+		public PromotionsDetailVO deleteOnePromoDetailVO(Integer pdid) {
+			
+				Connection con = null;
+				PreparedStatement pstmt = null;
+
+				try {
+					con = ds.getConnection();
+					pstmt = con.prepareStatement(DELETE_ONE_DETAIL_BY_PDID);
+
+					pstmt.setInt(1, pdid);
+
+					pstmt.executeUpdate();
+
+				} catch (SQLException se) {
+					throw new RuntimeException("A database error occured. " + se.getMessage());
+
+				} finally {
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException se) {
+							se.printStackTrace(System.err);
+						}
+					}
+					if (con != null) {
+						try {
+							con.close();
+						} catch (SQLException e) {
+							e.printStackTrace(System.err);
+						}
+					}
+				}
+			
+			return null;
+		}
+	}

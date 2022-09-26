@@ -17,17 +17,18 @@ public class ClassTagService {
 		classTagVO.setClaTagStatus(claTagStatus);
 		dao.insert(classTagVO);
 
-		return null;
+		return classTagVO;
 	}
 
-	public ClassTagVO updateClassTag(String claTagName, Integer claTagStatus) {
+	public ClassTagVO updateClassTag(String claTagName, Integer claTagStatus,Integer claTagid) {
 
 		ClassTagVO classTagVO = new ClassTagVO();
 		classTagVO.setClaTagName(claTagName);
 		classTagVO.setClaTagStatus(claTagStatus);
+		classTagVO.setClaTagid(claTagid);
 		dao.update(classTagVO);
 
-		return null;
+		return classTagVO;
 	}
 	
 	public void deleteClassTag(Integer claTagid) {

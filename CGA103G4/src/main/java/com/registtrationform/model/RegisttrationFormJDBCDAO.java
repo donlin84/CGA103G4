@@ -680,17 +680,16 @@ public class RegisttrationFormJDBCDAO implements RegisttrationFormDAO_interface 
 			//單純修改訂單狀態
 //			dao.update_status(1, 201);
 			
+//			RegisttrationFormVO vo2 = new RegisttrationFormVO();
+//			vo2.setClaid(1);
+//			vo2.setMemid(203);
+//			vo2.setRegReview(1);
+//			vo2.setRegReviewContent("超級爛");
+//			dao.update_review(vo2);
 			
-			List<RegisttrationFormVO> list= dao.review_sum(3,1);
-			Integer sum_1=0; 
-			if(list!=null) {
-				for(RegisttrationFormVO R : list) {
-					sum_1+=R.getRegPeople();
-				}
-				System.out.println(sum_1);
-			}else if(list.isEmpty()) {
-				System.out.println(sum_1);
-			}
+//			RegisttrationFormService regSrv = new RegisttrationFormService();
+//			regSrv.update_review(5, "大便", 1, 203);
+			
 		}
 	
 		
