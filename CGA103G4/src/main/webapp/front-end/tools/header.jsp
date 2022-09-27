@@ -24,8 +24,7 @@
 
 			<div class="sign_block">
 				<input class="input" placeholder="找食譜"><input class="input"
-					placeholder="找食材">
-				<button class="button">
+					placeholder="找食材"><button class="button">
 					<img src="../images/icon.png">
 				</button>
 				<c:choose>

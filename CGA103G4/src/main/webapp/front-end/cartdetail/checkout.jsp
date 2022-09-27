@@ -103,7 +103,7 @@ request.setAttribute("pdDis", pdDis);
         </div>
       </div>
       <div class="bs-stepper-content">
-        <div id="step1" class="content" role="tabpanel">
+        <div id="step1" class="content" role="tabpanel" style="width:20%;text-align:center;margin:0 auto;">
             <table id = classinformation>
                 <tr>
                     <th>商品名稱</th>
@@ -336,6 +336,8 @@ request.setAttribute("pdDis", pdDis);
     	console.log(paymentcheck);
         
     };
+    const phoneReg = "^09[0-9]{8}$";
+    
     let step2check = function(){
         if (paymentcheck===-1){
             errormessage.innerHTML = "請選擇付款方式";
@@ -358,10 +360,12 @@ request.setAttribute("pdDis", pdDis);
         	list[2]=1;
         }
         if(recphone.value === ""){
-        	errormessage4.innerHTML = " 連絡電話請勿空白";
+            errormessage4.innerHTML = " 連絡電話請勿空白";
+        }else if (!(recphone.value).match(phoneReg)){
+            errormessage4.innerHTML = " 連絡電話請填手機格式";
         }else{
-        	errormessage4.innerHTML = "";
-        	list[3]=1;
+            errormessage4.innerHTML = "";
+            list[3]=1;
         }
         if(address.value === "") {
         	errormessage5.innerHTML = " 取貨地址請勿空白";

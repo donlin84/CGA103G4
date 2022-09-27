@@ -491,7 +491,7 @@
             iframe.style="height:700px;width:500px;";
             let step3 = document.querySelector("#step3");
             step3.prepend(iframe);
-            step3.style="position: absolute;left: 45%;"
+            step3.style="position: absolute;left: 35%;"
 
 //             document.querySelector("#step3_return").style="display:none";
             document.querySelector("#step3_next").style="display:none";

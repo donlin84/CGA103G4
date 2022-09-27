@@ -196,7 +196,7 @@ ul,li{margin:0; padding:0; }
 </c:if>
 				
 	
-	<%@	include file="page1.file" %>
+	
 		<div class="table">
 		
 
@@ -235,7 +235,7 @@ ul,li{margin:0; padding:0; }
 
 	  
 			  
-	<c:forEach var="ordersVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	<c:forEach var="ordersVO" items="${list}">
 			<tr>
 			
 			 <td> 

@@ -237,6 +237,9 @@ background: linear-gradient(to bottom, #faf1e3, #f0e3cc 7%);
     <p class = "italicize">${chefVO.chefNickname}</p>
   </div>
       <p>${chefVO.chefIntroduction}</p>
+      <br>
+      <br>
+      <br>
     <div class = "row">
     <img class = "col-md-4" src="<%=request.getContextPath()%>/showChefPhotoPicture?chefid=${chefVO.chefid}">
 

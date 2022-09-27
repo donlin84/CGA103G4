@@ -173,8 +173,8 @@ header.header div.block nav.nav ul.nav_list>li>a {
 		</div>
 	</div>
 
-	<div class="col-sm-12" style = "margin-top:0px ;left: -120px;">
-		<div class="page-title-box" style="width:1000px">
+	<div class="col-sm-12" style = "margin-top:30px ;left: 10px;">
+		
 			<div class="btn-group pull-right">
 
 			<c:forEach var="productsortVO" items="${listAllSort}">
@@ -223,7 +223,7 @@ header.header div.block nav.nav ul.nav_list>li>a {
      </div>
 </div>
 </div> 
-</div>
+
 	
 
 

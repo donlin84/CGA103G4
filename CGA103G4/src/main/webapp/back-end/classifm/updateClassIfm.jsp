@@ -155,7 +155,7 @@
         </div>
         <div class="my_div">
             <span>授課時間 :</span>
-            <input id="f_date1" type="text" name="clatime" value="${fn:replace((classIfmVO.claTime),"T"," ")}">
+            <input id="f_date1" type="text" name="clatime" value="${classIfmVO.claStrTime.toString().replace('T',' ')}">
         </div>
         <div class="my_div">
             <span>課程價格 :</span>
@@ -181,9 +181,9 @@
         </div>
         <div class="my_div">
             <span>報名開始時間 :</span>
-            <input id="start_date" type="text" name="clastrtime" value="${fn:replace((classIfmVO.claStrTime), "T", " ")}">
+            <input id="start_date" type="text" name="clastrtime" value="${classIfmVO.claStrTime.toString().replace('T',' ')}">
             <span>報名結束時間 :</span>
-            <input id="end_date"   type="text" name="clafintime" value="${fn:replace((classIfmVO.claFinTime), "T", " ")}">
+            <input id="end_date"   type="text" name="clafintime" value="${classIfmVO.claStrTime.toString().replace('T',' ')}">
         </div>
         <br>
         <div class="my_div">

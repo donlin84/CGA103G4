@@ -69,6 +69,7 @@
 
 <style type="text/css" id="alertifyCSS">.alertify-logs>*{padding:12px 24px;color:#fff;box-shadow:0 2px 5px 0 rgba(0,0,0,.2);border-radius:1px}.alertify-logs>*,.alertify-logs>.default{background:rgba(0,0,0,.8)}.alertify-logs>.error{background:rgba(244,67,54,.8)}.alertify-logs>.success{background:rgba(76,175,80,.9)}.alertify{position:fixed;background-color:rgba(0,0,0,.3);left:0;right:0;top:0;bottom:0;width:100%;height:100%;z-index:1}.alertify.hide{opacity:0;pointer-events:none}.alertify,.alertify.show{box-sizing:border-box;transition:all .33s cubic-bezier(.25,.8,.25,1)}.alertify,.alertify *{box-sizing:border-box}.alertify .dialog{padding:12px}.alertify .alert,.alertify .dialog{width:100%;margin:0 auto;position:relative;top:50%;transform:translateY(-50%)}.alertify .alert>*,.alertify .dialog>*{width:400px;max-width:95%;margin:0 auto;text-align:center;padding:12px;background:#fff;box-shadow:0 2px 4px -1px rgba(0,0,0,.14),0 4px 5px 0 rgba(0,0,0,.098),0 1px 10px 0 rgba(0,0,0,.084)}.alertify .alert .msg,.alertify .dialog .msg{padding:12px;margin-bottom:12px;margin:0;text-align:left}.alertify .alert input:not(.form-control),.alertify .dialog input:not(.form-control){margin-bottom:15px;width:100%;font-size:100%;padding:12px}.alertify .alert input:not(.form-control):focus,.alertify .dialog input:not(.form-control):focus{outline-offset:-2px}.alertify .alert nav,.alertify .dialog nav{text-align:right}.alertify .alert nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button),.alertify .dialog nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button){background:transparent;box-sizing:border-box;color:rgba(0,0,0,.87);position:relative;outline:0;border:0;display:inline-block;-ms-flex-align:center;-ms-grid-row-align:center;align-items:center;padding:0 6px;margin:6px 8px;line-height:36px;min-height:36px;white-space:nowrap;min-width:88px;text-align:center;text-transform:uppercase;font-size:14px;text-decoration:none;cursor:pointer;border:1px solid transparent;border-radius:2px}.alertify .alert nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):active,.alertify .alert nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):hover,.alertify .dialog nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):active,.alertify .dialog nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):hover{background-color:rgba(0,0,0,.05)}.alertify .alert nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):focus,.alertify .dialog nav button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button):focus{border:1px solid rgba(0,0,0,.1)}.alertify .alert nav button.btn,.alertify .dialog nav button.btn{margin:6px 4px}.alertify-logs{position:fixed;z-index:1}.alertify-logs.bottom,.alertify-logs:not(.top){bottom:16px}.alertify-logs.left,.alertify-logs:not(.right){left:16px}.alertify-logs.left>*,.alertify-logs:not(.right)>*{float:left;transform:translateZ(0);height:auto}.alertify-logs.left>.show,.alertify-logs:not(.right)>.show{left:0}.alertify-logs.left>*,.alertify-logs.left>.hide,.alertify-logs:not(.right)>*,.alertify-logs:not(.right)>.hide{left:-110%}.alertify-logs.right{right:16px}.alertify-logs.right>*{float:right;transform:translateZ(0)}.alertify-logs.right>.show{right:0;opacity:1}.alertify-logs.right>*,.alertify-logs.right>.hide{right:-110%;opacity:0}.alertify-logs.top{top:0}.alertify-logs>*{box-sizing:border-box;transition:all .4s cubic-bezier(.25,.8,.25,1);position:relative;clear:both;backface-visibility:hidden;perspective:1000;max-height:0;margin:0;padding:0;overflow:hidden;opacity:0;pointer-events:none}.alertify-logs>.show{margin-top:12px;opacity:1;max-height:1000px;padding:12px;pointer-events:auto}</style>
 <style>
+
 header.header div.block nav.nav ul.nav_list>li>a {
     font-size: 1.8rem;
     text-decoration: none;
@@ -179,8 +180,8 @@ header.header div.block nav.nav ul.nav_list>li>a {
 		</div>
 	</div>
 
-	<div class="col-sm-12" style = "margin-top:0px ;left: -120px;">
-		<div class="page-title-box" style="width:1000px">
+	<div class="col-sm-12" style = "margin-top:30px ;left: 20px;">
+		
 			<div class="btn-group pull-right">
 
 			<c:forEach var="productsortVO" items="${listAllSort}">
@@ -196,7 +197,7 @@ header.header div.block nav.nav ul.nav_list>li>a {
 					<li class="list-inline-item hide-phone app-search" style = "display: inline-block; margin-top:-5px; width:250px" >
 					<form role="search" class="" method = "post" action = "FrontEndListAllPdByName.do" >
 						<input type="text" Name = "pdName" placeholder="Search..." class="form-control" style= "display: inline;">
-						<input class="btn btn-warning" type="submit" value = "查詢" style= "display: inline;">
+						<input class="btn btn-warning" type="submit" value = "查詢" style= "display: inline; front-size: rem">
 					</form>
 					</li>
 				
@@ -215,7 +216,7 @@ header.header div.block nav.nav ul.nav_list>li>a {
 	
 	
         <c:forEach var="productVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-       	<div class="col-md-6 col-lg-6 col-xl-3" style = "position: absoloute; top:63px;">
+       	<div class="col-md-6 col-lg-6 col-xl-3" style = "position: absoloute; top:40px;">
         	<div class="card" style = "height: 300px;">      			
         		<a id = "" href="FrontEndPdDetail.do?pdid=${productVO.pdid}"> 
         			<img class="card-img-top img-fluid" src="Productpic.do?pdid=${productVO.pdid}" width="200" height = "160">
@@ -263,7 +264,7 @@ header.header div.block nav.nav ul.nav_list>li>a {
      </div>
 </div>
 </div> 
-</div>
+
 	
 <div class = "nextpage" style="top:50px; margin-left: 460px; width: 500px" ><%@include file="page2.file" %></div>
 

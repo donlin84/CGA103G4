@@ -117,7 +117,7 @@
 							</td>
 							<td><img class="" src="Productpic.do?pdid=${favoriteProductVO.productVO.pdid}" width="200" height = "160"></td>
 							<td>
-							<a id = "cancelCollect" href= "DeleteCollection.do?memid=202&pdid=${favoriteProductVO.productVO.pdid}"><button type="button" class="btn btn-outline-danger waves-effect waves-light">刪除</button></a>
+							<a id = "cancelCollect" href= "DeleteCollection.do?memid=203&pdid=${favoriteProductVO.productVO.pdid}"><button type="button" class="btn btn-outline-danger waves-effect waves-light">刪除</button></a>
 							</td>
 						</tr>
 					</c:forEach>

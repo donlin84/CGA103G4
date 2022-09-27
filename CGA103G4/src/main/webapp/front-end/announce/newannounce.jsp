@@ -59,6 +59,7 @@ pageContext.setAttribute("list", list);
 						
 						
 						<c:forEach begin="1" end="${fn:length(list)}" varStatus="stat">
+						<c:if test="${list[fn:length(list)-stat.index].annStatus == 1}" var="condition" scope="page">
 								<li><a href="#">
 										<div class="img_block">
 										<img src="<%=request.getContextPath()%>/AnnouncementPic?annid=${list[fn:length(list)-stat.index].annid}">
@@ -69,6 +70,7 @@ pageContext.setAttribute("list", list);
 											${list[fn:length(list)-stat.index].annUpdate}</span>
 								</a></li>
 								<c:set var="count" value="${count+1}" />
+								</c:if>
 						</c:forEach>
 					</ul>
 								

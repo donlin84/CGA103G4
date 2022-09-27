@@ -293,8 +293,8 @@ td {
 												<td>${empVO.empPhone}</td>
 												<td>${empVO.empAccount}</td>
 												<td>${(empVO.empPassword!=null)? "*********":"錯誤"}</td>
-												<td>${empVO.empLevel}</td>
-												<td>${empVO.empStatus}</td>
+												<td>${(empVO.empLevel==0)? "最高":"一般"}</td>
+												<td>${(empVO.empStatus==0)? "在職":"離職"}</td>
 												<td>${empVO.empHiredate}</td>
 												<td>
 													<FORM METHOD="post"

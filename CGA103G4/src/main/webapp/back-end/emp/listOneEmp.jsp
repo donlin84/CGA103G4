@@ -229,8 +229,8 @@ td {
 <td><img src="<%= request.getContextPath() %>/EmpShowPic?empid=${empVO.empid}" width="100" heigh="100"></td>
 		<td><%=empVO.getEmpAccount()%></td>
 		<td><%=empVO.getEmpPassword()%></td>
-		<td><%=empVO.getEmpLevel()%></td>
-		<td><%=empVO.getEmpStatus()%></td>
+		<td>${(empVO.empLevel==0)? "最高":"一般"}</td>
+		<td>${(empVO.empStatus==0)? "在職":"離職"}</td>
 		<td><%=empVO.getEmpHiredate()%></td>
 		<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/emp/emp.do" style="margin-bottom: 0px;">

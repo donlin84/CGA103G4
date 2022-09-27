@@ -72,10 +72,10 @@ pageContext.setAttribute("list", list);
 						data-target="nav3" id="course" class="nav">料理課程</a></li>
 					<li><a href="./chef/chef.jsp" data-target="nav4" id="chef"
 						class="nav">私廚預約</a></li>
-					<li><a href="#" data-target="nav5" id="forum"
-						class="nav">討論區</a></li>
-					<li><a href="<%=request.getContextPath()%>/front-end/memberservice/chat.jsp" data-target="nav6"
-						id="social" class="nav">客服</a></li>
+					<li><a href="#" data-target="nav5" id="forum" class="nav">討論區</a></li>
+					<li><a
+						href="<%=request.getContextPath()%>/front-end/memberservice/chat.jsp"
+						data-target="nav6" id="social" class="nav">客服</a></li>
 
 				</ul>
 
@@ -101,8 +101,9 @@ pageContext.setAttribute("list", list);
 										href="<%=request.getContextPath()%>/front-end/member/update.jsp">修改資料</a>
 									<a class="dropdown-item"
 										href="<%=request.getContextPath()%>/front-end/creditCardInformation/CreditCardInformation.jsp">信用卡</a>
-									<a class="dropdown-item" href="shop/ListMemberAllOrd.do?memid=203&GotoMyOrders=GoToMyOrders">查看訂單</a> <a
-										class="dropdown-item" href="#">查看商品</a> <a
+									<a class="dropdown-item"
+										href="shop/ListMemberAllOrd.do?memid=203&GotoMyOrders=GoToMyOrders">查看訂單</a>
+									<a class="dropdown-item" href="#">查看商品</a> <a
 										class="dropdown-item"
 										href="<%=request.getContextPath()%>/front-end/membercoupon/membercoupon.jsp">查看優惠卷</a>
 									<a class="dropdown-item"
@@ -128,14 +129,11 @@ pageContext.setAttribute("list", list);
 							</div>
 						</li>
 						<li class="shopbar">
-<!-- 							<div> -->
-<!-- 								<a href="#">熱門推薦</a> -->
-<!-- 							</div> -->
-<!-- 							<div> -->
-<!-- 								<a href="#">商品分類</a> -->
-<!-- 							</div> -->
+							<!-- 							<div> --> <!-- 								<a href="#">熱門推薦</a> --> <!-- 							</div> -->
+							<!-- 							<div> --> <!-- 								<a href="#">商品分類</a> --> <!-- 							</div> -->
 							<div>
-								<a href="<%=request.getContextPath()%>/front-end/cartdetail/NewFile.jsp">購物車</a>
+								<a
+									href="<%=request.getContextPath()%>/front-end/cartdetail/NewFile.jsp">購物車</a>
 							</div>
 							<div>
 								<a href="./shop/promotions.jsp">優惠活動</a>
@@ -170,7 +168,8 @@ pageContext.setAttribute("list", list);
 						</li>
 						<li class="socialbar">
 							<div>
-								<a href="<%=request.getContextPath()%>/front-end/memberservice/chat.jsp">聯絡客服</a>
+								<a
+									href="<%=request.getContextPath()%>/front-end/memberservice/chat.jsp">聯絡客服</a>
 							</div>
 						</li>
 					</div>
@@ -221,17 +220,20 @@ pageContext.setAttribute("list", list);
 
 
 						<c:forEach begin="1" end="${fn:length(list)}" varStatus="stat">
-							<c:if test="${count < 3}" var="con" scope="page">
-								<li><a href="#">
-										<div class="img_block">
-											<img
-												src="<%=request.getContextPath()%>/AnnouncementPic?annid=${list[fn:length(list)-stat.index].annid}">
-										</div> <span class="item_text"><br> <b>${list[fn:length(list)-stat.index].annTitle}</b></span>
-										<span class="item_text content">${list[fn:length(list)-stat.index].annContent}</span><br>
-										<span class="item_text content">發布日期
-											${list[fn:length(list)-stat.index].annUpdate}</span>
-								</a></li>
-								<c:set var="count" value="${count+1}" />
+							<c:if test="${list[fn:length(list)-stat.index].annStatus == 1}" var="condition"
+								scope="page">
+								<c:if test="${count < 3}" var="con" scope="page">
+									<li><a href="#">
+											<div class="img_block">
+												<img
+													src="<%=request.getContextPath()%>/AnnouncementPic?annid=${list[fn:length(list)-stat.index].annid}">
+											</div> <span class="item_text"><br> <b>${list[fn:length(list)-stat.index].annTitle}</b></span>
+											<span class="item_text content">${list[fn:length(list)-stat.index].annContent}</span><br>
+											<span class="item_text content">發布日期
+												${list[fn:length(list)-stat.index].annUpdate}</span>
+									</a></li>
+									<c:set var="count" value="${count+1}" />
+								</c:if>
 							</c:if>
 						</c:forEach>
 					</ul>
