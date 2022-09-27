@@ -89,13 +89,17 @@
 							<a
 								href="<%=request.getContextPath()%>/front-end/registtrationform/fullcalendar.html">課程日曆</a>
 						</div>
+						<div>
+								<a
+									href="<%=request.getContextPath()%>/front-end/teacher/select_page.jsp">教師查詢</a>
+							</div>
 					</li>
 					<li class="chefbar">
 						<div>
-							<a href="./chef/chef.jsp">私廚介紹</a>
+							<a href="../chef/chef.jsp">私廚介紹</a>
 						</div>
 						<div>
-							<a href="./chef/chef.jsp">預約系統</a>
+							<a href="../chef/chef.jsp">預約系統</a>
 						</div>
 					</li>
 					<li class="forumbar">

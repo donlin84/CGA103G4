@@ -36,7 +36,7 @@
     text-align: center;
   line-height: 20px;
   }
-  
+
 </style>
 </head>
 
@@ -100,17 +100,31 @@
 								</thead>
 								<tbody>
 									<tr>
-									<td><input type="TEXT" name="thrName"  value=<%= (teacherVO==null)? "無名": teacherVO.getThrName() %> ></td>
-										
+									<td>
+									<div style="width:100px;">
+									<input  type="TEXT" name="thrName"  value=<%= (teacherVO==null)? "無名": teacherVO.getThrName() %> style="width:100px"></td>
+									<div>	
+									
 										<td>
+										<div style="width:20px;">
 										<select  name="thrGender">
 									  			<option value=<%= (teacherVO==null)? "男": teacherVO.getThrGender() %> selected><%= (teacherVO==null)? "男": teacherVO.getThrGender() %></option>
-									  			<option value= "男">男</option>
-									  			<option value= "女">女</option>
+												<option value= "男">男</option>
+												<option value= "女">女</option>
 										</select>
+										</div>
 										</td>
-										<td><input type="TEXT" name="thrPhone"  value=<%= (teacherVO==null)? "0912345678": teacherVO.getThrPhone() %> ></td>
-										<td><input type="email" name="thrEmail"  value= <%= (teacherVO==null)? "test@gmail.com": teacherVO.getThrEmail() %> ></td>
+										
+										<td>
+										<div style="width:60px;">
+										<input type="TEXT" name="thrPhone"  value=<%= (teacherVO==null)? "0912345678": teacherVO.getThrPhone() %> style="width:100px">
+										</div>
+										</td>
+										
+										<td>
+										<div style="width:110px;">
+										<input type="email" name="thrEmail"  value= <%= (teacherVO==null)? "test@gmail.com": teacherVO.getThrEmail() %> ></td>
+										</div>
 										<td>			
 											<select  name="thrStatus">
 									   			<option value= <%= (teacherVO==null)? 0:  teacherVO.getThrStatus() %> selected><%= (teacherVO==null)? "在職": (teacherVO.getThrStatus()==0? "在職":"離職")  %></option>
@@ -120,20 +134,22 @@
 										</td>
 										
 										<td class="td_introduct">
+										<div style="width:120px;">
 										<textarea name="thrIntroduction" rows="15" cols="22" class="my_textarea"  style="width:200px;height:200px;"><%= (teacherVO==null)? "你好": teacherVO.getThrIntroduction() %></textarea>
+										</div>
 										</td>
 									
 										<td>
 										<div style="width:60px;">
 										<input type="file" id=p_file accept="image/jpeg" name="picio" value=<%= (teacherVO==null)? "": teacherVO.getThrPic() %> >
 										<input id=post_file type="hidden" name="thrPic" value="" >
-										<div >
+										</div>
 										</td>
 										
 										<td>
 										<div style="width:60px;">
-										<img id = preImg src="" width="200px" height="200px" style="visibility:hidden">
-										<div >
+										<img id = preImg src="" width="150px" height="150px" style="visibility:hidden">
+										</div>
 										</td>
 										
 										

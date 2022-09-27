@@ -157,15 +157,12 @@ header.header div.block nav.nav ul.nav_list>li>a {
 						<br>
 					</li>
 					
-					<li class="nav-item">
-						優惠活動
-						<br>
-						<c:forEach var="promotionsVO" items="${listAllPromo}">
-							<a class="nav-link" href=".do?${promotionsVO.pmid}">${promotionsVO.pmName}</a>
-						</c:forEach>
-						<br>
-						<br>
-						<br>
+					<li>
+					<a href="ListOneUserFavoritePd.do?memid=${memid}">收藏清單</a>
+					<br>
+					<br>
+					<br>
+				
 					</li>
 					
 					<li class="nav-item">
@@ -195,10 +192,11 @@ header.header div.block nav.nav ul.nav_list>li>a {
 			</c:forEach>
 				
 				<ul>
-					<li class="list-inline-item hide-phone app-search" style = "display: inline-block; margin-top:-5px">
-					<form role="search" class="">
-						<input type="text" placeholder="Search..." class="form-control">
-						<a href=""><i class="fa fa-search"></i></a>
+					
+					<li class="list-inline-item hide-phone app-search" style = "display: inline-block; margin-top:-5px; width:250px" >
+					<form role="search" class="" method = "post" action = "FrontEndListAllPdByName.do" >
+						<input type="text" Name = "pdName" placeholder="Search..." class="form-control" style= "display: inline;">
+						<input class="btn btn-warning" type="submit" value = "查詢" style= "display: inline;">
 					</form>
 					</li>
 				
@@ -276,7 +274,7 @@ header.header div.block nav.nav ul.nav_list>li>a {
 			<FORM method = "post" action = "ListOneUserFavoritePd.do">
 				<input type = "hidden" name = "memid" value = "${memid}">
 				<input type = "hidden" name = "GoToMyCollection" value = "GoToMyCollection">
-				<input type = "submit">
+				<input type = "hidden">
 			
 			</FORM>
 			
@@ -284,7 +282,7 @@ header.header div.block nav.nav ul.nav_list>li>a {
 			
 				<input type = "hidden" name = "memid" value = "201">
 				<input type = "hidden" name = "GoToMyOrders" value = "GoToMyOrders">
-				<input type = "submit">
+				<input type = "hidden">
 			
 			</FORM>
 <!-- ==================================================================			 -->

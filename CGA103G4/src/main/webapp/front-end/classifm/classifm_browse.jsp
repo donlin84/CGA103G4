@@ -9,14 +9,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@page import="java.util.stream.Collectors"%>
 <%
 	TeacherService teacherSrv = new TeacherService();
 	List<TeacherVO> list=teacherSrv.getAll();
 	pageContext.setAttribute("teacherall",list);
 	
 	ClassTagService classSrv = new ClassTagService();
-	List<ClassTagVO> list2=classSrv.getAll();
-	pageContext.setAttribute("classtagall",list2);
+	 List<ClassTagVO> list2=classSrv.getAll();
+	 pageContext.setAttribute("classtagall",list2.stream().filter(c -> c.getClaTagStatus()==1).collect(Collectors.toList()));
 	
 	ClassIfmService classSrv1 = new ClassIfmService(); 
 	List<ClassIfmVO> list3=classSrv1.front_getall();

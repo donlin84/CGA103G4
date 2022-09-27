@@ -184,7 +184,7 @@ ul{
      						 <tr>
      						   	<td>&emsp;收件人:</td>
      						   	<td>
-      						  		<input type="text" id="" name = "OrdRecipient" value ="${ordersVO.ordRecipient}">
+      						  		<input type="text" id="" name = "OrdRecipient" value ="${ordersVO.ordRecipient}" required>
      						 		<br>
      							</td>
      						 </tr>
@@ -192,7 +192,7 @@ ul{
      						 <tr>
      						   	<td>&emsp;收件人地址:</td>
      						   	<td>
-      						  		<input type="text" id="" name = "OrdAddress" value ="${ordersVO.ordAddress}">
+      						  		<input type="text" id="" name = "OrdAddress" value ="${ordersVO.ordAddress}"required>
      						 		<br>
      							</td>
      						 </tr>
@@ -200,14 +200,14 @@ ul{
      						 <tr>
      						   	<td>&emsp;收件人電話:</td>
      						   	<td>
-     						   		<input type="text" id="pdid" name = "RecPhone" value ="${ordersVO.recPhone}"  >
+     						   		<input type="text" id="pdid" name = "RecPhone" value ="${ordersVO.recPhone}"  required>
      						   		<br>
      						   	</td>
      						 </tr>
      						   <tr>
      						   	<td>&emsp;配送方式:</td>
      						   		<td>
-          							 	<input type = "radio" id ="" name = "OrdDelivery"value = "1" >
+          							 	<input type = "radio" id ="" name = "OrdDelivery"value = "1" required>
             	 						<label for="productStateUn">超商取貨</label>
          		 						<input type="radio" id="" name="OrdDelivery"value="2">
        			 						<label for="pdStatus">宅配</label>

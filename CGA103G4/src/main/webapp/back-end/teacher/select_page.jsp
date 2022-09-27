@@ -117,7 +117,22 @@
 											
 												<FORM METHOD="post" ACTION="teacher.do">
 													<h4 class="card-title font-20 mt-0">教師資料查詢/修改</h4>
-													<div class="box-left" ><label for = "thrid">請選擇教師編號</label></div>
+													
+													<div class="box-right" >
+													<label for = "thrName">請輸入教師姓名</label>
+													</div>
+													<input id="thrName" type="text" name="thrName" placeholder="請輸入姓名"> 	
+													
+													<div class="box-right" >
+													<br>
+													<label for = "thrIntroduction">請輸入教師簡介關鍵字</label>
+													<div>
+													<input id="thrIntroduction" type="text" name="thrIntroduction" placeholder="請輸入簡介關鍵字"> 					
+													  											
+													<div class="box-left" >
+													<br>
+													<label for = "thrid">請選擇教師編號</label>
+													</div>
 													<div class="box-right" >
 													<select size="1" name="thrid" class="dis-select" >
 														<option value="">請選擇編號 
@@ -127,12 +142,10 @@
 													</select>
 													</div>
 													
-													<div class="box-right" >
-													<label for = "thrName">請輸入教師姓名</label>
-													</div>
-													<input id="thrName" type="text" name="thrName" placeholder="請輸入姓名"> 					
+									
 													
 													<div class="box-right" >
+													<br>
 													<label for = "thrGender">請選擇教師性別</label></div>
 													<div>
 													<select id="thrGender" size="1" name="thrGender" class="dis-select" >
@@ -143,6 +156,7 @@
 													</select>
 													
 													<div class="box-right" >
+													<br>
 													<label for = "thrStatus">請選擇教師狀態</label></div>
 													<div>
 													<select id="thrStatus" size="1" name="thrStatus" class="dis-select" >
@@ -151,12 +165,9 @@
 														<option value="1">離職
   													</select>
   													
-  													<div class="box-right" >
-													<label for = "thrIntroduction">請輸入教師簡介關鍵字</label>
-													<div>
-													<input id="thrIntroduction" type="text" name="thrIntroduction" placeholder="請輸入簡介關鍵字"> 					
-													  													
+  									
 													<div class="box-right" >
+													<br>
 													<label for = "thrComment">請選擇教師評分(高於幾顆星)</label></div>
 													<div>
 													<select id="thrComment" size="1" name="thrComment" class="dis-select" >
@@ -169,6 +180,7 @@
   													</select>
   												
 													<div class="box-right" >
+														<br>
 														<label for = "thrCmnumber">請選擇教師總評價數人數(高於多少人)</label></div>
 													<div>
 													<select id="thrCmnumber" size="1" name="thrCmnumber" class="dis-select" >

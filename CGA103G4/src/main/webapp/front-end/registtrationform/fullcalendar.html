@@ -74,6 +74,7 @@ body {
 <button id = "button1" type = "button">所有課程(含已結束)</button>
 <button id = "button2" type = "button2">上架中的課程</button> 
 <p>預設為上架中的課程 🟢可報名 🔴已額滿 ⚫未上架或已結束</p>
+<p id = "refleshtime"></p>
 </head>
 <body>
 	<div id='wrap'>
@@ -118,7 +119,7 @@ let transformdata = function (response){
 		
 		let object ={};
 		object["id"]=i["claid"];
-		object["title"]=i["claid"]+" "+i["claTitle"];
+		object["title"]="課程編號:"+i["claid"]+" "+ "課程名稱:"+ i["claTitle"];
 		object["start"]=new Date(i["claTime"]);   
 // 		t = new Date(i["claTime"]);  
 // 		t.setTime(t.getTime()+5*3600*1000);
@@ -260,9 +261,10 @@ let transformdata = function (response){
 		title = document.querySelectorAll(".fc-event-title");
 		time = document.querySelectorAll(".fc-event-time");
 		j=0;
+		
 		for(let i of time){
 			if (!(i.innerHTML.includes("~"))){     //判斷有沒有處理過
-			id = title[j].innerHTML.split(" ")[0];
+			id = title[j].innerHTML.split(" ")[0].replace("課程編號:","");
 			let people = 0 ;
 			let maxpeople = 0;
 			for (k of window.classfm){
@@ -292,6 +294,8 @@ let transformdata = function (response){
 
 			}
 		}
+		
+		document.getElementById('refleshtime').innerHTML = "更新時間:" + new Date().toLocaleString();
 	}
 	
 	//切換畫面時自動處理

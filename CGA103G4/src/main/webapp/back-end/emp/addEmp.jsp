@@ -196,17 +196,16 @@ td {
 				<div class="card-body">
 					<h4 class="mt-0 header-title">Default Datatable</h4>
 					<p class="text-muted mb-4 font-14">
-						DataTables has most features enabled by default,so all you need to
-						do to use it with your own tables is to call the construction
-						function:
-						<code>$().DataTable();</code>
-						.
+					
 					</p>
 					<div id="datatable_wrapper"
 						class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
 						<div class="row">
 							<div class="col-md-12 col-lg-12 col-xl-12">
 								<h4 class="card-title font-20 mt-0">新增管理員</h4>
+								<div style="margin-left:725px;">
+									<input name="Submit" type="button" id="Submit" onClick="javascript:history.back(1)" value="上一頁" style="background-color:#283179;border:2px;color:white;border-radius:5px;padding:5px;width:100px;hegiht:70px;"/>
+									</div>
 								<div class="pic" style="margin: auto; width: 500px">
 									<img id="showPic" src="./images/noImage.jpg" />
 								</div>
@@ -268,9 +267,10 @@ td {
 
 										</table>
 										<br> <input type="hidden" name="action" value="insert">
-										<input type="submit" value="送出新增" style="background-color:#283179;border:2px;color:white;">
+										<input type="submit" value="新增" style="background-color:#283179;border:2px;color:white;margin-left:210px;border-radius:5px;padding:5px;width:100px;hegiht:70px;">
 									</FORM>
-									<input name="Submit" type="button" id="Submit" onClick="javascript:history.back(1)" value="上一頁" style="background-color:#283179;border:2px;color:white;"/>
+									
+									
 								</div>
 							</div>
 							<div class="col-sm-12 col-md-6">

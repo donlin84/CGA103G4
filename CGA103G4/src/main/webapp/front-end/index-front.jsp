@@ -150,6 +150,10 @@ pageContext.setAttribute("list", list);
 								<a
 									href="<%=request.getContextPath()%>/front-end/registtrationform/fullcalendar.html">課程日曆</a>
 							</div>
+							<div>
+								<a
+									href="<%=request.getContextPath()%>/front-end/teacher/select_page.jsp">教師查詢</a>
+							</div>
 						</li>
 						<li class="chefbar">
 							<div>

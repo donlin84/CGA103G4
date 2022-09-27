@@ -28,6 +28,12 @@
 <script src="<%=request.getContextPath()%>/front-end/js/nav.js"></script>
 <script src="<%=request.getContextPath()%>/front-end/js/nav.js"></script>
 
+<link href="<%=request.getContextPath()%>/front-end/member/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/front-end/member/assets/css/icons.css" rel="stylesheet" type="text/css">
+<script src="<%=request.getContextPath()%>/front-end/assets/js/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/assets/js/popper.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/assets/js/bootstrap.min.js"></script>
+
 	<style>
 	body{
 		  background-image: url('../../images/picture_15/background.jpg');
@@ -180,12 +186,18 @@
 <div class="main">
 
     <div class="container -on" id="shopPage">
-
+		
       <div id="shopPageContent">
+      	<br>
+      	<br>
+      	<br>
+      	<br>
+      	<br>
+        	   	
 		<h1>教師資料查詢</h1>
-		<h3>請輸入搜尋條件</h3>
+		
 <!-- 		<h4><a href="listOneTeacher.jsp">查單筆資料</a></h4> -->
-		<h4><a href="listAllTeacher.jsp">列出所有資料</a></h4>
+		<h2><a href="listAllTeacher.jsp">列出所有資料</a></h2>
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color:red">請修正以下錯誤:</font>
@@ -197,6 +209,21 @@
 	</c:if>
 
 	<FORM METHOD="post" ACTION="teacher.do">
+		<br>
+		<br>	
+		<br>		
+		<h1>請輸入搜尋條件</h1>	
+		<label for = "thrName">請輸入教師姓名</label>
+		<input id="thrName" type="text" name="thrName" placeholder="請輸入姓名"> 		
+		<br>
+		<br>	
+		
+		<label for = "thrIntroduction">請輸入教師簡介關鍵字</label>
+		<input id="thrIntroduction" type="text" name="thrIntroduction" placeholder="請輸入簡介關鍵字"> 					
+		<br>
+		<br>		
+	
+	
 		<label for = "thrid">請選擇教師編號</label>
 		<select size="1" name="thrid" class="dis-select" >
 			<option value="">請選擇編號 
@@ -204,7 +231,9 @@
 			    <option value="${teacherVO.thrid}">${teacherVO.thrid}
         	</c:forEach>   
 		</select>
-		
+		<br>
+		<br>
+			
 		<label for = "thrGender">請選擇教師性別</label>
 		<select id="thrGender" size="1" name="thrGender" class="dis-select" >
 			<option value="">請選擇性別
@@ -212,29 +241,19 @@
 			<option value="女">女
 			
 		</select>
+		<br>
+		<br>
 		
 		<label for = "thrStatus">請選擇教師狀態</label>
-
 		<select id="thrStatus" size="1" name="thrStatus" class="dis-select" >
 			<option value="">請選擇狀態
 			<option value="0">在職
 			<option value="1">離職
 		</select>
-	
 		<br>
 		<br>	
 	
-		<label for = "thrName">請輸入教師姓名</label>
-		<input id="thrName" type="text" name="thrName" placeholder="請輸入姓名"> 					
-		
-		<label for = "thrIntroduction">請輸入教師簡介關鍵字</label>
-		
-		<input id="thrIntroduction" type="text" name="thrIntroduction" placeholder="請輸入簡介關鍵字"> 					
-		<br>
-		<br>		
-				
-		  													
-		
+								
 		<label for = "thrComment">請選擇教師評分(高於幾顆星)</label>
 
 		<select id="thrComment" size="1" name="thrComment" class="dis-select" >
@@ -244,8 +263,9 @@
 			<option value="3">3
 			<option value="4">4
 			<option value="5">5
-				</select>
-			
+		</select>
+		<br>
+		<br>	
 		
 			<label for = "thrCmnumber">請選擇教師總評價數人數(高於多少人)</label>
 
@@ -262,11 +282,6 @@
 		
 		<input type="hidden" name="action" value="getsome_For_condiction"> 
 		<input type="submit" class="mybtn" value="搜尋">
-		
-		<br>
-		<br>
-		<br>
-		<br>
 		
 	</FORM>	
 		

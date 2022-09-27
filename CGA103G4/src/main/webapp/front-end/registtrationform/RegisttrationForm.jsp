@@ -37,10 +37,12 @@
 <body>
 
 
-
+  <br>
+  <br>
   <h3 class="text-center">
     課程報名
   </h3>
+  <h6 class="text-center">請在30分鐘內付款完成，頁面會自動轉跳，如果30分鐘內未完成結帳請重新送出訂單</h6>
   <form class="container">
     <div class="bs-stepper">
       <div class="bs-stepper-header" role="tablist">
@@ -91,7 +93,8 @@
             <button type="button" onclick="stepper.next()">下一步</button>
           </div>
         </div>
-
+		<br>
+		<br>
         <div id="step2" class="content" role="tabpanel">
             <div class="form-group" id = payment>
                 <label for="transfer" >轉帳 </label>
@@ -132,7 +135,20 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bs-stepper@1.7.0/dist/js/bs-stepper.min.js"></script>
   <script>
-  	
+	let timecheck = false ;
+	setTimeout(function(){
+		if (timecheck ==false){
+			alert("超過時間，請重新操作");
+          	var MyPoint = "/front-end/registtrationform/fullcalendar.html";
+        	var host = window.location.host;
+        	var path = window.location.pathname;
+        	var webCtx = path.substring(0, path.indexOf('/', 1));
+        	var returnURL = "http://" + host + webCtx + MyPoint;						
+			window.location.replace(returnURL)
+		} 
+// 	},1000*60*5 );  //1分鐘
+	},1000*60*30 ); //30分鐘
+  
     var stepperElem = document.querySelector('.bs-stepper');
     var stepper = new Stepper(stepperElem);
     var done = false;
@@ -295,6 +311,18 @@
             done = false;
             stepper.next();
             done = true;
+            timecheck = true;
+          //導向會員課程
+          	
+            setTimeout(function(){
+            	alert("報名成功");
+              	var MyPoint = "/front-end/classifm/MyClassIfm.jsp";
+            	var host = window.location.host;
+            	var path = window.location.pathname;
+            	var webCtx = path.substring(0, path.indexOf('/', 1));
+            	var successURL = "http://" + host + webCtx + MyPoint;						
+    			window.location.replace(successURL)            	
+            },100);
             
         }else{
             alert(response["payment_commit"])
@@ -307,7 +335,19 @@
             done = false;
             stepper.next();
             done = true;
+            timecheck = true;
             
+            //導向會員課程
+            setTimeout(function(){
+            	alert("報名成功");
+              	var MyPoint = "/front-end/classifm/MyClassIfm.jsp";
+            	var host = window.location.host;
+            	var path = window.location.pathname;
+            	var webCtx = path.substring(0, path.indexOf('/', 1));
+            	var successURL = "http://" + host + webCtx + MyPoint;						
+    			window.location.replace(successURL)            	
+            },100);
+        
         }else if(typeof response["payment_commit"]==='undefined'){
           alert("資料格式錯誤");
           Riframe = document.getElementById("iframe").contentWindow;
@@ -363,6 +403,7 @@
 
     let paymenform = function(){
         if(paymentcheck===0){
+
             done = true;
             let payment = document.querySelector("#payment");
             let paymentArea = document.querySelector("#paymentArea");
@@ -391,10 +432,8 @@
 
             let tbody3 = document.createElement('tbody');
             let tr31 = document.createElement('tr');
-            let tr32 = document.createElement('tr');
-            tr32.innerHTML = "請在30分鐘內付款完成，頁面會自動轉跳，如果30分鐘內未完成結帳請重新送出訂單"
             tbody3.append(tr31);
-            tbody3.append(tr32);
+
 
             transfertable.append(tbody1);
             transfertable.append(tbody2);
@@ -452,7 +491,7 @@
             iframe.style="height:700px;width:500px;";
             let step3 = document.querySelector("#step3");
             step3.prepend(iframe);
-            step3.style="position: absolute;left: 30%;"
+            step3.style="position: absolute;left: 45%;"
 
 //             document.querySelector("#step3_return").style="display:none";
             document.querySelector("#step3_next").style="display:none";

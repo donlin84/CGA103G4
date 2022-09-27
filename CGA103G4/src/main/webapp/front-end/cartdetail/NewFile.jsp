@@ -305,13 +305,16 @@ request.setAttribute("list2",list2);
             width: 100%;
             height: 40px;
             border: none;
-            background: linear-gradient(to bottom right, #B8D7FF, #8EB7EB);
+/*             background: linear-gradient(to bottom right, #B8D7FF, #8EB7EB); */
             border-radius: 20px;
             cursor: pointer;
             font-size: 16px;
             font-family: ‘Open Sans’;
             font-weight: 600;
             color: #202020;
+            background-color: #f5b225;
+            border: 1px solid #f5b225;
+            background:#f5b225;
         }
     </style>
 </head>
@@ -436,7 +439,7 @@ request.setAttribute("list2",list2);
 	            <input type="hidden" name="jsonstr" value=${jsonstr}>
 	            <input type="hidden" name="memCpid_form" id="memCpid_form">
 	            <input type="hidden" name="action" value="checkout">
-	            <input class="button_checkout" type="submit" value="前往結帳" />
+	            <input style="background-color: #f5b225;border: 1px solid #f5b225;" class="button_checkout" type="submit" value="前往結帳" />
 	            
             </FORM>
         </div>

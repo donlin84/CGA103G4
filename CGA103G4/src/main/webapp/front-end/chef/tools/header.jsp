@@ -92,10 +92,10 @@
 					</li>
 					<li class="chefbar">
 						<div>
-							<a href="./chef/chef.jsp">私廚介紹</a>
+							<a href="../chef/chef.jsp">私廚介紹</a>
 						</div>
 						<div>
-							<a href="./chef/chef.jsp">預約系統</a>
+							<a href="../chef/chef.jsp">預約系統</a>
 						</div>
 					</li>
 					<li class="forumbar">

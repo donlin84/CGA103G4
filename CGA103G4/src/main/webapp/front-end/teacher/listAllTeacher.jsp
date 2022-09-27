@@ -43,13 +43,17 @@
 <script src="<%=request.getContextPath()%>/front-end/js/nav.js"></script>
 <script src="<%=request.getContextPath()%>/front-end/js/nav.js"></script>
 
+<link href="<%=request.getContextPath()%>/front-end/member/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/front-end/member/assets/css/icons.css" rel="stylesheet" type="text/css">
+<script src="<%=request.getContextPath()%>/front-end/assets/js/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/assets/js/popper.min.js"></script>
+<script src="<%=request.getContextPath()%>/front-end/assets/js/bootstrap.min.js"></script>
+
 <style>
-body{
-  background-image: url('../../images/picture_15/background.jpg');
-}
+
 .picture{
-	width:200px;
-	height:200px;
+	width:150px;
+	height:150px;
 }
 	table {
     width: 1400px;
@@ -57,6 +61,7 @@ body{
 /*     margin-left: 100px; */
     margin-top:-6px;
     border: 1px solid #CCCCFF;
+    transform:translateX(-160px);
   }
   th{
  font-weight: 700;
@@ -195,6 +200,9 @@ a{
     <div class="container -on" id="shopPage">
 
       <div id="shopPageContent">
+      	<br>
+      	<br>
+      	<br>
 		<h3>所有教師資料 </h3>
 		<h4><a href="select_page.jsp">回查詢首頁</a></h4>
 <!-- 		<h4><a href="listOneTeacher.jsp">查單筆資料</a></h4> -->

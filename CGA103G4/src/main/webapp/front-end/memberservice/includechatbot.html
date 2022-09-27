@@ -32,7 +32,13 @@ function ifrmae(){
 		button.style.display="none"
 	    iframe = document.createElement('iframe');
 	    iframediv = document.createElement('div');
-	    iframe.src="http://localhost:8081/CGA103G4_0921/front-end/memberservice/chatbot.html";  
+	    
+    	var MyPoint = "/front-end/memberservice/chatbot.html";
+    	var host = window.location.host;
+    	var path = window.location.pathname;
+    	var webCtx = path.substring(0, path.indexOf('/', 1));
+    	var endPointURL = "http://" + host + webCtx + MyPoint;  
+	    iframe.src=endPointURL;  
 	    iframe.id="iframe"; 
 	    iframe.style=" width: 350px;height: 350px;";    
 	    iframediv.setAttribute('class',"box_sticky");

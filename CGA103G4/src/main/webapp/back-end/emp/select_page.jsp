@@ -280,8 +280,8 @@ td {
 
 										</tr>
 									</thead>
-									<tbody>
 										<%@ include file="page1.file"%>
+									<tbody>
 										<c:forEach var="empVO" items="${list}" begin="<%=pageIndex%>"
 											end="<%=pageIndex+rowsPerPage-1%>">
 											<tr>

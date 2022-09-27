@@ -1,4 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.member.model.*"%>
+
+<% MemberVO memVO = (MemberVO)session.getAttribute("memVO");
+// 	Integer memid = memVO.getMemid();
+	String memid = memVO.getMemAccount();
+	System.out.print(memid);
+	request.setAttribute("userName" , memid );
+%> 
+
 <!DOCTYPE html>
 <html>
 <head>

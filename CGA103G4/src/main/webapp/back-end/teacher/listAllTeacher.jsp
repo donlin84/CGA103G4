@@ -45,7 +45,6 @@
 <link href="<%=request.getContextPath()%>/back-end/assets/css/style.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/back-end/assets/plugins/bootstrap-rating/bootstrap-rating.css" rel="stylesheet" type="text/css">
 
-
 <style>
 
  

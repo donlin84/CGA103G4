@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="com.member.model.*"%>
+<%@ page import="com.member.model.*"%>
 <%@ page import="java.util.*"%>
+
+<% 
+	request.setAttribute("userName" , "Service" );
+%> 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +27,7 @@
 	<h3 id="statusOutput" class="statusOutput"></h3>
 	<div id="row">
 	<c:forEach var="memberVO" items="${list}">
-		<div id=${memberVO.memid} class="column" name="friendName" value= ${memberVO.memid} ><h2>${memberVO.memid}🔴</h2></div>
+		<div id=${memberVO.memAccount} class="column" name="friendName" value= ${memberVO.memAccount} ><h2>${memberVO.memAccount}🔴</h2></div>
 	</c:forEach>
 	
 	</div>

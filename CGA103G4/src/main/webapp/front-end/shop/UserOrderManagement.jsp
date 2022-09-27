@@ -51,6 +51,9 @@
   <link rel="stylesheet" href="css/common/main.css">
   <link rel="stylesheet" href="css/shop.css">
   <link rel="shortcut icon" href="assets/images/favicon.ico">
+  <link href="<%=request.getContextPath()%>/front-end/member/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/front-end/member/assets/css/icons.css" rel="stylesheet" type="text/css">
+  
 
 </head>
 
@@ -73,9 +76,10 @@
 	<script src="assets/plugins/tabledit/jquery.tabledit.js"></script>
 	<script src="assets/pages/tabledit.init.js"></script>
 	<script src="assets/pages/modal-animation.init.js"></script>
+	
 	 <script src="../js/shop.js"></script>
   	<script src="../js/nav.js"></script>
-<%@ include file="tools/header.jsp"%>
+<%@ include file="../tools/header.jsp"%>
 					
 <div class="wrapper">
 <div class="container-fluid"><!-- Page-Title -->

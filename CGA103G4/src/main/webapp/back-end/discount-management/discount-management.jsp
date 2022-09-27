@@ -128,7 +128,7 @@
 							data-toggle="dropdown" href="#" role="button"
 							aria-haspopup="false" aria-expanded="true"><i
 								class="ti-bell noti-icon"></i><span
-								class="badge badge-danger noti-icon-badge">5</span></a>
+								class="badge badge-danger noti-icon-badge"></span></a>
 							<div
 								class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg"
 								style="position: absolute; transform: translate3d(-222px, 70px, 0px); top: 0px; left: 0px; will-change: transform;">
@@ -136,7 +136,7 @@
 
 								<div class="dropdown-item noti-title">
 									<h5>
-										<span class="badge badge-danger float-right">5</span>通知
+										<span class="badge badge-danger float-right"></span>通知
 									</h5>
 								</div>
 

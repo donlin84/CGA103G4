@@ -237,6 +237,7 @@
 		<url-pattern>/back-end/coupontype/listOneCouponType.jsp</url-pattern>
 		<url-pattern>/back-end/coupontype/select_page.jsp</url-pattern>
 		<url-pattern>/back-end/coupontype/updateCouponType.jsp</url-pattern>
+		<url-pattern>/back-end/memberservice/chat.jsp</url-pattern>
 
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
@@ -255,6 +256,8 @@
 		<url-pattern>/front-end/chefAppointment/Appointment.jsp</url-pattern>
 		<url-pattern>/front-end/cartdetail/NewFile.jsp</url-pattern>
 		<url-pattern>/front-end/chefAppointment/memberLisAll.jsp</url-pattern>
+		<url-pattern>/front-end/classifm/MyClassIfm.jsp</url-pattern>
+		<url-pattern>/front-end/memberservice/chat.jsp</url-pattern>
 		
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>

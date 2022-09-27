@@ -28,7 +28,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.member.model.MemberVO;
 import com.registtrationform.model.*;
-
+import com.util.MailService2;
 import com.ClassIfm.model.*;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024
@@ -158,6 +158,19 @@ public class CheckoutServlet extends HttpServlet{
 				//更新課程報名人數
 				classIfmSvc.update_clapeople(registtrationFormSvc.getConutPeople(claid), claid);
 				jsonString = jsonString(jsonString,"success");
+				
+				//寄送gmail
+				String email = memVO.getMemEmail();
+				String subject = "課程報名成功";
+				String name = memVO.getMemName(); // 會員名稱
+				ClassIfmVO classIfmVO = classIfmSvc.getOneClassIfm(claid);
+				String messageText = "Hello! " + name + "恭喜您報名料理課程["+  classIfmVO.getClaTitle() +"]成功!" + "\n"
+						+ "請於"+classIfmVO.getClaTime().toString().replace("T"," ")+"出席本課程" +"\n"+
+						"感謝您的支持。";
+				MailService2 mailService = new MailService2();
+				mailService.sendMail(email, subject, messageText);
+				
+				
 		}
 		//送出訊息
 		res.getWriter().print(jsonString);	
@@ -292,6 +305,19 @@ public class CheckoutServlet extends HttpServlet{
 				//更新課程報名人數
 				classIfmSvc.update_clapeople(registtrationFormSvc.getConutPeople(claid), claid);
 				jsonString = jsonString(jsonString,"success");
+				
+				//寄送gmail
+				String email = memVO.getMemEmail();
+				String subject = "課程報名成功";
+				String name = memVO.getMemName(); // 會員名稱
+				ClassIfmVO classIfmVO = classIfmSvc.getOneClassIfm(claid);
+				String messageText = "Hello! " + name + "恭喜您報名料理課程["+  classIfmVO.getClaTime().toString().replace("T"," ") +"]成功!" + "\n"
+						+ "請於"+classIfmVO.getClaTime()+"出席本課程" +"\n"+
+						"感謝您的支持。";
+				MailService2 mailService = new MailService2();
+				mailService.sendMail(email, subject, messageText);
+				
+				
 		}
 		//送出訊息
 		res.getWriter().print(jsonString);	
